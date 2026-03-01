@@ -1,0 +1,22 @@
+Package: spinviz
+Title: Visualise Sports Injuries With Anatomical Heatmaps
+Version: 0.0.1.0000
+Authors@R: 
+    person(given="Bianca Nicole", 
+    family="Casimiro",
+    email="biancanicole.casimiro@students.mq.edu.au",
+    role = c("aut", "cre")
+    )
+Description: Provides functions to visualise injury frequency data using anatomical heatmaps. Users can render front/back body diagrams, choose male/female models, toggle annotations, and customise colour palettes and legends for clear reporting and exploration.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: ggplot2, magrittr, dplyr, xml2, grDevices, tidyr, rlang,
+        this.path, purrr, tibble, stats, patchwork, stringr, magick,
+        viridis, grDevices
+NeedsCompilation: no
+Packaged: 2026-03-01 11:33:08 UTC; bnqcasimiro
+Author: Bianca Nicole Casimiro [aut, cre]
+Maintainer: Bianca Nicole Casimiro <biancanicole.casimiro@students.mq.edu.au>
+Depends: R (>= 4.1.0)
