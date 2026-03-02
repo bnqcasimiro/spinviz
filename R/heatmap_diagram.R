@@ -20,40 +20,10 @@
 #' @param show_scale (optional) Logical. If `TRUE`, show the colour scale (legend).
 
 #' @importFrom magrittr %>%
-#' @importFrom dplyr select
-#' @importFrom dplyr rename
-#' @importFrom dplyr mutate
-#' @importFrom dplyr case_when
-#' @importFrom dplyr tribble
-#' @importFrom dplyr slice
-#' @importFrom dplyr pull
-#' @importFrom dplyr left_join
-#' @importFrom dplyr rowwise
-#' @importFrom dplyr filter
-#' @importFrom dplyr transmute
-#' @importFrom xml2 read_xml
-#' @importFrom xml2 xml_root
-#' @importFrom xml2 write_xml
-#' @importFrom xml2 xml_attr
-#' @importFrom xml2 xml_set_attr
-#' @importFrom xml2 xml_find_all
-#' @importFrom grDevices colorRampPalette
-#' @importFrom grDevices as.raster
-#' @importFrom grDevices adjustcolor
-#' @importFrom ggplot2 ggplot
-#' @importFrom ggplot2 aes
-#' @importFrom ggplot2 geom_tile
-#' @importFrom ggplot2 theme
-#' @importFrom ggplot2 theme_void
-#' @importFrom ggplot2 element_text
-#' @importFrom ggplot2 annotation_raster
-#' @importFrom ggplot2 coord_cartesian
-#' @importFrom ggplot2 margin
-#' @importFrom ggplot2 geom_text
-#' @importFrom ggplot2 unit
-#' @importFrom ggplot2 geom_segment
-#' @importFrom ggplot2 scale_fill_gradientn
-#' @importFrom ggplot2 guide_colorbar
+#' @importFrom dplyr select rename mutate case_when tribble slice pull left_join rowwise filter transmute
+#' @importFrom xml2 read_xml xml_root write_xml xml_attr xml_set_attr xml_find_all
+#' @importFrom grDevices colorRampPalette as.raster adjustcolor
+#' @importFrom ggplot2 ggplot aes geom_tile theme theme_void element_text annotation_raster coord_cartesian margin geom_text unit geom_segment scale_fill_gradientn guide_colorbar
 #' @importFrom tidyr unnest
 #' @importFrom rlang .data
 #' @importFrom this.path this.dir
@@ -77,9 +47,7 @@
 #' p <- injury_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
 #' # You can add your own plot title by:
 #' p + ggplot2::labs(
-#'   title = "Boxing Injury Heatmap (Front)"
-#' )
-
+#'   title = "Boxing Injury Heatmap (Front)")
 
 injury_heatmap <- function(
     injury_data,
@@ -94,18 +62,16 @@ injury_heatmap <- function(
 ) {
 
   # ================================
-  # 1. SETUP AND DATA LOADING
+  # 1. DATA PROCESSING
   # ================================
 
   stopifnot(selected_sport %in% names(injury_data))
   stopifnot(view_choice %in% c("front", "back", "both"))
-  stopifnot(sex %in% c("male", "female"))
+  sex <- match.arg(sex)
   stopifnot(is.numeric(opacity), length(opacity) == 1, opacity >= 0, opacity <= 1)
   stopifnot(is.logical(show_labels), length(show_labels) == 1)
   stopifnot(is.logical(show_values), length(show_values) == 1)
   stopifnot(is.logical(show_scale),  length(show_scale)  == 1)
-
-  sex <- match.arg(sex)
 
   get_svg_path <- function(filename) {
     p <- system.file("extdata", filename, package = "spinviz")
@@ -113,7 +79,7 @@ injury_heatmap <- function(
     p
   }
 
-  # Build label text according to toggles
+  # Build label strings according to toggles
   make_label_text <- function(region, value) {
     if (!show_labels && !show_values) return("")
     if (show_labels && show_values) {
@@ -124,17 +90,10 @@ injury_heatmap <- function(
     return(ifelse(is.na(value), "NA", as.character(round(value, 1))))
   }
 
-
-  # -----------------------------
-  # Helper function to generate a single plot
-  # -----------------------------
+  # Render single view (front or back)
   generate_plot <- function(view_choice_inner, max_injuries_override = NULL, opacity_inner = opacity) {
 
-
-    # ================================
-    # 2. PREPROCESS INJURY DATA
-    # ================================
-
+  # Prepare injury data
     base_data <- injury_data %>%
       transmute(
         Region.area   = str_to_title(trimws(as.character(.data$Subcategory))),
@@ -142,7 +101,7 @@ injury_heatmap <- function(
         Sport         = selected_sport
       )
 
-    # 2.2 Assign SVG IDs and label layouts per view and sex choice
+  # View mapping
     svg_file <- switch(
       paste0(sex, "_", view_choice_inner),
       "male_front"   = get_svg_path("MaleFront.svg"),
@@ -247,6 +206,8 @@ injury_heatmap <- function(
       unnest(cols = c(SVG_ID)) |>
       filter(!is.na(.data$SVG_ID))
 
+
+  # Scale + palette setup
     max_injuries_local <- max(processed_injury_data$TotalInjuries, na.rm = TRUE)
     if (!is.finite(max_injuries_local)) max_injuries_local <- 0
     max_injuries <- if (!is.null(max_injuries_override)) max_injuries_override else max_injuries_local
@@ -257,8 +218,6 @@ injury_heatmap <- function(
 
     if (is.character(pal) && length(pal) == 1 && !grepl("^#", pal)) {
       pal_resolved <- diagram_colours(pal, n_colours = max_injuries + 1)
-
-      # fallback silently (or warning) if not recognised
       if (is.null(pal_resolved)) {
         warning("Palette '", pal, "' not recognised. Using default heat palette instead.",
                 call. = FALSE)
@@ -272,17 +231,19 @@ injury_heatmap <- function(
       color_palette <- colorRampPalette(pal)(max_injuries + 1)
     }
 
-    # Read and colour SVG
+  # ================================
+  # 2. SVG MANIPULATION
+  # ================================
+
     svg_content <- read_xml(svg_file)
     nodes <- xml_find_all(svg_content, "//*[@id]")
+
+    # Adjust SVG canvas height
     root <- xml_root(svg_content)
     current_height <- as.numeric(xml_attr(root, "height"))
     new_height <- current_height * 1.1
-
     xml_set_attr(root, "height", as.character(new_height))
     xml_set_attr(root, "viewBox", paste0("0 0 1024 ", new_height))
-
-    paths <- nodes
 
     color_paths <- function(path) {
       path_id <- xml_attr(path, "id")
@@ -292,6 +253,7 @@ injury_heatmap <- function(
         slice(1) |>
         pull(TotalInjuries)
 
+      # Handle no data match
       if (length(injury_match) == 0) injury_match <- NA_real_
 
       fill_color <- if (is.na(injury_match)) {
@@ -314,12 +276,18 @@ injury_heatmap <- function(
       )
     }
 
-    walk(paths, color_paths)
+    walk(nodes, color_paths)
 
+    # Rasterise modified SVG for ggplot
     modified_svg <- tempfile(pattern = paste0("filtered_body_", view_choice_inner, "_"), fileext = ".svg")
     write_xml(svg_content, modified_svg)
     body_image <- image_read_svg(modified_svg)
 
+  # ================================
+  # 3. VISUAL ASSEMBLY
+  # ================================
+
+  # Single view
     legend_dummy <- data.frame(
       x    = c(-1000, -1000),
       y    = c(-1000, -1001),
@@ -343,8 +311,7 @@ injury_heatmap <- function(
 
     draw_text <- isTRUE(show_labels) || isTRUE(show_values)
 
-    svg_palette <- color_palette
-    legend_palette <- adjustcolor(svg_palette, alpha.f = opacity_inner)
+    legend_palette <- adjustcolor(color_palette, alpha.f = opacity_inner)
 
     injury_plot <- ggplot() +
       annotation_raster(
@@ -396,6 +363,7 @@ injury_heatmap <- function(
   guides_mode  <- if (isTRUE(show_scale)) "collect" else "keep"
   legend_theme <- if (isTRUE(show_scale)) theme(legend.position = "right") else theme(legend.position = "none")
 
+  # Both view
   if (view_choice == "both") {
 
     global_max <- max(injury_data[[selected_sport]], na.rm = TRUE)
@@ -510,7 +478,6 @@ injury_heatmap <- function(
     return(combined_plot)
 
   } else {
-
     single_plot <- generate_plot(view_choice) +
       theme(
         plot.margin = margin(t = 15, r = 10, b = 10, l = 10),
