@@ -16,7 +16,7 @@ The main function, `injury_heatmap()`, colours anatomical regions by injury freq
 
 |Front (Male)|Back (Male)|Both Views (Male)|
 |--|--|--|
-|<a href = ""><img src="man/figures/injury-heatmap-front.png" height="300"/></a>|<a href = ""><img src="inst/figures/injury-heatmap-back.png" height="300"/></a>|<a href = ""><img src="inst/figures/injury-heatmap-both.png" height="300"/></a>|
+|<a href = ""><img src="man/figures/injury-heatmap-front.png" height="300"/></a>|<a href = ""><img src="man/figures/injury-heatmap-back.png" height="300"/></a>|<a href = ""><img src="man/figures/injury-heatmap-both.png" height="300"/></a>|
 
 </details>
 
