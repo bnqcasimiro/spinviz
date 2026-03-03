@@ -24,6 +24,16 @@
 #' @export
 #' @examples
 #' diagram_colours("Reds")
+#'
+#' @details
+#' Valid palette inputs:
+#' \itemize{
+#'   \item Viridis options: \code{"viridis"}, \code{"magma"}, \code{"plasma"},
+#'   \code{"inferno"}, \code{"cividis"}, \code{"mako"}, \code{"rocket"}, \code{"turbo"}.
+#'   \item Any palette name returned by \code{grDevices::hcl.pals()}.
+#' }
+#'
+#' To see available HCL palettes, run \code{grDevices::hcl.pals()}.
 
 
 
@@ -41,10 +51,10 @@ diagram_colours <- function(palette = "", n_colors = 10, n_colours = n_colors) {
 
   if (is.character(palette) && length(palette) == 1) {
     if (palette %in% viridis_opts) {
-      return(viridis::viridis(n = n_colours, option = palette))
+      return(rev(viridis::viridis(n = n_colours, option = palette)))
     }
     if (palette %in% grDevices::hcl.pals()) {
-      return(grDevices::hcl.colors(n = n_colours, palette = palette))
+      return(rev(grDevices::hcl.colors(n = n_colours, palette = palette)))
     }
   }
 
@@ -56,4 +66,3 @@ diagram_colours <- function(palette = "", n_colors = 10, n_colours = n_colors) {
 diagram_colors <- function(palette = "", n_colors = 10, n_colours = n_colors) {
   diagram_colours(palette = palette, n_colours = n_colours)
 }
-
