@@ -46,9 +46,9 @@ remotes::install_github("bnqcasimiro/spinviz")
 
 ## Getting Started
 The available functions in this package are:
-- injury_heatmap
-- test_colour
-- diagram_colours
+- injury_heatmap: render injury heatmaps on body SVG diagrams
+- diagram_colours: return colours from supported palette names
+- test_colour: visualise palettes (named or custom)
 
 
 ### Data Format
@@ -103,8 +103,8 @@ You can supply palette as:
 - A character vector of hex colours, e.g. c("#FFFFFF", "#FFFF00", "#FF0000")
 
 To preview supported palettes, run
-`?diagram_colours` return colours from supported palette names
-`?test_colour` visualise palettes (named or custom)
+- `?diagram_colours` 
+- `?test_colour`
 
 
 ### Dependencies
