@@ -13,11 +13,17 @@
 #' the frequency column in the data frame.
 #' @param view_choice which view to render the diagram. One of ("front", "back", or "both")
 #' @param sex which body diagram to use: `"male"` or `"female"`.
-#' @param palette WIP - placeholder to add custom colour options
+#' @param palette Optional colour palette.
+#' \itemize{
+#'   \item A single palette name supported by \code{\link{diagram_colours}} (viridis or HCL),
+#'   e.g. \code{"magma"} or \code{"Reds"}.
+#'   \item A character vector of hex colours, e.g. \code{c("#FFFFFF", "#FF0000")}.
+#'   \item HCL palette names can be listed with \code{grDevices::hcl.pals()}.
+#' }
 #' @param opacity Numeric between `0` and `1`. Opacity of the filled body regions.
 #' @param show_labels Logical. If `TRUE`, show region names.
-#' @param show_values (optional) Logical. If `TRUE`, show injury values.
-#' @param show_scale (optional) Logical. If `TRUE`, show the colour scale (legend).
+#' @param show_values Logical. If `TRUE`, show injury values.
+#' @param show_scale Logical. If `TRUE`, show the colour scale (legend).
 
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select rename mutate case_when tribble slice pull left_join rowwise filter transmute
@@ -35,6 +41,9 @@
 #' @importFrom magick image_read_svg
 
 #' @return A plot in R-studio viewer
+#' @seealso
+#' \code{\link{diagram_colours}} to preview supported palette names.
+#' \code{\link{test_colour}} to visualise palettes.
 #' @export
 #' @examples
 #' Subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
@@ -44,10 +53,12 @@
 #' boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
 #' df <- data.frame(Region.area, Subcategory, boxing)
 #' # Generate a plot for front view, male
-#' p <- injury_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
+#' p1 <- injury_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
+#' # You can customise the colour palette by:
+#' p2 <- injury_heatmap(df, "boxing", "front", sex = "female", palette = "plasma")
 #' # You can add your own plot title by:
-#' p + ggplot2::labs(
-#'   title = "Boxing Injury Heatmap (Front)")
+#' p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Front)")
+
 
 injury_heatmap <- function(
     injury_data,
@@ -211,25 +222,25 @@ injury_heatmap <- function(
     max_injuries_local <- max(processed_injury_data$TotalInjuries, na.rm = TRUE)
     if (!is.finite(max_injuries_local)) max_injuries_local <- 0
     max_injuries <- if (!is.null(max_injuries_override)) max_injuries_override else max_injuries_local
+    # --- Palette builder: always returns light -> dark (low -> high) ---
+    build_palette <- function(pal, n) {
 
-    default_palette <- c("#FFFFFF", "#FFFF00", "#FFA500", "#FF0000")
-    pal <- palette
-    if (is.null(pal)) pal <- default_palette
+      default_palette <- c("#FFFFFF", "#FFFF00", "#FFA500", "#FF0000")
 
-    if (is.character(pal) && length(pal) == 1 && !grepl("^#", pal)) {
-      pal_resolved <- diagram_colours(pal, n_colours = max_injuries + 1)
-      if (is.null(pal_resolved)) {
-        warning("Palette '", pal, "' not recognised. Using default heat palette instead.",
-                call. = FALSE)
-        pal <- default_palette
-        color_palette <- colorRampPalette(pal)(max_injuries + 1)
-      } else {
-        color_palette <- pal_resolved
+      if (is.null(pal)) pal <- default_palette
+      if (is.character(pal) && length(pal) == 1 && !grepl("^#", pal)) {
+        cols <- diagram_colours(pal, n_colours = n)
+        if (is.null(cols)) {
+          warning("Palette '", pal, "' not recognised. Using default heat palette instead.", call. = FALSE)
+          cols <- colorRampPalette(default_palette)(n)
+        }
+        return(cols)
       }
 
-    } else {
-      color_palette <- colorRampPalette(pal)(max_injuries + 1)
+      colorRampPalette(pal)(n)
     }
+
+    color_palette <- build_palette(palette, max_injuries + 1)
 
   # ================================
   # 2. SVG MANIPULATION
