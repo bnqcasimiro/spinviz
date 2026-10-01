@@ -7,14 +7,14 @@ Authors@R: c(
     email="biancanicole.casimiro@students.mq.edu.au",
     role = c("aut", "cre")
     ),
-    person(given="Reidar",
-    family="Lystad",
-    email="reidar.lystad@mq.edu.au",
-    role = "aut"
-    ),
     person(given="Thomas",
     family="Fung",
     email="thomas.fung.dr@gmail.com",
+    role = "aut"
+    ),
+    person(given="Reidar",
+    family="Lystad",
+    email="reidar.lystad@mq.edu.au",
     role = "aut"
     )
     )
