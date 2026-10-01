@@ -1,49 +1,51 @@
-
+---
+format:
+  gfm:
+    default-image-extension: ""
+---
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # spinviz <img src="man/figures/spinviz_logo.png" align="right" height="110"/>
 
 <!-- badges: start -->
-
 [![R-CMD-check](https://github.com/thomas-fung/spinviz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomas-fung/spinviz/actions/workflows/R-CMD-check.yaml)
-[![Ask
-DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bnqcasimiro/spinviz)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bnqcasimiro/spinviz)
 <!-- badges: end -->
 
 ## About
 
-The `spinviz` packages provides tools for visualising sporting injury
-frequencies as a **heatmap projected onto human-body SVG diagrams** in
-`R`.
+The `spinviz` packages provides tools for visualising sporting injury frequencies as a **heatmap projected onto human-body SVG diagrams** in `R`.
 
-The main function, `injury_heatmap()`, colours anatomical regions by
-injury frequency and can render **front**, **back**, or **both** views,
-using **male** or **female** body templates.
+The main function, `injury_heatmap()`, colours anatomical regions by injury frequency and can render **front**, **back**, or **both** views, using **male** or **female** body templates.
 
 ## Examples
 
 **Heatmap diagram**
 
 <details>
-
-<summary>
-
-<b><code>Example Diagrams</code></b>
-</summary>
+<summary><b><code>Example Diagrams</code></b></summary>
 
 | Front (Male) | Back (Male) | Both Views (Male) |
-|----|----|----|
-| <img src="man/figures/injury-heatmap-front.png" height="300" /> | <img src="man/figures/injury-heatmap-back.png" height="300" /> | <img src="man/figures/injury-heatmap-both.png" height="300" /> |
+|---|---|---|
+| ![](man/figures/injury-heatmap-front.png){height="300"} | ![](man/figures/injury-heatmap-back.png){height="300"} | ![](man/figures/injury-heatmap-both.png){height="300"} |
 
 </details>
 
 ## Features
 
 ### Injury Heatmap
-
-The heatmap uses **ggplot2** to display a body diagram with regions
-coloured by injury frequency.
+The heatmap uses **ggplot2** to display a body diagram with regions coloured by injury frequency.
 
 Available options:
 
@@ -53,21 +55,19 @@ Available options:
 - Optional labels (region names) and/or values
 - Optional legend scale
 - Custom palettes:
-  - Named palettes supported by `diagram_colours()` (viridis or HCL
-    palettes)
+  - Named palettes supported by `diagram_colours()` (viridis or HCL palettes)
   - Or a custom vector of hex colours
 
 ## Installation
 
 As this package is not currently on CRAN, install from GitHub:
 
-``` r
+```r
 # install.packages("pak")
 pak::pak("bnqcasimiro/spinviz")
 ```
 
 ## Getting Started
-
 The available functions in this package are:
 
 - `injury_heatmap()`: render injury heatmaps on body SVG diagrams
@@ -75,9 +75,7 @@ The available functions in this package are:
 - `test_colour()`: visualise palettes (named or custom)
 
 ### Data Format
-
-This package expects data to be provided in a data frame, with columns
-in the following order:
+This package expects data to be provided in a data frame, with columns in the following order:
 
 - Region.area
 - Subcategory
@@ -85,20 +83,21 @@ in the following order:
 
 #### Heatmap Diagram (Body Injuries)
 
-| Region.area   | Subcategory | Sport_1 |
-|---------------|-------------|---------|
-| Head and Neck | Head        | 10      |
-| Head and Neck | Neck        | 20      |
-| Upper Limb    | Shoulder    | 5       |
-| Upper Limb    | Upper Arm   | 8       |
+|Region.area|Subcategory|Sport_1|
+|--|--|--|
+|Head and Neck|Head|10|
+|Head and Neck|Neck|20|
+|Upper Limb|Shoulder|5|
+|Upper Limb|Upper Arm|8|
 
 ### Example Code
 
 #### Heatmap Example
-
 Start by creating a data frame:
 
-``` r
+```{r}
+#| label: example-data
+#| eval: false
 Subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
                  "Abdomen","Forearm","Hip Groin","Wrist","Hand",
                  "Thigh","Knee","Lower Leg","Ankle","Foot","Thoracic Spine","Lumbosacral")
@@ -109,44 +108,34 @@ boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
 df <- data.frame(Region.area, Subcategory, boxing)
 ```
 
-Then run `injury_heatmap(injury_data, selected_sport, view_choice)`
-where:
+Then run `injury_heatmap(injury_data, selected_sport, view_choice)` where:
 
-- `injury_data`: the data to be used, i.e. the data frame above
+- `injury_data`: the data to be used, i.e. the data frame above
 - `selected_sport`: the column name to use
-- `view_choice`: the view of the diagram. One of: `"front"`, `"back"`,
-  `"both"`
+- `view_choice`: the view of the diagram. One of: `"front"`, `"back"`, `"both"`
 
-``` r
+```{r}
+#| label: example-heatmap
+#| eval: false
 injury_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
 ```
 
 <details>
-
-<summary>
-
-<b><code>Example Code Run</code></b>
-</summary>
-
-<img src="man/figures/injury-heatmap-front.png" height="600" />
+<summary><b><code>Example Code Run</code></b></summary>
+![](man/figures/injury-heatmap-front.png){height="600"}
 </details>
 
 Run `?injury_heatmap` for more detail.
 
 ### Palette Support
-
 You can supply palette as:
 
-- A palette name supported by `diagram_colours()` (viridis or HCL),
-  e.g. `"magma"`, `"plasma"`, `"Reds"`
-- A character vector of hex colours,
-  e.g. `c("#FFFFFF", "#FFFF00", "#FF0000")`
+- A palette name supported by `diagram_colours()` (viridis or HCL), e.g. `"magma"`, `"plasma"`, `"Reds"`
+- A character vector of hex colours, e.g. `c("#FFFFFF", "#FFFF00", "#FF0000")`
 
-To preview supported palettes, run `?diagram_colours` and
-`?test_colour`.
+To preview supported palettes, run `?diagram_colours` and `?test_colour`.
 
 ### Dependencies
-
 Key packages used:
 
 - Data wrangling: `dplyr`, `tidyr`, `rlang`, `stringr`
