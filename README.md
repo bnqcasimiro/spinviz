@@ -9,6 +9,8 @@
 [![R-CMD-check](https://github.com/thomas-fung/spinviz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomas-fung/spinviz/actions/workflows/R-CMD-check.yaml)
 [![Ask
 DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bnqcasimiro/spinviz)
+[![Codecov test
+coverage](https://codecov.io/gh/thomas-fung/spinviz/graph/badge.svg)](https://app.codecov.io/gh/thomas-fung/spinviz)
 <!-- badges: end -->
 
 ## About
