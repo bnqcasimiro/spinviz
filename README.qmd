@@ -71,6 +71,8 @@ pak::pak("bnqcasimiro/spinviz")
 The available functions in this package are:
 
 - `injury_heatmap()`: render injury heatmaps on body SVG diagrams
+- `create_injury_template()`: write a template CSV in the expected data format
+- `read_injury_data()`: read and validate an injury-data CSV file
 - `diagram_colours()`: return colours from supported palette names
 - `test_colour()`: visualise palettes (named or custom)
 
@@ -89,6 +91,36 @@ This package expects data to be provided in a data frame, with columns in the fo
 |Head and Neck|Neck|20|
 |Upper Limb|Shoulder|5|
 |Upper Limb|Upper Arm|8|
+
+### Importing Data from a CSV File
+
+If your injury data lives in a CSV file, the package provides helpers for the full workflow: create a template, fill it in, read it back, and plot.
+
+**1. Create a template CSV** with all 18 recognised body subcategories and one empty column per sport:
+
+```{r}
+#| label: csv-template
+#| eval: false
+create_injury_template("injuries.csv", sports = c("boxing", "judo"))
+```
+
+**2. Fill in the file** in your favourite spreadsheet editor, entering the injury frequencies and the `Region.area` grouping for each row.
+
+**3. Read the file back in.** `read_injury_data()` checks that the required columns are present, that at least one sport column exists, and that sport values are numeric (with a warning for values that fail to parse):
+
+```{r}
+#| label: csv-read
+#| eval: false
+df <- read_injury_data("injuries.csv")
+```
+
+**4. Plot as usual:**
+
+```{r}
+#| label: csv-plot
+#| eval: false
+injury_heatmap(df, "boxing", "front", sex = "male")
+```
 
 ### Example Code
 
