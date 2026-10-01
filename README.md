@@ -82,18 +82,18 @@ The available functions in this package are:
 This package expects data to be provided in a data frame, with columns
 in the following order:
 
-- Region.area
-- Subcategory
+- region_area
+- subcategory
 - Sport column containing injury frequencies
 
 #### Heatmap Diagram (Body Injuries)
 
-| Region.area   | Subcategory | Sport_1 |
-|---------------|-------------|---------|
-| Head and Neck | Head        | 10      |
-| Head and Neck | Neck        | 20      |
-| Upper Limb    | Shoulder    | 5       |
-| Upper Limb    | Upper Arm   | 8       |
+| region_area   | subcategory | sport1 |
+|---------------|-------------|--------|
+| Head and Neck | Head        | 10     |
+| Head and Neck | Neck        | 20     |
+| Upper Limb    | Shoulder    | 5      |
+| Upper Limb    | Upper Arm   | 8      |
 
 ### Importing Data from a CSV File
 
@@ -109,7 +109,7 @@ create_injury_template("injuries.csv", sports = c("boxing", "judo"))
 ```
 
 **2. Fill in the file** in your favourite spreadsheet editor, entering
-the injury frequencies and the `Region.area` grouping for each row.
+the injury frequencies and the `region_area` grouping for each row.
 
 **3. Read the file back in.** `read_injury_data()` checks that the
 required columns are present, that at least one sport column exists, and
@@ -133,14 +133,14 @@ injury_heatmap(df, "boxing", "front", sex = "male")
 Start by creating a data frame:
 
 ``` r
-Subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
+subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
                  "Abdomen","Forearm","Hip Groin","Wrist","Hand",
                  "Thigh","Knee","Lower Leg","Ankle","Foot","Thoracic Spine","Lumbosacral")
 
-Region.area <- rep("Example", length(Subcategory))
+region_area <- rep("Example", length(subcategory))
 boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
 
-df <- data.frame(Region.area, Subcategory, boxing)
+df <- data.frame(region_area, subcategory, boxing)
 ```
 
 Then run `injury_heatmap(injury_data, selected_sport, view_choice)`

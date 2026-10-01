@@ -26,7 +26,7 @@ view_exclusive_regions <- function() {
   list(front_only = "Abdomen", back_only = c("Thoracic Spine", "Lumbosacral"))
 }
 
-# Shared front/back mapping from a title-cased Region.area to the SVG
+# Shared front/back mapping from a title-cased region_area to the SVG
 # element id(s) it should colour. Kept as a single lookup table so the two
 # views cannot silently drift apart; view-specific asymmetries (e.g. Hip
 # Groin, Thoracic Spine/Lumbosacral) are captured explicitly per view.
@@ -65,7 +65,7 @@ svg_id_lookup <- function(view_choice_inner) {
   if (view_choice_inner == "front") front else back
 }
 
-# Look up SVG ids for a vector of Region.area values, matching the fallback
+# Look up SVG ids for a vector of region_area values, matching the fallback
 # behaviour of the case_when() this replaces (unmatched regions map to NA).
 map_svg_ids <- function(region, view_choice_inner) {
   lookup <- svg_id_lookup(view_choice_inner)
@@ -82,7 +82,7 @@ map_svg_ids <- function(region, view_choice_inner) {
 # Lumbosacral are back-only), need a view-specific override.
 label_position_lookup <- function(view_choice_inner) {
   common_positions <- tribble(
-    ~Region.area , ~label_x , ~label_y , ~target_x , ~target_y ,
+    ~region_area , ~label_x , ~label_y , ~target_x , ~target_y ,
     "Chest"      , 0.8      , 0.87     , 0.51      , 0.80      ,
     "Upper Arm"  , 0.2      , 0.82     , 0.45      , 0.79      ,
     "Elbow"      , 0.15     , 0.77     , 0.44      , 0.74      ,
@@ -96,7 +96,7 @@ label_position_lookup <- function(view_choice_inner) {
   )
 
   front_only <- tribble(
-    ~Region.area , ~label_x , ~label_y , ~target_x , ~target_y ,
+    ~region_area , ~label_x , ~label_y , ~target_x , ~target_y ,
     "Head"       , 0.9      , 1.01     , 0.55      , 1.01      ,
     "Neck"       , 0.8      , 0.97     , 0.55      , 0.91      ,
     "Shoulder"   , 0.2      , 0.92     , 0.45      , 0.86      ,
@@ -106,7 +106,7 @@ label_position_lookup <- function(view_choice_inner) {
   )
 
   back_only <- tribble(
-    ~Region.area     , ~label_x , ~label_y , ~target_x , ~target_y ,
+    ~region_area     , ~label_x , ~label_y , ~target_x , ~target_y ,
     "Head"           , 0.9      , 1.05     , 0.54      , 1.01      ,
     "Neck"           , 0.8      , 1.00     , 0.55      , 0.92      ,
     "Shoulder"       , 0.2      , 0.96     , 0.47      , 0.87      ,
@@ -119,11 +119,11 @@ label_position_lookup <- function(view_choice_inner) {
   exclusive <- view_exclusive_regions()
   stopifnot(
     setequal(
-      setdiff(front_only$Region.area, back_only$Region.area),
+      setdiff(front_only$region_area, back_only$region_area),
       exclusive$front_only
     ),
     setequal(
-      setdiff(back_only$Region.area, front_only$Region.area),
+      setdiff(back_only$region_area, front_only$region_area),
       exclusive$back_only
     )
   )
@@ -140,7 +140,7 @@ label_position_lookup <- function(view_choice_inner) {
 # table cannot silently drift from svg_id_lookup()/label_position_lookup().
 both_label_position_lookup <- function() {
   positions <- tribble(
-    ~Region.area     , ~label_y , ~front_target_x , ~front_target_y , ~back_target_x , ~back_target_y ,
+    ~region_area     , ~label_y , ~front_target_x , ~front_target_y , ~back_target_x , ~back_target_y ,
     "Head"           , 1.05     , 0.56            , 1.01            , 0.49           , 1.01           ,
     "Neck"           , 1.00     , 0.56            , 0.91            , 0.50           , 0.92           ,
     "Shoulder"       , 0.96     , 0.64            , 0.87            , 0.42           , 0.87           ,
@@ -164,11 +164,11 @@ both_label_position_lookup <- function() {
   exclusive <- view_exclusive_regions()
   stopifnot(
     setequal(
-      positions$Region.area[is.na(positions$front_target_x)],
+      positions$region_area[is.na(positions$front_target_x)],
       exclusive$back_only
     ),
     setequal(
-      positions$Region.area[is.na(positions$back_target_x)],
+      positions$region_area[is.na(positions$back_target_x)],
       exclusive$front_only
     )
   )
@@ -224,12 +224,12 @@ both_label_position_lookup <- function() {
 #' \code{\link{test_colour}} to visualise palettes.
 #' @export
 #' @examples
-#' Subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
+#' subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
 #'                   "Abdomen","Forearm","Hip Groin","Wrist","Hand",
 #'                   "Thigh","Knee","Lower Leg","Ankle","Foot","Thoracic Spine","Lumbosacral")
-#' Region.area <- rep("Example", length(Subcategory))
+#' region_area <- rep("Example", length(subcategory))
 #' boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
-#' df <- data.frame(Region.area, Subcategory, boxing)
+#' df <- data.frame(region_area, subcategory, boxing)
 #' # Generate a plot for front view, male
 #' p1 <- injury_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
 #' # You can customise the colour palette by:
@@ -302,7 +302,7 @@ injury_heatmap <- function(
     # Prepare injury data
     base_data <- injury_data |>
       transmute(
-        Region.area = str_to_title(trimws(as.character(.data$Subcategory))),
+        region_area = str_to_title(trimws(as.character(.data$subcategory))),
         TotalInjuries = coerce_injury_values(
           .data[[selected_sport]],
           selected_sport
@@ -321,7 +321,7 @@ injury_heatmap <- function(
     )
 
     processed_injury_data <- base_data |>
-      mutate(SVG_ID = map_svg_ids(.data$Region.area, view_choice_inner))
+      mutate(SVG_ID = map_svg_ids(.data$region_area, view_choice_inner))
 
     stopifnot("SVG_ID" %in% names(processed_injury_data))
 
@@ -439,11 +439,11 @@ injury_heatmap <- function(
     )
 
     label_data <- label_positions |>
-      left_join(processed_injury_data, by = "Region.area")
+      left_join(processed_injury_data, by = "region_area")
 
     label_data$label_text <- mapply(
       make_label_text,
-      region = label_data$Region.area,
+      region = label_data$region_area,
       value = label_data$TotalInjuries,
       USE.NAMES = FALSE
     )
@@ -559,7 +559,7 @@ injury_heatmap <- function(
 
     base_data_both <- injury_data |>
       transmute(
-        Region.area = str_to_title(trimws(as.character(.data$Subcategory))),
+        region_area = str_to_title(trimws(as.character(.data$subcategory))),
         TotalInjuries = coerce_injury_values(
           .data[[selected_sport]],
           selected_sport
@@ -571,11 +571,11 @@ injury_heatmap <- function(
     draw_text <- isTRUE(show_labels) || isTRUE(show_values)
 
     middle_labels <- both_label_positions |>
-      left_join(base_data_both, by = "Region.area") |>
+      left_join(base_data_both, by = "region_area") |>
       mutate(
         label_text = mapply(
           make_label_text,
-          region = Region.area,
+          region = region_area,
           value = TotalInjuries,
           USE.NAMES = FALSE
         )

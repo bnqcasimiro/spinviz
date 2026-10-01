@@ -1,5 +1,31 @@
 # spinviz 0.0.1.0000
 
+## Breaking changes
+
+* The required column names for injury data have been standardised to
+  snake_case: `Region.area` is now `region_area` and `Subcategory` is now
+  `subcategory`. This affects `create_injury_template()`,
+  `read_injury_data()`, and `injury_heatmap()`. Existing CSV files using the
+  old names must be updated; `read_injury_data()` now errors on the old
+  names with a hint explaining the rename.
+* Example sport columns in the README and template now use lowercase names
+  (e.g. `sport1` instead of `Sport_1`) for consistency. Sport column names
+  remain free-form.
+
+## Other changes
+
+* New `create_injury_template()` writes a template CSV pre-filled with all
+  recognised body subcategories and one column per requested sport, ready to
+  be filled in with injury frequencies.
+* New `read_injury_data()` reads and validates such a CSV, checking for the
+  required `region_area`/`subcategory` columns, at least one sport column,
+  and unrecognised (possibly misspelled) subcategory values. Files are read
+  with `check.names = FALSE` so user-supplied column names are preserved
+  exactly as written.
+* Added `rsvg` to Imports. It is required at runtime by
+  `magick::image_read_svg()` when rendering the SVG body diagrams, and its
+  absence caused failures on systems (e.g. CI runners) where it was not
+  already installed.
 * Removed a duplicate `grDevices` entry from `DESCRIPTION` Imports.
 * Added a `tests/testthat` suite covering `diagram_colours()`, `test_colour()`,
   and `injury_heatmap()`.

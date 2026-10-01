@@ -10,13 +10,13 @@ read_injury_data(path)
 \item{path}{File path of the CSV to read.}
 }
 \value{
-A data frame with \code{Region.area}, \code{Subcategory}, and one column
+A data frame with \code{region_area}, \code{subcategory}, and one column
 per sport (coerced to numeric).
 }
 \description{
 Reads a CSV file (e.g. one created with \code{\link[=create_injury_template]{create_injury_template()}} and
 filled in) and checks that it has the structure \code{\link[=injury_heatmap]{injury_heatmap()}}
-expects: \code{Region.area} and \code{Subcategory} columns plus at least one sport
+expects: \code{region_area} and \code{subcategory} columns plus at least one sport
 column of injury frequencies.
 }
 \examples{

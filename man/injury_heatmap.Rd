@@ -53,12 +53,12 @@ diagram.
 Diagrams can be viewed from the front, back, or both views
 }
 \examples{
-Subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
+subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
                   "Abdomen","Forearm","Hip Groin","Wrist","Hand",
                   "Thigh","Knee","Lower Leg","Ankle","Foot","Thoracic Spine","Lumbosacral")
-Region.area <- rep("Example", length(Subcategory))
+region_area <- rep("Example", length(subcategory))
 boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
-df <- data.frame(Region.area, Subcategory, boxing)
+df <- data.frame(region_area, subcategory, boxing)
 # Generate a plot for front view, male
 p1 <- injury_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
 # You can customise the colour palette by:

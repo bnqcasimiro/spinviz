@@ -28,7 +28,7 @@ injury_subcategories <- function() {
 #'
 #' @description
 #' Writes a CSV file in the format expected by [injury_heatmap()]: one row
-#' per recognised body subcategory, with `Region.area` and `Subcategory`
+#' per recognised body subcategory, with `region_area` and `subcategory`
 #' columns and one empty column per sport for the user to fill in with
 #' injury frequencies.
 #'
@@ -53,8 +53,8 @@ create_injury_template <- function(path, sports = "sport1") {
   )
 
   template <- data.frame(
-    Region.area = "",
-    Subcategory = injury_subcategories(),
+    region_area = "",
+    subcategory = injury_subcategories(),
     stringsAsFactors = FALSE
   )
   for (sport in sports) {
@@ -70,12 +70,12 @@ create_injury_template <- function(path, sports = "sport1") {
 #' @description
 #' Reads a CSV file (e.g. one created with [create_injury_template()] and
 #' filled in) and checks that it has the structure [injury_heatmap()]
-#' expects: `Region.area` and `Subcategory` columns plus at least one sport
+#' expects: `region_area` and `subcategory` columns plus at least one sport
 #' column of injury frequencies.
 #'
 #' @param path File path of the CSV to read.
 #'
-#' @return A data frame with `Region.area`, `Subcategory`, and one column
+#' @return A data frame with `region_area`, `subcategory`, and one column
 #'   per sport (coerced to numeric).
 #' @seealso [create_injury_template()] to generate a correctly formatted
 #'   file.
@@ -92,12 +92,23 @@ read_injury_data <- function(path) {
 
   data <- utils::read.csv(path, check.names = FALSE)
 
-  required <- c("Region.area", "Subcategory")
+  required <- c("region_area", "subcategory")
   missing_cols <- setdiff(required, names(data))
   if (length(missing_cols) > 0) {
+    legacy <- intersect(c("Region.area", "Subcategory"), names(data))
+    hint <- if (length(legacy) > 0) {
+      paste0(
+        " Note: 'Region.area' and 'Subcategory' were renamed to snake_case; ",
+        "please update your file to use the new names."
+      )
+    } else {
+      ""
+    }
     stop(
       "Missing required column(s): ",
       paste(missing_cols, collapse = ", "),
+      ".",
+      hint,
       call. = FALSE
     )
   }
@@ -106,7 +117,7 @@ read_injury_data <- function(path) {
   if (length(sport_cols) == 0) {
     stop(
       "No sport column found. The file needs at least one injury frequency ",
-      "column besides 'Region.area' and 'Subcategory'.",
+      "column besides 'region_area' and 'subcategory'.",
       call. = FALSE
     )
   }
@@ -115,23 +126,23 @@ read_injury_data <- function(path) {
     stop("File contains no data rows.", call. = FALSE)
   }
 
-  data$Region.area <- as.character(data$Region.area)
-  data$Subcategory <- as.character(data$Subcategory)
+  data$region_area <- as.character(data$region_area)
+  data$subcategory <- as.character(data$subcategory)
 
-  if (anyNA(data$Subcategory) || any(!nzchar(trimws(data$Subcategory)))) {
+  if (anyNA(data$subcategory) || any(!nzchar(trimws(data$subcategory)))) {
     stop(
-      "Column 'Subcategory' contains missing or empty values.",
+      "Column 'subcategory' contains missing or empty values.",
       call. = FALSE
     )
   }
 
   # Match injury_heatmap()'s normalisation so validation reflects what will
   # actually be plotted.
-  normalised <- stringr::str_to_title(trimws(data$Subcategory))
+  normalised <- stringr::str_to_title(trimws(data$subcategory))
   unrecognised <- setdiff(unique(normalised), injury_subcategories())
   if (length(unrecognised) > 0) {
     warning(
-      "Unrecognised Subcategory value(s), possibly misspelled: ",
+      "Unrecognised subcategory value(s), possibly misspelled: ",
       paste(unrecognised, collapse = ", "),
       ". Expected values are: ",
       paste(injury_subcategories(), collapse = ", "),
