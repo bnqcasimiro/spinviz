@@ -23,7 +23,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: ggplot2, dplyr, xml2, grDevices, tidyr, rlang, this.path,
-        purrr, tibble, stats, patchwork, stringr, magick, viridis
+        purrr, tibble, stats, patchwork, stringr, magick, viridis, rsvg
 NeedsCompilation: no
 Packaged: 2026-03-01 11:33:08 UTC; bnqcasimiro
 Author: Bianca Nicole Casimiro [aut, cre]

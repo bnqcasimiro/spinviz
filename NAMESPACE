@@ -48,6 +48,7 @@ importFrom(patchwork,
 )
 importFrom(purrr,walk)
 importFrom(rlang,.data)
+importFrom(rsvg,rsvg)
 importFrom(stats,na.omit)
 importFrom(stringr,str_to_title)
 importFrom(this.path,this.dir)

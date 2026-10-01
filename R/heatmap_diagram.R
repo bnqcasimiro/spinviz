@@ -216,6 +216,7 @@ both_label_position_lookup <- function() {
 #' @importFrom patchwork plot_layout plot_annotation
 #' @importFrom stringr str_to_title
 #' @importFrom magick image_read_svg
+#' @importFrom rsvg rsvg
 
 #' @return A plot in R-studio viewer
 #' @seealso
