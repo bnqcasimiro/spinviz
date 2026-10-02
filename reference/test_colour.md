@@ -1,0 +1,183 @@
+# Test colour palette(s)
+
+Function to help test colour palettes by displaying pie chart(s) with
+the palette name and hexidecimal values next to each colour.
+
+Can accept any palette in hcl.pals() or the viridis package, or a custom
+palette.
+
+## Usage
+
+``` r
+test_colour(palettes = "", n_colors = 10, n_colours = n_colors)
+```
+
+## Arguments
+
+- palettes:
+
+  (required) the palette(s) to test. Can be a vector of hexidecimal
+  values (custom palette), a palette available in hcl.pals() or viridis,
+  or a list of palettes. Must be a list if multiple palettes are being
+  tested.
+
+  Will output a pie chart with 1-10 if a palette cannout be found.
+
+- n_colors:
+
+  (optional) localisation of n_colours
+
+- n_colours:
+
+  (optional) the number of colours to display in each pie chart
+
+## Value
+
+a diagram of pie charts displaying the colour schemes
+
+## Examples
+
+``` r
+# values from hcl.pals()
+test_colour("Greens")
+
+test_colour(list("Reds","Blues"))
+
+# values from viridis, localised to color
+test_colour("Grays")
+
+
+# Custom colour palette
+custom_palette <- c("#cba6f7", "#f38ba8", "#eba0ac", "#f9e2af", "#fab387",
+"#a6e3a1", "#94e2d5", "#74c7ec", "#89b4fa", "#b4befe")
+test_colour(custom_palette)
+
+
+# Multiple custom and existing palettes
+custom_palette <- c("#cba6f7", "#f38ba8", "#eba0ac", "#f9e2af", "#fab387",
+"#a6e3a1", "#94e2d5", "#74c7ec", "#89b4fa", "#b4befe")
+custom_palette_2 <- c("#8839ef", "#d20f39", "#e64553", "#df8e1d", "#fe640b",
+"#40a02b", "#179299", "#209fb5", "#1e66f5", "#7287fd")
+test_colour(list(custom_palette,"Blues", "Greens", custom_palette_2))
+
+# All hcl colours
+test_colour(hcl.pals())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# All colourblind palettes
+viridis_palettes <- list("magma", "inferno", "plasma", "viridis", "cividis",
+ "rocket", "mako", "turbo")
+```

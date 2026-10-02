@@ -1,0 +1,95 @@
+# spinviz ![spinviz logo](reference/figures/spinviz_logo.png)
+
+The `spinviz` package provides tools for visualising sporting injury
+frequencies as a **heatmap projected onto human-body SVG diagrams** in
+`R`, and interactive **sunburst diagrams** of injury tissue/pathology
+classifications.
+
+The main function,
+[`heatmap_diagram()`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md),
+colours anatomical regions by injury frequency and can render **front**,
+**back**, or **both** views, using **male** or **female** body
+templates.
+[`sunburst_diagram_echarts()`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+renders tissue types on an inner ring and pathologies on an outer ring.
+Built-in taxonomies (`body_categories`, `injury_categories`), one-call
+wrappers, and
+[`save_diagram()`](https://thomas-fung.github.io/spinviz/reference/save_diagram.md)
+for correct-aspect-ratio export are also included.
+
+Full documentation, tutorials, and a function reference live on the
+[pkgdown site](https://thomas-fung.github.io/spinviz/).
+
+## Installation
+
+As this package is not currently on CRAN, install from GitHub:
+
+``` r
+
+# install.packages("pak")
+pak::pak("bnqcasimiro/spinviz")
+```
+
+## Quick examples
+
+**Heatmap diagram**
+
+``` r
+
+heatmap_diagram(df, "boxing", "front", sex = "male", show_scale = FALSE)
+```
+
+**`Example Diagrams`**
+
+| Front (Male) | Back (Male) | Both Views (Male) |
+|----|----|----|
+| ![Injury heatmap, front view on male template](reference/figures/injury-heatmap-front.png) | ![Injury heatmap, back view on male template](reference/figures/injury-heatmap-back.png) | ![Injury heatmap, both views on male template](reference/figures/injury-heatmap-both.png) |
+
+**Sunburst diagram**
+
+``` r
+
+sunburst_diagram_echarts(df, "boxing", plot_title = "Boxing Injuries")
+```
+
+**`Example Diagram`**
+
+| Tissue/Pathology Sunburst |
+|----|
+| ![Sunburst diagram of tissue types and pathologies](reference/figures/sunburst-example.png) |
+
+## Learn more
+
+- [Get
+  started](https://thomas-fung.github.io/spinviz/articles/spinviz.html)
+  — data format and worked examples
+- [Importing data from a CSV
+  file](https://thomas-fung.github.io/spinviz/articles/importing-csv-data.html)
+  — template-based CSV workflow
+- [Customising and saving
+  diagrams](https://thomas-fung.github.io/spinviz/articles/customisation.html)
+  — palettes, display options, and file export
+- [Function reference](https://thomas-fung.github.io/spinviz/reference/)
+
+## Dependencies
+
+Key packages used:
+
+- Data wrangling: `dplyr`, `tidyr`, `rlang`, `stringr`
+- SVG handling: `xml2`
+- Iteration/utilities: `purrr`, `magrittr`
+- Raster + plotting: `magick`, `ggplot2`, `grDevices`
+- Combining plots: `patchwork`
+- Interactive sunbursts: `echarts4r`, `htmlwidgets`
+- Optional (sunburst file export only): `chromote`, `base64enc`
+
+## Acknowledgements
+
+`spinviz` builds on the foundations laid by the
+[`injvis`](https://github.com/alexandraD03/injvis-R-Package) and
+[`olympicinjuRies`](https://github.com/zachary-carr-student/COMP3850) R
+packages. We thank Alexander Brinkman, Alexandra Dooley, Andisheh
+Saffarian, Brice Thu, and Utsav Chadha (`injvis`), and Zoe Remo, Brayden
+Smith, Govardhan Bharadwaj, Katja Amet, Kyle Mcnicholas, and Zachary
+Carr (`olympicinjuRies`), for their work on those projects, which
+provided the groundwork for this package.
