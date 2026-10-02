@@ -1,9 +1,9 @@
 # Save a spinviz diagram to file
 
 Saves either kind of plot this package produces: a heatmap from
-[`heatmap_diagram`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md)
+[`heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
 or a sunburst from
-[`sunburst_diagram_echarts`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md),
+[`sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md),
 detecting which one `plot` is from its class and applying the matching
 export logic and width:height ratio.
 
@@ -32,7 +32,7 @@ diagrams aren't built the same way):
 
 - **Heatmap**: the body diagram panel itself is always drawn at a fixed
   height:width of 1.1:1 (`theme(aspect.ratio = 1.1)` inside
-  [`heatmap_diagram`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md)).
+  [`heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)).
   What varies is extra width outside that panel: labels/values reserve a
   data-width of 1.35 vs. 1.00 with neither shown (exact, from
   `coord_cartesian(xlim = ...)`), the legend adds an estimated ~15%
@@ -42,7 +42,7 @@ diagrams aren't built the same way):
   0.10 : 1, exact, from `plot_layout(widths = ...)`).
 
 - **Sunburst**: no fixed ratio is computed at all.
-  [`sunburst_diagram_echarts`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+  [`sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
   records the exact `widget_width`/`widget_height` it was built with,
   and that recorded ratio is scaled directly.
 
@@ -72,9 +72,9 @@ save_diagram(
 - plot:
 
   The plot/widget object returned by
-  [`heatmap_diagram`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md)
+  [`heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
   or
-  [`sunburst_diagram_echarts`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md).
+  [`sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md).
 
 - file:
 
@@ -116,7 +116,7 @@ save_diagram(
 - bg:
 
   **Heatmap only.** Background colour. Default `"white"`.
-  [`heatmap_diagram`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md)
+  [`heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
   uses `theme_void()`, which has no background fill at all, and many
   image viewers render that transparency as solid grey rather than
   white. Set to `NA` for a genuinely transparent export.
@@ -138,8 +138,8 @@ Invisibly, the file path written to.
 
 ## See also
 
-[`heatmap_diagram`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md),
-[`sunburst_diagram_echarts`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+[`heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md),
+[`sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
 
 ## Examples
 

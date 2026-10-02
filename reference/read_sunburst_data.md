@@ -1,15 +1,15 @@
 # Read and validate sunburst injury data from a CSV file
 
 Reads a CSV file (e.g. one created with
-[`create_sunburst_template()`](https://thomas-fung.github.io/spinviz/reference/create_sunburst_template.md)
+[`create_sunburst_template()`](https://bnqcasimiro.github.io/spinviz/reference/create_sunburst_template.md)
 and filled in) and checks that it has the structure
-[`sunburst_diagram_echarts()`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+[`sunburst_diagram_echarts()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
 expects: `tissue` and `pathology` columns plus at least one sport column
 of injury frequencies.
 
 Blank cells in the `tissue` column are filled with the last seen tissue
 value (carry-down), matching the behaviour of
-[`sunburst_diagram_echarts()`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md),
+[`sunburst_diagram_echarts()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md),
 so compact hand-edited files are accepted.
 
 ## Usage
@@ -28,13 +28,13 @@ read_sunburst_data(path)
 
 A data frame with `tissue`, `pathology`, and one column per sport
 (coerced to numeric), ready to pass to
-[`sunburst_diagram_echarts()`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md).
+[`sunburst_diagram_echarts()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md).
 
 ## See also
 
-[`create_sunburst_template()`](https://thomas-fung.github.io/spinviz/reference/create_sunburst_template.md)
+[`create_sunburst_template()`](https://bnqcasimiro.github.io/spinviz/reference/create_sunburst_template.md)
 to generate a correctly formatted file,
-[`read_injury_data()`](https://thomas-fung.github.io/spinviz/reference/read_injury_data.md)
+[`read_injury_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_injury_data.md)
 for the heatmap equivalent.
 
 ## Examples

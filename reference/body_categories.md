@@ -1,9 +1,9 @@
 # Standard body region/body area injury taxonomy
 
 The standard body region/body area classification used by
-[`heatmap_diagram()`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md),
+[`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md),
 with no injury counts attached. Combine it with your own counts via
-[`heatmap_diagram_default()`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram_default.md)
+[`heatmap_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram_default.md)
 rather than retyping the full region_area/subcategory list for every
 analysis.
 
@@ -28,7 +28,7 @@ A data frame with 19 rows and 2 columns:
 ## Details
 
 **Row order matters.**
-[`heatmap_diagram_default()`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram_default.md)
+[`heatmap_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram_default.md)
 (and the manual `df <- body_categories; df$my_counts <- counts` pattern)
 line up your counts with this taxonomy purely by row position.
 `counts[i]` is assumed to be the count for row `i`. The current order
@@ -59,9 +59,9 @@ this list and the live object ever disagree) is:
 
 ## See also
 
-[`heatmap_diagram_default()`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram_default.md)
+[`heatmap_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram_default.md)
 to build a heatmap diagram from this taxonomy plus your own injury
 counts, without needing to retype the region_area/subcategory labels
 yourself.
-[injury_categories](https://thomas-fung.github.io/spinviz/reference/injury_categories.md)
+[injury_categories](https://bnqcasimiro.github.io/spinviz/reference/injury_categories.md)
 for the equivalent taxonomy used by the sunburst functions.

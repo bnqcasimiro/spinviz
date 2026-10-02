@@ -1,9 +1,9 @@
 # Read and validate injury data from a CSV file
 
 Reads a CSV file (e.g. one created with
-[`create_injury_template()`](https://thomas-fung.github.io/spinviz/reference/create_injury_template.md)
+[`create_injury_template()`](https://bnqcasimiro.github.io/spinviz/reference/create_injury_template.md)
 and filled in) and checks that it has the structure
-[`heatmap_diagram()`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md)
+[`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
 expects: `region_area` and `subcategory` columns plus at least one sport
 column of injury frequencies.
 
@@ -26,7 +26,7 @@ A data frame with `region_area`, `subcategory`, and one column per sport
 
 ## See also
 
-[`create_injury_template()`](https://thomas-fung.github.io/spinviz/reference/create_injury_template.md)
+[`create_injury_template()`](https://bnqcasimiro.github.io/spinviz/reference/create_injury_template.md)
 to generate a correctly formatted file.
 
 ## Examples

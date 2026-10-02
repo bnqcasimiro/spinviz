@@ -8,10 +8,10 @@ library(spinviz)
 `spinviz` produces two kinds of injury visualisations:
 
 - **Heatmaps** of injury frequency projected onto human-body diagrams
-  ([`heatmap_diagram()`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md)),
+  ([`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)),
   with front, back, or both views and male or female body templates.
 - **Interactive sunburst diagrams** of tissue/pathology classifications
-  ([`sunburst_diagram_echarts()`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md)),
+  ([`sunburst_diagram_echarts()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)),
   built on echarts4r.
 
 ## Data format
@@ -73,7 +73,7 @@ heatmap_diagram(df, "boxing", "front", sex = "male", show_scale = FALSE)
 ![](spinviz_files/figure-html/unnamed-chunk-4-1.png)
 
 See
-[`?heatmap_diagram`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md)
+[`?heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
 for options controlling labels, values, opacity, the legend scale, and
 custom palettes. Rows with an `"Unspecified"` subcategory are shown as a
 label below the diagram (they have no body region to colour).
@@ -94,7 +94,7 @@ sunburst_diagram_echarts(df_sb, "boxing", plot_title = "Boxing Injuries")
 
 The sunburst is interactive: tissue types sit on the inner ring,
 pathologies on the outer ring. See
-[`?sunburst_diagram_echarts`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+[`?sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
 for options such as `depth = 1` (tissue ring only), excluding
 “Unspecified”/“Non-specific” rows, and label/radius/font tuning.
 
@@ -122,7 +122,7 @@ Counts are matched by row position to `body_categories` /
 ## Next steps
 
 - [Importing CSV
-  data](https://thomas-fung.github.io/spinviz/articles/importing-csv-data.md)
+  data](https://bnqcasimiro.github.io/spinviz/articles/importing-csv-data.md)
   — a template-based CSV workflow
-- [Customisation](https://thomas-fung.github.io/spinviz/articles/customisation.md)
+- [Customisation](https://bnqcasimiro.github.io/spinviz/articles/customisation.md)
   — palettes, saving diagrams, and display options

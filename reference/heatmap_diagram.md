@@ -45,7 +45,7 @@ heatmap_diagram(
   Optional colour palette.
 
   - A single palette name supported by
-    [`diagram_colours`](https://thomas-fung.github.io/spinviz/reference/diagram_colours.md)
+    [`diagram_colours`](https://bnqcasimiro.github.io/spinviz/reference/diagram_colours.md)
     (viridis or HCL), e.g. `"magma"` or `"Reds"`.
 
   - A character vector of hex colours, e.g. `c("#FFFFFF", "#FF0000")`.
@@ -75,15 +75,15 @@ A plot in R-studio viewer
 
 ## See also
 
-[`body_categories`](https://thomas-fung.github.io/spinviz/reference/body_categories.md)
+[`body_categories`](https://bnqcasimiro.github.io/spinviz/reference/body_categories.md)
 for the built-in region_area/subcategory taxonomy, and
-[`heatmap_diagram_default`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram_default.md)
+[`heatmap_diagram_default`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram_default.md)
 for a wrapper that only needs a vector of counts.
-[`diagram_colours`](https://thomas-fung.github.io/spinviz/reference/diagram_colours.md)
+[`diagram_colours`](https://bnqcasimiro.github.io/spinviz/reference/diagram_colours.md)
 to preview supported palette names.
-[`test_colour`](https://thomas-fung.github.io/spinviz/reference/test_colour.md)
+[`test_colour`](https://bnqcasimiro.github.io/spinviz/reference/test_colour.md)
 to visualise palettes.
-[`save_diagram`](https://thomas-fung.github.io/spinviz/reference/save_diagram.md)
+[`save_diagram`](https://bnqcasimiro.github.io/spinviz/reference/save_diagram.md)
 to save the plot to file with the correct width:height ratio
 automatically applied.
 

@@ -5,15 +5,15 @@
 Both diagram functions accept a palette as either:
 
 - A palette name supported by
-  [`diagram_colours()`](https://thomas-fung.github.io/spinviz/reference/diagram_colours.md)
+  [`diagram_colours()`](https://bnqcasimiro.github.io/spinviz/reference/diagram_colours.md)
   (viridis or HCL palettes), e.g. `"magma"`, `"plasma"`, `"Reds"`
 - A character vector of hex colours,
   e.g. `c("#FFFFFF", "#FFFF00", "#FF0000")`
 
 Run
-[`?diagram_colours`](https://thomas-fung.github.io/spinviz/reference/diagram_colours.md)
+[`?diagram_colours`](https://bnqcasimiro.github.io/spinviz/reference/diagram_colours.md)
 to see supported palette names, and use
-[`test_colour()`](https://thomas-fung.github.io/spinviz/reference/test_colour.md)
+[`test_colour()`](https://bnqcasimiro.github.io/spinviz/reference/test_colour.md)
 to visualise a named or custom palette before applying it.
 
 ``` r
@@ -24,7 +24,7 @@ test_colour(c("#FFFFFF", "#FFFF00", "#FF0000"))
 
 ## Heatmap display options
 
-[`heatmap_diagram()`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md)
+[`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
 supports:
 
 - View: `"front"`, `"back"`, or `"both"`
@@ -40,12 +40,12 @@ heatmap_diagram(df, "boxing", "both", sex = "female",
 ```
 
 See
-[`?heatmap_diagram`](https://thomas-fung.github.io/spinviz/reference/heatmap_diagram.md)
+[`?heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
 for the full argument list.
 
 ## Sunburst display options
 
-[`sunburst_diagram_echarts()`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+[`sunburst_diagram_echarts()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
 supports:
 
 - Colour per tissue type, with pathology slices automatically lightened
@@ -60,7 +60,7 @@ sunburst_diagram_echarts(df_sb, "boxing", depth = 1,
 ```
 
 See
-[`?sunburst_diagram_echarts`](https://thomas-fung.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+[`?sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
 for the full argument list.
 
 ## Saving diagrams

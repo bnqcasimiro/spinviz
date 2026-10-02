@@ -18,7 +18,7 @@ create_injury_template("injuries.csv", sports = c("boxing", "judo"))
 the injury frequencies and the `region_area` grouping for each row.
 
 **3. Read the file back in.**
-[`read_injury_data()`](https://thomas-fung.github.io/spinviz/reference/read_injury_data.md)
+[`read_injury_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_injury_data.md)
 checks that the required columns are present, that at least one sport
 column exists, and that sport values are numeric (with a warning for
 values that fail to parse):
@@ -38,10 +38,10 @@ heatmap_diagram(df, "boxing", "front", sex = "male")
 ## Sunburst (tissue/pathology) data
 
 The same workflow exists for the sunburst format.
-[`create_sunburst_template()`](https://thomas-fung.github.io/spinviz/reference/create_sunburst_template.md)
+[`create_sunburst_template()`](https://bnqcasimiro.github.io/spinviz/reference/create_sunburst_template.md)
 writes a CSV pre-filled with the 25-row `injury_categories` taxonomy
 (`tissue` and `pathology` columns), and
-[`read_sunburst_data()`](https://thomas-fung.github.io/spinviz/reference/read_sunburst_data.md)
+[`read_sunburst_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_sunburst_data.md)
 validates it — including filling blank `tissue` cells down from the row
 above, so compact hand-edited files work:
 
