@@ -100,6 +100,8 @@ test_that("save_diagram saves a both-view heatmap as PDF", {
 test_that("save_diagram saves a sunburst as PNG via chromote", {
   skip_if_not_installed("chromote")
   skip_if_not_installed("base64enc")
+  # Launching Chrome via chromote is unreliable in CI (sandbox/headless issues)
+  skip_on_ci()
   # chromote also needs a Chromium-based browser binary
   skip_if(
     Sys.getenv("CHROMOTE_CHROME") == "" &&
