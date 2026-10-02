@@ -315,3 +315,14 @@ Key packages used:
 - Combining plots: `patchwork`
 - Interactive sunbursts: `echarts4r`, `htmlwidgets`
 - Optional (sunburst file export only): `chromote`, `base64enc`
+
+## Acknowledgements
+
+`spinviz` builds on the foundations laid by the
+[`injvis`](https://github.com/alexandraD03/injvis-R-Package) and
+[`olympicinjuRies`](https://github.com/zachary-carr-student/COMP3850) R
+packages. We thank Alexander Brinkman, Alexandra Dooley, Andisheh
+Saffarian, Brice Thu, and Utsav Chadha (`injvis`), and Zoe Remo, Brayden
+Smith, Govardhan Bharadwaj, Katja Amet, Kyle Mcnicholas, and Zachary
+Carr (`olympicinjuRies`), for their work on those projects, which
+provided the groundwork for this package.
