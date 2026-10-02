@@ -116,5 +116,5 @@ Counts are matched by row position to `body_categories` / `injury_categories`.
 
 ## Next steps
 
-- `vignette("importing-csv-data", package = "spinviz")` — a template-based CSV workflow
-- `vignette("customisation", package = "spinviz")` — palettes, saving diagrams, and display options
+- [Importing CSV data](importing-csv-data.html) — a template-based CSV workflow
+- [Customisation](customisation.html) — palettes, saving diagrams, and display options
