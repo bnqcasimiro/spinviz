@@ -50,7 +50,12 @@ is not important:
 Rather than typing out the Tissue/Pathology columns yourself, you can
 start from the built-in \link{injury_categories} taxonomy (which already has
 columns 1 and 2 filled in with the standard classification) and just add
-your own injury counts as column 3. See \code{\link[=sunburst_diagram_default]{sunburst_diagram_default()}}}
+your own injury counts as column 3. See \code{\link[=sunburst_diagram_default]{sunburst_diagram_default()}}.
+
+If your data lives in a CSV file, \code{\link[=create_sunburst_template]{create_sunburst_template()}} writes a
+template pre-filled with the \link{injury_categories} taxonomy, and
+\code{\link[=read_sunburst_data]{read_sunburst_data()}} reads a completed file back in, validating the
+column structure and category labels.}
 
 \item{column_name}{A string of the name of the column that contains the
 injury frequency. Will use the 3rd column if unspecified.}
@@ -205,5 +210,6 @@ p3 <- sunburst_diagram_echarts(df2, "boxing")
 }
 \seealso{
 \code{\link[=save_diagram]{save_diagram()}} to export this chart directly
-to a specific file type at a chosen size.
+to a specific file type at a chosen size; \code{\link[=create_sunburst_template]{create_sunburst_template()}}
+and \code{\link[=read_sunburst_data]{read_sunburst_data()}} for the CSV template workflow.
 }

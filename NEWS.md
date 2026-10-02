@@ -29,6 +29,15 @@
 * New `save_diagram()` exports heatmaps (via `ggplot2::ggsave()`) and
   sunbursts (via chromote screenshots/PDF) with the correct width:height
   ratio derived automatically from metadata recorded on the plot object.
+* New `create_sunburst_template()` writes a template CSV pre-filled with
+  the 25-row `injury_categories` tissue/pathology taxonomy and one empty
+  column per requested sport, ready to be filled in with injury
+  frequencies.
+* New `read_sunburst_data()` reads and validates such a CSV, checking for
+  the required `tissue`/`pathology` columns and at least one sport column,
+  warning on unrecognised (possibly misspelled) tissue/pathology values,
+  and carrying blank `tissue` cells down from the row above so compact
+  hand-edited files work.
 
 ## Bug fixes
 

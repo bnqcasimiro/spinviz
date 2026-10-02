@@ -26,4 +26,19 @@ Authors:
   \item Reidar Lystad \email{reidar.lystad@mq.edu.au}
 }
 
+Other contributors:
+\itemize{
+  \item Alexander Brinkman \email{alexander.brinkman@students.mq.edu.au} [contributor]
+  \item Alexandra Dooley \email{alexandra.dooley@students.mq.edu.au} [contributor]
+  \item Andisheh Saffarian \email{andisheh.saffarian@students.mq.edu.au} [contributor]
+  \item Brice Thu \email{brice.thu1@students.mq.edu.au} [contributor]
+  \item Utsav Chadha \email{utsav.chadha@students.mq.edu.au} [contributor]
+  \item Zoe Remo \email{zoe.remo@students.mq.edu.au} [contributor]
+  \item Brayden Smith \email{brayden.smith@students.mq.edu.au} [contributor]
+  \item Govardhan Bharadwaj \email{govardhan.bharadwaj@students.mq.edu.au} [contributor]
+  \item Katja Amet \email{katja.amet@students.mq.edu.au} [contributor]
+  \item Kyle Mcnicholas \email{kyle.mcnicholas@students.mq.edu.au} [contributor]
+  \item Zachary Carr \email{zachary.carr@students.mq.edu.au} [contributor]
+}
+
 }

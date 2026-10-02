@@ -24,7 +24,12 @@
 #' Rather than typing out the Tissue/Pathology columns yourself, you can
 #' start from the built-in [injury_categories] taxonomy (which already has
 #' columns 1 and 2 filled in with the standard classification) and just add
-#' your own injury counts as column 3. See [sunburst_diagram_default()]
+#' your own injury counts as column 3. See [sunburst_diagram_default()].
+#'
+#' If your data lives in a CSV file, [create_sunburst_template()] writes a
+#' template pre-filled with the [injury_categories] taxonomy, and
+#' [read_sunburst_data()] reads a completed file back in, validating the
+#' column structure and category labels.
 #'
 #' @param column_name A string of the name of the column that contains the
 #' injury frequency. Will use the 3rd column if unspecified.
@@ -73,7 +78,8 @@
 #'
 #' @return An echarts4r htmlwidget.
 #' @seealso [save_diagram()] to export this chart directly
-#' to a specific file type at a chosen size.
+#' to a specific file type at a chosen size; [create_sunburst_template()]
+#' and [read_sunburst_data()] for the CSV template workflow.
 #' @export
 #'
 #' @examples

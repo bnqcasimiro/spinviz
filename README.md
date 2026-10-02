@@ -138,9 +138,11 @@ The available functions in this package are:
   tissue/pathology taxonomies
 - `save_diagram()`: export either diagram type to file at the correct
   aspect ratio
-- `create_injury_template()`: write a template CSV in the expected data
-  format
-- `read_injury_data()`: read and validate an injury-data CSV file
+- `create_injury_template()`, `create_sunburst_template()`: write a
+  template CSV in the expected data format (heatmap and sunburst
+  respectively)
+- `read_injury_data()`, `read_sunburst_data()`: read and validate an
+  injury-data CSV file
 - `diagram_colours()`: return colours from supported palette names
 - `test_colour()`: visualise palettes (named or custom)
 
@@ -203,6 +205,18 @@ df <- read_injury_data("injuries.csv")
 
 ``` r
 heatmap_diagram(df, "boxing", "front", sex = "male")
+```
+
+The same workflow exists for the sunburst’s tissue/pathology format:
+`create_sunburst_template()` writes a CSV pre-filled with the 25-row
+`injury_categories` taxonomy (`tissue` and `pathology` columns), and
+`read_sunburst_data()` validates it, including filling blank `tissue`
+cells down from the row above so compact hand-edited files work:
+
+``` r
+create_sunburst_template("tissue_injuries.csv", sports = c("boxing", "judo"))
+df <- read_sunburst_data("tissue_injuries.csv")
+sunburst_diagram_echarts(df, "boxing")
 ```
 
 ### Example Code

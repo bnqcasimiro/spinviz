@@ -2,11 +2,13 @@
 
 export(body_categories)
 export(create_injury_template)
+export(create_sunburst_template)
 export(diagram_colours)
 export(heatmap_diagram)
 export(heatmap_diagram_default)
 export(injury_categories)
 export(read_injury_data)
+export(read_sunburst_data)
 export(save_diagram)
 export(sunburst_diagram_default)
 export(sunburst_diagram_echarts)
