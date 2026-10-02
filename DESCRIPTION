@@ -89,5 +89,5 @@ VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/roxygen2/version: 8.1.0
 URL: https://github.com/bnqcasimiro/spinviz,
-    https://thomas-fung.github.io/spinviz/
+    https://bnqcasimiro.github.io/spinviz/
 BugReports: https://github.com/bnqcasimiro/spinviz/issues

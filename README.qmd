@@ -20,16 +20,16 @@ knitr::opts_chunk$set(
 # spinviz <img src="man/figures/spinviz_logo.png" alt="spinviz logo" align="right" height="110"/>
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/thomas-fung/spinviz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomas-fung/spinviz/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/bnqcasimiro/spinviz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bnqcasimiro/spinviz/actions/workflows/R-CMD-check.yaml)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bnqcasimiro/spinviz)
-[![Codecov test coverage](https://codecov.io/gh/thomas-fung/spinviz/graph/badge.svg)](https://app.codecov.io/gh/thomas-fung/spinviz)
+[![Codecov test coverage](https://codecov.io/gh/bnqcasimiro/spinviz/graph/badge.svg)](https://app.codecov.io/gh/bnqcasimiro/spinviz)
 <!-- badges: end -->
 
 The `spinviz` package provides tools for visualising sporting injury frequencies as a **heatmap projected onto human-body SVG diagrams** in `R`, and interactive **sunburst diagrams** of injury tissue/pathology classifications.
 
 The main function, `heatmap_diagram()`, colours anatomical regions by injury frequency and can render **front**, **back**, or **both** views, using **male** or **female** body templates. `sunburst_diagram_echarts()` renders tissue types on an inner ring and pathologies on an outer ring. Built-in taxonomies (`body_categories`, `injury_categories`), one-call wrappers, and `save_diagram()` for correct-aspect-ratio export are also included.
 
-Full documentation, tutorials, and a function reference live on the [pkgdown site](https://thomas-fung.github.io/spinviz/).
+Full documentation, tutorials, and a function reference live on the [pkgdown site](https://bnqcasimiro.github.io/spinviz/).
 
 ## Installation
 
@@ -78,10 +78,10 @@ sunburst_diagram_echarts(df, "boxing", plot_title = "Boxing Injuries")
 
 ## Learn more
 
-- [Get started](https://thomas-fung.github.io/spinviz/articles/spinviz.html) — data format and worked examples
-- [Importing data from a CSV file](https://thomas-fung.github.io/spinviz/articles/importing-csv-data.html) — template-based CSV workflow
-- [Customising and saving diagrams](https://thomas-fung.github.io/spinviz/articles/customisation.html) — palettes, display options, and file export
-- [Function reference](https://thomas-fung.github.io/spinviz/reference/)
+- [Get started](https://bnqcasimiro.github.io/spinviz/articles/spinviz.html) — data format and worked examples
+- [Importing data from a CSV file](https://bnqcasimiro.github.io/spinviz/articles/importing-csv-data.html) — template-based CSV workflow
+- [Customising and saving diagrams](https://bnqcasimiro.github.io/spinviz/articles/customisation.html) — palettes, display options, and file export
+- [Function reference](https://bnqcasimiro.github.io/spinviz/reference/)
 
 ## Dependencies
 
