@@ -203,7 +203,7 @@ both_label_position_lookup <- function() {
 #' @param show_values Logical. If `TRUE`, show injury values.
 #' @param show_scale Logical. If `TRUE`, show the colour scale (legend).
 
-#' @importFrom dplyr select rename mutate tribble slice pull left_join rowwise filter transmute bind_rows
+#' @importFrom dplyr select rename mutate tribble slice pull left_join rowwise filter transmute bind_rows distinct
 #' @importFrom xml2 read_xml xml_root write_xml xml_attr xml_set_attr xml_find_all
 #' @importFrom grDevices colorRampPalette as.raster adjustcolor
 #' @importFrom ggplot2 ggplot aes geom_tile theme theme_void element_text annotation_raster coord_cartesian margin geom_text unit geom_segment scale_fill_gradientn guide_colorbar
@@ -220,24 +220,29 @@ both_label_position_lookup <- function() {
 
 #' @return A plot in R-studio viewer
 #' @seealso
+#' \code{\link{body_categories}} for the built-in region_area/subcategory
+#' taxonomy, and \code{\link{heatmap_diagram_default}} for a wrapper that
+#' only needs a vector of counts.
 #' \code{\link{diagram_colours}} to preview supported palette names.
 #' \code{\link{test_colour}} to visualise palettes.
+#' \code{\link{save_diagram}} to save the plot to file with the correct
+#' width:height ratio automatically applied.
 #' @export
 #' @examples
-#' subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
-#'                   "Abdomen","Forearm","Hip Groin","Wrist","Hand",
-#'                   "Thigh","Knee","Lower Leg","Ankle","Foot","Thoracic Spine","Lumbosacral")
-#' region_area <- rep("Example", length(subcategory))
-#' boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
-#' df <- data.frame(region_area, subcategory, boxing)
+#' # Easiest: start from the built-in body_categories taxonomy (its
+#' # region_area/subcategory columns are already filled in) and just add
+#' # your own counts, matching its row order. See ?body_categories, or
+#' # just run print(body_categories) to see the order directly.
+#' df <- body_categories
+#' df$boxing <- c(15, 5, 18, 20, 6, 14, 9, 11, 12, 18, 22, 10, 9, 16, 13, 7, 8, 3, 24)
 #' # Generate a plot for front view, male
-#' p1 <- injury_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
+#' p1 <- heatmap_diagram(df, "boxing", "front", sex = "male", show_values = FALSE)
 #' # You can customise the colour palette by:
-#' p2 <- injury_heatmap(df, "boxing", "front", sex = "female", palette = "plasma")
+#' p2 <- heatmap_diagram(df, "boxing", "front", sex = "female", palette = "plasma")
 #' # You can add your own plot title by:
 #' p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Front)")
 
-injury_heatmap <- function(
+heatmap_diagram <- function(
   injury_data,
   selected_sport,
   view_choice,
@@ -265,12 +270,54 @@ injury_heatmap <- function(
   stopifnot(is.logical(show_values), length(show_values) == 1)
   stopifnot(is.logical(show_scale), length(show_scale) == 1)
 
+  # Shared title-cased region/numeric-count table, computed once so all
+  # views and the Unspecified label use identical values.
+  base_data <- injury_data |>
+    transmute(
+      region_area = str_to_title(trimws(as.character(.data$subcategory))),
+      TotalInjuries = coerce_injury_values(
+        .data[[selected_sport]],
+        selected_sport
+      )
+    )
+
+  # Detect an "Unspecified" row (shown as a label below the diagram rather
+  # than coloured on it). NULL when the data has no such row; NA counts
+  # become 0.
+  unspecified_count <- base_data |>
+    filter(.data$region_area == "Unspecified") |>
+    pull(.data$TotalInjuries)
+
+  if (length(unspecified_count) == 0) {
+    unspecified_count <- NULL
+  } else {
+    unspecified_count <- unspecified_count[1]
+    if (is.na(unspecified_count)) {
+      unspecified_count <- 0
+    }
+  }
+
   get_svg_path <- function(filename) {
     p <- system.file("extdata", filename, package = "spinviz")
     if (p == "") {
       stop("SVG not found in package extdata/: ", filename, call. = FALSE)
     }
     p
+  }
+
+  # Enforce a minimum vertical gap between stacked labels so adjacent
+  # rows never overlap at the rendered text size. Rows keep their relative
+  # order; only crowded rows are pushed down.
+  spread_label_y <- function(y, min_gap = 0.055) {
+    ord <- order(y, decreasing = TRUE)
+    ys <- y[ord]
+    for (i in 2:length(ys)) {
+      if (ys[i] > ys[i - 1] - min_gap) {
+        ys[i] <- ys[i - 1] - min_gap
+      }
+    }
+    y[ord] <- ys
+    y
   }
 
   # Build label strings according to toggles
@@ -299,17 +346,6 @@ injury_heatmap <- function(
     max_injuries_override = NULL,
     opacity_inner = opacity
   ) {
-    # Prepare injury data
-    base_data <- injury_data |>
-      transmute(
-        region_area = str_to_title(trimws(as.character(.data$subcategory))),
-        TotalInjuries = coerce_injury_values(
-          .data[[selected_sport]],
-          selected_sport
-        ),
-        Sport = selected_sport
-      )
-
     # View mapping
     svg_file <- switch(
       paste0(sex, "_", view_choice_inner),
@@ -439,7 +475,10 @@ injury_heatmap <- function(
     )
 
     label_data <- label_positions |>
-      left_join(processed_injury_data, by = "region_area")
+      # processed_injury_data has one row per SVG id (2-3 per region);
+      # labels need one row per region
+      left_join(processed_injury_data, by = "region_area") |>
+      distinct(.data$region_area, .keep_all = TRUE)
 
     label_data$label_text <- mapply(
       make_label_text,
@@ -451,6 +490,28 @@ injury_heatmap <- function(
     label_data$label_x <- 0.2
     label_hjust <- 1
     label_data$xend <- 0.85 * label_data$target_x + 0.15 * label_data$label_x
+
+    # Add "Unspecified" below the other labels (no leader segment target)
+    if (!is.null(unspecified_count)) {
+      unspecified_y <- if (nrow(label_data) > 0) {
+        min(label_data$label_y, na.rm = TRUE) - 0.08
+      } else {
+        0.1
+      }
+      label_data <- bind_rows(
+        label_data,
+        data.frame(
+          region_area = "Unspecified",
+          label_x = 0.2,
+          label_y = unspecified_y,
+          TotalInjuries = unspecified_count,
+          label_text = make_label_text("Unspecified", unspecified_count),
+          stringsAsFactors = FALSE
+        )
+      )
+    }
+
+    label_data$label_y <- spread_label_y(label_data$label_y)
 
     draw_text <- isTRUE(show_labels) || isTRUE(show_values)
 
@@ -499,7 +560,8 @@ injury_heatmap <- function(
           fontface = "plain"
         ) +
         geom_segment(
-          data = label_data,
+          # Unspecified rows have no leader-line target
+          data = filter(label_data, !is.na(.data$target_y)),
           aes(
             x = .data$label_x,
             y = .data$label_y - 0.01,
@@ -557,21 +619,12 @@ injury_heatmap <- function(
       theme_void() +
       theme(legend.position = "none", plot.margin = unit(c(0, 0, 0, 0), "pt"))
 
-    base_data_both <- injury_data |>
-      transmute(
-        region_area = str_to_title(trimws(as.character(.data$subcategory))),
-        TotalInjuries = coerce_injury_values(
-          .data[[selected_sport]],
-          selected_sport
-        )
-      )
-
     both_label_positions <- both_label_position_lookup()
 
     draw_text <- isTRUE(show_labels) || isTRUE(show_values)
 
     middle_labels <- both_label_positions |>
-      left_join(base_data_both, by = "region_area") |>
+      left_join(base_data, by = "region_area") |>
       mutate(
         label_text = mapply(
           make_label_text,
@@ -580,6 +633,24 @@ injury_heatmap <- function(
           USE.NAMES = FALSE
         )
       )
+
+    if (!is.null(unspecified_count)) {
+      unspecified_y_both <- if (nrow(middle_labels) > 0) {
+        min(middle_labels$label_y, na.rm = TRUE) - 0.08
+      } else {
+        0.1
+      }
+      middle_labels <- bind_rows(
+        middle_labels,
+        data.frame(
+          region_area = "Unspecified",
+          label_y = unspecified_y_both,
+          TotalInjuries = unspecified_count,
+          label_text = make_label_text("Unspecified", unspecified_count),
+          stringsAsFactors = FALSE
+        )
+      )
+    }
 
     if (draw_text) {
       front_plot <- front_plot +
@@ -645,6 +716,13 @@ injury_heatmap <- function(
       ) &
       legend_theme
 
+    attr(combined_plot, "spinviz_heatmap_meta") <- list(
+      view_choice = view_choice,
+      show_labels = show_labels,
+      show_values = show_values,
+      show_scale = show_scale
+    )
+
     return(combined_plot)
   } else {
     single_plot <- generate_plot(view_choice) +
@@ -652,6 +730,13 @@ injury_heatmap <- function(
         plot.margin = margin(t = 15, r = 10, b = 10, l = 10),
         legend.position = if (isTRUE(show_scale)) "right" else "none"
       )
+
+    attr(single_plot, "spinviz_heatmap_meta") <- list(
+      view_choice = view_choice,
+      show_labels = show_labels,
+      show_values = show_values,
+      show_scale = show_scale
+    )
 
     return(single_plot)
   }

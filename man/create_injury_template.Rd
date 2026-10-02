@@ -16,7 +16,7 @@ frequency column in the template.}
 The path (invisibly), so the call can be used in a pipe.
 }
 \description{
-Writes a CSV file in the format expected by \code{\link[=injury_heatmap]{injury_heatmap()}}: one row
+Writes a CSV file in the format expected by \code{\link[=heatmap_diagram]{heatmap_diagram()}}: one row
 per recognised body subcategory, with \code{region_area} and \code{subcategory}
 columns and one empty column per sport for the user to fill in with
 injury frequencies.

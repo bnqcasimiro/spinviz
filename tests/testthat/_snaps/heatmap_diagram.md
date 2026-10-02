@@ -1,31 +1,31 @@
-# injury_heatmap validates its arguments
+# heatmap_diagram validates its arguments
 
     Code
-      injury_heatmap(df, "not_a_column", "front")
+      heatmap_diagram(df, "not_a_column", "front")
     Condition
-      Error in `injury_heatmap()`:
+      Error in `heatmap_diagram()`:
       ! selected_sport %in% names(injury_data) is not TRUE
 
 ---
 
     Code
-      injury_heatmap(df, "boxing", "sideways")
+      heatmap_diagram(df, "boxing", "sideways")
     Condition
-      Error in `injury_heatmap()`:
+      Error in `heatmap_diagram()`:
       ! view_choice %in% c("front", "back", "both") is not TRUE
 
 ---
 
     Code
-      injury_heatmap(df, "boxing", "front", opacity = 2)
+      heatmap_diagram(df, "boxing", "front", opacity = 2)
     Condition
-      Error in `injury_heatmap()`:
+      Error in `heatmap_diagram()`:
       ! opacity <= 1 is not TRUE
 
-# injury_heatmap warns when injury values are not numeric
+# heatmap_diagram warns when injury values are not numeric
 
     Code
-      invisible(injury_heatmap(df, "boxing", "front", show_values = FALSE))
+      invisible(heatmap_diagram(df, "boxing", "front", show_values = FALSE))
     Condition
       Warning:
       There was 1 warning in `transmute()`.

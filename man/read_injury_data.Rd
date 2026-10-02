@@ -15,7 +15,7 @@ per sport (coerced to numeric).
 }
 \description{
 Reads a CSV file (e.g. one created with \code{\link[=create_injury_template]{create_injury_template()}} and
-filled in) and checks that it has the structure \code{\link[=injury_heatmap]{injury_heatmap()}}
+filled in) and checks that it has the structure \code{\link[=heatmap_diagram]{heatmap_diagram()}}
 expects: \code{region_area} and \code{subcategory} columns plus at least one sport
 column of injury frequencies.
 }
