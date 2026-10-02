@@ -1,22 +1,93 @@
 Package: spinviz
 Title: Visualise Sports Injuries With Anatomical Heatmaps
 Version: 0.0.1.0000
-Authors@R: 
-    person(given="Bianca Nicole", 
+Authors@R: c(
+    person(given="Bianca Nicole",
     family="Casimiro",
     email="biancanicole.casimiro@students.mq.edu.au",
     role = c("aut", "cre")
+    ),
+    person(given="Thomas",
+    family="Fung",
+    email="thomas.fung.dr@gmail.com",
+    role = "aut"
+    ),
+    person(given="Reidar",
+    family="Lystad",
+    email="reidar.lystad@mq.edu.au",
+    role = "aut"
+    ),
+    person(given="Alexander",
+    family="Brinkman",
+    email="alexander.brinkman@students.mq.edu.au",
+    role = "ctb"
+    ),
+    person(given="Alexandra",
+    family="Dooley",
+    email="alexandra.dooley@students.mq.edu.au",
+    role = "ctb"
+    ),
+    person(given="Andisheh",
+    family="Saffarian",
+    email="andisheh.saffarian@students.mq.edu.au",
+    role = "ctb"
+    ),
+    person(given="Brice",
+    family="Thu",
+    email="brice.thu1@students.mq.edu.au",
+    role = "ctb"
+    ),
+    person(given="Utsav",
+    family="Chadha",
+    email="utsav.chadha@students.mq.edu.au",
+    role = "ctb"
+    ),
+    person(given="Zoe",
+    family="Remo",
+    email="zoe.remo@students.mq.edu.au",
+    role = "ctb"
+    ),
+    person(given="Brayden",
+    family="Smith",
+    email="brayden.smith@students.mq.edu.au",
+    role = "ctb"
+    ),
+    person(given="Govardhan",
+    family="Bharadwaj",
+    email="govardhan.bharadwaj@students.mq.edu.au",
+    role = "ctb"
+    ),
+    person(given="Katja",
+    family="Amet",
+    email="katja.amet@students.mq.edu.au",
+    role = "ctb"
+    ),
+    person(given="Kyle",
+    family="Mcnicholas",
+    email="kyle.mcnicholas@students.mq.edu.au",
+    role = "ctb"
+    ),
+    person(given="Zachary",
+    family="Carr",
+    email="zachary.carr@students.mq.edu.au",
+    role = "ctb"
+    )
     )
 Description: Provides functions to visualise injury frequency data using anatomical heatmaps. Users can render front/back body diagrams, choose male/female models, toggle annotations, and customise colour palettes and legends for clear reporting and exploration.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
-Imports: ggplot2, magrittr, dplyr, xml2, grDevices, tidyr, rlang,
-        this.path, purrr, tibble, stats, patchwork, stringr, magick,
-        viridis, grDevices
+Imports: ggplot2, dplyr, xml2, grDevices, tidyr, rlang, this.path,
+        purrr, tibble, stats, patchwork, stringr, magick, viridis, rsvg,
+        echarts4r, htmlwidgets, tools
 NeedsCompilation: no
 Packaged: 2026-03-01 11:33:08 UTC; bnqcasimiro
-Author: Bianca Nicole Casimiro [aut, cre]
 Maintainer: Bianca Nicole Casimiro <biancanicole.casimiro@students.mq.edu.au>
 Depends: R (>= 4.1.0)
+Suggests: testthat (>= 3.0.0), chromote, base64enc, knitr, rmarkdown
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.0
+URL: https://github.com/bnqcasimiro/spinviz,
+    https://thomas-fung.github.io/spinviz/
+BugReports: https://github.com/bnqcasimiro/spinviz/issues

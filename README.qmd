@@ -1,12 +1,29 @@
-
+---
+format:
+  gfm:
+    default-image-extension: ""
+    wrap: none
+---
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # spinviz <img src="man/figures/spinviz_logo.png" alt="spinviz logo" align="right" height="110"/>
 
 <!-- badges: start -->
-
-[![R-CMD-check](https://github.com/thomas-fung/spinviz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomas-fung/spinviz/actions/workflows/R-CMD-check.yaml) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bnqcasimiro/spinviz) [![Codecov test coverage](https://codecov.io/gh/thomas-fung/spinviz/graph/badge.svg)](https://app.codecov.io/gh/thomas-fung/spinviz) <!-- badges: end -->
+[![R-CMD-check](https://github.com/thomas-fung/spinviz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomas-fung/spinviz/actions/workflows/R-CMD-check.yaml)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bnqcasimiro/spinviz)
+[![Codecov test coverage](https://codecov.io/gh/thomas-fung/spinviz/graph/badge.svg)](https://app.codecov.io/gh/thomas-fung/spinviz)
+<!-- badges: end -->
 
 The `spinviz` package provides tools for visualising sporting injury frequencies as a **heatmap projected onto human-body SVG diagrams** in `R`, and interactive **sunburst diagrams** of injury tissue/pathology classifications.
 
@@ -18,7 +35,7 @@ Full documentation, tutorials, and a function reference live on the [pkgdown sit
 
 As this package is not currently on CRAN, install from GitHub:
 
-``` r
+```r
 # install.packages("pak")
 pak::pak("bnqcasimiro/spinviz")
 ```
@@ -27,39 +44,35 @@ pak::pak("bnqcasimiro/spinviz")
 
 **Heatmap diagram**
 
-``` r
+```{r}
+#| label: example-heatmap
+#| eval: false
 heatmap_diagram(df, "boxing", "front", sex = "male", show_scale = FALSE)
 ```
 
 <details>
-
-<summary>
-
-<b><code>Example Diagrams</code></b>
-</summary>
+<summary><b><code>Example Diagrams</code></b></summary>
 
 | Front (Male) | Back (Male) | Both Views (Male) |
-|----|----|----|
-| <img src="man/figures/injury-heatmap-front.png" height="300" alt="Injury heatmap, front view on male template" /> | <img src="man/figures/injury-heatmap-back.png" height="300" alt="Injury heatmap, back view on male template" /> | <img src="man/figures/injury-heatmap-both.png" height="300" alt="Injury heatmap, both views on male template" /> |
+|---|---|---|
+| ![Injury heatmap, front view on male template](man/figures/injury-heatmap-front.png){height="300"} | ![Injury heatmap, back view on male template](man/figures/injury-heatmap-back.png){height="300"} | ![Injury heatmap, both views on male template](man/figures/injury-heatmap-both.png){height="300"} |
 
 </details>
 
 **Sunburst diagram**
 
-``` r
+```{r}
+#| label: example-sunburst
+#| eval: false
 sunburst_diagram_echarts(df, "boxing", plot_title = "Boxing Injuries")
 ```
 
 <details>
-
-<summary>
-
-<b><code>Example Diagram</code></b>
-</summary>
+<summary><b><code>Example Diagram</code></b></summary>
 
 | Tissue/Pathology Sunburst |
-|----|
-| <img src="man/figures/sunburst-example.png" height="400" alt="Sunburst diagram of tissue types and pathologies" /> |
+|---|
+| ![Sunburst diagram of tissue types and pathologies](man/figures/sunburst-example.png){height="400"} |
 
 </details>
 

@@ -28,6 +28,17 @@ Used to validate the colours that will output in these packages to help
 Create custom palettes. Advised to output 10 colours, as this is the maximum
 number of tissue types.
 }
+\details{
+Valid palette inputs:
+\itemize{
+\item Viridis options: \code{"viridis"}, \code{"magma"}, \code{"plasma"},
+\code{"inferno"}, \code{"cividis"}, \code{"mako"}, \code{"rocket"}, \code{"turbo"}.
+\item Any palette name returned by \code{grDevices::hcl.pals()}.
+}
+
+To see available HCL palettes, run \code{grDevices::hcl.pals()}.
+}
 \examples{
 diagram_colours("Reds")
+
 }

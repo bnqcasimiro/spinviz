@@ -1,0 +1,8 @@
+{
+  "permission": {
+    "read": {
+      "*/DESCRIPTION": "allow",
+      "*.R": "allow"
+    }
+  }
+}

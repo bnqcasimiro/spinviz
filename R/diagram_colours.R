@@ -35,19 +35,28 @@
 #'
 #' To see available HCL palettes, run \code{grDevices::hcl.pals()}.
 
-
-
-
 ####################################################################
 # Function to update colour palette to pre-existing palettes
 # Used if the user has not provided their own palette
 ####################################################################
+# `n_colours` defaults to the (lazily evaluated) promise `n_colors`, so
+# passing either spelling forwards the same value.
 diagram_colours <- function(palette = "", n_colors = 10, n_colours = n_colors) {
-  if (is.null(palette) || identical(palette, "")) return(NULL)
+  if (is.null(palette) || identical(palette, "")) {
+    return(NULL)
+  }
 
   # Supported viridis options
-  viridis_opts <- c("viridis", "magma", "plasma", "inferno",
-                    "cividis", "mako", "rocket", "turbo")
+  viridis_opts <- c(
+    "viridis",
+    "magma",
+    "plasma",
+    "inferno",
+    "cividis",
+    "mako",
+    "rocket",
+    "turbo"
+  )
 
   if (is.character(palette) && length(palette) == 1) {
     if (palette %in% viridis_opts) {
@@ -62,7 +71,9 @@ diagram_colours <- function(palette = "", n_colors = 10, n_colours = n_colors) {
   NULL
 }
 
-# Localisation of diagram_colours.
+# US-spelling alias for diagram_colours(). `n_colours` defaults to the
+# (lazily evaluated) promise `n_colors`, so passing either spelling
+# forwards the same value.
 diagram_colors <- function(palette = "", n_colors = 10, n_colours = n_colors) {
   diagram_colours(palette = palette, n_colours = n_colours)
 }

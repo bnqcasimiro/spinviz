@@ -47,7 +47,7 @@ custom_palette_2 <- c("#8839ef", "#d20f39", "#e64553", "#df8e1d", "#fe640b",
 test_colour(list(custom_palette,"Blues", "Greens", custom_palette_2))
 # All hcl colours
 test_colour(hcl.pals())
-# All coloublind palettes
+# All colourblind palettes
 viridis_palettes <- list("magma", "inferno", "plasma", "viridis", "cividis",
  "rocket", "mako", "turbo")
 }

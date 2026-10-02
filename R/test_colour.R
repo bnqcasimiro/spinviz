@@ -39,10 +39,14 @@
 #' test_colour(list(custom_palette,"Blues", "Greens", custom_palette_2))
 #' # All hcl colours
 #' test_colour(hcl.pals())
-#' # All coloublind palettes
+#' # All colourblind palettes
 #' viridis_palettes <- list("magma", "inferno", "plasma", "viridis", "cividis",
 #'  "rocket", "mako", "turbo")
 test_colour <- function(palettes = "", n_colors = 10, n_colours = n_colors) {
+  # Drawing pie charts changes graphics::par() (e.g. mfrow); restore the
+  # user's previous settings when the function exits.
+  old_par <- graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(old_par), add = TRUE)
 
   is_hex_vec <- function(x) {
     x <- as.character(x)
@@ -52,7 +56,9 @@ test_colour <- function(palettes = "", n_colors = 10, n_colours = n_colors) {
   draw_pie <- function(cols, title) {
     cols <- as.character(cols)
     cols <- cols[!is.na(cols)]
-    if (length(cols) == 0) return(invisible(NULL))
+    if (length(cols) == 0) {
+      return(invisible(NULL))
+    }
     values <- rep(1, length(cols))
     graphics::pie(values, labels = cols, main = title, col = cols)
   }
@@ -81,18 +87,15 @@ test_colour <- function(palettes = "", n_colors = 10, n_colours = n_colors) {
         draw_pie(cols, as.character(p))
       }
     }
-
   } else if (is_hex_vec(palettes)) {
     # single custom palette vector
     draw_pie(palettes, "custom palette")
-
   } else if (length(palettes) > 1) {
     # vector of hcl palette names
     for (pal_name in palettes) {
       cols <- grDevices::hcl.colors(n = n_colours, palette = pal_name)
       draw_pie(cols, pal_name)
     }
-
   } else {
     # single palette name (viridis/hcl)
     cols <- diagram_colours(palettes, n_colours = n_colours)

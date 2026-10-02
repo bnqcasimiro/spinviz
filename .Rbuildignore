@@ -1,0 +1,9 @@
+^spinviz\.Rproj$
+^\.Rproj\.user$
+^\.posit$
+^README\.qmd$
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^vignettes/articles$
