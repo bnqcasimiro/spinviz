@@ -13,8 +13,6 @@ DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bnqcasimiro/spin
 coverage](https://codecov.io/gh/thomas-fung/spinviz/graph/badge.svg)](https://app.codecov.io/gh/thomas-fung/spinviz)
 <!-- badges: end -->
 
-## About
-
 The `spinviz` packages provides tools for visualising sporting injury
 frequencies as a **heatmap projected onto human-body SVG diagrams** in
 `R`.
@@ -29,6 +27,15 @@ built-in category taxonomies (`body_categories`, `injury_categories`)
 with one-call convenience wrappers (`heatmap_diagram_default()`,
 `sunburst_diagram_default()`), and `save_diagram()` for exporting either
 diagram type to file at the correct aspect ratio.
+
+## Installation
+
+As this package is not currently on CRAN, install from GitHub:
+
+``` r
+# install.packages("pak")
+pak::pak("bnqcasimiro/spinviz")
+```
 
 ## Examples
 
@@ -117,15 +124,6 @@ the other dimension from the correct width:height ratio automatically.
 Heatmaps are saved via `ggplot2::ggsave()` (PNG, PDF, SVG, JPG, …);
 sunbursts via a headless Chromium browser through the optional
 `chromote` package (PNG, JPG, PDF).
-
-## Installation
-
-As this package is not currently on CRAN, install from GitHub:
-
-``` r
-# install.packages("pak")
-pak::pak("bnqcasimiro/spinviz")
-```
 
 ## Getting Started
 

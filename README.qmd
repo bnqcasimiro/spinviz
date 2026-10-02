@@ -24,13 +24,20 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/thomas-fung/spinviz/graph/badge.svg)](https://app.codecov.io/gh/thomas-fung/spinviz)
 <!-- badges: end -->
 
-## About
-
 The `spinviz` packages provides tools for visualising sporting injury frequencies as a **heatmap projected onto human-body SVG diagrams** in `R`.
 
 The main function, `heatmap_diagram()`, colours anatomical regions by injury frequency and can render **front**, **back**, or **both** views, using **male** or **female** body templates.
 
 The package also produces interactive **sunburst diagrams** of injury tissue/pathology classifications via `sunburst_diagram_echarts()`, built-in category taxonomies (`body_categories`, `injury_categories`) with one-call convenience wrappers (`heatmap_diagram_default()`, `sunburst_diagram_default()`), and `save_diagram()` for exporting either diagram type to file at the correct aspect ratio.
+
+## Installation
+
+As this package is not currently on CRAN, install from GitHub:
+
+```r
+# install.packages("pak")
+pak::pak("bnqcasimiro/spinviz")
+```
 
 ## Examples
 
@@ -96,15 +103,6 @@ If you use the package's standard classifications, you don't need to retype them
 ### Saving Diagrams
 
 `save_diagram(plot, file, width = ...)` detects whether `plot` is a heatmap or a sunburst and applies the matching export logic, deriving the other dimension from the correct width:height ratio automatically. Heatmaps are saved via `ggplot2::ggsave()` (PNG, PDF, SVG, JPG, ...); sunbursts via a headless Chromium browser through the optional `chromote` package (PNG, JPG, PDF).
-
-## Installation
-
-As this package is not currently on CRAN, install from GitHub:
-
-```r
-# install.packages("pak")
-pak::pak("bnqcasimiro/spinviz")
-```
 
 ## Getting Started
 The available functions in this package are:
