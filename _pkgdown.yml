@@ -2,3 +2,40 @@ url: https://thomas-fung.github.io/spinviz/
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+  components:
+    articles:
+      text: Articles
+      menu:
+        - text: Importing data from a CSV file
+          href: articles/importing-csv-data.html
+        - text: Customising and saving diagrams
+          href: articles/customisation.html
+
+reference:
+  - title: Package
+    contents:
+      - spinviz
+  - title: Diagrams
+    contents:
+      - heatmap_diagram
+      - sunburst_diagram_echarts
+      - save_diagram
+  - title: Convenience wrappers and taxonomies
+    contents:
+      - heatmap_diagram_default
+      - sunburst_diagram_default
+      - body_categories
+      - injury_categories
+  - title: Importing data
+    contents:
+      - create_injury_template
+      - create_sunburst_template
+      - read_injury_data
+      - read_sunburst_data
+  - title: Palettes
+    contents:
+      - diagram_colours
+      - test_colour

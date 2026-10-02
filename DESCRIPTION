@@ -84,8 +84,10 @@ NeedsCompilation: no
 Packaged: 2026-03-01 11:33:08 UTC; bnqcasimiro
 Maintainer: Bianca Nicole Casimiro <biancanicole.casimiro@students.mq.edu.au>
 Depends: R (>= 4.1.0)
-Suggests: testthat (>= 3.0.0), chromote, base64enc
+Suggests: testthat (>= 3.0.0), chromote, base64enc, knitr, rmarkdown
+VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/roxygen2/version: 8.1.0
-URL: https://github.com/bnqcasimiro/spinviz
+URL: https://github.com/bnqcasimiro/spinviz,
+    https://thomas-fung.github.io/spinviz/
 BugReports: https://github.com/bnqcasimiro/spinviz/issues
