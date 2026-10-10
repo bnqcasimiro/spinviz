@@ -89,7 +89,10 @@ df_sb <- injury_categories
 df_sb$boxing <- c(20, 0, 0, 10, 31, 18, 16, 16, 20, 20, 27, 46,
                   67, 31, 54, 20, 27, 30, 96, 82, 48, 26, 33, 34, 24)
 
-sunburst_diagram_echarts(df_sb, "boxing", plot_title = "Boxing Injuries")
+sunburst_diagram_echarts(
+  df_sb, "boxing",
+  plot_title = "Boxing Injuries"
+)
 ```
 
 The sunburst is interactive: tissue types sit on the inner ring,
@@ -109,7 +112,7 @@ counts:
 heatmap_diagram_default(c(boxing, unspecified = 4), "front")
 ```
 
-![](spinviz_files/figure-html/unnamed-chunk-6-1.png)
+![](spinviz_files/figure-html/unnamed-chunk-7-1.png)
 
 ``` r
 

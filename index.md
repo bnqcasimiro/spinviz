@@ -1,9 +1,10 @@
-# spinviz ![spinviz logo](reference/figures/spinviz_logo.png)
+# spinviz
 
-The `spinviz` package provides tools for visualising sporting injury
-frequencies as a **heatmap projected onto human-body SVG diagrams** in
-`R`, and interactive **sunburst diagrams** of injury tissue/pathology
-classifications.
+`spinviz` is an `R` package for visualising **sports injury frequency
+data**. It renders **anatomical heatmaps** (front/back, male/female body
+models) and **interactive tissue-type to pathology-type sunburst
+diagrams**. Toggle labels and values, customise colour palettes and
+legends, and export publication-ready **PNG, JPG or PDF** figures.
 
 The main function,
 [`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md),
