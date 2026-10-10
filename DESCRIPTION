@@ -73,7 +73,10 @@ Authors@R: c(
     role = "ctb"
     )
     )
-Description: Provides functions to visualise injury frequency data using anatomical heatmaps. Users can render front/back body diagrams, choose male/female models, toggle annotations, and customise colour palettes and legends for clear reporting and exploration.
+Description: Tools for visualising sports injury frequency data. Render anatomical
+    heatmaps (front/back, male/female body models) and interactive tissue-type to
+    pathology-type sunburst diagrams. Toggle labels and values, customise colour
+    palettes and legends, and export publication-ready PNG, JPG or PDF figures.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

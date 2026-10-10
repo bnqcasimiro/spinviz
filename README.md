@@ -2,13 +2,13 @@
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
-# spinviz <img src="man/figures/spinviz_logo.png" alt="spinviz logo" align="right" height="110"/>
+# spinviz <img src="man/figures/logo.png" alt="spinviz logo" align="right" height="139"/>
 
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/bnqcasimiro/spinviz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bnqcasimiro/spinviz/actions/workflows/R-CMD-check.yaml) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bnqcasimiro/spinviz) [![Codecov test coverage](https://codecov.io/gh/bnqcasimiro/spinviz/graph/badge.svg)](https://app.codecov.io/gh/bnqcasimiro/spinviz) <!-- badges: end -->
 
-The `spinviz` package provides tools for visualising sporting injury frequencies as a **heatmap projected onto human-body SVG diagrams** in `R`, and interactive **sunburst diagrams** of injury tissue/pathology classifications.
+`spinviz` is an `R` package for visualising **sports injury frequency data**. It renders **anatomical heatmaps** (front/back, male/female body models) and **interactive tissue-type to pathology-type sunburst diagrams**. Toggle labels and values, customise colour palettes and legends, and export publication-ready **PNG, JPG or PDF** figures.
 
 The main function, `heatmap_diagram()`, colours anatomical regions by injury frequency and can render **front**, **back**, or **both** views, using **male** or **female** body templates. `sunburst_diagram_echarts()` renders tissue types on an inner ring and pathologies on an outer ring. Built-in taxonomies (`body_categories`, `injury_categories`), one-call wrappers, and `save_diagram()` for correct-aspect-ratio export are also included.
 
