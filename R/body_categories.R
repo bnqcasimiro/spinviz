@@ -1,15 +1,15 @@
 #' @title Standard body region/body area injury taxonomy
 #'
 #' @description
-#' The standard body region/body area classification used by
+#' The standard Body region/Body area classification used by
 #' [heatmap_diagram()], with no injury counts attached. Combine it with your
 #' own counts via [heatmap_diagram_default()] rather than retyping the full
-#' region_area/subcategory list for every analysis.
+#' Region.area/Subcategory list for every analysis.
 #'
 #' @format A data frame with 19 rows and 2 columns:
 #' \describe{
-#'   \item{region_area}{Body region, e.g. "Upper limb", "Trunk".}
-#'   \item{subcategory}{Body area, e.g. "Shoulder", "Chest".}
+#'   \item{Region.area}{Body region, e.g. "Upper limb", "Trunk".}
+#'   \item{Subcategory}{Body area, e.g. "Shoulder", "Chest".}
 #' }
 #'
 #' @details
@@ -33,7 +33,7 @@
 #' 10. Trunk         -- Thoracic spine
 #' 11. Trunk         -- Lumbosacral
 #' 12. Trunk         -- Abdomen
-#' 13. Lower limb    -- Hip Groin
+#' 13. Lower limb    -- Hip / Groin
 #' 14. Lower limb    -- Thigh
 #' 15. Lower limb    -- Knee
 #' 16. Lower limb    -- Lower leg
@@ -43,23 +43,27 @@
 #' }
 #'
 #' @seealso [heatmap_diagram_default()] to build a heatmap diagram from
-#' this taxonomy plus your own injury counts, without needing to retype the
-#' region_area/subcategory labels yourself. [injury_categories] for the
-#' equivalent taxonomy used by the sunburst functions.
+#' this taxonomy plus your own injury counts, without needing to retype
+#' the Region.area/Subcategory labels yourself.
+#' [injury_categories] for the equivalent taxonomy used by
+#' the sunburst functions.
+#'
+#' @docType data
+#' @name body_categories
 #' @export
 body_categories <- data.frame(
-  region_area = c(
+  Region.area = c(
     "Head and neck", "Head and neck",
     "Upper limb", "Upper limb", "Upper limb", "Upper limb", "Upper limb", "Upper limb",
     "Trunk", "Trunk", "Trunk", "Trunk",
     "Lower limb", "Lower limb", "Lower limb", "Lower limb", "Lower limb", "Lower limb",
     "Unspecified"
   ),
-  subcategory = c(
+  Subcategory = c(
     "Head", "Neck",
     "Shoulder", "Upper arm", "Elbow", "Forearm", "Wrist", "Hand",
     "Chest", "Thoracic spine", "Lumbosacral", "Abdomen",
-    "Hip Groin", "Thigh", "Knee", "Lower leg", "Ankle", "Foot",
+    "Hip / Groin", "Thigh", "Knee", "Lower leg", "Ankle", "Foot",
     "Unspecified"
   ),
   stringsAsFactors = FALSE
