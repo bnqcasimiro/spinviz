@@ -15,16 +15,16 @@ i.e. \code{counts[i]} is the injury count for
 \item{column_name}{A string used as the injury-count column's name when
 building the underlying data frame. Default "injury_count".}
 
-\item{...}{Passed straight through to \code{\link[=sunburst_diagram_echarts]{sunburst_diagram_echarts()}}.
+\item{...}{Passed straight through to \code{\link[=sunburst_diagram]{sunburst_diagram()}}.
 Every other argument (\code{palette}, \code{plot_title}, \code{include_non_specific},
 radius/label tuning, etc.) works exactly the same way.}
 }
 \value{
 An echarts4r htmlwidget, identical to what
-\code{\link[=sunburst_diagram_echarts]{sunburst_diagram_echarts()}} itself returns.
+\code{\link[=sunburst_diagram]{sunburst_diagram()}} itself returns.
 }
 \description{
-A thin wrapper around \code{\link[=sunburst_diagram_echarts]{sunburst_diagram_echarts()}} for using the standard
+A thin wrapper around \code{\link[=sunburst_diagram]{sunburst_diagram()}} for using the standard
 tissue/pathology taxonomy (\link{injury_categories}) and plugging in a set of
 injury counts.
 }
@@ -34,7 +34,7 @@ p1 <- sunburst_diagram_default(boxing, plot_title = "Boxing Injuries")
 }
 \seealso{
 \link{injury_categories} for the taxonomy this merges your counts
-into. \code{\link[=sunburst_diagram_echarts]{sunburst_diagram_echarts()}} for the full version that accepts any
+into. \code{\link[=sunburst_diagram]{sunburst_diagram()}} for the full version that accepts any
 tissue/pathology taxonomy, if you need something other than the
 built-in one (i.e. a different classification system).
 }
