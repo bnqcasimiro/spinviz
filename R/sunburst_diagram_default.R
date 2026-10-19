@@ -1,7 +1,7 @@
 #' @title Sunburst diagram using the built-in injury taxonomy
 #'
 #' @description
-#' A thin wrapper around [sunburst_diagram_echarts()] for using the standard
+#' A thin wrapper around [sunburst_diagram()] for using the standard
 #' tissue/pathology taxonomy ([injury_categories]) and plugging in a set of
 #' injury counts.
 #'
@@ -11,14 +11,14 @@
 #' `injury_categories[i, c("tissue", "pathology")]`.
 #' @param column_name A string used as the injury-count column's name when
 #' building the underlying data frame. Default "injury_count".
-#' @param ... Passed straight through to [sunburst_diagram_echarts()].
+#' @param ... Passed straight through to [sunburst_diagram()].
 #' Every other argument (`palette`, `plot_title`, `include_non_specific`,
 #' radius/label tuning, etc.) works exactly the same way.
 #'
 #' @return An echarts4r htmlwidget, identical to what
-#' [sunburst_diagram_echarts()] itself returns.
+#' [sunburst_diagram()] itself returns.
 #' @seealso [injury_categories] for the taxonomy this merges your counts
-#' into. [sunburst_diagram_echarts()] for the full version that accepts any
+#' into. [sunburst_diagram()] for the full version that accepts any
 #' tissue/pathology taxonomy, if you need something other than the
 #' built-in one (i.e. a different classification system).
 #' @export
@@ -41,5 +41,5 @@ sunburst_diagram_default <- function(counts, column_name = "injury_count", ...){
   df <- injury_categories
   df[[column_name]] <- counts
 
-  sunburst_diagram_echarts(df, column_name = column_name, ...)
+  sunburst_diagram(df, column_name = column_name, ...)
 }
