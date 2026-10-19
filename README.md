@@ -10,7 +10,7 @@
 
 `spinviz` is an `R` package for visualising **sports injury frequency data**. It renders **anatomical heatmaps** (front/back, male/female body models) and **interactive tissue-type to pathology-type sunburst diagrams**. Toggle labels and values, customise colour palettes and legends, and export publication-ready **PNG, JPG or PDF** figures.
 
-The main function, `heatmap_diagram()`, colours anatomical regions by injury frequency and can render **front**, **back**, or **both** views, using **male** or **female** body templates. `sunburst_diagram_echarts()` renders tissue types on an inner ring and pathologies on an outer ring. Built-in taxonomies (`body_categories`, `injury_categories`), one-call wrappers, and `save_diagram()` for correct-aspect-ratio export are also included.
+The main function, `heatmap_diagram()`, colours anatomical regions by injury frequency and can render **front**, **back**, or **both** views, using **male** or **female** body templates. `sunburst_diagram()` renders tissue types on an inner ring and pathologies on an outer ring. Built-in taxonomies (`body_categories`, `injury_categories`), one-call wrappers, and `save_diagram()` for correct-aspect-ratio export are also included.
 
 Full documentation, tutorials, and a function reference live on the [pkgdown site](https://bnqcasimiro.github.io/spinviz/).
 
@@ -47,7 +47,7 @@ heatmap_diagram(df, "boxing", "front", sex = "male", show_scale = FALSE)
 **Sunburst diagram**
 
 ``` r
-sunburst_diagram_echarts(df, "boxing", plot_title = "Boxing Injuries")
+sunburst_diagram(df, "boxing", plot_title = "Boxing Injuries")
 ```
 
 <details>
