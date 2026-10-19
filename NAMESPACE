@@ -11,7 +11,7 @@ export(read_injury_data)
 export(read_sunburst_data)
 export(save_diagram)
 export(sunburst_diagram_default)
-export(sunburst_diagram_echarts)
+export(sunburst_diagram)
 export(test_colour)
 importFrom(dplyr,
   bind_rows,
