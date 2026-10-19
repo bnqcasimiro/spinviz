@@ -21,7 +21,7 @@ reference:
   - title: Diagrams
     contents:
       - heatmap_diagram
-      - sunburst_diagram_echarts
+      - sunburst_diagram
       - save_diagram
   - title: Convenience wrappers and taxonomies
     contents:
