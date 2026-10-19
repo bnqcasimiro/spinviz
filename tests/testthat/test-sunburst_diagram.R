@@ -20,16 +20,16 @@ sample_sunburst_data <- function() {
   )
 }
 
-test_that("sunburst_diagram_echarts returns an htmlwidget with recorded size metadata", {
+test_that("sunburst_diagram returns an htmlwidget with recorded size metadata", {
   df <- sample_sunburst_data()
-  sb <- sunburst_diagram_echarts(df, "boxing")
+  sb <- sunburst_diagram(df, "boxing")
   expect_s3_class(sb, "htmlwidget")
 
   meta <- attr(sb, "spinviz_sunburst_meta")
   expect_equal(meta$widget_width, "1200px")
   expect_equal(meta$widget_height, "1500px")
 
-  sb2 <- sunburst_diagram_echarts(
+  sb2 <- sunburst_diagram(
     df,
     "boxing",
     widget_width = "800px",
@@ -40,29 +40,29 @@ test_that("sunburst_diagram_echarts returns an htmlwidget with recorded size met
   expect_equal(meta2$widget_height, "600px")
 })
 
-test_that("sunburst_diagram_echarts defaults to the third column when column_name is empty", {
+test_that("sunburst_diagram defaults to the third column when column_name is empty", {
   df <- sample_sunburst_data()
   # Should not error; "boxing" is the third column
-  expect_no_error(sunburst_diagram_echarts(df))
+  expect_no_error(sunburst_diagram(df))
 })
 
-test_that("sunburst_diagram_echarts drops the pathology ring for depth = 1", {
+test_that("sunburst_diagram drops the pathology ring for depth = 1", {
   df <- sample_sunburst_data()
-  sb_full <- sunburst_diagram_echarts(df, "boxing")
-  sb_depth1 <- sunburst_diagram_echarts(df, "boxing", depth = 1)
+  sb_full <- sunburst_diagram(df, "boxing")
+  sb_depth1 <- sunburst_diagram(df, "boxing", depth = 1)
   expect_length(sb_full$x$opts$series, 2)
   expect_length(sb_depth1$x$opts$series, 1)
 })
 
-test_that("sunburst_diagram_echarts can exclude non-specific tissue rows", {
+test_that("sunburst_diagram can exclude non-specific tissue rows", {
   df <- sample_sunburst_data()
-  sb <- sunburst_diagram_echarts(df, "boxing", include_non_specific = FALSE)
+  sb <- sunburst_diagram(df, "boxing", include_non_specific = FALSE)
   labels <- vapply(sb$x$opts$series[[1]]$data, `[[`, "", "name")
   expect_false(any(grepl("unspecified", labels, ignore.case = TRUE)))
 
   everything_unspecified <- df[df$tissue == "Unspecified", ]
   expect_error(
-    sunburst_diagram_echarts(
+    sunburst_diagram(
       everything_unspecified,
       "boxing",
       include_non_specific = FALSE
@@ -71,28 +71,28 @@ test_that("sunburst_diagram_echarts can exclude non-specific tissue rows", {
   )
 })
 
-test_that("sunburst_diagram_echarts validates its input data", {
+test_that("sunburst_diagram validates its input data", {
   df <- sample_sunburst_data()
 
   expect_error(
-    sunburst_diagram_echarts(df[, 1:2]),
+    sunburst_diagram(df[, 1:2]),
     "less than 3 columns"
   )
   expect_error(
-    sunburst_diagram_echarts(df, "not_a_column"),
+    sunburst_diagram(df, "not_a_column"),
     "Column name does not exist"
   )
 
   df_zero <- df
   df_zero$boxing <- 0
-  expect_error(sunburst_diagram_echarts(df_zero, "boxing"), "Sum of column")
+  expect_error(sunburst_diagram(df_zero, "boxing"), "Sum of column")
 })
 
-test_that("sunburst_diagram_echarts warns and substitutes 0 for missing counts", {
+test_that("sunburst_diagram warns and substitutes 0 for missing counts", {
   df <- sample_sunburst_data()
   df$boxing[1] <- NA
   expect_warning(
-    sunburst_diagram_echarts(df, "boxing"),
+    sunburst_diagram(df, "boxing"),
     "null values found"
   )
 })
