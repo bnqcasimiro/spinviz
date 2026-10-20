@@ -25,7 +25,7 @@
 #' Rather than typing out the Tissue/Pathology columns yourself, you can
 #' start from the built-in [injury_categories] taxonomy (which already has
 #' columns 1 and 2 filled in with the standard classification) and just add
-#' your own injury counts as column 3. See [sunburst_diagram_default()].
+#' your own injury counts as column 3. See [plot_sunburst_default()].
 #'
 #' @param column_name A string of the name of the column that contains the
 #' injury frequency. Will use the 3rd column if unspecified.
@@ -114,11 +114,11 @@
 #'   48, 41, 31, 25, 48
 #' )
 #'
-#' p1 <- sunburst_diagram(df, "boxing")
-#' p2 <- sunburst_diagram(df, "judo")
+#' p1 <- plot_sunburst(df, "boxing")
+#' p2 <- plot_sunburst(df, "judo")
 #'
 #' # Customise inner and outer label formatting independently
-#' p_custom <- sunburst_diagram(
+#' p_custom <- plot_sunburst(
 #'   df,
 #'   "boxing",
 #'   palette = "Dark 3",
@@ -189,10 +189,10 @@
 #'   boxing = boxing2
 #' )
 #'
-#' p3 <- sunburst_diagram(df2, "boxing")
+#' p3 <- plot_sunburst(df2, "boxing")
 
 
-sunburst_diagram <- function(
+plot_sunburst <- function(
     data, column_name = "", replace_names = "",
     depth = -1,
     palette = "Dark 3", transparency = 1,

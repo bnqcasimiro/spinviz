@@ -23,13 +23,14 @@ coerce_injury_values <- function(x, column_name) {
 # functions validates its own region set against it, instead of encoding
 # the same front-only/back-only knowledge independently three times.
 view_exclusive_regions <- function() {
-  list(front_only = "Abdomen", back_only = c("Thoracic Spine", "Lumbosacral"))
+  list(front_only = "Abdomen", back_only = c("Thoracic spine", "Lumbosacral"))
 }
 
-# Shared front/back mapping from a title-cased region_area to the SVG
-# element id(s) it should colour. Kept as a single lookup table so the two
-# views cannot silently drift apart; view-specific asymmetries (e.g. Hip
-# Groin, Thoracic Spine/Lumbosacral) are captured explicitly per view.
+# Shared front/back mapping from a region_area (using the canonical
+# body_categories labels, e.g. "Hip / groin") to the SVG element id(s) it
+# should colour. Kept as a single lookup table so the two views cannot
+# silently drift apart; view-specific asymmetries (e.g. Hip / groin,
+# Thoracic spine/Lumbosacral) are captured explicitly per view.
 svg_id_lookup <- function(view_choice_inner) {
   front <- list(
     "Head" = "Head",
@@ -37,23 +38,23 @@ svg_id_lookup <- function(view_choice_inner) {
     "Shoulder" = c("Right_Shoulder", "Left_Shoulder"),
     "Chest" = c("Chest", "Right_Chest", "Left_Chest"),
     "Abdomen" = "Abdomen",
-    "Upper Arm" = c("Right_Upper_Arm", "Left_Upper_Arm"),
+    "Upper arm" = c("Right_Upper_Arm", "Left_Upper_Arm"),
     "Elbow" = c("Right_Elbow", "Left_Elbow"),
     "Forearm" = c("Right_Forearm", "Left_Forearm"),
     "Thigh" = c("Right_Thigh", "Left_Thigh"),
     "Knee" = c("Right_Knee", "Left_Knee"),
-    "Lower Leg" = c("Right_Lower_Leg", "Left_Lower_Leg"),
+    "Lower leg" = c("Right_Lower_Leg", "Left_Lower_Leg"),
     "Wrist" = c("Right_Wrist", "Left_Wrist"),
     "Hand" = c("Right_Hand", "Left_Hand"),
     "Ankle" = c("Right_Ankle", "Left_Ankle"),
     "Foot" = c("Right_Foot", "Left_Foot"),
-    "Hip Groin" = c("Hip_Groin", "Left_Hip_Groin", "Right_Hip_Groin")
+    "Hip / groin" = c("Hip_Groin", "Left_Hip_Groin", "Right_Hip_Groin")
   )
 
   back <- front
   back[["Abdomen"]] <- NULL
-  back[["Hip Groin"]] <- c("Left_Hip_Groin", "Right_Hip_Groin")
-  back[["Thoracic Spine"]] <- "Thoracic_Spine"
+  back[["Hip / groin"]] <- c("Left_Hip_Groin", "Right_Hip_Groin")
+  back[["Thoracic spine"]] <- "Thoracic_Spine"
   back[["Lumbosacral"]] <- "Lumbosacral"
 
   exclusive <- view_exclusive_regions()
@@ -77,32 +78,32 @@ map_svg_ids <- function(region, view_choice_inner) {
 
 # Shared front/back label placement lookup. Most regions share the same
 # label/target coordinates in both views; only the rows that genuinely
-# differ between views (Head, Neck, Shoulder, Forearm, Hip Groin), or that
-# only exist in one view (Abdomen is front-only; Thoracic Spine and
+# differ between views (Head, Neck, Shoulder, Forearm, Hip / groin), or that
+# only exist in one view (Abdomen is front-only; Thoracic spine and
 # Lumbosacral are back-only), need a view-specific override.
 label_position_lookup <- function(view_choice_inner) {
   common_positions <- tribble(
     ~region_area , ~label_x , ~label_y , ~target_x , ~target_y ,
     "Chest"      , 0.8      , 0.87     , 0.51      , 0.80      ,
-    "Upper Arm"  , 0.2      , 0.82     , 0.45      , 0.79      ,
+    "Upper arm"  , 0.2      , 0.82     , 0.45      , 0.79      ,
     "Elbow"      , 0.15     , 0.77     , 0.44      , 0.74      ,
     "Wrist"      , 0.85     , 0.61     , 0.44      , 0.61      ,
     "Hand"       , 0.2      , 0.57     , 0.45      , 0.57      ,
     "Thigh"      , 0.8      , 0.48     , 0.50      , 0.48      ,
     "Knee"       , 0.2      , 0.40     , 0.51      , 0.40      ,
-    "Lower Leg"  , 0.8      , 0.31     , 0.51      , 0.31      ,
+    "Lower leg"  , 0.8      , 0.31     , 0.51      , 0.31      ,
     "Ankle"      , 0.2      , 0.22     , 0.52      , 0.21      ,
     "Foot"       , 0.75     , 0.18     , 0.50      , 0.17
   )
 
   front_only <- tribble(
-    ~region_area , ~label_x , ~label_y , ~target_x , ~target_y ,
-    "Head"       , 0.9      , 1.01     , 0.55      , 1.01      ,
-    "Neck"       , 0.8      , 0.97     , 0.55      , 0.91      ,
-    "Shoulder"   , 0.2      , 0.92     , 0.45      , 0.86      ,
-    "Abdomen"    , 0.8      , 0.73     , 0.52      , 0.70      ,
-    "Forearm"    , 0.2      , 0.69     , 0.44      , 0.68      ,
-    "Hip Groin"  , 0.90     , 0.65     , 0.50      , 0.65
+    ~region_area  , ~label_x , ~label_y , ~target_x , ~target_y ,
+    "Head"        , 0.9      , 1.01     , 0.55      , 1.01      ,
+    "Neck"        , 0.8      , 0.97     , 0.55      , 0.91      ,
+    "Shoulder"    , 0.2      , 0.92     , 0.45      , 0.86      ,
+    "Abdomen"     , 0.8      , 0.73     , 0.52      , 0.70      ,
+    "Forearm"     , 0.2      , 0.69     , 0.44      , 0.68      ,
+    "Hip / groin" , 0.90     , 0.65     , 0.50      , 0.65
   )
 
   back_only <- tribble(
@@ -110,9 +111,9 @@ label_position_lookup <- function(view_choice_inner) {
     "Head"           , 0.9      , 1.05     , 0.54      , 1.01      ,
     "Neck"           , 0.8      , 1.00     , 0.55      , 0.92      ,
     "Shoulder"       , 0.2      , 0.96     , 0.47      , 0.87      ,
-    "Thoracic Spine" , 0.75     , 0.91     , 0.57      , 0.83      ,
+    "Thoracic spine" , 0.75     , 0.91     , 0.57      , 0.83      ,
     "Forearm"        , 0.2      , 0.73     , 0.44      , 0.68      ,
-    "Hip Groin"      , 0.90     , 0.69     , 0.50      , 0.66      ,
+    "Hip / groin"    , 0.90     , 0.69     , 0.50      , 0.66      ,
     "Lumbosacral"    , 0.76     , 0.65     , 0.53      , 0.64
   )
 
@@ -144,19 +145,19 @@ both_label_position_lookup <- function() {
     "Head"           , 1.05     , 0.56            , 1.01            , 0.49           , 1.01           ,
     "Neck"           , 1.00     , 0.56            , 0.91            , 0.50           , 0.92           ,
     "Shoulder"       , 0.96     , 0.64            , 0.87            , 0.42           , 0.87           ,
-    "Thoracic Spine" , 0.91     , NA_real_        , NA_real_        , 0.52           , 0.83           ,
+    "Thoracic spine" , 0.91     , NA_real_        , NA_real_        , 0.52           , 0.83           ,
     "Chest"          , 0.87     , 0.55            , 0.82            , 0.48           , 0.80           ,
-    "Upper Arm"      , 0.82     , 0.64            , 0.79            , 0.41           , 0.79           ,
+    "Upper arm"      , 0.82     , 0.64            , 0.79            , 0.41           , 0.79           ,
     "Elbow"          , 0.77     , 0.65            , 0.74            , 0.41           , 0.74           ,
     "Forearm"        , 0.73     , 0.66            , 0.70            , 0.40           , 0.70           ,
     "Abdomen"        , 0.69     , 0.55            , 0.68            , NA_real_       , NA_real_       ,
-    "Hip Groin"      , 0.65     , 0.56            , 0.63            , 0.47           , 0.66           ,
+    "Hip / groin"    , 0.65     , 0.56            , 0.63            , 0.47           , 0.66           ,
     "Lumbosacral"    , 0.61     , NA_real_        , NA_real_        , 0.53           , 0.64           ,
     "Wrist"          , 0.57     , 0.65            , 0.61            , 0.41           , 0.61           ,
     "Hand"           , 0.53     , 0.65            , 0.57            , 0.41           , 0.57           ,
     "Thigh"          , 0.48     , 0.60            , 0.48            , 0.45           , 0.48           ,
     "Knee"           , 0.40     , 0.60            , 0.41            , 0.46           , 0.41           ,
-    "Lower Leg"      , 0.31     , 0.60            , 0.31            , 0.46           , 0.31           ,
+    "Lower leg"      , 0.31     , 0.60            , 0.31            , 0.46           , 0.31           ,
     "Ankle"          , 0.22     , 0.58            , 0.21            , 0.48           , 0.21           ,
     "Foot"           , 0.18     , 0.60            , 0.17            , 0.46           , 0.17
   )
@@ -214,14 +215,13 @@ both_label_position_lookup <- function() {
 #' @importFrom tibble add_column
 #' @importFrom stats na.omit
 #' @importFrom patchwork plot_layout plot_annotation
-#' @importFrom stringr str_to_title
 #' @importFrom magick image_read_svg
 #' @importFrom rsvg rsvg
 
 #' @return A plot in R-studio viewer
 #' @seealso
 #' \code{\link{body_categories}} for the built-in region_area/subcategory
-#' taxonomy, and \code{\link{heatmap_diagram_default}} for a wrapper that
+#' taxonomy, and \code{\link{plot_heatmap_default}} for a wrapper that
 #' only needs a vector of counts.
 #' \code{\link{diagram_colours}} to preview supported palette names.
 #' \code{\link{test_colour}} to visualise palettes.
@@ -236,13 +236,13 @@ both_label_position_lookup <- function() {
 #' df <- body_categories
 #' df$boxing <- c(15, 5, 18, 20, 6, 14, 9, 11, 12, 18, 22, 10, 9, 16, 13, 7, 8, 3, 24)
 #' # Generate a plot for front view, male
-#' p1 <- heatmap_diagram(df, "boxing", "front", sex = "male", show_values = FALSE)
+#' p1 <- plot_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
 #' # You can customise the colour palette by:
-#' p2 <- heatmap_diagram(df, "boxing", "front", sex = "female", palette = "plasma")
+#' p2 <- plot_heatmap(df, "boxing", "front", sex = "female", palette = "plasma")
 #' # You can add your own plot title by:
 #' p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Front)")
 
-heatmap_diagram <- function(
+plot_heatmap <- function(
   injury_data,
   selected_sport,
   view_choice,
@@ -270,11 +270,13 @@ heatmap_diagram <- function(
   stopifnot(is.logical(show_values), length(show_values) == 1)
   stopifnot(is.logical(show_scale), length(show_scale) == 1)
 
-  # Shared title-cased region/numeric-count table, computed once so all
-  # views and the Unspecified label use identical values.
+  # Shared region/numeric-count table, computed once so all views and the
+  # Unspecified label use identical values. Subcategories are matched
+  # verbatim against the canonical body_categories labels (e.g.
+  # "Hip / groin"); only surrounding whitespace is trimmed.
   base_data <- injury_data |>
     transmute(
-      region_area = str_to_title(trimws(as.character(.data$subcategory))),
+      region_area = trimws(as.character(.data$subcategory)),
       TotalInjuries = coerce_injury_values(
         .data[[selected_sport]],
         selected_sport

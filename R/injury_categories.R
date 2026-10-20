@@ -3,7 +3,7 @@
 #' @description
 #' The standard Tissue/Pathology classification used throughout this
 #' package's sunburst and heatmap functions, with no injury counts attached.
-#' Combine it with your own counts via [sunburst_diagram_default()] rather
+#' Combine it with your own counts via [plot_sunburst_default()] rather
 #' than retyping the full tissue/pathology category list for every analysis.
 #'
 #' @format A data frame with 25 rows and 2 columns:
@@ -13,7 +13,7 @@
 #' }
 #'
 #' @details
-#' \strong{Row order matters.} [sunburst_diagram_default()] (and the manual
+#' \strong{Row order matters.} [plot_sunburst_default()] (and the manual
 #' \code{df <- injury_categories; df$my_counts <- counts} pattern) line up
 #' your counts with this taxonomy purely by row position. \code{counts[i]}
 #' is assumed to be the count for row \code{i}. The current order (also
@@ -48,10 +48,10 @@
 #' 25. Unspecified           -- Unspecified
 #' }
 #'
-#' @seealso [sunburst_diagram_default()] to build a sunburst diagram from
+#' @seealso [plot_sunburst_default()] to build a sunburst diagram from
 #' this taxonomy plus your own injury counts, without needing to retype the
 #' tissue/pathology labels yourself. [body_categories] for the equivalent
-#' taxonomy used by [heatmap_diagram()].
+#' taxonomy used by [plot_heatmap()].
 #' @export
 injury_categories <- data.frame(
   tissue = c(

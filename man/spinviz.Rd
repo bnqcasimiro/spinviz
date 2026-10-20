@@ -6,12 +6,13 @@
 \alias{spinviz}
 \title{spinviz: Injury visualisation tools}
 \description{
-Tools for rendering injury frequency heatmaps on human-body SVG diagrams.
+Tools for rendering injury frequency heatmaps on human-body SVG diagrams and interactive tissue-type to pathology-type sunburst diagrams.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/bnqcasimiro/spinviz}
+  \item \url{https://bnqcasimiro.github.io/spinviz/}
   \item Report bugs at \url{https://github.com/bnqcasimiro/spinviz/issues}
 }
 

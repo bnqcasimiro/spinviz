@@ -30,7 +30,7 @@ test_colour(c("#FFFFFF", "#FFFF00", "#FF0000"))
 
 ## Heatmap display options
 
-`heatmap_diagram()` supports:
+`plot_heatmap()` supports:
 
 - View: `"front"`, `"back"`, or `"both"`
 - Diagram sex: `"male"` or `"female"`
@@ -39,15 +39,15 @@ test_colour(c("#FFFFFF", "#FFFF00", "#FF0000"))
 - Optional legend scale
 
 ```{r}
-heatmap_diagram(df, "boxing", "both", sex = "female",
+plot_heatmap(df, "boxing", "both", sex = "female",
                 opacity = 0.8, show_scale = TRUE)
 ```
 
-See `?heatmap_diagram` for the full argument list.
+See `?plot_heatmap` for the full argument list.
 
 ## Sunburst display options
 
-`sunburst_diagram_echarts()` supports:
+`plot_sunburst()` supports:
 
 - Colour per tissue type, with pathology slices automatically lightened
 - Optional exclusion of "Unspecified"/"Non-specific" tissue rows
@@ -55,11 +55,11 @@ See `?heatmap_diagram` for the full argument list.
 - Label/leader-line, radius, font and title tuning
 
 ```{r}
-sunburst_diagram_echarts(df_sb, "boxing", depth = 1,
+plot_sunburst(df_sb, "boxing", depth = 1,
                          plot_title = "Tissue types only")
 ```
 
-See `?sunburst_diagram_echarts` for the full argument list.
+See `?plot_sunburst` for the full argument list.
 
 ## Saving diagrams
 
@@ -68,10 +68,10 @@ a sunburst and applies the matching export logic, deriving the height from the
 width at the correct aspect ratio automatically:
 
 ```{r}
-p_heat <- heatmap_diagram(df, "boxing", "front", sex = "male")
+p_heat <- plot_heatmap(df, "boxing", "front", sex = "male")
 save_diagram(p_heat, file = "heatmap.png", width = 1600, units = "px")
 
-p_sun <- sunburst_diagram_echarts(df_sb, "boxing")
+p_sun <- plot_sunburst(df_sb, "boxing")
 save_diagram(p_sun, file = "sunburst.png", width = 1200)
 ```
 

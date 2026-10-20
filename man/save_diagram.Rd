@@ -23,7 +23,7 @@ save_diagram(
 }
 \arguments{
 \item{plot}{The plot/widget object returned by
-\code{\link{heatmap_diagram}} or \code{\link{sunburst_diagram_echarts}}.}
+\code{\link{plot_heatmap}} or \code{\link{plot_sunburst}}.}
 
 \item{file}{Output file path. See Description for which extensions are
 valid for each diagram type.}
@@ -51,7 +51,7 @@ mismatched ratio, \code{height} is recalculated to match and a warning
 explains why. Set \code{FALSE} to deliberately stretch the diagram.}
 
 \item{bg}{\strong{Heatmap only.} Background colour. Default
-\code{"white"}. \code{\link{heatmap_diagram}} uses \code{theme_void()},
+\code{"white"}. \code{\link{plot_heatmap}} uses \code{theme_void()},
 which has no background fill at all, and many image viewers render that
 transparency as solid grey rather than white. Set to \code{NA} for a
 genuinely transparent export.}
@@ -68,14 +68,14 @@ Invisibly, the file path written to.
 }
 \description{
 Saves either kind of plot this package produces: a heatmap from
-\code{\link{heatmap_diagram}} or a sunburst from \code{\link{sunburst_diagram_echarts}},
+\code{\link{plot_heatmap}} or a sunburst from \code{\link{plot_sunburst}},
 detecting which one \code{plot} is from its class and applying the matching
 export logic and width:height ratio.
 \preformatted{
-p1 <- heatmap_diagram(df, "boxing", "front", sex = "male")
+p1 <- plot_heatmap(df, "boxing", "front", sex = "male")
 save_diagram(p1, file = "heatmap.png", width = 1600, units = "px")
 
-p2 <- sunburst_diagram_echarts(df, "boxing")
+p2 <- plot_sunburst(df, "boxing")
 save_diagram(p2, file = "sunburst.jpg", width = 1500)
 }
 
@@ -98,7 +98,7 @@ diagrams aren't built the same way):
 \itemize{
 \item \strong{Heatmap}: the body diagram panel itself is always drawn
 at a fixed height:width of 1.1:1 (\code{theme(aspect.ratio = 1.1)}
-inside \code{\link{heatmap_diagram}}). What
+inside \code{\link{plot_heatmap}}). What
 varies is extra width outside that panel: labels/values reserve a
 data-width of 1.35 vs. 1.00 with neither shown (exact, from
 \code{coord_cartesian(xlim = ...)}), the legend adds an estimated
@@ -107,18 +107,18 @@ a placeholder worth checking against actual output), and
 \code{view_choice = "both"} uses the combined front+gap+back width
 (1 : 0.10 : 1, exact, from \code{plot_layout(widths = ...)}).
 \item \strong{Sunburst}: no fixed ratio is computed at all.
-\code{\link{sunburst_diagram_echarts}} records the exact
+\code{\link{plot_sunburst}} records the exact
 \code{widget_width}/\code{widget_height} it was built with, and that
 recorded ratio is scaled directly.
 }
 }
 \examples{
-subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
-                  "Abdomen","Forearm","Hip Groin","Wrist","Hand",
-                  "Thigh","Knee","Lower Leg","Ankle","Foot","Thoracic Spine","Lumbosacral")
-region_area <- rep("Example", length(subcategory))
+Subcategory <- c("Head","Neck","Shoulder","Chest","Upper arm","Elbow",
+                  "Abdomen","Forearm","Hip / groin","Wrist","Hand",
+                  "Thigh","Knee","Lower leg","Ankle","Foot","Thoracic spine","Lumbosacral")
+Region.area <- rep("Example", length(Subcategory))
 boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
-df_heatmap <- data.frame(region_area, subcategory, boxing)
+df_heatmap <- data.frame(Region.area, Subcategory, boxing)
 
 tissue <- c('Muscle/tendon','Muscle/tendon','Nervous','Bone','Bone',
             'Cartilage/Synovium/Bursa','Ligament/Joint capsule',
@@ -130,25 +130,25 @@ injuries <- c(20, 10, 16, 16, 10, 67, 27, 82, 26, 34)
 df_sunburst <- data.frame(tissue, pathology, injuries)
 
 \dontrun{
-# Heatmap: type detected automatically, ratio comes from heatmap_diagram()'s
+# Heatmap: type detected automatically, ratio comes from plot_heatmap()'s
 # own recorded metadata (view_choice, show_labels, show_values, show_scale)
-p1 <- heatmap_diagram(df_heatmap, "boxing", "front", sex = "male")
+p1 <- plot_heatmap(df_heatmap, "boxing", "front", sex = "male")
 save_diagram(p1, file = "heatmap.png", width = 1600, units = "px")
 
 # "both" view, exported as PDF
-p2 <- heatmap_diagram(df_heatmap, "boxing", "both", sex = "male")
+p2 <- plot_heatmap(df_heatmap, "boxing", "both", sex = "male")
 save_diagram(p2, file = "heatmap_both.pdf", width = 2400, units = "px")
 
-# Sunburst: ratio comes from sunburst_diagram_echarts()'s own recorded
+# Sunburst: ratio comes from plot_sunburst()'s own recorded
 # widget_width/widget_height instead; no units argument needed (always px)
-p3 <- sunburst_diagram_echarts(df_sunburst, "injuries")
+p3 <- plot_sunburst(df_sunburst, "injuries")
 save_diagram(p3, file = "sunburst.jpg", width = 1500)
 
 # Sunburst as PDF: same call shape again, just a different extension
 save_diagram(p3, file = "sunburst.pdf", width = 1500)
 
 # Overriding recorded metadata explicitly (e.g. plot came from an older
-# version of heatmap_diagram() with no attached metadata)
+# version of plot_heatmap() with no attached metadata)
 save_diagram(p1, file = "heatmap_custom.png",
              view_choice = "front", show_labels = TRUE,
              show_values = FALSE, show_scale = TRUE,
@@ -156,5 +156,5 @@ save_diagram(p1, file = "heatmap_custom.png",
 }
 }
 \seealso{
-\code{\link{heatmap_diagram}}, \code{\link{sunburst_diagram_echarts}}
+\code{\link{plot_heatmap}}, \code{\link{plot_sunburst}}
 }

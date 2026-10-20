@@ -4,19 +4,19 @@ sample_injury_data <- function() {
     "Neck",
     "Shoulder",
     "Chest",
-    "Upper Arm",
+    "Upper arm",
     "Elbow",
     "Abdomen",
     "Forearm",
-    "Hip Groin",
+    "Hip / groin",
     "Wrist",
     "Hand",
     "Thigh",
     "Knee",
-    "Lower Leg",
+    "Lower leg",
     "Ankle",
     "Foot",
-    "Thoracic Spine",
+    "Thoracic spine",
     "Lumbosacral"
   )
   data.frame(
@@ -31,16 +31,16 @@ test_that("label_position_lookup shares identical rows for unchanged regions", {
   back <- spinviz:::label_position_lookup("back")
 
   # These regions use the same coordinates in both views; Head/Neck/
-  # Shoulder/Forearm/Hip Groin intentionally differ between views.
+  # Shoulder/Forearm/Hip / groin intentionally differ between views.
   common_regions <- c(
     "Chest",
-    "Upper Arm",
+    "Upper arm",
     "Elbow",
     "Wrist",
     "Hand",
     "Thigh",
     "Knee",
-    "Lower Leg",
+    "Lower leg",
     "Ankle",
     "Foot"
   )
@@ -64,8 +64,8 @@ test_that("label_position_lookup includes view-only regions", {
 
   expect_true("Abdomen" %in% front$region_area)
   expect_false("Abdomen" %in% back$region_area)
-  expect_true(all(c("Thoracic Spine", "Lumbosacral") %in% back$region_area))
-  expect_false(any(c("Thoracic Spine", "Lumbosacral") %in% front$region_area))
+  expect_true(all(c("Thoracic spine", "Lumbosacral") %in% back$region_area))
+  expect_false(any(c("Thoracic spine", "Lumbosacral") %in% front$region_area))
 })
 
 test_that("both_label_position_lookup agrees with view_exclusive_regions", {
@@ -108,47 +108,47 @@ test_that("svg_id_lookup and label_position_lookup agree with view_exclusive_reg
   )
 })
 
-test_that("heatmap_diagram returns a ggplot for a single view", {
+test_that("plot_heatmap returns a ggplot for a single view", {
   df <- sample_injury_data()
-  p <- heatmap_diagram(df, "boxing", "front", sex = "male", show_values = FALSE)
+  p <- plot_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
   expect_s3_class(p, "ggplot")
 })
 
-test_that("heatmap_diagram returns a patchwork object for 'both' views", {
+test_that("plot_heatmap returns a patchwork object for 'both' views", {
   df <- sample_injury_data()
-  p <- heatmap_diagram(df, "boxing", "both", sex = "female")
+  p <- plot_heatmap(df, "boxing", "both", sex = "female")
   expect_s3_class(p, "patchwork")
 })
 
-test_that("heatmap_diagram does not call print() as a side effect", {
-  # heatmap_diagram() used to call print() explicitly before returning,
+test_that("plot_heatmap does not call print() as a side effect", {
+  # plot_heatmap() used to call print() explicitly before returning,
   # which forces a render even when the result is only assigned (causing
   # double rendering in knitr/Quarto documents). Guard against a
   # regression by checking the function body directly.
-  body_text <- paste(deparse(body(heatmap_diagram)), collapse = "\n")
+  body_text <- paste(deparse(body(plot_heatmap)), collapse = "\n")
   expect_no_match(body_text, "(?<![.[:alnum:]_])print\\(", perl = TRUE)
 })
 
-test_that("heatmap_diagram returns a ggplot for a single view without printing", {
+test_that("plot_heatmap returns a ggplot for a single view without printing", {
   df <- sample_injury_data()
-  p <- heatmap_diagram(df, "boxing", "front", show_values = FALSE)
+  p <- plot_heatmap(df, "boxing", "front", show_values = FALSE)
   expect_s3_class(p, "ggplot")
 })
 
-test_that("heatmap_diagram validates its arguments", {
+test_that("plot_heatmap validates its arguments", {
   df <- sample_injury_data()
-  expect_snapshot(error = TRUE, heatmap_diagram(df, "not_a_column", "front"))
-  expect_snapshot(error = TRUE, heatmap_diagram(df, "boxing", "sideways"))
+  expect_snapshot(error = TRUE, plot_heatmap(df, "not_a_column", "front"))
+  expect_snapshot(error = TRUE, plot_heatmap(df, "boxing", "sideways"))
   expect_snapshot(
     error = TRUE,
-    heatmap_diagram(df, "boxing", "front", opacity = 2)
+    plot_heatmap(df, "boxing", "front", opacity = 2)
   )
 })
 
-test_that("heatmap_diagram warns when injury values are not numeric", {
+test_that("plot_heatmap warns when injury values are not numeric", {
   df <- sample_injury_data()
   df$boxing[1] <- "not-a-number"
-  expect_snapshot(invisible(heatmap_diagram(
+  expect_snapshot(invisible(plot_heatmap(
     df,
     "boxing",
     "front",

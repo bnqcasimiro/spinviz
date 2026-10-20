@@ -1,19 +1,19 @@
-#' @title Standard body region/body area injury taxonomy
+#' @title Standard Body region/Body area injury taxonomy
 #'
 #' @description
 #' The standard Body region/Body area classification used by
-#' [heatmap_diagram()], with no injury counts attached. Combine it with your
-#' own counts via [heatmap_diagram_default()] rather than retyping the full
-#' Region.area/Subcategory list for every analysis.
+#' [plot_heatmap()], with no injury counts attached. Combine it with your
+#' own counts via [plot_heatmap_default()] rather than retyping the full
+#' region_area/subcategory list for every analysis.
 #'
 #' @format A data frame with 19 rows and 2 columns:
 #' \describe{
-#'   \item{Region.area}{Body region, e.g. "Upper limb", "Trunk".}
-#'   \item{Subcategory}{Body area, e.g. "Shoulder", "Chest".}
+#'   \item{region_area}{Body region, e.g. "Upper limb", "Trunk".}
+#'   \item{subcategory}{Body area, e.g. "Shoulder", "Chest".}
 #' }
 #'
 #' @details
-#' \strong{Row order matters.} [heatmap_diagram_default()] (and the manual
+#' \strong{Row order matters.} [plot_heatmap_default()] (and the manual
 #' \code{df <- body_categories; df$my_counts <- counts} pattern) line up
 #' your counts with this taxonomy purely by row position. \code{counts[i]}
 #' is assumed to be the count for row \code{i}. The current order (also
@@ -33,7 +33,7 @@
 #' 10. Trunk         -- Thoracic spine
 #' 11. Trunk         -- Lumbosacral
 #' 12. Trunk         -- Abdomen
-#' 13. Lower limb    -- Hip / Groin
+#' 13. Lower limb    -- Hip / groin
 #' 14. Lower limb    -- Thigh
 #' 15. Lower limb    -- Knee
 #' 16. Lower limb    -- Lower leg
@@ -42,28 +42,52 @@
 #' 19. Unspecified   -- Unspecified
 #' }
 #'
-#' @seealso [heatmap_diagram_default()] to build a heatmap diagram from
-#' this taxonomy plus your own injury counts, without needing to retype
-#' the Region.area/Subcategory labels yourself.
-#' [injury_categories] for the equivalent taxonomy used by
-#' the sunburst functions.
-#'
-#' @docType data
-#' @name body_categories
+#' @seealso [plot_heatmap_default()] to build a heatmap diagram from
+#' this taxonomy plus your own injury counts, without needing to retype the
+#' region_area/subcategory labels yourself. [injury_categories] for the
+#' equivalent taxonomy used by the sunburst functions.
 #' @export
 body_categories <- data.frame(
-  Region.area = c(
-    "Head and neck", "Head and neck",
-    "Upper limb", "Upper limb", "Upper limb", "Upper limb", "Upper limb", "Upper limb",
-    "Trunk", "Trunk", "Trunk", "Trunk",
-    "Lower limb", "Lower limb", "Lower limb", "Lower limb", "Lower limb", "Lower limb",
+  region_area = c(
+    "Head and neck",
+    "Head and neck",
+    "Upper limb",
+    "Upper limb",
+    "Upper limb",
+    "Upper limb",
+    "Upper limb",
+    "Upper limb",
+    "Trunk",
+    "Trunk",
+    "Trunk",
+    "Trunk",
+    "Lower limb",
+    "Lower limb",
+    "Lower limb",
+    "Lower limb",
+    "Lower limb",
+    "Lower limb",
     "Unspecified"
   ),
-  Subcategory = c(
-    "Head", "Neck",
-    "Shoulder", "Upper arm", "Elbow", "Forearm", "Wrist", "Hand",
-    "Chest", "Thoracic spine", "Lumbosacral", "Abdomen",
-    "Hip / Groin", "Thigh", "Knee", "Lower leg", "Ankle", "Foot",
+  subcategory = c(
+    "Head",
+    "Neck",
+    "Shoulder",
+    "Upper arm",
+    "Elbow",
+    "Forearm",
+    "Wrist",
+    "Hand",
+    "Chest",
+    "Thoracic spine",
+    "Lumbosacral",
+    "Abdomen",
+    "Hip / groin",
+    "Thigh",
+    "Knee",
+    "Lower leg",
+    "Ankle",
+    "Foot",
     "Unspecified"
   ),
   stringsAsFactors = FALSE

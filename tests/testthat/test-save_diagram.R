@@ -21,7 +21,7 @@ sample_heatmap_plot <- function(view_choice = "front", ...) {
     3,
     24
   )
-  heatmap_diagram(df, "boxing", view_choice, sex = "male", ...)
+  plot_heatmap(df, "boxing", view_choice, sex = "male", ...)
 }
 
 test_that("save_diagram requires width or height", {
@@ -109,7 +109,7 @@ test_that("save_diagram saves a sunburst as PNG via chromote", {
     "No Chromium-based browser found"
   )
 
-  sb <- sunburst_diagram_default(rep(1, nrow(injury_categories)))
+  sb <- plot_sunburst_default(rep(1, nrow(injury_categories)))
   out <- tempfile(fileext = ".png")
   on.exit(unlink(out), add = TRUE)
 
@@ -119,7 +119,7 @@ test_that("save_diagram saves a sunburst as PNG via chromote", {
 })
 
 test_that("save_diagram rejects unsupported sunburst extensions", {
-  sb <- sunburst_diagram_default(rep(1, nrow(injury_categories)))
+  sb <- plot_sunburst_default(rep(1, nrow(injury_categories)))
   expect_error(
     save_diagram(sb, file = tempfile(fileext = ".svg"), width = 800),
     "only supports .jpg/.jpeg/.png/.pdf"
@@ -127,7 +127,7 @@ test_that("save_diagram rejects unsupported sunburst extensions", {
 })
 
 test_that("save_diagram errors when a sunburst widget has no size metadata", {
-  sb <- sunburst_diagram_default(rep(1, nrow(injury_categories)))
+  sb <- plot_sunburst_default(rep(1, nrow(injury_categories)))
   attr(sb, "spinviz_sunburst_meta") <- NULL
   expect_error(
     save_diagram(sb, file = tempfile(fileext = ".png"), width = 800),

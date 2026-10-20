@@ -120,7 +120,7 @@ test_that("read_injury_data accepts recognised subcategories in any case", {
   utils::write.csv(
     data.frame(
       region_area = "Example",
-      subcategory = c("head", "HIP GROIN", " thoracic spine "),
+      subcategory = c("head", "HIP / GROIN", " thoracic spine "),
       boxing = c(1, 2, 3)
     ),
     path,

@@ -12,17 +12,17 @@ read_sunburst_data(path)
 \value{
 A data frame with \code{tissue}, \code{pathology}, and one column per
 sport (coerced to numeric), ready to pass to
-\code{\link[=sunburst_diagram]{sunburst_diagram()}}.
+\code{\link[=plot_sunburst]{plot_sunburst()}}.
 }
 \description{
 Reads a CSV file (e.g. one created with \code{\link[=create_sunburst_template]{create_sunburst_template()}} and
 filled in) and checks that it has the structure
-\code{\link[=sunburst_diagram]{sunburst_diagram()}} expects: \code{tissue} and \code{pathology} columns
+\code{\link[=plot_sunburst]{plot_sunburst()}} expects: \code{tissue} and \code{pathology} columns
 plus at least one sport column of injury frequencies.
 
 Blank cells in the \code{tissue} column are filled with the last seen tissue
 value (carry-down), matching the behaviour of
-\code{\link[=sunburst_diagram]{sunburst_diagram()}}, so compact hand-edited files are accepted.
+\code{\link[=plot_sunburst]{plot_sunburst()}}, so compact hand-edited files are accepted.
 }
 \examples{
 path <- tempfile(fileext = ".csv")

@@ -16,11 +16,11 @@ injury_categories
 \description{
 The standard Tissue/Pathology classification used throughout this
 package's sunburst and heatmap functions, with no injury counts attached.
-Combine it with your own counts via \code{\link[=sunburst_diagram_default]{sunburst_diagram_default()}} rather
+Combine it with your own counts via \code{\link[=plot_sunburst_default]{plot_sunburst_default()}} rather
 than retyping the full tissue/pathology category list for every analysis.
 }
 \details{
-\strong{Row order matters.} \code{\link[=sunburst_diagram_default]{sunburst_diagram_default()}} (and the manual
+\strong{Row order matters.} \code{\link[=plot_sunburst_default]{plot_sunburst_default()}} (and the manual
 \code{df <- injury_categories; df$my_counts <- counts} pattern) line up
 your counts with this taxonomy purely by row position. \code{counts[i]}
 is assumed to be the count for row \code{i}. The current order (also
@@ -56,8 +56,8 @@ source if this list and the live object ever disagree) is:
 }
 }
 \seealso{
-\code{\link[=sunburst_diagram_default]{sunburst_diagram_default()}} to build a sunburst diagram from
+\code{\link[=plot_sunburst_default]{plot_sunburst_default()}} to build a sunburst diagram from
 this taxonomy plus your own injury counts, without needing to retype the
 tissue/pathology labels yourself. \link{body_categories} for the equivalent
-taxonomy used by \code{\link[=heatmap_diagram]{heatmap_diagram()}}.
+taxonomy used by \code{\link[=plot_heatmap]{plot_heatmap()}}.
 }

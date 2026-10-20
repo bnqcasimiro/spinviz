@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Writes a CSV file in the format expected by
-#' [sunburst_diagram()]: one row per entry in the built-in
+#' [plot_sunburst()]: one row per entry in the built-in
 #' [injury_categories] taxonomy, with `tissue` and `pathology` columns and
 #' one empty column per sport for the user to fill in with injury
 #' frequencies.
@@ -54,18 +54,18 @@ create_sunburst_template <- function(path, sports = "sport1") {
 #' @description
 #' Reads a CSV file (e.g. one created with [create_sunburst_template()] and
 #' filled in) and checks that it has the structure
-#' [sunburst_diagram()] expects: `tissue` and `pathology` columns
+#' [plot_sunburst()] expects: `tissue` and `pathology` columns
 #' plus at least one sport column of injury frequencies.
 #'
 #' Blank cells in the `tissue` column are filled with the last seen tissue
 #' value (carry-down), matching the behaviour of
-#' [sunburst_diagram()], so compact hand-edited files are accepted.
+#' [plot_sunburst()], so compact hand-edited files are accepted.
 #'
 #' @param path File path of the CSV to read.
 #'
 #' @return A data frame with `tissue`, `pathology`, and one column per
 #'   sport (coerced to numeric), ready to pass to
-#'   [sunburst_diagram()].
+#'   [plot_sunburst()].
 #' @seealso [create_sunburst_template()] to generate a correctly formatted
 #'   file, [read_injury_data()] for the heatmap equivalent.
 #' @export
@@ -109,7 +109,7 @@ read_sunburst_data <- function(path) {
   data$pathology <- trimws(as.character(data$pathology))
 
   # Carry the last seen tissue down over blank cells, mirroring
-  # sunburst_diagram()'s handling of compact hand-edited files.
+  # plot_sunburst()'s handling of compact hand-edited files.
   blank_tissue <- is.na(data$tissue) | !nzchar(data$tissue)
   if (any(blank_tissue)) {
     if (blank_tissue[1]) {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/body_categories.R
 \name{body_categories}
 \alias{body_categories}
-\title{Standard body region/body area injury taxonomy}
+\title{Standard Body region/Body area injury taxonomy}
 \format{
 A data frame with 19 rows and 2 columns:
 \describe{
@@ -14,13 +14,13 @@ A data frame with 19 rows and 2 columns:
 body_categories
 }
 \description{
-The standard body region/body area classification used by
-\code{\link[=heatmap_diagram]{heatmap_diagram()}}, with no injury counts attached. Combine it with your
-own counts via \code{\link[=heatmap_diagram_default]{heatmap_diagram_default()}} rather than retyping the full
+The standard Body region/Body area classification used by
+\code{\link[=plot_heatmap]{plot_heatmap()}}, with no injury counts attached. Combine it with your
+own counts via \code{\link[=plot_heatmap_default]{plot_heatmap_default()}} rather than retyping the full
 region_area/subcategory list for every analysis.
 }
 \details{
-\strong{Row order matters.} \code{\link[=heatmap_diagram_default]{heatmap_diagram_default()}} (and the manual
+\strong{Row order matters.} \code{\link[=plot_heatmap_default]{plot_heatmap_default()}} (and the manual
 \code{df <- body_categories; df$my_counts <- counts} pattern) line up
 your counts with this taxonomy purely by row position. \code{counts[i]}
 is assumed to be the count for row \code{i}. The current order (also
@@ -40,7 +40,7 @@ if this list and the live object ever disagree) is:
 10. Trunk         -- Thoracic spine
 11. Trunk         -- Lumbosacral
 12. Trunk         -- Abdomen
-13. Lower limb    -- Hip Groin
+13. Lower limb    -- Hip / groin
 14. Lower limb    -- Thigh
 15. Lower limb    -- Knee
 16. Lower limb    -- Lower leg
@@ -50,7 +50,7 @@ if this list and the live object ever disagree) is:
 }
 }
 \seealso{
-\code{\link[=heatmap_diagram_default]{heatmap_diagram_default()}} to build a heatmap diagram from
+\code{\link[=plot_heatmap_default]{plot_heatmap_default()}} to build a heatmap diagram from
 this taxonomy plus your own injury counts, without needing to retype the
 region_area/subcategory labels yourself. \link{injury_categories} for the
 equivalent taxonomy used by the sunburst functions.

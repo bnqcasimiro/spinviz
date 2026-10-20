@@ -1,18 +1,18 @@
-# Canonical list of body subcategories recognised by heatmap_diagram(),
+# Canonical list of body subcategories recognised by plot_heatmap(),
 # derived from the built-in body_categories taxonomy (minus "Unspecified",
-# which is not drawn on the diagram) and title-cased the same way
-# heatmap_diagram() normalises input. Single source of truth so the CSV
-# template, the reader's validation, and the diagram cannot drift apart.
+# which is not drawn on the diagram). Used verbatim (no title-casing), so
+# e.g. "Hip / groin" keeps its lowercase second word. Single source of
+# truth so the CSV template, the reader's validation, and the diagram
+# cannot drift apart.
 injury_subcategories <- function() {
   subcategories <- body_categories$subcategory
-  subcategories <- subcategories[subcategories != "Unspecified"]
-  stringr::str_to_title(subcategories)
+  subcategories[subcategories != "Unspecified"]
 }
 
 #' @title Create a template CSV file for injury data
 #'
 #' @description
-#' Writes a CSV file in the format expected by [heatmap_diagram()]: one row
+#' Writes a CSV file in the format expected by [plot_heatmap()]: one row
 #' per recognised body subcategory, with `region_area` and `subcategory`
 #' columns and one empty column per sport for the user to fill in with
 #' injury frequencies.
@@ -54,7 +54,7 @@ create_injury_template <- function(path, sports = "sport1") {
 #'
 #' @description
 #' Reads a CSV file (e.g. one created with [create_injury_template()] and
-#' filled in) and checks that it has the structure [heatmap_diagram()]
+#' filled in) and checks that it has the structure [plot_heatmap()]
 #' expects: `region_area` and `subcategory` columns plus at least one sport
 #' column of injury frequencies.
 #'
@@ -121,16 +121,18 @@ read_injury_data <- function(path) {
     )
   }
 
-  # Match heatmap_diagram()'s normalisation so validation reflects what will
-  # actually be plotted.
-  normalised <- stringr::str_to_title(trimws(data$subcategory))
-  unrecognised <- setdiff(unique(normalised), injury_subcategories())
+  # Case-insensitive comparison against the canonical labels (which keep
+  # lowercase second words, e.g. "Hip / groin"); input values themselves
+  # are stored verbatim, so matching in plot_heatmap() is unaffected.
+  canonical <- injury_subcategories()
+  entered <- trimws(data$subcategory)
+  unrecognised <- unique(entered[!tolower(entered) %in% tolower(canonical)])
   if (length(unrecognised) > 0) {
     warning(
       "Unrecognised subcategory value(s), possibly misspelled: ",
       paste(unrecognised, collapse = ", "),
       ". Expected values are: ",
-      paste(injury_subcategories(), collapse = ", "),
+      paste(canonical, collapse = ", "),
       call. = FALSE
     )
   }

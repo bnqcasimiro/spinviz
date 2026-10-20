@@ -20,13 +20,13 @@ reference:
       - spinviz
   - title: Diagrams
     contents:
-      - heatmap_diagram
-      - sunburst_diagram
+      - plot_heatmap
+      - plot_sunburst
       - save_diagram
   - title: Convenience wrappers and taxonomies
     contents:
-      - heatmap_diagram_default
-      - sunburst_diagram_default
+      - plot_heatmap_default
+      - plot_sunburst_default
       - body_categories
       - injury_categories
   - title: Importing data
