@@ -8,10 +8,10 @@ library(spinviz)
 `spinviz` produces two kinds of injury visualisations:
 
 - **Heatmaps** of injury frequency projected onto human-body diagrams
-  ([`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)),
+  ([`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)),
   with front, back, or both views and male or female body templates.
 - **Interactive sunburst diagrams** of tissue/pathology classifications
-  ([`sunburst_diagram_echarts()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)),
+  ([`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)),
   built on echarts4r.
 
 ## Data format
@@ -23,10 +23,10 @@ one or more columns of injury frequencies (one per sport or cohort).
 
 | region_area   | subcategory | sport1 |
 |---------------|-------------|--------|
-| Head and Neck | Head        | 10     |
-| Head and Neck | Neck        | 20     |
-| Upper Limb    | Shoulder    | 5      |
-| Upper Limb    | Upper Arm   | 8      |
+| Head and neck | Head        | 10     |
+| Head and neck | Neck        | 20     |
+| Upper limb    | Shoulder    | 5      |
+| Upper limb    | Upper arm   | 8      |
 
 The 18 recognised body subcategories and their `region_area` groupings,
 plus a special `Unspecified` category for injuries that cannot be
@@ -51,10 +51,10 @@ tissue/pathology classification.
 
 ``` r
 
-subcategory <- c("Head", "Neck", "Shoulder", "Chest", "Upper Arm", "Elbow",
-                 "Abdomen", "Forearm", "Hip Groin", "Wrist", "Hand",
-                 "Thigh", "Knee", "Lower Leg", "Ankle", "Foot",
-                 "Thoracic Spine", "Lumbosacral")
+subcategory <- c("Head", "Neck", "Shoulder", "Chest", "Upper arm", "Elbow",
+                 "Abdomen", "Forearm", "Hip / groin", "Wrist", "Hand",
+                 "Thigh", "Knee", "Lower leg", "Ankle", "Foot",
+                 "Thoracic spine", "Lumbosacral")
 
 region_area <- rep("Example", length(subcategory))
 boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
@@ -62,18 +62,18 @@ boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
 df <- data.frame(region_area, subcategory, boxing)
 ```
 
-Then call `heatmap_diagram(injury_data, selected_sport, view_choice)`,
+Then call `plot_heatmap(injury_data, selected_sport, view_choice)`,
 where `view_choice` is one of `"front"`, `"back"`, or `"both"`:
 
 ``` r
 
-heatmap_diagram(df, "boxing", "front", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
 ```
 
 ![](spinviz_files/figure-html/unnamed-chunk-4-1.png)
 
 See
-[`?heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
+[`?plot_heatmap`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
 for options controlling labels, values, opacity, the legend scale, and
 custom palettes. Rows with an `"Unspecified"` subcategory are shown as a
 label below the diagram (they have no body region to colour).
@@ -89,15 +89,14 @@ df_sb <- injury_categories
 df_sb$boxing <- c(20, 0, 0, 10, 31, 18, 16, 16, 20, 20, 27, 46,
                   67, 31, 54, 20, 27, 30, 96, 82, 48, 26, 33, 34, 24)
 
-sunburst_diagram_echarts(
-  df_sb, "boxing",
-  plot_title = "Boxing Injuries"
+plot_sunburst(
+  df_sb, "boxing"
 )
 ```
 
 The sunburst is interactive: tissue types sit on the inner ring,
 pathologies on the outer ring. See
-[`?sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+[`?plot_sunburst`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
 for options such as `depth = 1` (tissue ring only), excluding
 “Unspecified”/“Non-specific” rows, and label/radius/font tuning.
 
@@ -109,14 +108,14 @@ counts:
 
 ``` r
 
-heatmap_diagram_default(c(boxing, unspecified = 4), "front")
+plot_heatmap_default(c(boxing, unspecified = 4), "front")
 ```
 
 ![](spinviz_files/figure-html/unnamed-chunk-7-1.png)
 
 ``` r
 
-sunburst_diagram_default(df_sb$boxing, plot_title = "Boxing Injuries")
+plot_sunburst_default(df_sb$boxing)
 ```
 
 Counts are matched by row position to `body_categories` /

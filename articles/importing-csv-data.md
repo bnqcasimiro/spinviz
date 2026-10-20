@@ -32,7 +32,7 @@ df <- read_injury_data("injuries.csv")
 
 ``` r
 
-heatmap_diagram(df, "boxing", "front", sex = "male")
+plot_heatmap(df, "boxing", "front", sex = "male")
 ```
 
 ## Sunburst (tissue/pathology) data
@@ -49,5 +49,5 @@ above, so compact hand-edited files work:
 
 create_sunburst_template("tissue_injuries.csv", sports = c("boxing", "judo"))
 df <- read_sunburst_data("tissue_injuries.csv")
-sunburst_diagram_echarts(df, "boxing")
+plot_sunburst(df, "boxing")
 ```

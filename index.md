@@ -7,11 +7,11 @@ diagrams**. Toggle labels and values, customise colour palettes and
 legends, and export publication-ready **PNG, JPG or PDF** figures.
 
 The main function,
-[`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md),
+[`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md),
 colours anatomical regions by injury frequency and can render **front**,
 **back**, or **both** views, using **male** or **female** body
 templates.
-[`sunburst_diagram_echarts()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+[`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
 renders tissue types on an inner ring and pathologies on an outer ring.
 Built-in taxonomies (`body_categories`, `injury_categories`), one-call
 wrappers, and
@@ -37,7 +37,7 @@ pak::pak("bnqcasimiro/spinviz")
 
 ``` r
 
-heatmap_diagram(df, "boxing", "front", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
 ```
 
 **`Example Diagrams`**
@@ -50,7 +50,7 @@ heatmap_diagram(df, "boxing", "front", sex = "male", show_scale = FALSE)
 
 ``` r
 
-sunburst_diagram_echarts(df, "boxing", plot_title = "Boxing Injuries")
+plot_sunburst(df, "boxing", plot_title = "Boxing Injuries")
 ```
 
 **`Example Diagram`**

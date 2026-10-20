@@ -8,21 +8,21 @@
 
 ## Diagrams
 
-- [`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
+- [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
   : Heat map of Injuries on Human Body
-- [`sunburst_diagram_echarts()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+- [`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
   : Sunburst diagram
 - [`save_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/save_diagram.md)
   : Save a spinviz diagram to file
 
 ## Convenience wrappers and taxonomies
 
-- [`heatmap_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram_default.md)
+- [`plot_heatmap_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap_default.md)
   : Heatmap diagram using the built-in body region taxonomy
-- [`sunburst_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_default.md)
+- [`plot_sunburst_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst_default.md)
   : Sunburst diagram using the built-in injury taxonomy
 - [`body_categories`](https://bnqcasimiro.github.io/spinviz/reference/body_categories.md)
-  : Standard body region/body area injury taxonomy
+  : Standard Body region/Body area injury taxonomy
 - [`injury_categories`](https://bnqcasimiro.github.io/spinviz/reference/injury_categories.md)
   : Standard tissue/pathology injury taxonomy
 

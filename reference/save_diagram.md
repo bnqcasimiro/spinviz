@@ -1,17 +1,17 @@
 # Save a spinviz diagram to file
 
 Saves either kind of plot this package produces: a heatmap from
-[`heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
+[`plot_heatmap`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
 or a sunburst from
-[`sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md),
+[`plot_sunburst`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md),
 detecting which one `plot` is from its class and applying the matching
 export logic and width:height ratio.
 
 
-    p1 <- heatmap_diagram(df, "boxing", "front", sex = "male")
+    p1 <- plot_heatmap(df, "boxing", "front", sex = "male")
     save_diagram(p1, file = "heatmap.png", width = 1600, units = "px")
 
-    p2 <- sunburst_diagram_echarts(df, "boxing")
+    p2 <- plot_sunburst(df, "boxing")
     save_diagram(p2, file = "sunburst.jpg", width = 1500)
 
 **Supply `width` OR `height`** for either diagram type, whichever you
@@ -32,7 +32,7 @@ diagrams aren't built the same way):
 
 - **Heatmap**: the body diagram panel itself is always drawn at a fixed
   height:width of 1.1:1 (`theme(aspect.ratio = 1.1)` inside
-  [`heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)).
+  [`plot_heatmap`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)).
   What varies is extra width outside that panel: labels/values reserve a
   data-width of 1.35 vs. 1.00 with neither shown (exact, from
   `coord_cartesian(xlim = ...)`), the legend adds an estimated ~15%
@@ -42,7 +42,7 @@ diagrams aren't built the same way):
   0.10 : 1, exact, from `plot_layout(widths = ...)`).
 
 - **Sunburst**: no fixed ratio is computed at all.
-  [`sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+  [`plot_sunburst`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
   records the exact `widget_width`/`widget_height` it was built with,
   and that recorded ratio is scaled directly.
 
@@ -72,9 +72,9 @@ save_diagram(
 - plot:
 
   The plot/widget object returned by
-  [`heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
+  [`plot_heatmap`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
   or
-  [`sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md).
+  [`plot_sunburst`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md).
 
 - file:
 
@@ -116,7 +116,7 @@ save_diagram(
 - bg:
 
   **Heatmap only.** Background colour. Default `"white"`.
-  [`heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
+  [`plot_heatmap`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
   uses `theme_void()`, which has no background fill at all, and many
   image viewers render that transparency as solid grey rather than
   white. Set to `NA` for a genuinely transparent export.
@@ -138,18 +138,18 @@ Invisibly, the file path written to.
 
 ## See also
 
-[`heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md),
-[`sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+[`plot_heatmap`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md),
+[`plot_sunburst`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
 
 ## Examples
 
 ``` r
-subcategory <- c("Head","Neck","Shoulder","Chest","Upper Arm","Elbow",
-                  "Abdomen","Forearm","Hip Groin","Wrist","Hand",
-                  "Thigh","Knee","Lower Leg","Ankle","Foot","Thoracic Spine","Lumbosacral")
-region_area <- rep("Example", length(subcategory))
+Subcategory <- c("Head","Neck","Shoulder","Chest","Upper arm","Elbow",
+                  "Abdomen","Forearm","Hip / groin","Wrist","Hand",
+                  "Thigh","Knee","Lower leg","Ankle","Foot","Thoracic spine","Lumbosacral")
+Region.area <- rep("Example", length(Subcategory))
 boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
-df_heatmap <- data.frame(region_area, subcategory, boxing)
+df_heatmap <- data.frame(Region.area, Subcategory, boxing)
 
 tissue <- c('Muscle/tendon','Muscle/tendon','Nervous','Bone','Bone',
             'Cartilage/Synovium/Bursa','Ligament/Joint capsule',
@@ -161,25 +161,25 @@ injuries <- c(20, 10, 16, 16, 10, 67, 27, 82, 26, 34)
 df_sunburst <- data.frame(tissue, pathology, injuries)
 
 if (FALSE) { # \dontrun{
-# Heatmap: type detected automatically, ratio comes from heatmap_diagram()'s
+# Heatmap: type detected automatically, ratio comes from plot_heatmap()'s
 # own recorded metadata (view_choice, show_labels, show_values, show_scale)
-p1 <- heatmap_diagram(df_heatmap, "boxing", "front", sex = "male")
+p1 <- plot_heatmap(df_heatmap, "boxing", "front", sex = "male")
 save_diagram(p1, file = "heatmap.png", width = 1600, units = "px")
 
 # "both" view, exported as PDF
-p2 <- heatmap_diagram(df_heatmap, "boxing", "both", sex = "male")
+p2 <- plot_heatmap(df_heatmap, "boxing", "both", sex = "male")
 save_diagram(p2, file = "heatmap_both.pdf", width = 2400, units = "px")
 
-# Sunburst: ratio comes from sunburst_diagram_echarts()'s own recorded
+# Sunburst: ratio comes from plot_sunburst()'s own recorded
 # widget_width/widget_height instead; no units argument needed (always px)
-p3 <- sunburst_diagram_echarts(df_sunburst, "injuries")
+p3 <- plot_sunburst(df_sunburst, "injuries")
 save_diagram(p3, file = "sunburst.jpg", width = 1500)
 
 # Sunburst as PDF: same call shape again, just a different extension
 save_diagram(p3, file = "sunburst.pdf", width = 1500)
 
 # Overriding recorded metadata explicitly (e.g. plot came from an older
-# version of heatmap_diagram() with no attached metadata)
+# version of plot_heatmap() with no attached metadata)
 save_diagram(p1, file = "heatmap_custom.png",
              view_choice = "front", show_labels = TRUE,
              show_values = FALSE, show_scale = TRUE,

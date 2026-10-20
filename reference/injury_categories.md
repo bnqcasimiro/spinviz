@@ -3,7 +3,7 @@
 The standard Tissue/Pathology classification used throughout this
 package's sunburst and heatmap functions, with no injury counts
 attached. Combine it with your own counts via
-[`sunburst_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_default.md)
+[`plot_sunburst_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst_default.md)
 rather than retyping the full tissue/pathology category list for every
 analysis.
 
@@ -28,7 +28,7 @@ A data frame with 25 rows and 2 columns:
 ## Details
 
 **Row order matters.**
-[`sunburst_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_default.md)
+[`plot_sunburst_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst_default.md)
 (and the manual `df <- injury_categories; df$my_counts <- counts`
 pattern) line up your counts with this taxonomy purely by row position.
 `counts[i]` is assumed to be the count for row `i`. The current order
@@ -65,9 +65,9 @@ this list and the live object ever disagree) is:
 
 ## See also
 
-[`sunburst_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_default.md)
+[`plot_sunburst_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst_default.md)
 to build a sunburst diagram from this taxonomy plus your own injury
 counts, without needing to retype the tissue/pathology labels yourself.
 [body_categories](https://bnqcasimiro.github.io/spinviz/reference/body_categories.md)
 for the equivalent taxonomy used by
-[`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md).
+[`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md).

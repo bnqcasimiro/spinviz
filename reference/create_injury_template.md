@@ -1,7 +1,7 @@
 # Create a template CSV file for injury data
 
 Writes a CSV file in the format expected by
-[`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md):
+[`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md):
 one row per recognised body subcategory, with `region_area` and
 `subcategory` columns and one empty column per sport for the user to
 fill in with injury frequencies.

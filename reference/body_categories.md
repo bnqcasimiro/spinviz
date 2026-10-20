@@ -1,9 +1,9 @@
-# Standard body region/body area injury taxonomy
+# Standard Body region/Body area injury taxonomy
 
-The standard body region/body area classification used by
-[`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md),
+The standard Body region/Body area classification used by
+[`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md),
 with no injury counts attached. Combine it with your own counts via
-[`heatmap_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram_default.md)
+[`plot_heatmap_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap_default.md)
 rather than retyping the full region_area/subcategory list for every
 analysis.
 
@@ -28,7 +28,7 @@ A data frame with 19 rows and 2 columns:
 ## Details
 
 **Row order matters.**
-[`heatmap_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram_default.md)
+[`plot_heatmap_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap_default.md)
 (and the manual `df <- body_categories; df$my_counts <- counts` pattern)
 line up your counts with this taxonomy purely by row position.
 `counts[i]` is assumed to be the count for row `i`. The current order
@@ -49,7 +49,7 @@ this list and the live object ever disagree) is:
     10. Trunk         -- Thoracic spine
     11. Trunk         -- Lumbosacral
     12. Trunk         -- Abdomen
-    13. Lower limb    -- Hip Groin
+    13. Lower limb    -- Hip / groin
     14. Lower limb    -- Thigh
     15. Lower limb    -- Knee
     16. Lower limb    -- Lower leg
@@ -59,7 +59,7 @@ this list and the live object ever disagree) is:
 
 ## See also
 
-[`heatmap_diagram_default()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram_default.md)
+[`plot_heatmap_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap_default.md)
 to build a heatmap diagram from this taxonomy plus your own injury
 counts, without needing to retype the region_area/subcategory labels
 yourself.

@@ -1,7 +1,7 @@
 # Create a template CSV file for sunburst injury data
 
 Writes a CSV file in the format expected by
-[`sunburst_diagram_echarts()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md):
+[`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md):
 one row per entry in the built-in
 [injury_categories](https://bnqcasimiro.github.io/spinviz/reference/injury_categories.md)
 taxonomy, with `tissue` and `pathology` columns and one empty column per

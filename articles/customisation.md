@@ -24,7 +24,7 @@ test_colour(c("#FFFFFF", "#FFFF00", "#FF0000"))
 
 ## Heatmap display options
 
-[`heatmap_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
+[`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
 supports:
 
 - View: `"front"`, `"back"`, or `"both"`
@@ -35,17 +35,17 @@ supports:
 
 ``` r
 
-heatmap_diagram(df, "boxing", "both", sex = "female",
+plot_heatmap(df, "boxing", "both", sex = "female",
                 opacity = 0.8, show_scale = TRUE)
 ```
 
 See
-[`?heatmap_diagram`](https://bnqcasimiro.github.io/spinviz/reference/heatmap_diagram.md)
+[`?plot_heatmap`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
 for the full argument list.
 
 ## Sunburst display options
 
-[`sunburst_diagram_echarts()`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+[`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
 supports:
 
 - Colour per tissue type, with pathology slices automatically lightened
@@ -55,12 +55,12 @@ supports:
 
 ``` r
 
-sunburst_diagram_echarts(df_sb, "boxing", depth = 1,
+plot_sunburst(df_sb, "boxing", depth = 1,
                          plot_title = "Tissue types only")
 ```
 
 See
-[`?sunburst_diagram_echarts`](https://bnqcasimiro.github.io/spinviz/reference/sunburst_diagram_echarts.md)
+[`?plot_sunburst`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
 for the full argument list.
 
 ## Saving diagrams
@@ -71,10 +71,10 @@ the height from the width at the correct aspect ratio automatically:
 
 ``` r
 
-p_heat <- heatmap_diagram(df, "boxing", "front", sex = "male")
+p_heat <- plot_heatmap(df, "boxing", "front", sex = "male")
 save_diagram(p_heat, file = "heatmap.png", width = 1600, units = "px")
 
-p_sun <- sunburst_diagram_echarts(df_sb, "boxing")
+p_sun <- plot_sunburst(df_sb, "boxing")
 save_diagram(p_sun, file = "sunburst.png", width = 1200)
 ```
 

@@ -1,13 +1,15 @@
 # spinviz: Injury visualisation tools
 
-Tools for rendering injury frequency heatmaps on human-body SVG
-diagrams.
+Tools for rendering injury frequency heatmaps on human-body SVG diagrams
+and interactive tissue-type to pathology-type sunburst diagrams.
 
 ## See also
 
 Useful links:
 
 - <https://github.com/bnqcasimiro/spinviz>
+
+- <https://bnqcasimiro.github.io/spinviz/>
 
 - Report bugs at <https://github.com/bnqcasimiro/spinviz/issues>
 
