@@ -322,24 +322,28 @@ plot_heatmap <- function(
     y
   }
 
-  # Build label strings according to toggles
+  # Build label strings as plotmath expressions (parsed by geom_text) so the
+  # "n" in "(n = ...)" renders in italics. Everything is quoted or juxtaposed
+  # with ~/* so every branch is a valid expression for parse = TRUE.
   make_label_text <- function(region, value) {
+    value_str <- ifelse(is.na(value), "NA", as.character(round(value, 1)))
     if (!show_labels && !show_values) {
-      return("")
+      return('""')
     }
     if (show_labels && show_values) {
       return(paste0(
+        '"',
         region,
-        " (",
-        ifelse(is.na(value), "NA", round(value, 1)),
-        ")"
+        '"~"("*italic(n)*" = ',
+        value_str,
+        ')"'
       ))
     }
     if (show_labels && !show_values) {
-      return(as.character(region))
+      return(paste0('"', region, '"'))
     }
     # show_values && !show_labels
-    return(ifelse(is.na(value), "NA", as.character(round(value, 1))))
+    return(paste0('"', value_str, '"'))
   }
 
   # Render single view (front or back)
@@ -559,7 +563,8 @@ plot_heatmap <- function(
           size = 3.2,
           hjust = label_hjust,
           vjust = 0.5,
-          fontface = "plain"
+          fontface = "plain",
+          parse = TRUE
         ) +
         geom_segment(
           # Unspecified rows have no leader-line target
@@ -698,10 +703,11 @@ plot_heatmap <- function(
       middle_plot <- ggplot(middle_labels) +
         geom_text(
           aes(x = 0.5, y = label_y, label = label_text),
-          size = 3.2,
+          size = 2.6,
           fontface = "plain",
           hjust = 0.5,
-          vjust = 0.5
+          vjust = 0.5,
+          parse = TRUE
         ) +
         coord_cartesian(xlim = c(0.45, 0.55), ylim = c(0, 1.1), clip = "off") +
         theme_void() +
@@ -710,7 +716,7 @@ plot_heatmap <- function(
 
     combined_plot <-
       (front_plot + middle_plot + back_plot) +
-      plot_layout(guides = guides_mode, widths = c(1, 0.22, 1), ncol = 3) +
+      plot_layout(guides = guides_mode, widths = c(1, 0.38, 1), ncol = 3) +
       plot_annotation(
         theme = theme(
           plot.title = element_text(hjust = 0.5, size = 16, face = "bold")
