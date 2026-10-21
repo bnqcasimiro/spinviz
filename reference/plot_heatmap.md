@@ -12,12 +12,12 @@ plot_heatmap(
   selected_sport,
   view_choice,
   sex = c("male", "female"),
+  value_format = c("count", "percentage"),
   palette = NULL,
   opacity = 0.8,
   show_labels = TRUE,
   show_values = TRUE,
-  show_scale = TRUE,
-  value_format = c("count", "percentage")
+  show_scale = TRUE
 )
 ```
 
@@ -40,6 +40,13 @@ plot_heatmap(
 - sex:
 
   which body diagram to use: `"male"` or `"female"`.
+
+- value_format:
+
+  Character. Format used for injury labels, body colours, and the
+  colour-scale legend. Either `"count"` (default) for absolute injury
+  frequencies or `"percentage"` for each region's percentage of total
+  recorded injuries, including unspecified injuries.
 
 - palette:
 
@@ -69,13 +76,6 @@ plot_heatmap(
 - show_scale:
 
   Logical. If `TRUE`, show the colour scale (legend).
-
-- value_format:
-
-  Character. Format used for injury labels, body colours, and the
-  colour-scale legend. Either `"count"` (default) for absolute injury
-  frequencies or `"percentage"` for each region's percentage of total
-  recorded injuries, including unspecified injuries.
 
 ## Value
 

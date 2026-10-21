@@ -58,12 +58,12 @@ Diagrams can be viewed from the front, back, or both views</p>
 <span>  <span class="va">selected_sport</span>,</span>
 <span>  <span class="va">view_choice</span>,</span>
 <span>  sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"male"</span>, <span class="st">"female"</span><span class="op">)</span>,</span>
+<span>  value_format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"count"</span>, <span class="st">"percentage"</span><span class="op">)</span>,</span>
 <span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  opacity <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>  show_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  show_values <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  show_scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  value_format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"count"</span>, <span class="st">"percentage"</span><span class="op">)</span></span>
+<span>  show_scale <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -89,6 +89,13 @@ the frequency column in the data frame.</p></dd>
 <dd><p>which body diagram to use: <code>"male"</code> or <code>"female"</code>.</p></dd>
 
 
+<dt id="arg-value-format">value_format<a class="anchor" aria-label="anchor" href="#arg-value-format"></a></dt>
+<dd><p>Character. Format used for injury labels, body colours,
+and the colour-scale legend. Either <code>"count"</code> (default) for absolute
+injury frequencies or <code>"percentage"</code> for each region's percentage
+of total recorded injuries, including unspecified injuries.</p></dd>
+
+
 <dt id="arg-palette">palette<a class="anchor" aria-label="anchor" href="#arg-palette"></a></dt>
 <dd><p>Optional colour palette.</p><ul><li><p>A single palette name supported by <code><a href="diagram_colours.html">diagram_colours</a></code> (viridis or HCL),
 e.g. <code>"magma"</code> or <code>"Reds"</code>.</p></li>
@@ -111,13 +118,6 @@ e.g. <code>"magma"</code> or <code>"Reds"</code>.</p></li>
 
 <dt id="arg-show-scale">show_scale<a class="anchor" aria-label="anchor" href="#arg-show-scale"></a></dt>
 <dd><p>Logical. If <code>TRUE</code>, show the colour scale (legend).</p></dd>
-
-
-<dt id="arg-value-format">value_format<a class="anchor" aria-label="anchor" href="#arg-value-format"></a></dt>
-<dd><p>Character. Format used for injury labels, body colours,
-and the colour-scale legend. Either <code>"count"</code> (default) for absolute
-injury frequencies or <code>"percentage"</code> for each region's percentage
-of total recorded injuries, including unspecified injuries.</p></dd>
 
 </dl></div>
     <div class="section level2">
