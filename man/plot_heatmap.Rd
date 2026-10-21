@@ -13,7 +13,8 @@ plot_heatmap(
   opacity = 0.8,
   show_labels = TRUE,
   show_values = TRUE,
-  show_scale = TRUE
+  show_scale = TRUE,
+  value_format = c("count", "percentage")
 )
 }
 \arguments{
@@ -42,6 +43,11 @@ e.g. \code{"magma"} or \code{"Reds"}.
 \item{show_values}{Logical. If \code{TRUE}, show injury values.}
 
 \item{show_scale}{Logical. If \code{TRUE}, show the colour scale (legend).}
+
+\item{value_format}{Character. Format used for injury labels, body colours,
+and the colour-scale legend. Either \code{"count"} (default) for absolute
+injury frequencies or \code{"percentage"} for each region's percentage
+of total recorded injuries, including unspecified injuries.}
 }
 \value{
 A plot in R-studio viewer
