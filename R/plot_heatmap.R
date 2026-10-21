@@ -84,13 +84,13 @@ map_svg_ids <- function(region, view_choice_inner) {
 label_position_lookup <- function(view_choice_inner) {
   common_positions <- tribble(
     ~region_area , ~label_x , ~label_y , ~target_x , ~target_y ,
-    "Chest"      , 0.8      , 0.87     , 0.51      , 0.80      ,
+    "Chest"      , 0.8      , 0.85     , 0.51      , 0.83      ,
     "Upper arm"  , 0.2      , 0.82     , 0.45      , 0.79      ,
     "Elbow"      , 0.15     , 0.77     , 0.44      , 0.74      ,
-    "Wrist"      , 0.85     , 0.61     , 0.44      , 0.61      ,
-    "Hand"       , 0.2      , 0.57     , 0.45      , 0.57      ,
+    "Wrist"      , 0.85     , 0.61     , 0.43      , 0.62      ,
+    "Hand"       , 0.2      , 0.57     , 0.44      , 0.58      ,
     "Thigh"      , 0.8      , 0.48     , 0.50      , 0.48      ,
-    "Knee"       , 0.2      , 0.40     , 0.51      , 0.40      ,
+    "Knee"       , 0.2      , 0.40     , 0.51      , 0.42      ,
     "Lower leg"  , 0.8      , 0.31     , 0.51      , 0.31      ,
     "Ankle"      , 0.2      , 0.22     , 0.52      , 0.21      ,
     "Foot"       , 0.75     , 0.18     , 0.50      , 0.17
@@ -98,23 +98,23 @@ label_position_lookup <- function(view_choice_inner) {
 
   front_only <- tribble(
     ~region_area  , ~label_x , ~label_y , ~target_x , ~target_y ,
-    "Head"        , 0.9      , 1.01     , 0.55      , 1.01      ,
-    "Neck"        , 0.8      , 0.97     , 0.55      , 0.91      ,
+    "Head"        , 0.9      , 1.01     , 0.53      , 1.01      ,
+    "Neck"        , 0.8      , 0.97     , 0.52      , 0.90      ,
     "Shoulder"    , 0.2      , 0.92     , 0.45      , 0.86      ,
     "Abdomen"     , 0.8      , 0.73     , 0.52      , 0.70      ,
     "Forearm"     , 0.2      , 0.69     , 0.44      , 0.68      ,
-    "Hip / groin" , 0.90     , 0.65     , 0.50      , 0.65
+    "Hip / groin" , 0.90     , 0.66     , 0.50      , 0.65
   )
 
   back_only <- tribble(
     ~region_area     , ~label_x , ~label_y , ~target_x , ~target_y ,
-    "Head"           , 0.9      , 1.05     , 0.54      , 1.01      ,
-    "Neck"           , 0.8      , 1.00     , 0.55      , 0.92      ,
-    "Shoulder"       , 0.2      , 0.96     , 0.47      , 0.87      ,
-    "Thoracic spine" , 0.75     , 0.91     , 0.57      , 0.83      ,
+    "Head"           , 0.9      , 1.05     , 0.53      , 1.01      ,
+    "Neck"           , 0.8      , 1.00     , 0.54      , 0.91      ,
+    "Shoulder"       , 0.2      , 0.96     , 0.46      , 0.86      ,
+    "Thoracic spine" , 0.75     , 0.91     , 0.55      , 0.84      ,
     "Forearm"        , 0.2      , 0.73     , 0.44      , 0.68      ,
-    "Hip / groin"    , 0.90     , 0.69     , 0.50      , 0.66      ,
-    "Lumbosacral"    , 0.76     , 0.65     , 0.53      , 0.64
+    "Hip / groin"    , 0.90     , 0.69     , 0.50      , 0.67      ,
+    "Lumbosacral"    , 0.76     , 0.65     , 0.53      , 0.66
   )
 
   exclusive <- view_exclusive_regions()
@@ -143,8 +143,8 @@ both_label_position_lookup <- function() {
   positions <- tribble(
     ~region_area     , ~label_y , ~front_target_x , ~front_target_y , ~back_target_x , ~back_target_y ,
     "Head"           , 1.05     , 0.56            , 1.01            , 0.49           , 1.01           ,
-    "Neck"           , 1.00     , 0.56            , 0.91            , 0.50           , 0.92           ,
-    "Shoulder"       , 0.96     , 0.64            , 0.87            , 0.42           , 0.87           ,
+    "Neck"           , 1.00     , 0.54            , 0.91            , 0.51           , 0.92           ,
+    "Shoulder"       , 0.96     , 0.63            , 0.87            , 0.43           , 0.87           ,
     "Thoracic spine" , 0.91     , NA_real_        , NA_real_        , 0.52           , 0.83           ,
     "Chest"          , 0.87     , 0.55            , 0.82            , 0.48           , 0.80           ,
     "Upper arm"      , 0.82     , 0.64            , 0.79            , 0.41           , 0.79           ,
@@ -192,6 +192,10 @@ both_label_position_lookup <- function() {
 #' the frequency column in the data frame.
 #' @param view_choice which view to render the diagram. One of ("front", "back", or "both")
 #' @param sex which body diagram to use: `"male"` or `"female"`.
+#' @param value_format Character. Format used for injury labels, body colours,
+#'   and the colour-scale legend. Either `"count"` (default) for absolute
+#'   injury frequencies or `"percentage"` for each region's percentage
+#'   of total recorded injuries, including unspecified injuries.
 #' @param palette Optional colour palette.
 #' \itemize{
 #'   \item A single palette name supported by \code{\link{diagram_colours}} (viridis or HCL),
@@ -204,7 +208,7 @@ both_label_position_lookup <- function() {
 #' @param show_values Logical. If `TRUE`, show injury values.
 #' @param show_scale Logical. If `TRUE`, show the colour scale (legend).
 
-#' @importFrom dplyr select rename mutate tribble slice pull left_join rowwise filter transmute bind_rows distinct
+#' @importFrom dplyr select rename mutate tribble slice pull left_join rowwise filter transmute bind_rows distinct case_when
 #' @importFrom xml2 read_xml xml_root write_xml xml_attr xml_set_attr xml_find_all
 #' @importFrom grDevices colorRampPalette as.raster adjustcolor
 #' @importFrom ggplot2 ggplot aes geom_tile theme theme_void element_text annotation_raster coord_cartesian margin geom_text unit geom_segment scale_fill_gradientn guide_colorbar
@@ -247,6 +251,7 @@ plot_heatmap <- function(
   selected_sport,
   view_choice,
   sex = c("male", "female"),
+  value_format = c("count", "percentage"),
   palette = NULL,
   opacity = 0.8,
   show_labels = TRUE,
@@ -260,6 +265,7 @@ plot_heatmap <- function(
   stopifnot(selected_sport %in% names(injury_data))
   stopifnot(view_choice %in% c("front", "back", "both"))
   sex <- match.arg(sex)
+  value_format <- match.arg(value_format)
   stopifnot(
     is.numeric(opacity),
     length(opacity) == 1,
@@ -282,6 +288,17 @@ plot_heatmap <- function(
         selected_sport
       )
     )
+  total_injuries <- sum(base_data$TotalInjuries, na.rm = TRUE)
+
+  base_data$PlotValue <- if (value_format == "percentage") {
+    if (total_injuries > 0) {
+      100 * base_data$TotalInjuries / total_injuries
+    } else {
+      rep(0, nrow(base_data))
+    }
+  } else {
+    base_data$TotalInjuries
+  }
 
   # Detect an "Unspecified" row (shown as a label below the diagram rather
   # than coloured on it). NULL when the data has no such row; NA counts
@@ -322,28 +339,58 @@ plot_heatmap <- function(
     y
   }
 
-  # Build label strings as plotmath expressions (parsed by geom_text) so the
-  # "n" in "(n = ...)" renders in italics. Everything is quoted or juxtaposed
-  # with ~/* so every branch is a valid expression for parse = TRUE.
+  # Build label strings as plotmath expressions for geom_text(parse = TRUE).
+  # Supports injury counts (n = ...) or percentages of total
+  # injuries, depending on value_format. Region names and values are displayed
+  # according to show_labels and show_values, with valid expressions returned
+  # for all combinations.
+
   make_label_text <- function(region, value) {
-    value_str <- ifelse(is.na(value), "NA", as.character(round(value, 1)))
+
     if (!show_labels && !show_values) {
       return('""')
     }
+
+    if (value_format == "percentage") {
+
+      percentage <- if (is.na(value) || total_injuries <= 0) {
+        NA_real_
+      } else {
+        100 * value / total_injuries
+      }
+
+      value_str <- if (is.na(percentage)) {
+        "NA"
+      } else {
+        paste0(format(round(percentage, 1), nsmall = 1), "%")
+      }
+
+      value_expression <- paste0('"', value_str, '"')
+
+    } else {
+
+      value_str <- if (is.na(value)) {
+        "NA"
+      } else {
+        as.character(round(value, 1))
+      }
+
+      value_expression <- paste0('italic(n)*" = "*"', value_str, '"')
+    }
+
     if (show_labels && show_values) {
       return(paste0(
-        '"',
-        region,
-        '"~"("*italic(n)*" = ',
-        value_str,
-        ')"'
+        '"', region, '"~"("*',
+        value_expression,
+        '*")"'
       ))
     }
-    if (show_labels && !show_values) {
+
+    if (show_labels) {
       return(paste0('"', region, '"'))
     }
-    # show_values && !show_labels
-    return(paste0('"', value_str, '"'))
+
+    return(value_expression)
   }
 
   # Render single view (front or back)
@@ -374,7 +421,7 @@ plot_heatmap <- function(
       filter(!is.na(.data$SVG_ID))
 
     # Scale + palette setup
-    max_injuries_local <- max(processed_injury_data$TotalInjuries, na.rm = TRUE)
+    max_injuries_local <- max(processed_injury_data$PlotValue, na.rm = TRUE)
     if (!is.finite(max_injuries_local)) {
       max_injuries_local <- 0
     }
@@ -407,7 +454,7 @@ plot_heatmap <- function(
       colorRampPalette(pal)(n)
     }
 
-    color_palette <- build_palette(palette, max_injuries + 1)
+    color_palette <- build_palette(palette, 256)
 
     # ================================
     # 2. SVG MANIPULATION
@@ -429,7 +476,7 @@ plot_heatmap <- function(
       injury_match <- processed_injury_data |>
         filter(SVG_ID == path_id) |>
         slice(1) |>
-        pull(TotalInjuries)
+        pull(PlotValue)
 
       # Handle no data match
       if (length(injury_match) == 0) {
@@ -438,10 +485,12 @@ plot_heatmap <- function(
 
       fill_color <- if (is.na(injury_match)) {
         "#F0F0F0"
+      } else if (max_injuries <= 0) {
+        color_palette[1]
       } else {
-        val <- round(injury_match)
-        val <- max(0, min(val, max_injuries))
-        color_palette[val + 1]
+        val <- max(0, min(injury_match, max_injuries))
+        index <- round(val / max_injuries * 255) + 1
+        color_palette[index]
       }
 
       xml_set_attr(
@@ -495,7 +544,7 @@ plot_heatmap <- function(
 
     label_data$label_x <- 0.2
     label_hjust <- 1
-    label_data$xend <- 0.85 * label_data$target_x + 0.15 * label_data$label_x
+    label_data$bend_x <- 0.25
 
     # Add "Unspecified" below the other labels (no leader segment target)
     if (!is.null(unspecified_count)) {
@@ -537,19 +586,45 @@ plot_heatmap <- function(
       ) +
       scale_fill_gradientn(
         colors = legend_palette,
-        name = NULL,
+        name = if (value_format == "percentage") {
+          "Injuries (%)"
+        } else {
+          "Injuries (n)"
+        },
         limits = c(0, max_injuries),
-        breaks = seq(0, max_injuries, length.out = 5),
-        labels = round(seq(0, max_injuries, length.out = 5), 1),
+        breaks = function(limits) {
+          max_val <- max(limits)
+
+          if (max_val <= 0) {
+            return(0)
+          }
+
+          if (value_format == "percentage") {
+            seq(0, max_val, length.out = 5)
+          } else {
+            unique(as.integer(round(seq(0, max_val, length.out = 5))))
+          }
+        },
+        labels = if (value_format == "percentage") {
+          function(x) paste0(round(x, 1), "%")
+        } else {
+          function(x) as.character(as.integer(x))
+        },
         na.value = "#F0F0F0",
         guide = guide_colorbar(
           barheight = unit(5, "cm"),
-          barwidth = unit(0.4, "cm"),
+          barwidth = unit(0.4, "cm")
         )
       ) +
       coord_cartesian(xlim = c(-0.35, 1.00), ylim = c(0, 1.1), clip = "off") +
       theme_void() +
-      theme(legend.position = "right", aspect.ratio = 1.1)
+      theme(
+        legend.position = "right",
+        aspect.ratio = 1.1,
+        legend.title = element_text(
+          margin = margin(b = 8)
+        )
+      )
 
     if (!isTRUE(show_scale)) {
       injury_plot <- injury_plot + theme(legend.position = "none")
@@ -566,16 +641,30 @@ plot_heatmap <- function(
           fontface = "plain",
           parse = TRUE
         ) +
+        # Horizontal segment from label to bend
         geom_segment(
-          # Unspecified rows have no leader-line target
           data = filter(label_data, !is.na(.data$target_y)),
           aes(
             x = .data$label_x,
-            y = .data$label_y - 0.01,
-            xend = .data$xend,
-            yend = .data$target_y
+            y = .data$label_y,
+            xend = .data$bend_x,
+            yend = .data$label_y
           ),
-          linewidth = 0.1
+          linewidth = 0.2
+        ) +
+
+        # Angled segment from bend to body region
+        geom_segment(
+          data = filter(label_data, !is.na(.data$target_y)),
+          aes(
+            x = .data$bend_x,
+            y = .data$label_y,
+            xend = .data$bend_x +
+              0.92 * (.data$target_x - .data$bend_x),
+            yend = .data$label_y +
+              0.92 * (.data$target_y - .data$label_y)
+          ),
+          linewidth = 0.2
         )
     }
 
@@ -585,14 +674,17 @@ plot_heatmap <- function(
 
   guides_mode <- if (isTRUE(show_scale)) "collect" else "keep"
   legend_theme <- if (isTRUE(show_scale)) {
-    theme(legend.position = "right")
+    theme(
+      legend.position = "right",
+      legend.title = element_text(margin = margin(b = 8))
+    )
   } else {
     theme(legend.position = "none")
   }
 
   # Both view
   if (view_choice == "both") {
-    global_max <- max(injury_data[[selected_sport]], na.rm = TRUE)
+    global_max <- max(base_data$PlotValue, na.rm = TRUE)
     if (!is.finite(global_max)) {
       global_max <- 0
     }
@@ -660,37 +752,68 @@ plot_heatmap <- function(
     }
 
     if (draw_text) {
+
+      # Fixed divergence coordinates
+      front_bend_x <- 0.82
+      back_bend_x  <- 0.18
+
+      # Front leader lines
+      front_lines <- middle_labels |>
+        filter(!is.na(front_target_x), !is.na(front_target_y)) |>
+        mutate(line_length = 1)
+
       front_plot <- front_plot +
         geom_segment(
-          data = filter(
-            middle_labels,
-            !is.na(front_target_x),
-            !is.na(front_target_y)
-          ),
+          data = front_lines,
           aes(
-            x = 1.00,
+            x = 1,
             y = label_y,
-            xend = front_target_x,
-            yend = front_target_y
+            xend = front_bend_x,
+            yend = label_y
+          ),
+          inherit.aes = FALSE,
+          linewidth = 0.3
+        ) +
+        geom_segment(
+          data = front_lines,
+          aes(
+            x = front_bend_x,
+            y = label_y,
+            xend = front_bend_x +
+              line_length * (front_target_x - front_bend_x),
+            yend = label_y +
+              line_length * (front_target_y - label_y)
           ),
           inherit.aes = FALSE,
           linewidth = 0.3
         )
-    }
 
-    if (draw_text) {
+      # Back leader lines
+      back_lines <- middle_labels |>
+        filter(!is.na(back_target_x), !is.na(back_target_y)) |>
+        mutate(line_length = 1)
+
       back_plot <- back_plot +
         geom_segment(
-          data = filter(
-            middle_labels,
-            !is.na(back_target_x),
-            !is.na(back_target_y)
-          ),
+          data = back_lines,
           aes(
-            x = 0.00,
+            x = 0,
             y = label_y,
-            xend = back_target_x,
-            yend = back_target_y
+            xend = back_bend_x,
+            yend = label_y
+          ),
+          inherit.aes = FALSE,
+          linewidth = 0.3
+        ) +
+        geom_segment(
+          data = back_lines,
+          aes(
+            x = back_bend_x,
+            y = label_y,
+            xend = back_bend_x +
+              line_length * (back_target_x - back_bend_x),
+            yend = label_y +
+              line_length * (back_target_y - label_y)
           ),
           inherit.aes = FALSE,
           linewidth = 0.3

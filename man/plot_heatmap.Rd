@@ -9,12 +9,12 @@ plot_heatmap(
   selected_sport,
   view_choice,
   sex = c("male", "female"),
+  value_format = c("count", "percentage"),
   palette = NULL,
   opacity = 0.8,
   show_labels = TRUE,
   show_values = TRUE,
-  show_scale = TRUE,
-  value_format = c("count", "percentage")
+  show_scale = TRUE
 )
 }
 \arguments{
@@ -27,6 +27,11 @@ the frequency column in the data frame.}
 \item{view_choice}{which view to render the diagram. One of ("front", "back", or "both")}
 
 \item{sex}{which body diagram to use: \code{"male"} or \code{"female"}.}
+
+\item{value_format}{Character. Format used for injury labels, body colours,
+and the colour-scale legend. Either \code{"count"} (default) for absolute
+injury frequencies or \code{"percentage"} for each region's percentage
+of total recorded injuries, including unspecified injuries.}
 
 \item{palette}{Optional colour palette.
 \itemize{
@@ -43,11 +48,6 @@ e.g. \code{"magma"} or \code{"Reds"}.
 \item{show_values}{Logical. If \code{TRUE}, show injury values.}
 
 \item{show_scale}{Logical. If \code{TRUE}, show the colour scale (legend).}
-
-\item{value_format}{Character. Format used for injury labels, body colours,
-and the colour-scale legend. Either \code{"count"} (default) for absolute
-injury frequencies or \code{"percentage"} for each region's percentage
-of total recorded injuries, including unspecified injuries.}
 }
 \value{
 A plot in R-studio viewer
