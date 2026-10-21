@@ -145,6 +145,167 @@ test_that("plot_heatmap validates its arguments", {
   )
 })
 
+# Helpers to pull the geom_text label data out of a built plot
+text_layer_data <- function(p) {
+  is_text <- vapply(
+    p$layers,
+    function(l) inherits(l$geom, "GeomText"),
+    logical(1)
+  )
+  p$layers[[which(is_text)[1]]]$data
+}
+
+test_that("plot_heatmap rejects an invalid value_format", {
+  df <- sample_injury_data()
+  expect_error(
+    plot_heatmap(df, "boxing", "front", value_format = "fraction"),
+    "should be one of"
+  )
+})
+
+test_that("plot_heatmap percentage view uses a percentage legend and labels", {
+  df <- sample_injury_data()
+
+  p_count <- plot_heatmap(df, "boxing", "front", show_labels = FALSE)
+  p_pct <- plot_heatmap(
+    df,
+    "boxing",
+    "front",
+    value_format = "percentage",
+    show_labels = FALSE
+  )
+
+  expect_equal(p_count$scales$scales[[1]]$name, "Injuries (n)")
+  expect_equal(p_pct$scales$scales[[1]]$name, "Injuries (%)")
+
+  pct_labels <- text_layer_data(p_pct)$label_text
+  expect_true(all(grepl("%", pct_labels, fixed = TRUE)))
+  # Percentages should sum to ~100 across regions
+  values <- as.numeric(sub('.*"([0-9.]+)%".*', "\\1", pct_labels))
+  expect_equal(sum(values), 100, tolerance = 0.5)
+})
+
+test_that("plot_heatmap percentage labels are italic-n free and counts use italic n", {
+  df <- sample_injury_data()
+  p_count <- plot_heatmap(df, "boxing", "front", show_labels = FALSE)
+  count_labels <- text_layer_data(p_count)$label_text
+  expect_true(all(grepl("italic(n)", count_labels, fixed = TRUE)))
+})
+
+test_that("plot_heatmap shows an Unspecified row as a label", {
+  df <- sample_injury_data()
+  df <- rbind(
+    df,
+    data.frame(region_area = "Example", subcategory = "Unspecified", boxing = 7)
+  )
+
+  p <- plot_heatmap(df, "boxing", "front")
+  labels <- text_layer_data(p)$label_text
+  expect_true(any(grepl("Unspecified", labels, fixed = TRUE)))
+  # Unspecified has no leader-line target
+  ld <- text_layer_data(p)
+  expect_true(is.na(ld$target_y[ld$region_area == "Unspecified"]))
+})
+
+test_that("plot_heatmap omits the Unspecified label when no such row exists", {
+  df <- sample_injury_data()
+  p <- plot_heatmap(df, "boxing", "front")
+  labels <- text_layer_data(p)$label_text
+  expect_false(any(grepl("Unspecified", labels, fixed = TRUE)))
+})
+
+test_that("plot_heatmap percentage total includes Unspecified injuries", {
+  df <- sample_injury_data()
+  df_uns <- rbind(
+    df,
+    data.frame(
+      region_area = "Example",
+      subcategory = "Unspecified",
+      boxing = 96
+    )
+  )
+  p <- plot_heatmap(
+    df_uns,
+    "boxing",
+    "front",
+    value_format = "percentage",
+    show_labels = FALSE
+  )
+  labels <- text_layer_data(p)$label_text
+  values <- as.numeric(sub('.*"([0-9.]+)%".*', "\\1", labels))
+  # Denominator includes the 96 unspecified injuries
+  expect_equal(sum(values), 100, tolerance = 0.5)
+})
+
+test_that("plot_heatmap labels are spread to a minimum vertical gap", {
+  df <- sample_injury_data()
+  p <- plot_heatmap(df, "boxing", "front")
+  ys <- sort(text_layer_data(p)$label_y, decreasing = TRUE)
+  gaps <- -diff(ys)
+  expect_true(all(gaps >= 0.055 - 1e-9))
+})
+
+test_that("plot_heatmap draws two leader-line segments per labelled region", {
+  df <- sample_injury_data()
+  p <- plot_heatmap(df, "boxing", "front")
+  is_segment <- vapply(
+    p$layers,
+    function(l) inherits(l$geom, "GeomSegment"),
+    logical(1)
+  )
+  # One horizontal (label -> bend) and one angled (bend -> body) layer
+  expect_equal(sum(is_segment), 2)
+  n_targets <- sum(!is.na(spinviz:::label_position_lookup("front")$target_y))
+  for (l in p$layers[is_segment]) {
+    expect_equal(nrow(l$data), n_targets)
+  }
+})
+
+test_that("plot_heatmap count legend breaks are integers", {
+  df <- sample_injury_data()
+  p <- plot_heatmap(df, "boxing", "front", show_labels = FALSE)
+  scale <- p$scales$scales[[1]]
+  breaks <- scale$breaks(c(0, 22))
+  expect_equal(breaks, as.integer(breaks))
+  expect_equal(breaks, unique(breaks))
+  # Percentage scale keeps fractional breaks and % labels
+  p_pct <- plot_heatmap(
+    df,
+    "boxing",
+    "front",
+    value_format = "percentage",
+    show_labels = FALSE
+  )
+  scale_pct <- p_pct$scales$scales[[1]]
+  expect_equal(scale_pct$labels(c(0, 25, 50)), c("0%", "25%", "50%"))
+})
+
+test_that("plot_heatmap records spinviz_heatmap_meta for save_diagram", {
+  df <- sample_injury_data()
+  p_front <- plot_heatmap(df, "boxing", "front", show_scale = FALSE)
+  meta <- attr(p_front, "spinviz_heatmap_meta")
+  expect_equal(meta$view_choice, "front")
+  expect_false(meta$show_scale)
+
+  p_both <- plot_heatmap(df, "boxing", "both")
+  meta_both <- attr(p_both, "spinviz_heatmap_meta")
+  expect_equal(meta_both$view_choice, "both")
+  expect_true(meta_both$show_scale)
+})
+
+test_that("plot_heatmap handles all-zero and all-NA data without error", {
+  df <- sample_injury_data()
+  df$boxing <- 0
+  expect_no_error(plot_heatmap(
+    df,
+    "boxing",
+    "front",
+    value_format = "percentage"
+  ))
+  df$boxing <- NA_real_
+  expect_no_error(plot_heatmap(df, "boxing", "front"))
+})
+
 test_that("plot_heatmap warns when injury values are not numeric", {
   df <- sample_injury_data()
   df$boxing[1] <- "not-a-number"
