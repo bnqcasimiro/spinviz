@@ -1,6 +1,6 @@
 Package: spinviz
 Title: Visualise Sports Injuries With Anatomical Heatmaps
-Version: 0.0.1.0000
+Version: 1.0.0
 Authors@R: c(
     person(given="Bianca Nicole",
     family="Casimiro",
