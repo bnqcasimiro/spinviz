@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">spinviz</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.0000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,16 +38,17 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.0.1.0000" id="spinviz-0010000">spinviz 0.0.1.0000<a class="anchor" aria-label="anchor" href="#spinviz-0010000"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0" id="spinviz-100">spinviz 1.0.0<a class="anchor" aria-label="anchor" href="#spinviz-100"></a></h2>
+<p>First CRAN release.</p>
 <div class="section level3">
-<h3 id="breaking-changes-0-0-1-0000">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-1-0000"></a></h3>
+<h3 id="breaking-changes-1-0-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-0"></a></h3>
 <ul><li>The required column names for injury data have been standardised to snake_case: <code>Region.area</code> is now <code>region_area</code> and <code>Subcategory</code> is now <code>subcategory</code>. This affects <code><a href="../reference/create_injury_template.html">create_injury_template()</a></code>, <code><a href="../reference/read_injury_data.html">read_injury_data()</a></code>, and <code><a href="../reference/plot_heatmap.html">plot_heatmap()</a></code>. Existing CSV files using the old names must be updated; <code><a href="../reference/read_injury_data.html">read_injury_data()</a></code> now errors on the old names with a hint explaining the rename.</li>
 <li>
 <code>injury_heatmap()</code> has been renamed to <code><a href="../reference/plot_heatmap.html">plot_heatmap()</a></code>.</li>
 <li>Example sport columns in the README and template now use lowercase names (e.g. <code>sport1</code> instead of <code>Sport_1</code>) for consistency. Sport column names remain free-form.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="new-features-0-0-1-0000">New features<a class="anchor" aria-label="anchor" href="#new-features-0-0-1-0000"></a></h3>
+<h3 id="new-features-1-0-0">New features<a class="anchor" aria-label="anchor" href="#new-features-1-0-0"></a></h3>
 <ul><li>New <code>sunburst_diagram_echarts()</code> renders an interactive tissue/pathology sunburst diagram using echarts4r.</li>
 <li>New built-in taxonomies: <code>body_categories</code> (19-row region_area/subcategory, used by the heatmap) and <code>injury_categories</code> (25-row tissue/pathology, used by the sunburst), each with no counts attached, ready to combine with your own counts.</li>
 <li>New <code><a href="../reference/plot_heatmap_default.html">plot_heatmap_default()</a></code> and <code><a href="../reference/plot_sunburst_default.html">plot_sunburst_default()</a></code> wrappers build a diagram from just a vector of counts matched by row position to the corresponding built-in taxonomy.</li>
@@ -58,12 +59,12 @@
 <li>New <code><a href="../reference/read_sunburst_data.html">read_sunburst_data()</a></code> reads and validates such a CSV, checking for the required <code>tissue</code>/<code>pathology</code> columns and at least one sport column, warning on unrecognised (possibly misspelled) tissue/pathology values, and carrying blank <code>tissue</code> cells down from the row above so compact hand-edited files work.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-0-0-1-0000">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-0-1-0000"></a></h3>
+<h3 id="bug-fixes-1-0-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-0"></a></h3>
 <ul><li>
 <code><a href="../reference/plot_heatmap.html">plot_heatmap()</a></code> single-view labels no longer overlap: adjacent labels are now spread to a minimum vertical gap. This also fixed a latent bug where each region’s label was drawn multiple times (once per underlying SVG id, exactly on top of itself); each region now gets a single label.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="other-changes-0-0-1-0000">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-0-0-1-0000"></a></h3>
+<h3 id="other-changes-1-0-0">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-1-0-0"></a></h3>
 <ul><li>Extended the test suite to cover <code>sunburst_diagram_echarts()</code>, <code><a href="../reference/plot_sunburst_default.html">plot_sunburst_default()</a></code>, and <code><a href="../reference/save_diagram.html">save_diagram()</a></code> (92 tests in total). The chromote-based sunburst export test skips gracefully when no Chromium-based browser is available (e.g. CRAN or minimal CI images).</li>
 <li>Added <code>echarts4r</code>, <code>htmlwidgets</code>, and <code>tools</code> to Imports, and <code>chromote</code> and <code>base64enc</code> to Suggests (only needed for sunburst export in <code><a href="../reference/save_diagram.html">save_diagram()</a></code>).</li>
 <li>

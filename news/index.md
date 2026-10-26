@@ -1,6 +1,8 @@
 # Changelog
 
-## spinviz 0.0.1.0000
+## spinviz 1.0.0
+
+First CRAN release.
 
 ### Breaking changes
 
