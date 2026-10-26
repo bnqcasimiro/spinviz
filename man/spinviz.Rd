@@ -22,7 +22,6 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Bianca Nicole Casimiro \email{biancanicole.casimiro@students.mq.edu.au}
   \item Thomas Fung \email{thomas.fung.dr@gmail.com}
   \item Reidar Lystad \email{reidar.lystad@mq.edu.au}
 }
