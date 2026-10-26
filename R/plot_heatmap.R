@@ -193,8 +193,8 @@ both_label_position_lookup <- function() {
 #' @param view_choice which view to render the diagram. One of ("front", "back", or "both")
 #' @param sex which body diagram to use: `"male"` or `"female"`.
 #' @param value_format Character. Format used for injury labels, body colours,
-#'   and the colour-scale legend. Either `"count"` (default) for absolute
-#'   injury frequencies or `"percentage"` for each region's percentage
+#'   and the colour-scale legend. Either `"frequency"` (default) for absolute
+#'   injury frequencies or `"proportion"` for each region's proportion
 #'   of total recorded injuries, including unspecified injuries.
 #' @param palette Optional colour palette.
 #' \itemize{
@@ -251,7 +251,7 @@ plot_heatmap <- function(
   selected_sport,
   view_choice,
   sex = c("male", "female"),
-  value_format = c("count", "percentage"),
+  value_format = c("frequency", "proportion"),
   palette = NULL,
   opacity = 0.8,
   show_labels = TRUE,
@@ -290,7 +290,7 @@ plot_heatmap <- function(
     )
   total_injuries <- sum(base_data$TotalInjuries, na.rm = TRUE)
 
-  base_data$PlotValue <- if (value_format == "percentage") {
+  base_data$PlotValue <- if (value_format == "proportion") {
     if (total_injuries > 0) {
       100 * base_data$TotalInjuries / total_injuries
     } else {
@@ -340,10 +340,9 @@ plot_heatmap <- function(
   }
 
   # Build label strings as plotmath expressions for geom_text(parse = TRUE).
-  # Supports injury counts (n = ...) or percentages of total
-  # injuries, depending on value_format. Region names and values are displayed
-  # according to show_labels and show_values, with valid expressions returned
-  # for all combinations.
+  # Supports injury frequencies (n = ...) or proportions, depending on
+  # value_format. Region names and values are displayed according to show_labels
+  # and show_values, with valid expressions returned for all combinations.
 
   make_label_text <- function(region, value) {
 
@@ -351,18 +350,18 @@ plot_heatmap <- function(
       return('""')
     }
 
-    if (value_format == "percentage") {
+    if (value_format == "proportion") {
 
-      percentage <- if (is.na(value) || total_injuries <= 0) {
+      proportion <- if (is.na(value) || total_injuries <= 0) {
         NA_real_
       } else {
         100 * value / total_injuries
       }
 
-      value_str <- if (is.na(percentage)) {
+      value_str <- if (is.na(proportion)) {
         "NA"
       } else {
-        paste0(format(round(percentage, 1), nsmall = 1), "%")
+        paste0(format(round(proportion, 1), nsmall = 1), "%")
       }
 
       value_expression <- paste0('"', value_str, '"')
@@ -586,7 +585,7 @@ plot_heatmap <- function(
       ) +
       scale_fill_gradientn(
         colors = legend_palette,
-        name = if (value_format == "percentage") {
+        name = if (value_format == "proportion") {
           "Injuries (%)"
         } else {
           "Injuries (n)"
@@ -599,13 +598,13 @@ plot_heatmap <- function(
             return(0)
           }
 
-          if (value_format == "percentage") {
+          if (value_format == "proportion") {
             seq(0, max_val, length.out = 5)
           } else {
             unique(as.integer(round(seq(0, max_val, length.out = 5))))
           }
         },
-        labels = if (value_format == "percentage") {
+        labels = if (value_format == "proportion") {
           function(x) paste0(round(x, 1), "%")
         } else {
           function(x) as.character(as.integer(x))

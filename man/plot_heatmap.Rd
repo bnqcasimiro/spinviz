@@ -9,7 +9,7 @@ plot_heatmap(
   selected_sport,
   view_choice,
   sex = c("male", "female"),
-  value_format = c("count", "percentage"),
+  value_format = c("frequency", "proportion"),
   palette = NULL,
   opacity = 0.8,
   show_labels = TRUE,
@@ -29,8 +29,8 @@ the frequency column in the data frame.}
 \item{sex}{which body diagram to use: \code{"male"} or \code{"female"}.}
 
 \item{value_format}{Character. Format used for injury labels, body colours,
-and the colour-scale legend. Either \code{"count"} (default) for absolute
-injury frequencies or \code{"percentage"} for each region's percentage
+and the colour-scale legend. Either \code{"frequency"} (default) for absolute
+injury frequencies or \code{"proportion"} for each region's proportion
 of total recorded injuries, including unspecified injuries.}
 
 \item{palette}{Optional colour palette.
