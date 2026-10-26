@@ -171,7 +171,7 @@ test_that("plot_heatmap percentage view uses a percentage legend and labels", {
     df,
     "boxing",
     "front",
-    value_format = "percentage",
+    value_format = "proportion",
     show_labels = FALSE
   )
 
@@ -228,7 +228,7 @@ test_that("plot_heatmap percentage total includes Unspecified injuries", {
     df_uns,
     "boxing",
     "front",
-    value_format = "percentage",
+    value_format = "proportion",
     show_labels = FALSE
   )
   labels <- text_layer_data(p)$label_text
@@ -273,7 +273,7 @@ test_that("plot_heatmap count legend breaks are integers", {
     df,
     "boxing",
     "front",
-    value_format = "percentage",
+    value_format = "proportion",
     show_labels = FALSE
   )
   scale_pct <- p_pct$scales$scales[[1]]
@@ -300,7 +300,7 @@ test_that("plot_heatmap handles all-zero and all-NA data without error", {
     df,
     "boxing",
     "front",
-    value_format = "percentage"
+    value_format = "proportion"
   ))
   df$boxing <- NA_real_
   expect_no_error(plot_heatmap(df, "boxing", "front"))

@@ -92,7 +92,7 @@ df_sb$boxing <- c(20, 0, 0, 10, 31, 18, 16, 16, 20, 20, 27, 46,
                   67, 31, 54, 20, 27, 30, 96, 82, 48, 26, 33, 34, 24)
 
 plot_sunburst(
-  df_sb, "boxing"
+  df_sb
 )
 ```
 
@@ -103,7 +103,7 @@ df_sb <- injury_categories
 df_sb$boxing <- c(20, 0, 0, 10, 31, 18, 16, 16, 20, 20, 27, 46,
                   67, 31, 54, 20, 27, 30, 96, 82, 48, 26, 33, 34, 24)
 plot_sunburst(
-  df_sb, "boxing",
+  df_sb, 
   widget_width = "750px",
   widget_height = "750px"
 )

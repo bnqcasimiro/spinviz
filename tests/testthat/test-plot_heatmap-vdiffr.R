@@ -64,7 +64,7 @@ test_that("heatmap display options render consistently", {
       df,
       "boxing",
       "front",
-      value_format = "percentage",
+      value_format = "proportion",
       show_labels = FALSE
     )
   )
