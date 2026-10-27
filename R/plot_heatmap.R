@@ -345,13 +345,11 @@ plot_heatmap <- function(
   # and show_values, with valid expressions returned for all combinations.
 
   make_label_text <- function(region, value) {
-
     if (!show_labels && !show_values) {
       return('""')
     }
 
     if (value_format == "proportion") {
-
       proportion <- if (is.na(value) || total_injuries <= 0) {
         NA_real_
       } else {
@@ -365,9 +363,7 @@ plot_heatmap <- function(
       }
 
       value_expression <- paste0('"', value_str, '"')
-
     } else {
-
       value_str <- if (is.na(value)) {
         "NA"
       } else {
@@ -379,7 +375,9 @@ plot_heatmap <- function(
 
     if (show_labels && show_values) {
       return(paste0(
-        '"', region, '"~"("*',
+        '"',
+        region,
+        '"~"("*',
         value_expression,
         '*")"'
       ))
@@ -475,7 +473,7 @@ plot_heatmap <- function(
       injury_match <- processed_injury_data |>
         filter(SVG_ID == path_id) |>
         slice(1) |>
-        pull(PlotValue)
+        pull(.data$PlotValue)
 
       # Handle no data match
       if (length(injury_match) == 0) {
@@ -751,10 +749,9 @@ plot_heatmap <- function(
     }
 
     if (draw_text) {
-
       # Fixed divergence coordinates
       front_bend_x <- 0.82
-      back_bend_x  <- 0.18
+      back_bend_x <- 0.18
 
       # Front leader lines
       front_lines <- middle_labels |>
@@ -779,9 +776,9 @@ plot_heatmap <- function(
             x = front_bend_x,
             y = label_y,
             xend = front_bend_x +
-              line_length * (front_target_x - front_bend_x),
+              .data$line_length * (front_target_x - front_bend_x),
             yend = label_y +
-              line_length * (front_target_y - label_y)
+              .data$line_length * (front_target_y - label_y)
           ),
           inherit.aes = FALSE,
           linewidth = 0.3
@@ -810,9 +807,9 @@ plot_heatmap <- function(
             x = back_bend_x,
             y = label_y,
             xend = back_bend_x +
-              line_length * (back_target_x - back_bend_x),
+              .data$line_length * (back_target_x - back_bend_x),
             yend = label_y +
-              line_length * (back_target_y - label_y)
+              .data$line_length * (back_target_y - label_y)
           ),
           inherit.aes = FALSE,
           linewidth = 0.3

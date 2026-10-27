@@ -8,10 +8,10 @@ test_colour(palettes = "", n_colors = 10, n_colours = n_colors)
 }
 \arguments{
 \item{palettes}{(required) the palette(s) to test. Can be a vector
-of hexidecimal values (custom palette), a palette available in hcl.pals() or viridis,
+of hexadecimal values (custom palette), a palette available in hcl.pals() or viridis,
 or a list of palettes. Must be a list if multiple palettes are being tested.
 
-Will output a pie chart with 1-10 if a palette cannout be found.}
+Will output a pie chart with 1-10 if a palette cannot be found.}
 
 \item{n_colors}{(optional) localisation of n_colours}
 
@@ -22,7 +22,7 @@ a diagram of pie charts displaying the colour schemes
 }
 \description{
 Function to help test colour palettes by displaying pie chart(s) with the
-palette name and hexidecimal values next to each colour.
+palette name and hexadecimal values next to each colour.
 
 Can accept any palette in hcl.pals() or the viridis package,
 or a custom palette.
