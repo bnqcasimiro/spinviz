@@ -36,11 +36,11 @@ Source:
 [`DESCRIPTION`](https://github.com/bnqcasimiro/spinviz/blob/main/DESCRIPTION)
 
 Casimiro B, Fung T, Lystad R (2026). *spinviz: Visualise Sports Injuries
-With Anatomical Heatmaps*. R package version 1.0.0,
+with Anatomical Heatmaps*. R package version 1.0.0,
 <https://github.com/bnqcasimiro/spinviz>.
 
     @Manual{,
-      title = {spinviz: Visualise Sports Injuries With Anatomical Heatmaps},
+      title = {spinviz: Visualise Sports Injuries with Anatomical Heatmaps},
       author = {Bianca Nicole Casimiro and Thomas Fung and Reidar Lystad},
       year = {2026},
       note = {R package version 1.0.0},

@@ -124,7 +124,7 @@ Counts are matched by row position to `body_categories` /
 ## Next steps
 
 - [Importing CSV
-  data](https://bnqcasimiro.github.io/spinviz/articles/importing-csv-data.md)
+  data](https://bnqcasimiro.github.io/spinviz/articles/importing-csv-data.html)
   — a template-based CSV workflow
-- [Customisation](https://bnqcasimiro.github.io/spinviz/articles/customisation.md)
+- [Customisation](https://bnqcasimiro.github.io/spinviz/articles/customisation.html)
   — palettes, saving diagrams, and display options

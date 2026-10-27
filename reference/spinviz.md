@@ -20,6 +20,8 @@ Useful links:
 
 Authors:
 
+- Bianca Nicole Casimiro <biancanicole.casimiro@students.mq.edu.au>
+
 - Thomas Fung <thomas.fung.dr@gmail.com>
 
 - Reidar Lystad <reidar.lystad@mq.edu.au>

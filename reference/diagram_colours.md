@@ -1,6 +1,6 @@
 # Available colours in package
 
-Outputs a vector of hexidecimal colour values if the colour palette is
+Outputs a vector of hexadecimal colour values if the colour palette is
 in hcl.pals or viridis.
 
 Used to validate the colours that will output in these packages to help
@@ -18,8 +18,8 @@ diagram_colours(palette = "", n_colors = 10, n_colours = n_colors)
 - palette:
 
   (optional) a string or vector of strings. Either the palette name if
-  using a predefined colour scheme, or a vector or hexidecimal colours
-  if using own colour scheme. Returns a vector of hexidecimal values, or
+  using a predefined colour scheme, or a vector or hexadecimal colours
+  if using own colour scheme. Returns a vector of hexadecimal values, or
   NULL if empty (default colour scheme for plotly)
 
 - n_colors:
@@ -28,12 +28,12 @@ diagram_colours(palette = "", n_colors = 10, n_colours = n_colors)
 
 - n_colours:
 
-  (optional) the number of hexidecimal values to generate standard is 10
+  (optional) the number of hexadecimal values to generate standard is 10
   as that is the maximum expected tissue types
 
 ## Value
 
-Returns a vector of hexidecimal colours, or NULL if left blank
+Returns a vector of hexadecimal colours, or NULL if left blank
 
 ## Details
 

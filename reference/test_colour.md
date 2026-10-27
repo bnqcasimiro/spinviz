@@ -1,7 +1,7 @@
 # Test colour palette(s)
 
 Function to help test colour palettes by displaying pie chart(s) with
-the palette name and hexidecimal values next to each colour.
+the palette name and hexadecimal values next to each colour.
 
 Can accept any palette in hcl.pals() or the viridis package, or a custom
 palette.
@@ -16,12 +16,12 @@ test_colour(palettes = "", n_colors = 10, n_colours = n_colors)
 
 - palettes:
 
-  (required) the palette(s) to test. Can be a vector of hexidecimal
+  (required) the palette(s) to test. Can be a vector of hexadecimal
   values (custom palette), a palette available in hcl.pals() or viridis,
   or a list of palettes. Must be a list if multiple palettes are being
   tested.
 
-  Will output a pie chart with 1-10 if a palette cannout be found.
+  Will output a pie chart with 1-10 if a palette cannot be found.
 
 - n_colors:
 
