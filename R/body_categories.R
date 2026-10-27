@@ -4,12 +4,12 @@
 #' The standard Body region/Body area classification used by
 #' [plot_heatmap()], with no injury counts attached. Combine it with your
 #' own counts via [plot_heatmap_default()] rather than retyping the full
-#' region_area/subcategory list for every analysis.
+#' body_region/body_area list for every analysis.
 #'
 #' @format A data frame with 19 rows and 2 columns:
 #' \describe{
-#'   \item{region_area}{Body region, e.g. "Upper limb", "Trunk".}
-#'   \item{subcategory}{Body area, e.g. "Shoulder", "Chest".}
+#'   \item{body_region}{Body region, e.g. "Upper limb", "Trunk".}
+#'   \item{body_area}{Body area, e.g. "Shoulder", "Chest".}
 #' }
 #'
 #' @details
@@ -44,11 +44,11 @@
 #'
 #' @seealso [plot_heatmap_default()] to build a heatmap diagram from
 #' this taxonomy plus your own injury counts, without needing to retype the
-#' region_area/subcategory labels yourself. [injury_categories] for the
+#' body_region/body_area labels yourself. [injury_categories] for the
 #' equivalent taxonomy used by the sunburst functions.
 #' @export
 body_categories <- data.frame(
-  region_area = c(
+  body_region = c(
     "Head and neck",
     "Head and neck",
     "Upper limb",
@@ -69,7 +69,7 @@ body_categories <- data.frame(
     "Lower limb",
     "Unspecified"
   ),
-  subcategory = c(
+  body_area = c(
     "Head",
     "Neck",
     "Shoulder",

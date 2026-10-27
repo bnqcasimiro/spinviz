@@ -1,5 +1,5 @@
 sample_injury_data <- function() {
-  subcategory <- c(
+  body_area <- c(
     "Head",
     "Neck",
     "Shoulder",
@@ -20,8 +20,8 @@ sample_injury_data <- function() {
     "Lumbosacral"
   )
   data.frame(
-    region_area = rep("Example", length(subcategory)),
-    subcategory = subcategory,
+    body_region = rep("Example", length(body_area)),
+    body_area = body_area,
     boxing = c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
   )
 }
@@ -48,10 +48,10 @@ test_that("label_position_lookup shares identical rows for unchanged regions", {
   merged <- merge(
     front,
     back,
-    by = "region_area",
+    by = "body_region",
     suffixes = c(".front", ".back")
   )
-  merged <- merged[merged$region_area %in% common_regions, ]
+  merged <- merged[merged$body_region %in% common_regions, ]
   expect_equal(merged$label_x.front, merged$label_x.back)
   expect_equal(merged$label_y.front, merged$label_y.back)
   expect_equal(merged$target_x.front, merged$target_x.back)
@@ -62,10 +62,10 @@ test_that("label_position_lookup includes view-only regions", {
   front <- spinviz:::label_position_lookup("front")
   back <- spinviz:::label_position_lookup("back")
 
-  expect_true("Abdomen" %in% front$region_area)
-  expect_false("Abdomen" %in% back$region_area)
-  expect_true(all(c("Thoracic spine", "Lumbosacral") %in% back$region_area))
-  expect_false(any(c("Thoracic spine", "Lumbosacral") %in% front$region_area))
+  expect_true("Abdomen" %in% front$body_region)
+  expect_false("Abdomen" %in% back$body_region)
+  expect_true(all(c("Thoracic spine", "Lumbosacral") %in% back$body_region))
+  expect_false(any(c("Thoracic spine", "Lumbosacral") %in% front$body_region))
 })
 
 test_that("both_label_position_lookup agrees with view_exclusive_regions", {
@@ -73,11 +73,11 @@ test_that("both_label_position_lookup agrees with view_exclusive_regions", {
   positions <- spinviz:::both_label_position_lookup()
 
   expect_setequal(
-    positions$region_area[is.na(positions$front_target_x)],
+    positions$body_region[is.na(positions$front_target_x)],
     exclusive$back_only
   )
   expect_setequal(
-    positions$region_area[is.na(positions$back_target_x)],
+    positions$body_region[is.na(positions$back_target_x)],
     exclusive$front_only
   )
 })
@@ -99,11 +99,11 @@ test_that("svg_id_lookup and label_position_lookup agree with view_exclusive_reg
   label_front <- spinviz:::label_position_lookup("front")
   label_back <- spinviz:::label_position_lookup("back")
   expect_setequal(
-    setdiff(label_front$region_area, label_back$region_area),
+    setdiff(label_front$body_region, label_back$body_region),
     exclusive$front_only
   )
   expect_setequal(
-    setdiff(label_back$region_area, label_front$region_area),
+    setdiff(label_back$body_region, label_front$body_region),
     exclusive$back_only
   )
 })
@@ -196,7 +196,7 @@ test_that("plot_heatmap shows an Unspecified row as a label", {
   df <- sample_injury_data()
   df <- rbind(
     df,
-    data.frame(region_area = "Example", subcategory = "Unspecified", boxing = 7)
+    data.frame(body_region = "Example", body_area = "Unspecified", boxing = 7)
   )
 
   p <- plot_heatmap(df, "boxing", "front")
@@ -204,7 +204,7 @@ test_that("plot_heatmap shows an Unspecified row as a label", {
   expect_true(any(grepl("Unspecified", labels, fixed = TRUE)))
   # Unspecified has no leader-line target
   ld <- text_layer_data(p)
-  expect_true(is.na(ld$target_y[ld$region_area == "Unspecified"]))
+  expect_true(is.na(ld$target_y[ld$body_region == "Unspecified"]))
 })
 
 test_that("plot_heatmap omits the Unspecified label when no such row exists", {
@@ -219,8 +219,8 @@ test_that("plot_heatmap percentage total includes Unspecified injuries", {
   df_uns <- rbind(
     df,
     data.frame(
-      region_area = "Example",
-      subcategory = "Unspecified",
+      body_region = "Example",
+      body_area = "Unspecified",
       boxing = 96
     )
   )

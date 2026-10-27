@@ -82,12 +82,12 @@
 #' @export
 #'
 #' @examples
-#' Subcategory <- c("Head","Neck","Shoulder","Chest","Upper arm","Elbow",
-#'                   "Abdomen","Forearm","Hip / groin","Wrist","Hand",
-#'                   "Thigh","Knee","Lower leg","Ankle","Foot","Thoracic spine","Lumbosacral")
-#' Region.area <- rep("Example", length(Subcategory))
+#' body_area <- c("Head","Neck","Shoulder","Chest","Upper arm","Elbow",
+#'                "Abdomen","Forearm","Hip / groin","Wrist","Hand",
+#'                "Thigh","Knee","Lower leg","Ankle","Foot","Thoracic spine","Lumbosacral")
+#' body_region <- rep("Example", length(body_area))
 #' boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
-#' df_heatmap <- data.frame(Region.area, Subcategory, boxing)
+#' df_heatmap <- data.frame(body_region, body_area, boxing)
 #'
 #' tissue <- c('Muscle/tendon','Muscle/tendon','Nervous','Bone','Bone',
 #'             'Cartilage/Synovium/Bursa','Ligament/Joint capsule',

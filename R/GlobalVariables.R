@@ -1,6 +1,6 @@
 utils::globalVariables(c(
-  "region_area",
-  "subcategory",
+  "body_region",
+  "body_area",
   "TotalInjuries",
   "SVG_ID",
   "label_x",

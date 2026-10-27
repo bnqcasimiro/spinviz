@@ -1,19 +1,19 @@
-# Canonical list of body subcategories recognised by plot_heatmap(),
+# Canonical list of body areas recognised by plot_heatmap(),
 # derived from the built-in body_categories taxonomy (minus "Unspecified",
 # which is not drawn on the diagram). Used verbatim (no title-casing), so
 # e.g. "Hip / groin" keeps its lowercase second word. Single source of
 # truth so the CSV template, the reader's validation, and the diagram
 # cannot drift apart.
-injury_subcategories <- function() {
-  subcategories <- body_categories$subcategory
-  subcategories[subcategories != "Unspecified"]
+injury_body_areas <- function() {
+  areas <- body_categories$body_area
+  areas[areas != "Unspecified"]
 }
 
 #' @title Create a template CSV file for injury data
 #'
 #' @description
 #' Writes a CSV file in the format expected by [plot_heatmap()]: one row
-#' per recognised body subcategory, with `region_area` and `subcategory`
+#' per recognised body area, with `body_region` and `body_area`
 #' columns and one empty column per sport for the user to fill in with
 #' injury frequencies.
 #'
@@ -38,8 +38,8 @@ create_injury_template <- function(path, sports = "sport1") {
   )
 
   template <- data.frame(
-    region_area = "",
-    subcategory = injury_subcategories(),
+    body_region = "",
+    body_area = injury_body_areas(),
     stringsAsFactors = FALSE
   )
   for (sport in sports) {
@@ -55,12 +55,12 @@ create_injury_template <- function(path, sports = "sport1") {
 #' @description
 #' Reads a CSV file (e.g. one created with [create_injury_template()] and
 #' filled in) and checks that it has the structure [plot_heatmap()]
-#' expects: `region_area` and `subcategory` columns plus at least one sport
+#' expects: `body_region` and `body_area` columns plus at least one sport
 #' column of injury frequencies.
 #'
 #' @param path File path of the CSV to read.
 #'
-#' @return A data frame with `region_area`, `subcategory`, and one column
+#' @return A data frame with `body_region`, `body_area`, and one column
 #'   per sport (coerced to numeric).
 #' @seealso [create_injury_template()] to generate a correctly formatted
 #'   file.
@@ -77,13 +77,16 @@ read_injury_data <- function(path) {
 
   data <- utils::read.csv(path, check.names = FALSE)
 
-  required <- c("region_area", "subcategory")
+  required <- c("body_region", "body_area")
   missing_cols <- setdiff(required, names(data))
   if (length(missing_cols) > 0) {
-    legacy <- intersect(c("Region.area", "Subcategory"), names(data))
+    legacy <- intersect(
+      c("Region.area", "Subcategory", "region_area", "subcategory"),
+      names(data)
+    )
     hint <- if (length(legacy) > 0) {
       paste0(
-        " Note: 'Region.area' and 'Subcategory' were renamed to snake_case; ",
+        " Note: these columns were renamed to 'body_region' and 'body_area'; ",
         "please update your file to use the new names."
       )
     } else {
@@ -102,7 +105,7 @@ read_injury_data <- function(path) {
   if (length(sport_cols) == 0) {
     stop(
       "No sport column found. The file needs at least one injury frequency ",
-      "column besides 'region_area' and 'subcategory'.",
+      "column besides 'body_region' and 'body_area'.",
       call. = FALSE
     )
   }
@@ -111,12 +114,12 @@ read_injury_data <- function(path) {
     stop("File contains no data rows.", call. = FALSE)
   }
 
-  data$region_area <- as.character(data$region_area)
-  data$subcategory <- as.character(data$subcategory)
+  data$body_region <- as.character(data$body_region)
+  data$body_area <- as.character(data$body_area)
 
-  if (anyNA(data$subcategory) || any(!nzchar(trimws(data$subcategory)))) {
+  if (anyNA(data$body_area) || any(!nzchar(trimws(data$body_area)))) {
     stop(
-      "Column 'subcategory' contains missing or empty values.",
+      "Column 'body_area' contains missing or empty values.",
       call. = FALSE
     )
   }
@@ -124,12 +127,12 @@ read_injury_data <- function(path) {
   # Case-insensitive comparison against the canonical labels (which keep
   # lowercase second words, e.g. "Hip / groin"); input values themselves
   # are stored verbatim, so matching in plot_heatmap() is unaffected.
-  canonical <- injury_subcategories()
-  entered <- trimws(data$subcategory)
+  canonical <- injury_body_areas()
+  entered <- trimws(data$body_area)
   unrecognised <- unique(entered[!tolower(entered) %in% tolower(canonical)])
   if (length(unrecognised) > 0) {
     warning(
-      "Unrecognised subcategory value(s), possibly misspelled: ",
+      "Unrecognised body_area value(s), possibly misspelled: ",
       paste(unrecognised, collapse = ", "),
       ". Expected values are: ",
       paste(canonical, collapse = ", "),

@@ -60,7 +60,7 @@ Diagrams can be viewed from the front, back, or both views
 }
 \examples{
 # Easiest: start from the built-in body_categories taxonomy (its
-# region_area/subcategory columns are already filled in) and just add
+# body_region/body_area columns are already filled in) and just add
 # your own counts, matching its row order. See ?body_categories, or
 # just run print(body_categories) to see the order directly.
 df <- body_categories
@@ -73,7 +73,7 @@ p2 <- plot_heatmap(df, "boxing", "front", sex = "female", palette = "plasma")
 p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Front)")
 }
 \seealso{
-\code{\link{body_categories}} for the built-in region_area/subcategory
+\code{\link{body_categories}} for the built-in body_region/body_area
 taxonomy, and \code{\link{plot_heatmap_default}} for a wrapper that
 only needs a vector of counts.
 \code{\link{diagram_colours}} to preview supported palette names.

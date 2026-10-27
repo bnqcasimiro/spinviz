@@ -16,7 +16,7 @@ plot_heatmap_default(
 \item{counts}{A numeric vector of exactly \code{nrow(body_categories)} values
 (currently 19), in the same row order as \link{body_categories},
 i.e. \code{counts[i]} is the injury count for
-\code{body_categories[i, c("region_area", "subcategory")]}. See
+\code{body_categories[i, c("body_region", "body_area")]}. See
 \code{?body_categories} for the full numbered row order, or just run
 \code{print(body_categories)} directly.}
 
@@ -48,6 +48,6 @@ p1 <- plot_heatmap_default(boxing, "front", sex = "male")
 \seealso{
 \link{body_categories} for the taxonomy this merges your counts
 into. \code{\link[=plot_heatmap]{plot_heatmap()}} for the full version that accepts any
-region_area/subcategory taxonomy, if you need something other than the
+body_region/body_area taxonomy, if you need something other than the
 built-in one. \code{\link[=save_diagram]{save_diagram()}} to save the result to file.
 }

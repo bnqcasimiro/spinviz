@@ -4,8 +4,8 @@
 
 vdiffr_injury_data <- function() {
   df <- data.frame(
-    region_area = rep("Example", 18),
-    subcategory = c(
+    body_region = rep("Example", 18),
+    body_area = c(
       "Head",
       "Neck",
       "Shoulder",
@@ -95,7 +95,7 @@ test_that("heatmap with Unspecified row renders consistently", {
   df <- vdiffr_injury_data()
   df <- rbind(
     df,
-    data.frame(region_area = "Example", subcategory = "Unspecified", boxing = 7)
+    data.frame(body_region = "Example", body_area = "Unspecified", boxing = 7)
   )
 
   vdiffr::expect_doppelganger(

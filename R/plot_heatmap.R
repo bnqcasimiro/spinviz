@@ -26,7 +26,7 @@ view_exclusive_regions <- function() {
   list(front_only = "Abdomen", back_only = c("Thoracic spine", "Lumbosacral"))
 }
 
-# Shared front/back mapping from a region_area (using the canonical
+# Shared front/back mapping from a body_area (using the canonical
 # body_categories labels, e.g. "Hip / groin") to the SVG element id(s) it
 # should colour. Kept as a single lookup table so the two views cannot
 # silently drift apart; view-specific asymmetries (e.g. Hip / groin,
@@ -66,8 +66,8 @@ svg_id_lookup <- function(view_choice_inner) {
   if (view_choice_inner == "front") front else back
 }
 
-# Look up SVG ids for a vector of region_area values, matching the fallback
-# behaviour of the case_when() this replaces (unmatched regions map to NA).
+# Look up SVG ids for a vector of body_area values, matching the fallback
+# behaviour of the case_when() this replaces (unmatched areas map to NA).
 map_svg_ids <- function(region, view_choice_inner) {
   lookup <- svg_id_lookup(view_choice_inner)
   lapply(region, function(r) {
@@ -83,7 +83,7 @@ map_svg_ids <- function(region, view_choice_inner) {
 # Lumbosacral are back-only), need a view-specific override.
 label_position_lookup <- function(view_choice_inner) {
   common_positions <- tribble(
-    ~region_area , ~label_x , ~label_y , ~target_x , ~target_y ,
+    ~body_region , ~label_x , ~label_y , ~target_x , ~target_y ,
     "Chest"      , 0.8      , 0.85     , 0.51      , 0.83      ,
     "Upper arm"  , 0.2      , 0.82     , 0.45      , 0.79      ,
     "Elbow"      , 0.15     , 0.77     , 0.44      , 0.74      ,
@@ -97,7 +97,7 @@ label_position_lookup <- function(view_choice_inner) {
   )
 
   front_only <- tribble(
-    ~region_area  , ~label_x , ~label_y , ~target_x , ~target_y ,
+    ~body_region  , ~label_x , ~label_y , ~target_x , ~target_y ,
     "Head"        , 0.9      , 1.01     , 0.53      , 1.01      ,
     "Neck"        , 0.8      , 0.97     , 0.52      , 0.90      ,
     "Shoulder"    , 0.2      , 0.92     , 0.45      , 0.86      ,
@@ -107,7 +107,7 @@ label_position_lookup <- function(view_choice_inner) {
   )
 
   back_only <- tribble(
-    ~region_area     , ~label_x , ~label_y , ~target_x , ~target_y ,
+    ~body_region     , ~label_x , ~label_y , ~target_x , ~target_y ,
     "Head"           , 0.9      , 1.05     , 0.53      , 1.01      ,
     "Neck"           , 0.8      , 1.00     , 0.54      , 0.91      ,
     "Shoulder"       , 0.2      , 0.96     , 0.46      , 0.86      ,
@@ -120,11 +120,11 @@ label_position_lookup <- function(view_choice_inner) {
   exclusive <- view_exclusive_regions()
   stopifnot(
     setequal(
-      setdiff(front_only$region_area, back_only$region_area),
+      setdiff(front_only$body_region, back_only$body_region),
       exclusive$front_only
     ),
     setequal(
-      setdiff(back_only$region_area, front_only$region_area),
+      setdiff(back_only$body_region, front_only$body_region),
       exclusive$back_only
     )
   )
@@ -141,7 +141,7 @@ label_position_lookup <- function(view_choice_inner) {
 # table cannot silently drift from svg_id_lookup()/label_position_lookup().
 both_label_position_lookup <- function() {
   positions <- tribble(
-    ~region_area     , ~label_y , ~front_target_x , ~front_target_y , ~back_target_x , ~back_target_y ,
+    ~body_region     , ~label_y , ~front_target_x , ~front_target_y , ~back_target_x , ~back_target_y ,
     "Head"           , 1.05     , 0.56            , 1.01            , 0.49           , 1.01           ,
     "Neck"           , 1.00     , 0.54            , 0.91            , 0.51           , 0.92           ,
     "Shoulder"       , 0.96     , 0.63            , 0.87            , 0.43           , 0.87           ,
@@ -165,11 +165,11 @@ both_label_position_lookup <- function() {
   exclusive <- view_exclusive_regions()
   stopifnot(
     setequal(
-      positions$region_area[is.na(positions$front_target_x)],
+      positions$body_region[is.na(positions$front_target_x)],
       exclusive$back_only
     ),
     setequal(
-      positions$region_area[is.na(positions$back_target_x)],
+      positions$body_region[is.na(positions$back_target_x)],
       exclusive$front_only
     )
   )
@@ -224,7 +224,7 @@ both_label_position_lookup <- function() {
 
 #' @return A plot in R-studio viewer
 #' @seealso
-#' \code{\link{body_categories}} for the built-in region_area/subcategory
+#' \code{\link{body_categories}} for the built-in body_region/body_area
 #' taxonomy, and \code{\link{plot_heatmap_default}} for a wrapper that
 #' only needs a vector of counts.
 #' \code{\link{diagram_colours}} to preview supported palette names.
@@ -234,7 +234,7 @@ both_label_position_lookup <- function() {
 #' @export
 #' @examples
 #' # Easiest: start from the built-in body_categories taxonomy (its
-#' # region_area/subcategory columns are already filled in) and just add
+#' # body_region/body_area columns are already filled in) and just add
 #' # your own counts, matching its row order. See ?body_categories, or
 #' # just run print(body_categories) to see the order directly.
 #' df <- body_categories
@@ -277,12 +277,12 @@ plot_heatmap <- function(
   stopifnot(is.logical(show_scale), length(show_scale) == 1)
 
   # Shared region/numeric-count table, computed once so all views and the
-  # Unspecified label use identical values. Subcategories are matched
+  # Unspecified label use identical values. Body areas are matched
   # verbatim against the canonical body_categories labels (e.g.
   # "Hip / groin"); only surrounding whitespace is trimmed.
   base_data <- injury_data |>
     transmute(
-      region_area = trimws(as.character(.data$subcategory)),
+      body_region = trimws(as.character(.data$body_area)),
       TotalInjuries = coerce_injury_values(
         .data[[selected_sport]],
         selected_sport
@@ -304,7 +304,7 @@ plot_heatmap <- function(
   # than coloured on it). NULL when the data has no such row; NA counts
   # become 0.
   unspecified_count <- base_data |>
-    filter(.data$region_area == "Unspecified") |>
+    filter(.data$body_region == "Unspecified") |>
     pull(.data$TotalInjuries)
 
   if (length(unspecified_count) == 0) {
@@ -407,7 +407,7 @@ plot_heatmap <- function(
     )
 
     processed_injury_data <- base_data |>
-      mutate(SVG_ID = map_svg_ids(.data$region_area, view_choice_inner))
+      mutate(SVG_ID = map_svg_ids(.data$body_region, view_choice_inner))
 
     stopifnot("SVG_ID" %in% names(processed_injury_data))
 
@@ -529,12 +529,12 @@ plot_heatmap <- function(
     label_data <- label_positions |>
       # processed_injury_data has one row per SVG id (2-3 per region);
       # labels need one row per region
-      left_join(processed_injury_data, by = "region_area") |>
-      distinct(.data$region_area, .keep_all = TRUE)
+      left_join(processed_injury_data, by = "body_region") |>
+      distinct(.data$body_region, .keep_all = TRUE)
 
     label_data$label_text <- mapply(
       make_label_text,
-      region = label_data$region_area,
+      region = label_data$body_region,
       value = label_data$TotalInjuries,
       USE.NAMES = FALSE
     )
@@ -553,7 +553,7 @@ plot_heatmap <- function(
       label_data <- bind_rows(
         label_data,
         data.frame(
-          region_area = "Unspecified",
+          body_region = "Unspecified",
           label_x = 0.2,
           label_y = unspecified_y,
           TotalInjuries = unspecified_count,
@@ -720,11 +720,11 @@ plot_heatmap <- function(
     draw_text <- isTRUE(show_labels) || isTRUE(show_values)
 
     middle_labels <- both_label_positions |>
-      left_join(base_data, by = "region_area") |>
+      left_join(base_data, by = "body_region") |>
       mutate(
         label_text = mapply(
           make_label_text,
-          region = region_area,
+          region = body_region,
           value = TotalInjuries,
           USE.NAMES = FALSE
         )
@@ -739,7 +739,7 @@ plot_heatmap <- function(
       middle_labels <- bind_rows(
         middle_labels,
         data.frame(
-          region_area = "Unspecified",
+          body_region = "Unspecified",
           label_y = unspecified_y_both,
           TotalInjuries = unspecified_count,
           label_text = make_label_text("Unspecified", unspecified_count),

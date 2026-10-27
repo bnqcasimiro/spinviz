@@ -17,7 +17,7 @@ The path (invisibly), so the call can be used in a pipe.
 }
 \description{
 Writes a CSV file in the format expected by \code{\link[=plot_heatmap]{plot_heatmap()}}: one row
-per recognised body subcategory, with \code{region_area} and \code{subcategory}
+per recognised body area, with \code{body_region} and \code{body_area}
 columns and one empty column per sport for the user to fill in with
 injury frequencies.
 }

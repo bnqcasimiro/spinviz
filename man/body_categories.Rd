@@ -6,8 +6,8 @@
 \format{
 A data frame with 19 rows and 2 columns:
 \describe{
-\item{region_area}{Body region, e.g. "Upper limb", "Trunk".}
-\item{subcategory}{Body area, e.g. "Shoulder", "Chest".}
+\item{body_region}{Body region, e.g. "Upper limb", "Trunk".}
+\item{body_area}{Body area, e.g. "Shoulder", "Chest".}
 }
 }
 \usage{
@@ -17,7 +17,7 @@ body_categories
 The standard Body region/Body area classification used by
 \code{\link[=plot_heatmap]{plot_heatmap()}}, with no injury counts attached. Combine it with your
 own counts via \code{\link[=plot_heatmap_default]{plot_heatmap_default()}} rather than retyping the full
-region_area/subcategory list for every analysis.
+body_region/body_area list for every analysis.
 }
 \details{
 \strong{Row order matters.} \code{\link[=plot_heatmap_default]{plot_heatmap_default()}} (and the manual
@@ -52,6 +52,6 @@ if this list and the live object ever disagree) is:
 \seealso{
 \code{\link[=plot_heatmap_default]{plot_heatmap_default()}} to build a heatmap diagram from
 this taxonomy plus your own injury counts, without needing to retype the
-region_area/subcategory labels yourself. \link{injury_categories} for the
+body_region/body_area labels yourself. \link{injury_categories} for the
 equivalent taxonomy used by the sunburst functions.
 }
