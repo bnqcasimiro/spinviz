@@ -28,7 +28,7 @@ pak::pak("bnqcasimiro/spinviz")
 **Heatmap diagram**
 
 ``` r
-plot_heatmap(df, "boxing", "anterior", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "anterior", sex = "male", show_legend = FALSE)
 ```
 
 <details>
@@ -38,7 +38,7 @@ plot_heatmap(df, "boxing", "anterior", sex = "male", show_scale = FALSE)
 <b><code>Example Diagrams</code></b>
 </summary>
 
-| Front (Male) | Back (Male) | Both Views (Male) |
+| Anterior/Front (Male) | Posterior/Back (Male) | Both Views (Male) |
 |----|----|----|
 | <img src="man/figures/injury-heatmap-front.png" height="300" alt="Injury heatmap, anterior view on male template" /> | <img src="man/figures/injury-heatmap-back.png" height="300" alt="Injury heatmap, posterior view on male template" /> | <img src="man/figures/injury-heatmap-both.png" height="300" alt="Injury heatmap, both views on male template" /> |
 

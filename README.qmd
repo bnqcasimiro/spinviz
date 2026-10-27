@@ -52,13 +52,13 @@ pak::pak("bnqcasimiro/spinviz")
 ```{r}
 #| label: example-heatmap
 #| eval: false
-plot_heatmap(df, "boxing", "anterior", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "anterior", sex = "male", show_legend = FALSE)
 ```
 
 <details>
 <summary><b><code>Example Diagrams</code></b></summary>
 
-| Front (Male) | Back (Male) | Both Views (Male) |
+| Anterior/Front (Male) | Posterior/Back (Male) | Both Views (Male) |
 |---|---|---|
 | ![Injury heatmap, anterior view on male template](man/figures/injury-heatmap-front.png){height="300"} | ![Injury heatmap, posterior view on male template](man/figures/injury-heatmap-back.png){height="300"} | ![Injury heatmap, both views on male template](man/figures/injury-heatmap-both.png){height="300"} |
 

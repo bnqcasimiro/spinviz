@@ -30,7 +30,7 @@ when building the underlying data frame. Default "injury_count".}
 
 \item{...}{Passed straight through to \code{\link[=plot_heatmap]{plot_heatmap()}}. Every other
 argument (\code{palette}, \code{opacity}, \code{show_labels}, \code{show_values},
-\code{show_scale}, etc.) works exactly the same way.}
+\code{show_legend}, etc.) works exactly the same way.}
 }
 \value{
 A plot in R-studio viewer, identical to what

@@ -62,8 +62,8 @@ test_that("save_diagram saves a heatmap PNG with the derived ratio", {
   expect_equal(info$height, 1500 * 1.1 / 1.5, tolerance = 2)
 })
 
-test_that("save_diagram derives width from height and honours show_scale metadata", {
-  p <- sample_heatmap_plot(show_scale = FALSE)
+test_that("save_diagram derives width from height and honours show_legend metadata", {
+  p <- sample_heatmap_plot(show_legend = FALSE)
   out <- tempfile(fileext = ".png")
   on.exit(unlink(out), add = TRUE)
 

@@ -73,7 +73,7 @@ Then call `plot_heatmap(data, group, view)`, where
 ```{r}
 #| fig.width: 6
 #| fig.height: 8
-plot_heatmap(df, "boxing", "anterior", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "anterior", sex = "male", show_legend = FALSE)
 ```
 
 See `?plot_heatmap` for options controlling labels, values, opacity, the

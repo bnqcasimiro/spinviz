@@ -55,7 +55,7 @@
 #' @param view \strong{Heatmap only.} One of \code{"anterior"},
 #' \code{"posterior"}, or \code{"both"}. Left as \code{NULL} (default) to
 #' auto-detect from \code{plot}'s recorded metadata.
-#' @param show_labels,show_values,show_scale \strong{Heatmap only.}
+#' @param show_labels,show_values,show_legend \strong{Heatmap only.}
 #' Logical, or \code{NULL} (default) to auto-detect from \code{plot}'s
 #' recorded metadata.
 #' @param units \strong{Heatmap only.} Units for \code{width}/\code{height}:
@@ -100,7 +100,7 @@
 #'
 #' \dontrun{
 #' # Heatmap: type detected automatically, ratio comes from plot_heatmap()'s
-#' # own recorded metadata (view, show_labels, show_values, show_scale)
+#' # own recorded metadata (view, show_labels, show_values, show_legend)
 #' p1 <- plot_heatmap(df_heatmap, "boxing", "anterior", sex = "male")
 #' save_diagram(p1, file = "heatmap.png", width = 1600, units = "px")
 #'
@@ -120,7 +120,7 @@
 #' # version of plot_heatmap() with no attached metadata)
 #' save_diagram(p1, file = "heatmap_custom.png",
 #'              view = "anterior", show_labels = TRUE,
-#'              show_values = FALSE, show_scale = TRUE,
+#'              show_values = FALSE, show_legend = TRUE,
 #'              width = 1200, units = "px")
 #' }
 save_diagram <- function(
@@ -132,7 +132,7 @@ save_diagram <- function(
   view = NULL,
   show_labels = NULL,
   show_values = NULL,
-  show_scale = NULL,
+  show_legend = NULL,
   units = "px",
   dpi = 300,
   enforce_ratio = TRUE,
@@ -189,8 +189,8 @@ save_diagram <- function(
     if (is.null(show_values)) {
       show_values <- if (!is.null(meta)) meta$show_values else TRUE
     }
-    if (is.null(show_scale)) {
-      show_scale <- if (!is.null(meta)) meta$show_scale else TRUE
+    if (is.null(show_legend)) {
+      show_legend <- if (!is.null(meta)) meta$show_legend else TRUE
     }
 
     # dpi only matters for raster formats. Flag it if set on a vector export
@@ -225,7 +225,7 @@ save_diagram <- function(
 
       total_width <-
         base_width +
-        if (isTRUE(show_scale)) LEGEND_WIDTH_ALLOWANCE else 0
+        if (isTRUE(show_legend)) LEGEND_WIDTH_ALLOWANCE else 0
 
       ratio <- PANEL_HEIGHT / total_width
     }
@@ -237,7 +237,7 @@ save_diagram <- function(
           "height (",
           height,
           ") doesn't match the fixed ratio for this ",
-          "view/show_labels/show_values/show_scale combination; ",
+          "view/show_labels/show_values/show_legend combination; ",
           "overriding to ",
           round(expected_height, 3),
           " to keep the body ",

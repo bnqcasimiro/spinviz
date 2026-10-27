@@ -18,7 +18,7 @@
 #' @param sex which body diagram to use: `"male"` or `"female"`.
 #' @param ... Passed straight through to [plot_heatmap()]. Every other
 #' argument (`palette`, `opacity`, `show_labels`, `show_values`,
-#' `show_scale`, etc.) works exactly the same way.
+#' `show_legend`, etc.) works exactly the same way.
 #'
 #' @return A plot in R-studio viewer, identical to what
 #' [plot_heatmap()] itself returns.

@@ -206,7 +206,7 @@ both_label_position_lookup <- function() {
 #' @param opacity Numeric between `0` and `1`. Opacity of the filled body regions.
 #' @param show_labels Logical. If `TRUE`, show region names.
 #' @param show_values Logical. If `TRUE`, show injury values.
-#' @param show_scale Logical. If `TRUE`, show the colour scale (legend).
+#' @param show_legend Logical. If `TRUE`, show the colour scale (legend).
 
 #' @importFrom dplyr select rename mutate tribble slice pull left_join rowwise filter transmute bind_rows distinct case_when
 #' @importFrom xml2 read_xml xml_root write_xml xml_attr xml_set_attr xml_find_all
@@ -256,7 +256,7 @@ plot_heatmap <- function(
   opacity = 0.8,
   show_labels = TRUE,
   show_values = TRUE,
-  show_scale = TRUE
+  show_legend = TRUE
 ) {
   # ================================
   # 1. DATA PROCESSING
@@ -279,7 +279,7 @@ plot_heatmap <- function(
   )
   stopifnot(is.logical(show_labels), length(show_labels) == 1)
   stopifnot(is.logical(show_values), length(show_values) == 1)
-  stopifnot(is.logical(show_scale), length(show_scale) == 1)
+  stopifnot(is.logical(show_legend), length(show_legend) == 1)
 
   # Shared region/numeric-count table, computed once so all views and the
   # Unspecified label use identical values. Body areas are matched
@@ -628,7 +628,7 @@ plot_heatmap <- function(
         )
       )
 
-    if (!isTRUE(show_scale)) {
+    if (!isTRUE(show_legend)) {
       injury_plot <- injury_plot + theme(legend.position = "none")
     }
 
@@ -674,8 +674,8 @@ plot_heatmap <- function(
     return(injury_plot)
   }
 
-  guides_mode <- if (isTRUE(show_scale)) "collect" else "keep"
-  legend_theme <- if (isTRUE(show_scale)) {
+  guides_mode <- if (isTRUE(show_legend)) "collect" else "keep"
+  legend_theme <- if (isTRUE(show_legend)) {
     theme(
       legend.position = "right",
       legend.title = element_text(margin = margin(b = 8))
@@ -852,7 +852,7 @@ plot_heatmap <- function(
       view = view_user,
       show_labels = show_labels,
       show_values = show_values,
-      show_scale = show_scale
+      show_legend = show_legend
     )
 
     return(combined_plot)
@@ -860,14 +860,14 @@ plot_heatmap <- function(
     single_plot <- generate_plot(view) +
       theme(
         plot.margin = margin(t = 15, r = 10, b = 10, l = 10),
-        legend.position = if (isTRUE(show_scale)) "right" else "none"
+        legend.position = if (isTRUE(show_legend)) "right" else "none"
       )
 
     attr(single_plot, "spinviz_heatmap_meta") <- list(
       view = view_user,
       show_labels = show_labels,
       show_values = show_values,
-      show_scale = show_scale
+      show_legend = show_legend
     )
 
     return(single_plot)

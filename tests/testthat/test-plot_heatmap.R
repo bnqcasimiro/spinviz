@@ -282,15 +282,15 @@ test_that("plot_heatmap count legend breaks are integers", {
 
 test_that("plot_heatmap records spinviz_heatmap_meta for save_diagram", {
   df <- sample_injury_data()
-  p_front <- plot_heatmap(df, "boxing", "anterior", show_scale = FALSE)
+  p_front <- plot_heatmap(df, "boxing", "anterior", show_legend = FALSE)
   meta <- attr(p_front, "spinviz_heatmap_meta")
   expect_equal(meta$view, "anterior")
-  expect_false(meta$show_scale)
+  expect_false(meta$show_legend)
 
   p_both <- plot_heatmap(df, "boxing", "both")
   meta_both <- attr(p_both, "spinviz_heatmap_meta")
   expect_equal(meta_both$view, "both")
-  expect_true(meta_both$show_scale)
+  expect_true(meta_both$show_legend)
 })
 
 test_that("plot_heatmap handles all-zero and all-NA data without error", {

@@ -34,19 +34,19 @@ df_heatmap$boxing <- c(
 figure_height_px <- 1400
 
 save_diagram(
-  plot_heatmap(df_heatmap, "boxing", "anterior", sex = "male", show_scale = FALSE),
+  plot_heatmap(df_heatmap, "boxing", "anterior", sex = "male", show_legend = FALSE),
   "man/figures/injury-heatmap-front.png",
   height = figure_height_px
 )
 
 save_diagram(
-  plot_heatmap(df_heatmap, "boxing", "posterior", sex = "male", show_scale = FALSE),
+  plot_heatmap(df_heatmap, "boxing", "posterior", sex = "male", show_legend = FALSE),
   "man/figures/injury-heatmap-back.png",
   height = figure_height_px
 )
 
 save_diagram(
-  plot_heatmap(df_heatmap, "boxing", "both", sex = "male", show_scale = FALSE),
+  plot_heatmap(df_heatmap, "boxing", "both", sex = "male", show_legend = FALSE),
   "man/figures/injury-heatmap-both.png",
   height = figure_height_px
 )

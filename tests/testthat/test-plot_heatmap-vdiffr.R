@@ -75,7 +75,7 @@ test_that("heatmap display options render consistently", {
       "boxing",
       "anterior",
       palette = "magma",
-      show_scale = FALSE
+      show_legend = FALSE
     )
   )
   vdiffr::expect_doppelganger(

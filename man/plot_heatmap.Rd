@@ -14,7 +14,7 @@ plot_heatmap(
   opacity = 0.8,
   show_labels = TRUE,
   show_values = TRUE,
-  show_scale = TRUE
+  show_legend = TRUE
 )
 }
 \arguments{
@@ -47,7 +47,7 @@ e.g. \code{"magma"} or \code{"Reds"}.
 
 \item{show_values}{Logical. If \code{TRUE}, show injury values.}
 
-\item{show_scale}{Logical. If \code{TRUE}, show the colour scale (legend).}
+\item{show_legend}{Logical. If \code{TRUE}, show the colour scale (legend).}
 }
 \value{
 A plot in R-studio viewer
