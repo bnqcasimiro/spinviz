@@ -6,7 +6,7 @@
 #' detecting which one \code{plot} is from its class and applying the matching
 #' export logic and width:height ratio.
 #' \preformatted{
-#' p1 <- plot_heatmap(df, "boxing", "front", sex = "male")
+#' p1 <- plot_heatmap(df, "boxing", "anterior", sex = "male")
 #' save_diagram(p1, file = "heatmap.png", width = 1600, units = "px")
 #'
 #' p2 <- plot_sunburst(df, "boxing")
@@ -38,7 +38,7 @@
 #'   \code{coord_cartesian(xlim = ...)}), the legend adds an estimated
 #'   ~15% extra width if shown (\strong{not} measured from a real render,
 #'   a placeholder worth checking against actual output), and
-#'   \code{view_choice = "both"} uses the combined front+gap+back width
+#'   \code{view = "both"} uses the combined front+gap+back width
 #'   (1 : 0.10 : 1, exact, from \code{plot_layout(widths = ...)}).
 #'   \item \strong{Sunburst}: no fixed ratio is computed at all.
 #'   \code{\link{plot_sunburst}} records the exact
@@ -52,8 +52,8 @@
 #' valid for each diagram type.
 #' @param width,height Size of the saved file. Supply at least one, the
 #' other is derived from the relevant ratio. Both default to \code{NULL}.
-#' @param view_choice \strong{Heatmap only.} One of \code{"front"},
-#' \code{"back"}, or \code{"both"}. Left as \code{NULL} (default) to
+#' @param view \strong{Heatmap only.} One of \code{"anterior"},
+#' \code{"posterior"}, or \code{"both"}. Left as \code{NULL} (default) to
 #' auto-detect from \code{plot}'s recorded metadata.
 #' @param show_labels,show_values,show_scale \strong{Heatmap only.}
 #' Logical, or \code{NULL} (default) to auto-detect from \code{plot}'s
@@ -100,8 +100,8 @@
 #'
 #' \dontrun{
 #' # Heatmap: type detected automatically, ratio comes from plot_heatmap()'s
-#' # own recorded metadata (view_choice, show_labels, show_values, show_scale)
-#' p1 <- plot_heatmap(df_heatmap, "boxing", "front", sex = "male")
+#' # own recorded metadata (view, show_labels, show_values, show_scale)
+#' p1 <- plot_heatmap(df_heatmap, "boxing", "anterior", sex = "male")
 #' save_diagram(p1, file = "heatmap.png", width = 1600, units = "px")
 #'
 #' # "both" view, exported as PDF
@@ -119,7 +119,7 @@
 #' # Overriding recorded metadata explicitly (e.g. plot came from an older
 #' # version of plot_heatmap() with no attached metadata)
 #' save_diagram(p1, file = "heatmap_custom.png",
-#'              view_choice = "front", show_labels = TRUE,
+#'              view = "anterior", show_labels = TRUE,
 #'              show_values = FALSE, show_scale = TRUE,
 #'              width = 1200, units = "px")
 #' }
@@ -129,7 +129,7 @@ save_diagram <- function(
   width = NULL,
   height = NULL,
   # heatmap-only arguments
-  view_choice = NULL,
+  view = NULL,
   show_labels = NULL,
   show_values = NULL,
   show_scale = NULL,
@@ -166,18 +166,22 @@ save_diagram <- function(
   if (is_heatmap) {
     meta <- attr(plot, "spinviz_heatmap_meta")
 
-    if (is.null(view_choice)) {
+    if (is.null(view)) {
       if (is.null(meta)) {
         stop(
-          "`plot` has no recorded view_choice metadata (it may have come ",
-          "from an older version of plot_heatmap()). Pass view_choice ",
-          "explicitly: \"front\", \"back\", or \"both\".",
+          "`plot` has no recorded view metadata (it may have come ",
+          "from an older version of plot_heatmap()). Pass view ",
+          "explicitly: \"anterior\", \"posterior\", or \"both\".",
           call. = FALSE
         )
       }
-      view_choice <- meta$view_choice
+      view <- meta$view
     }
-    view_choice <- match.arg(view_choice, c("front", "back", "both"))
+    view <- match.arg(view, c("anterior", "posterior", "both"))
+    # Translate to the front/back terminology used by the ratio logic below.
+    view <- unname(c(anterior = "front", posterior = "back", both = "both")[
+      view
+    ])
 
     if (is.null(show_labels)) {
       show_labels <- if (!is.null(meta)) meta$show_labels else TRUE
@@ -208,7 +212,7 @@ save_diagram <- function(
 
     draw_labels <- isTRUE(show_labels) || isTRUE(show_values)
 
-    if (view_choice == "both") {
+    if (view == "both") {
       # Fixed 16:9 aspect ratio for the complete both-view composition.
       # Changing the export width therefore scales the height proportionally.
       ratio <- 9 / 16
@@ -233,7 +237,7 @@ save_diagram <- function(
           "height (",
           height,
           ") doesn't match the fixed ratio for this ",
-          "view_choice/show_labels/show_values/show_scale combination; ",
+          "view/show_labels/show_values/show_scale combination; ",
           "overriding to ",
           round(expected_height, 3),
           " to keep the body ",
@@ -250,7 +254,7 @@ save_diagram <- function(
     }
 
     if (
-      view_choice == "both" &&
+      view == "both" &&
         units == "px" &&
         file_ext %in% c("png", "jpg", "jpeg", "tiff", "tif", "bmp")
     ) {

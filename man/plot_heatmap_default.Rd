@@ -6,8 +6,8 @@
 \usage{
 plot_heatmap_default(
   counts,
-  view_choice,
-  selected_sport = "injury_count",
+  view,
+  group = "injury_count",
   sex = c("male", "female"),
   ...
 )
@@ -20,10 +20,10 @@ i.e. \code{counts[i]} is the injury count for
 \code{?body_categories} for the full numbered row order, or just run
 \code{print(body_categories)} directly.}
 
-\item{view_choice}{which view to render the diagram. One of ("front",
-"back", or "both"), same as \code{\link[=plot_heatmap]{plot_heatmap()}}.}
+\item{view}{which view to render the diagram. One of ("anterior",
+"posterior", or "both"), same as \code{\link[=plot_heatmap]{plot_heatmap()}}.}
 
-\item{selected_sport}{A string used as the injury-count column's name
+\item{group}{A string used as the injury-count column's name
 when building the underlying data frame. Default "injury_count".}
 
 \item{sex}{which body diagram to use: \code{"male"} or \code{"female"}.}
@@ -43,7 +43,7 @@ injury counts.
 }
 \examples{
 boxing <- c(1, 12, 24, 20, 11, 12, 8, 5, 40, 32, 12, 28, 20, 15, 12, 35, 18, 5, 0)
-p1 <- plot_heatmap_default(boxing, "front", sex = "male")
+p1 <- plot_heatmap_default(boxing, "anterior", sex = "male")
 }
 \seealso{
 \link{body_categories} for the taxonomy this merges your counts

@@ -12,6 +12,11 @@
 
 ## Breaking changes
 
+* `plot_heatmap()` arguments have been renamed: `injury_data` is now `data`,
+  `selected_sport` is now `group`, and `view_choice` is now `view`, with the
+  view values `"front"` and `"back"` renamed to `"anterior"` and `"posterior"`
+  (`"both"` is unchanged). The same renames apply to `plot_heatmap_default()`
+  and to `save_diagram()`'s `view` argument.
 * The sunburst injury-data column names have been renamed: `tissue` is now
   `tissue_type` and `pathology` is now `pathology_type`, mirroring the
   "Tissue type / Pathology type" terminology used in the documentation.

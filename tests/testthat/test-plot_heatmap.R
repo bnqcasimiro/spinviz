@@ -110,7 +110,7 @@ test_that("svg_id_lookup and label_position_lookup agree with view_exclusive_reg
 
 test_that("plot_heatmap returns a ggplot for a single view", {
   df <- sample_injury_data()
-  p <- plot_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
+  p <- plot_heatmap(df, "boxing", "anterior", sex = "male", show_values = FALSE)
   expect_s3_class(p, "ggplot")
 })
 
@@ -131,17 +131,17 @@ test_that("plot_heatmap does not call print() as a side effect", {
 
 test_that("plot_heatmap returns a ggplot for a single view without printing", {
   df <- sample_injury_data()
-  p <- plot_heatmap(df, "boxing", "front", show_values = FALSE)
+  p <- plot_heatmap(df, "boxing", "anterior", show_values = FALSE)
   expect_s3_class(p, "ggplot")
 })
 
 test_that("plot_heatmap validates its arguments", {
   df <- sample_injury_data()
-  expect_snapshot(error = TRUE, plot_heatmap(df, "not_a_column", "front"))
+  expect_snapshot(error = TRUE, plot_heatmap(df, "not_a_column", "anterior"))
   expect_snapshot(error = TRUE, plot_heatmap(df, "boxing", "sideways"))
   expect_snapshot(
     error = TRUE,
-    plot_heatmap(df, "boxing", "front", opacity = 2)
+    plot_heatmap(df, "boxing", "anterior", opacity = 2)
   )
 })
 
@@ -158,7 +158,7 @@ text_layer_data <- function(p) {
 test_that("plot_heatmap rejects an invalid value_format", {
   df <- sample_injury_data()
   expect_error(
-    plot_heatmap(df, "boxing", "front", value_format = "fraction"),
+    plot_heatmap(df, "boxing", "anterior", value_format = "fraction"),
     "should be one of"
   )
 })
@@ -166,11 +166,11 @@ test_that("plot_heatmap rejects an invalid value_format", {
 test_that("plot_heatmap percentage view uses a percentage legend and labels", {
   df <- sample_injury_data()
 
-  p_count <- plot_heatmap(df, "boxing", "front", show_labels = FALSE)
+  p_count <- plot_heatmap(df, "boxing", "anterior", show_labels = FALSE)
   p_pct <- plot_heatmap(
     df,
     "boxing",
-    "front",
+    "anterior",
     value_format = "proportion",
     show_labels = FALSE
   )
@@ -187,7 +187,7 @@ test_that("plot_heatmap percentage view uses a percentage legend and labels", {
 
 test_that("plot_heatmap percentage labels are italic-n free and counts use italic n", {
   df <- sample_injury_data()
-  p_count <- plot_heatmap(df, "boxing", "front", show_labels = FALSE)
+  p_count <- plot_heatmap(df, "boxing", "anterior", show_labels = FALSE)
   count_labels <- text_layer_data(p_count)$label_text
   expect_true(all(grepl("italic(n)", count_labels, fixed = TRUE)))
 })
@@ -199,7 +199,7 @@ test_that("plot_heatmap shows an Unspecified row as a label", {
     data.frame(body_region = "Example", body_area = "Unspecified", boxing = 7)
   )
 
-  p <- plot_heatmap(df, "boxing", "front")
+  p <- plot_heatmap(df, "boxing", "anterior")
   labels <- text_layer_data(p)$label_text
   expect_true(any(grepl("Unspecified", labels, fixed = TRUE)))
   # Unspecified has no leader-line target
@@ -209,7 +209,7 @@ test_that("plot_heatmap shows an Unspecified row as a label", {
 
 test_that("plot_heatmap omits the Unspecified label when no such row exists", {
   df <- sample_injury_data()
-  p <- plot_heatmap(df, "boxing", "front")
+  p <- plot_heatmap(df, "boxing", "anterior")
   labels <- text_layer_data(p)$label_text
   expect_false(any(grepl("Unspecified", labels, fixed = TRUE)))
 })
@@ -227,7 +227,7 @@ test_that("plot_heatmap percentage total includes Unspecified injuries", {
   p <- plot_heatmap(
     df_uns,
     "boxing",
-    "front",
+    "anterior",
     value_format = "proportion",
     show_labels = FALSE
   )
@@ -239,7 +239,7 @@ test_that("plot_heatmap percentage total includes Unspecified injuries", {
 
 test_that("plot_heatmap labels are spread to a minimum vertical gap", {
   df <- sample_injury_data()
-  p <- plot_heatmap(df, "boxing", "front")
+  p <- plot_heatmap(df, "boxing", "anterior")
   ys <- sort(text_layer_data(p)$label_y, decreasing = TRUE)
   gaps <- -diff(ys)
   expect_true(all(gaps >= 0.055 - 1e-9))
@@ -247,7 +247,7 @@ test_that("plot_heatmap labels are spread to a minimum vertical gap", {
 
 test_that("plot_heatmap draws two leader-line segments per labelled region", {
   df <- sample_injury_data()
-  p <- plot_heatmap(df, "boxing", "front")
+  p <- plot_heatmap(df, "boxing", "anterior")
   is_segment <- vapply(
     p$layers,
     function(l) inherits(l$geom, "GeomSegment"),
@@ -263,7 +263,7 @@ test_that("plot_heatmap draws two leader-line segments per labelled region", {
 
 test_that("plot_heatmap count legend breaks are integers", {
   df <- sample_injury_data()
-  p <- plot_heatmap(df, "boxing", "front", show_labels = FALSE)
+  p <- plot_heatmap(df, "boxing", "anterior", show_labels = FALSE)
   scale <- p$scales$scales[[1]]
   breaks <- scale$breaks(c(0, 22))
   expect_equal(breaks, as.integer(breaks))
@@ -272,7 +272,7 @@ test_that("plot_heatmap count legend breaks are integers", {
   p_pct <- plot_heatmap(
     df,
     "boxing",
-    "front",
+    "anterior",
     value_format = "proportion",
     show_labels = FALSE
   )
@@ -282,14 +282,14 @@ test_that("plot_heatmap count legend breaks are integers", {
 
 test_that("plot_heatmap records spinviz_heatmap_meta for save_diagram", {
   df <- sample_injury_data()
-  p_front <- plot_heatmap(df, "boxing", "front", show_scale = FALSE)
+  p_front <- plot_heatmap(df, "boxing", "anterior", show_scale = FALSE)
   meta <- attr(p_front, "spinviz_heatmap_meta")
-  expect_equal(meta$view_choice, "front")
+  expect_equal(meta$view, "anterior")
   expect_false(meta$show_scale)
 
   p_both <- plot_heatmap(df, "boxing", "both")
   meta_both <- attr(p_both, "spinviz_heatmap_meta")
-  expect_equal(meta_both$view_choice, "both")
+  expect_equal(meta_both$view, "both")
   expect_true(meta_both$show_scale)
 })
 
@@ -299,11 +299,11 @@ test_that("plot_heatmap handles all-zero and all-NA data without error", {
   expect_no_error(plot_heatmap(
     df,
     "boxing",
-    "front",
+    "anterior",
     value_format = "proportion"
   ))
   df$boxing <- NA_real_
-  expect_no_error(plot_heatmap(df, "boxing", "front"))
+  expect_no_error(plot_heatmap(df, "boxing", "anterior"))
 })
 
 test_that("plot_heatmap warns when injury values are not numeric", {
@@ -312,7 +312,31 @@ test_that("plot_heatmap warns when injury values are not numeric", {
   expect_snapshot(invisible(plot_heatmap(
     df,
     "boxing",
-    "front",
+    "anterior",
     show_values = FALSE
   )))
+})
+
+test_that("plot_heatmap renders the Unspecified count for both views", {
+  df <- rbind(
+    sample_injury_data(),
+    data.frame(
+      body_region = "Unspecified",
+      body_area = "Unspecified",
+      boxing = 7
+    )
+  )
+
+  for (view in c("anterior", "posterior")) {
+    p <- plot_heatmap(df, "boxing", view)
+    expect_s3_class(p, "ggplot")
+    labels <- unlist(lapply(ggplot2::ggplot_build(p)$data, function(layer) {
+      if ("label" %in% names(layer)) as.character(layer$label) else NULL
+    }))
+    expect_true(
+      any(grepl("Unspecified", labels)),
+      info = paste("view:", view)
+    )
+    expect_true(any(grepl("7", labels[grepl("Unspecified", labels)])))
+  }
 })

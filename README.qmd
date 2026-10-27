@@ -30,9 +30,9 @@ knitr::opts_chunk$set(
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bnqcasimiro/spinviz)
 <!-- badges: end -->
 
-`spinviz` is an `R` package for visualising **sports injury frequency data**. It renders **anatomical heatmaps** (front/back, male/female body models) and **interactive tissue-type to pathology-type sunburst diagrams**. Toggle labels and values, customise colour palettes and legends, and export publication-ready **PNG, JPG or PDF** figures.
+`spinviz` is an `R` package for visualising **sports injury frequency data**. It renders **anatomical heatmaps** (anterior/posterior, male/female body models) and **interactive tissue-type to pathology-type sunburst diagrams**. Toggle labels and values, customise colour palettes and legends, and export publication-ready **PNG, JPG or PDF** figures.
 
-The main function, `plot_heatmap()`, colours anatomical regions by injury frequency and can render **front**, **back**, or **both** views, using **male** or **female** body templates. `plot_sunburst()` renders tissue types on an inner ring and pathologies on an outer ring. Built-in taxonomies (`body_categories`, `injury_categories`), one-call wrappers, and `save_diagram()` for correct-aspect-ratio export are also included.
+The main function, `plot_heatmap()`, colours anatomical regions by injury frequency and can render **anterior**, **posterior**, or **both** views, using **male** or **female** body templates. `plot_sunburst()` renders tissue types on an inner ring and pathologies on an outer ring. Built-in taxonomies (`body_categories`, `injury_categories`), one-call wrappers, and `save_diagram()` for correct-aspect-ratio export are also included.
 
 Full documentation, tutorials, and a function reference live on the [pkgdown site](https://bnqcasimiro.github.io/spinviz/).
 
@@ -52,7 +52,7 @@ pak::pak("bnqcasimiro/spinviz")
 ```{r}
 #| label: example-heatmap
 #| eval: false
-plot_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "anterior", sex = "male", show_scale = FALSE)
 ```
 
 <details>
@@ -60,7 +60,7 @@ plot_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
 
 | Front (Male) | Back (Male) | Both Views (Male) |
 |---|---|---|
-| ![Injury heatmap, front view on male template](man/figures/injury-heatmap-front.png){height="300"} | ![Injury heatmap, back view on male template](man/figures/injury-heatmap-back.png){height="300"} | ![Injury heatmap, both views on male template](man/figures/injury-heatmap-both.png){height="300"} |
+| ![Injury heatmap, anterior view on male template](man/figures/injury-heatmap-front.png){height="300"} | ![Injury heatmap, posterior view on male template](man/figures/injury-heatmap-back.png){height="300"} | ![Injury heatmap, both views on male template](man/figures/injury-heatmap-both.png){height="300"} |
 
 </details>
 

@@ -36,11 +36,11 @@ test_that("single-view heatmaps render consistently", {
 
   vdiffr::expect_doppelganger(
     "heatmap front male",
-    plot_heatmap(df, "boxing", "front", sex = "male")
+    plot_heatmap(df, "boxing", "anterior", sex = "male")
   )
   vdiffr::expect_doppelganger(
     "heatmap back female",
-    plot_heatmap(df, "boxing", "back", sex = "female")
+    plot_heatmap(df, "boxing", "posterior", sex = "female")
   )
 })
 
@@ -63,7 +63,7 @@ test_that("heatmap display options render consistently", {
     plot_heatmap(
       df,
       "boxing",
-      "front",
+      "anterior",
       value_format = "proportion",
       show_labels = FALSE
     )
@@ -73,7 +73,7 @@ test_that("heatmap display options render consistently", {
     plot_heatmap(
       df,
       "boxing",
-      "front",
+      "anterior",
       palette = "magma",
       show_scale = FALSE
     )
@@ -83,7 +83,7 @@ test_that("heatmap display options render consistently", {
     plot_heatmap(
       df,
       "boxing",
-      "front",
+      "anterior",
       show_labels = FALSE,
       show_values = FALSE
     )
@@ -100,6 +100,6 @@ test_that("heatmap with Unspecified row renders consistently", {
 
   vdiffr::expect_doppelganger(
     "heatmap with unspecified",
-    plot_heatmap(df, "boxing", "front")
+    plot_heatmap(df, "boxing", "anterior")
   )
 })

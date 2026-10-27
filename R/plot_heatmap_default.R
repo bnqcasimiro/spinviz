@@ -11,9 +11,9 @@
 #' `body_categories[i, c("body_region", "body_area")]`. See
 #' `?body_categories` for the full numbered row order, or just run
 #' `print(body_categories)` directly.
-#' @param view_choice which view to render the diagram. One of ("front",
-#' "back", or "both"), same as [plot_heatmap()].
-#' @param selected_sport A string used as the injury-count column's name
+#' @param view which view to render the diagram. One of ("anterior",
+#' "posterior", or "both"), same as [plot_heatmap()].
+#' @param group A string used as the injury-count column's name
 #' when building the underlying data frame. Default "injury_count".
 #' @param sex which body diagram to use: `"male"` or `"female"`.
 #' @param ... Passed straight through to [plot_heatmap()]. Every other
@@ -30,12 +30,12 @@
 #'
 #' @examples
 #' boxing <- c(1, 12, 24, 20, 11, 12, 8, 5, 40, 32, 12, 28, 20, 15, 12, 35, 18, 5, 0)
-#' p1 <- plot_heatmap_default(boxing, "front", sex = "male")
+#' p1 <- plot_heatmap_default(boxing, "anterior", sex = "male")
 
 plot_heatmap_default <- function(
   counts,
-  view_choice,
-  selected_sport = "injury_count",
+  view,
+  group = "injury_count",
   sex = c("male", "female"),
   ...
 ) {
@@ -53,7 +53,7 @@ plot_heatmap_default <- function(
   }
 
   df <- body_categories
-  df[[selected_sport]] <- counts
+  df[[group]] <- counts
 
-  plot_heatmap(df, selected_sport, view_choice, sex = sex, ...)
+  plot_heatmap(df, group, view, sex = sex, ...)
 }

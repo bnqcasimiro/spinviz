@@ -8,9 +8,9 @@
 
 [![CRAN status](https://www.r-pkg.org/badges/version/spinviz)](https://cran.r-project.org/package=spinviz) [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) [![R-CMD-check](https://github.com/bnqcasimiro/spinviz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bnqcasimiro/spinviz/actions/workflows/R-CMD-check.yaml) [![R-hub](https://github.com/bnqcasimiro/spinviz/actions/workflows/rhub.yaml/badge.svg)](https://github.com/bnqcasimiro/spinviz/actions/workflows/rhub.yaml) [![Codecov test coverage](https://codecov.io/gh/bnqcasimiro/spinviz/graph/badge.svg)](https://app.codecov.io/gh/bnqcasimiro/spinviz) [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/spinviz)](https://cran.r-project.org/package=spinviz) [![pkgdown](https://img.shields.io/badge/pkgdown-docs-blue.svg)](https://bnqcasimiro.github.io/spinviz/) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/bnqcasimiro/spinviz) <!-- badges: end -->
 
-`spinviz` is an `R` package for visualising **sports injury frequency data**. It renders **anatomical heatmaps** (front/back, male/female body models) and **interactive tissue-type to pathology-type sunburst diagrams**. Toggle labels and values, customise colour palettes and legends, and export publication-ready **PNG, JPG or PDF** figures.
+`spinviz` is an `R` package for visualising **sports injury frequency data**. It renders **anatomical heatmaps** (anterior/posterior, male/female body models) and **interactive tissue-type to pathology-type sunburst diagrams**. Toggle labels and values, customise colour palettes and legends, and export publication-ready **PNG, JPG or PDF** figures.
 
-The main function, `plot_heatmap()`, colours anatomical regions by injury frequency and can render **front**, **back**, or **both** views, using **male** or **female** body templates. `plot_sunburst()` renders tissue types on an inner ring and pathologies on an outer ring. Built-in taxonomies (`body_categories`, `injury_categories`), one-call wrappers, and `save_diagram()` for correct-aspect-ratio export are also included.
+The main function, `plot_heatmap()`, colours anatomical regions by injury frequency and can render **anterior**, **posterior**, or **both** views, using **male** or **female** body templates. `plot_sunburst()` renders tissue types on an inner ring and pathologies on an outer ring. Built-in taxonomies (`body_categories`, `injury_categories`), one-call wrappers, and `save_diagram()` for correct-aspect-ratio export are also included.
 
 Full documentation, tutorials, and a function reference live on the [pkgdown site](https://bnqcasimiro.github.io/spinviz/).
 
@@ -28,7 +28,7 @@ pak::pak("bnqcasimiro/spinviz")
 **Heatmap diagram**
 
 ``` r
-plot_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "anterior", sex = "male", show_scale = FALSE)
 ```
 
 <details>
@@ -40,7 +40,7 @@ plot_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
 
 | Front (Male) | Back (Male) | Both Views (Male) |
 |----|----|----|
-| <img src="man/figures/injury-heatmap-front.png" height="300" alt="Injury heatmap, front view on male template" /> | <img src="man/figures/injury-heatmap-back.png" height="300" alt="Injury heatmap, back view on male template" /> | <img src="man/figures/injury-heatmap-both.png" height="300" alt="Injury heatmap, both views on male template" /> |
+| <img src="man/figures/injury-heatmap-front.png" height="300" alt="Injury heatmap, anterior view on male template" /> | <img src="man/figures/injury-heatmap-back.png" height="300" alt="Injury heatmap, posterior view on male template" /> | <img src="man/figures/injury-heatmap-both.png" height="300" alt="Injury heatmap, both views on male template" /> |
 
 </details>
 

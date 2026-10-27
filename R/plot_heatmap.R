@@ -184,13 +184,13 @@ both_label_position_lookup <- function() {
 #' based on the number of injuries on body parts visible on the
 #' diagram.
 
-#' Diagrams can be viewed from the front, back, or both views
+#' Diagrams can be viewed from the anterior, posterior, or both views
 
-#' @param injury_data a data frame with the body region, area the injury occurred,
+#' @param data a data frame with the body region, area the injury occurred,
 #' and the frequency of the injury
-#' @param selected_sport the name of the sport, corresponding to the header of
-#' the frequency column in the data frame.
-#' @param view_choice which view to render the diagram. One of ("front", "back", or "both")
+#' @param group the name of the group (e.g. a sport), corresponding to the
+#' header of the frequency column in the data frame.
+#' @param view which view to render the diagram. One of ("anterior", "posterior", or "both")
 #' @param sex which body diagram to use: `"male"` or `"female"`.
 #' @param value_format Character. Format used for injury labels, body colours,
 #'   and the colour-scale legend. Either `"frequency"` (default) for absolute
@@ -239,17 +239,17 @@ both_label_position_lookup <- function() {
 #' # just run print(body_categories) to see the order directly.
 #' df <- body_categories
 #' df$boxing <- c(15, 5, 18, 20, 6, 14, 9, 11, 12, 18, 22, 10, 9, 16, 13, 7, 8, 3, 24)
-#' # Generate a plot for front view, male
-#' p1 <- plot_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
+#' # Generate a plot for anterior view, male
+#' p1 <- plot_heatmap(df, "boxing", "anterior", sex = "male", show_values = FALSE)
 #' # You can customise the colour palette by:
-#' p2 <- plot_heatmap(df, "boxing", "front", sex = "female", palette = "plasma")
+#' p2 <- plot_heatmap(df, "boxing", "anterior", sex = "female", palette = "plasma")
 #' # You can add your own plot title by:
-#' p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Front)")
+#' p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Anterior)")
 
 plot_heatmap <- function(
-  injury_data,
-  selected_sport,
-  view_choice,
+  data,
+  group,
+  view,
   sex = c("male", "female"),
   value_format = c("frequency", "proportion"),
   palette = NULL,
@@ -262,8 +262,13 @@ plot_heatmap <- function(
   # 1. DATA PROCESSING
   # ================================
 
-  stopifnot(selected_sport %in% names(injury_data))
-  stopifnot(view_choice %in% c("front", "back", "both"))
+  stopifnot(group %in% names(data))
+  stopifnot(view %in% c("anterior", "posterior", "both"))
+
+  # Record the user-facing view for save_diagram() metadata, then translate
+  # to the front/back terminology used by the SVG assets and label lookups.
+  view_user <- view
+  view <- unname(c(anterior = "front", posterior = "back", both = "both")[view])
   sex <- match.arg(sex)
   value_format <- match.arg(value_format)
   stopifnot(
@@ -280,12 +285,12 @@ plot_heatmap <- function(
   # Unspecified label use identical values. Body areas are matched
   # verbatim against the canonical body_categories labels (e.g.
   # "Hip / groin"); only surrounding whitespace is trimmed.
-  base_data <- injury_data |>
+  base_data <- data |>
     transmute(
       body_region = trimws(as.character(.data$body_area)),
       TotalInjuries = coerce_injury_values(
-        .data[[selected_sport]],
-        selected_sport
+        .data[[group]],
+        group
       )
     )
   total_injuries <- sum(base_data$TotalInjuries, na.rm = TRUE)
@@ -680,7 +685,7 @@ plot_heatmap <- function(
   }
 
   # Both view
-  if (view_choice == "both") {
+  if (view == "both") {
     global_max <- max(base_data$PlotValue, na.rm = TRUE)
     if (!is.finite(global_max)) {
       global_max <- 0
@@ -844,7 +849,7 @@ plot_heatmap <- function(
       legend_theme
 
     attr(combined_plot, "spinviz_heatmap_meta") <- list(
-      view_choice = view_choice,
+      view = view_user,
       show_labels = show_labels,
       show_values = show_values,
       show_scale = show_scale
@@ -852,14 +857,14 @@ plot_heatmap <- function(
 
     return(combined_plot)
   } else {
-    single_plot <- generate_plot(view_choice) +
+    single_plot <- generate_plot(view) +
       theme(
         plot.margin = margin(t = 15, r = 10, b = 10, l = 10),
         legend.position = if (isTRUE(show_scale)) "right" else "none"
       )
 
     attr(single_plot, "spinviz_heatmap_meta") <- list(
-      view_choice = view_choice,
+      view = view_user,
       show_labels = show_labels,
       show_values = show_values,
       show_scale = show_scale

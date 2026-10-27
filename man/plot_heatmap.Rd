@@ -5,9 +5,9 @@
 \title{Heat map of Injuries on Human Body}
 \usage{
 plot_heatmap(
-  injury_data,
-  selected_sport,
-  view_choice,
+  data,
+  group,
+  view,
   sex = c("male", "female"),
   value_format = c("frequency", "proportion"),
   palette = NULL,
@@ -18,13 +18,13 @@ plot_heatmap(
 )
 }
 \arguments{
-\item{injury_data}{a data frame with the body region, area the injury occurred,
+\item{data}{a data frame with the body region, area the injury occurred,
 and the frequency of the injury}
 
-\item{selected_sport}{the name of the sport, corresponding to the header of
-the frequency column in the data frame.}
+\item{group}{the name of the group (e.g. a sport), corresponding to the
+header of the frequency column in the data frame.}
 
-\item{view_choice}{which view to render the diagram. One of ("front", "back", or "both")}
+\item{view}{which view to render the diagram. One of ("anterior", "posterior", or "both")}
 
 \item{sex}{which body diagram to use: \code{"male"} or \code{"female"}.}
 
@@ -56,7 +56,7 @@ A plot in R-studio viewer
 Creates a heat map projected onto a diagram of the human body,
 based on the number of injuries on body parts visible on the
 diagram.
-Diagrams can be viewed from the front, back, or both views
+Diagrams can be viewed from the anterior, posterior, or both views
 }
 \examples{
 # Easiest: start from the built-in body_categories taxonomy (its
@@ -65,12 +65,12 @@ Diagrams can be viewed from the front, back, or both views
 # just run print(body_categories) to see the order directly.
 df <- body_categories
 df$boxing <- c(15, 5, 18, 20, 6, 14, 9, 11, 12, 18, 22, 10, 9, 16, 13, 7, 8, 3, 24)
-# Generate a plot for front view, male
-p1 <- plot_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
+# Generate a plot for anterior view, male
+p1 <- plot_heatmap(df, "boxing", "anterior", sex = "male", show_values = FALSE)
 # You can customise the colour palette by:
-p2 <- plot_heatmap(df, "boxing", "front", sex = "female", palette = "plasma")
+p2 <- plot_heatmap(df, "boxing", "anterior", sex = "female", palette = "plasma")
 # You can add your own plot title by:
-p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Front)")
+p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Anterior)")
 }
 \seealso{
 \code{\link{body_categories}} for the built-in body_region/body_area

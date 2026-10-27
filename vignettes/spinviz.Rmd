@@ -22,7 +22,7 @@ library(spinviz)
 
 `spinviz` produces two kinds of injury visualisations:
 
-- **Heatmaps** of injury frequency projected onto human-body diagrams (`plot_heatmap()`), with front, back, or both views and male or female body templates.
+- **Heatmaps** of injury frequency projected onto human-body diagrams (`plot_heatmap()`), with anterior, posterior, or both views and male or female body templates.
 - **Interactive sunburst diagrams** of tissue_type/pathology_type classifications (`plot_sunburst()`), built on echarts4r.
 
 ## Data format
@@ -67,13 +67,13 @@ boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
 df <- data.frame(body_region, body_area, boxing)
 ```
 
-Then call `plot_heatmap(injury_data, selected_sport, view_choice)`, where
-`view_choice` is one of `"front"`, `"back"`, or `"both"`:
+Then call `plot_heatmap(data, group, view)`, where
+`view` is one of `"anterior"`, `"posterior"`, or `"both"`:
 
 ```{r}
 #| fig.width: 6
 #| fig.height: 8
-plot_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "anterior", sex = "male", show_scale = FALSE)
 ```
 
 See `?plot_heatmap` for options controlling labels, values, opacity, the
@@ -122,7 +122,7 @@ the descriptor columns entirely and pass just a vector of counts:
 ```{r}
 #| fig.width: 6
 #| fig.height: 8
-plot_heatmap_default(c(boxing, unspecified = 4), "front")
+plot_heatmap_default(c(boxing, unspecified = 4), "anterior")
 ```
 
 ```{r}

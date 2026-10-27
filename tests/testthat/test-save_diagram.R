@@ -1,4 +1,4 @@
-sample_heatmap_plot <- function(view_choice = "front", ...) {
+sample_heatmap_plot <- function(view = "anterior", ...) {
   df <- body_categories
   df$boxing <- c(
     15,
@@ -21,7 +21,7 @@ sample_heatmap_plot <- function(view_choice = "front", ...) {
     3,
     24
   )
-  plot_heatmap(df, "boxing", view_choice, sex = "male", ...)
+  plot_heatmap(df, "boxing", view, sex = "male", ...)
 }
 
 test_that("save_diagram requires width or height", {
@@ -39,11 +39,11 @@ test_that("save_diagram rejects unrecognised plot objects", {
   )
 })
 
-test_that("save_diagram errors when a heatmap lacks metadata and view_choice is not given", {
+test_that("save_diagram errors when a heatmap lacks metadata and view is not given", {
   p <- ggplot2::ggplot()
   expect_error(
     save_diagram(p, file = tempfile(fileext = ".png"), width = 800),
-    "no recorded view_choice"
+    "no recorded view"
   )
 })
 
