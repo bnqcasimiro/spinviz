@@ -37,6 +37,13 @@
 - [`read_sunburst_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_sunburst_data.md)
   : Read and validate sunburst injury data from a CSV file
 
+## Data
+
+- [`body_df`](https://bnqcasimiro.github.io/spinviz/reference/body_df.md)
+  : Example boxing injury counts by body area
+- [`tissue_df`](https://bnqcasimiro.github.io/spinviz/reference/tissue_df.md)
+  : Example boxing and judo injury counts by tissue/pathology type
+
 ## Palettes
 
 - [`diagram_colours()`](https://bnqcasimiro.github.io/spinviz/reference/diagram_colours.md)

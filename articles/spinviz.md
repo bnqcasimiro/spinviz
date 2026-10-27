@@ -69,7 +69,7 @@ Then call `plot_heatmap(data, group, view)`, where `view` is one of
 
 ``` r
 
-plot_heatmap(df, "boxing", "anterior", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "anterior", sex = "male", show_legend = FALSE)
 ```
 
 ![](spinviz_files/figure-html/unnamed-chunk-4-1.png)

@@ -57,7 +57,7 @@ save_diagram(
   view = NULL,
   show_labels = NULL,
   show_values = NULL,
-  show_scale = NULL,
+  show_legend = NULL,
   units = "px",
   dpi = 300,
   enforce_ratio = TRUE,
@@ -92,7 +92,7 @@ save_diagram(
   Left as `NULL` (default) to auto-detect from `plot`'s recorded
   metadata.
 
-- show_labels, show_values, show_scale:
+- show_labels, show_values, show_legend:
 
   **Heatmap only.** Logical, or `NULL` (default) to auto-detect from
   `plot`'s recorded metadata.
@@ -163,7 +163,7 @@ df_sunburst <- data.frame(tissue_type, pathology_type, injuries)
 
 if (FALSE) { # \dontrun{
 # Heatmap: type detected automatically, ratio comes from plot_heatmap()'s
-# own recorded metadata (view, show_labels, show_values, show_scale)
+# own recorded metadata (view, show_labels, show_values, show_legend)
 p1 <- plot_heatmap(df_heatmap, "boxing", "anterior", sex = "male")
 save_diagram(p1, file = "heatmap.png", width = 1600, units = "px")
 
@@ -183,7 +183,7 @@ save_diagram(p3, file = "sunburst.pdf", width = 1500)
 # version of plot_heatmap() with no attached metadata)
 save_diagram(p1, file = "heatmap_custom.png",
              view = "anterior", show_labels = TRUE,
-             show_values = FALSE, show_scale = TRUE,
+             show_values = FALSE, show_legend = TRUE,
              width = 1200, units = "px")
 } # }
 ```

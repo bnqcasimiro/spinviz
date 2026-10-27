@@ -51,7 +51,7 @@ plot_heatmap_default(
   Passed straight through to
   [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md).
   Every other argument (`palette`, `opacity`, `show_labels`,
-  `show_values`, `show_scale`, etc.) works exactly the same way.
+  `show_values`, `show_legend`, etc.) works exactly the same way.
 
 ## Value
 

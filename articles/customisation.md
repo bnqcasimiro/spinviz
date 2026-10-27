@@ -36,7 +36,7 @@ supports:
 ``` r
 
 plot_heatmap(df, "boxing", "both", sex = "female",
-                opacity = 0.8, show_scale = TRUE)
+                opacity = 0.8, show_legend = TRUE)
 ```
 
 See
