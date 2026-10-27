@@ -8,7 +8,7 @@ detecting which one `plot` is from its class and applying the matching
 export logic and width:height ratio.
 
 
-    p1 <- plot_heatmap(df, "boxing", "front", sex = "male")
+    p1 <- plot_heatmap(df, "boxing", "anterior", sex = "male")
     save_diagram(p1, file = "heatmap.png", width = 1600, units = "px")
 
     p2 <- plot_sunburst(df, "boxing")
@@ -37,9 +37,9 @@ diagrams aren't built the same way):
   data-width of 1.35 vs. 1.00 with neither shown (exact, from
   `coord_cartesian(xlim = ...)`), the legend adds an estimated ~15%
   extra width if shown (**not** measured from a real render, a
-  placeholder worth checking against actual output), and
-  `view_choice = "both"` uses the combined front+gap+back width (1 :
-  0.10 : 1, exact, from `plot_layout(widths = ...)`).
+  placeholder worth checking against actual output), and `view = "both"`
+  uses the combined front+gap+back width (1 : 0.10 : 1, exact, from
+  `plot_layout(widths = ...)`).
 
 - **Sunburst**: no fixed ratio is computed at all.
   [`plot_sunburst`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
@@ -54,7 +54,7 @@ save_diagram(
   file,
   width = NULL,
   height = NULL,
-  view_choice = NULL,
+  view = NULL,
   show_labels = NULL,
   show_values = NULL,
   show_scale = NULL,
@@ -86,10 +86,11 @@ save_diagram(
   Size of the saved file. Supply at least one, the other is derived from
   the relevant ratio. Both default to `NULL`.
 
-- view_choice:
+- view:
 
-  **Heatmap only.** One of `"front"`, `"back"`, or `"both"`. Left as
-  `NULL` (default) to auto-detect from `plot`'s recorded metadata.
+  **Heatmap only.** One of `"anterior"`, `"posterior"`, or `"both"`.
+  Left as `NULL` (default) to auto-detect from `plot`'s recorded
+  metadata.
 
 - show_labels, show_values, show_scale:
 
@@ -162,8 +163,8 @@ df_sunburst <- data.frame(tissue_type, pathology_type, injuries)
 
 if (FALSE) { # \dontrun{
 # Heatmap: type detected automatically, ratio comes from plot_heatmap()'s
-# own recorded metadata (view_choice, show_labels, show_values, show_scale)
-p1 <- plot_heatmap(df_heatmap, "boxing", "front", sex = "male")
+# own recorded metadata (view, show_labels, show_values, show_scale)
+p1 <- plot_heatmap(df_heatmap, "boxing", "anterior", sex = "male")
 save_diagram(p1, file = "heatmap.png", width = 1600, units = "px")
 
 # "both" view, exported as PDF
@@ -181,7 +182,7 @@ save_diagram(p3, file = "sunburst.pdf", width = 1500)
 # Overriding recorded metadata explicitly (e.g. plot came from an older
 # version of plot_heatmap() with no attached metadata)
 save_diagram(p1, file = "heatmap_custom.png",
-             view_choice = "front", show_labels = TRUE,
+             view = "anterior", show_labels = TRUE,
              show_values = FALSE, show_scale = TRUE,
              width = 1200, units = "px")
 } # }

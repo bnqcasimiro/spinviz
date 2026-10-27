@@ -27,7 +27,7 @@ test_colour(c("#FFFFFF", "#FFFF00", "#FF0000"))
 [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
 supports:
 
-- View: `"front"`, `"back"`, or `"both"`
+- View: `"anterior"`, `"posterior"`, or `"both"`
 - Diagram sex: `"male"` or `"female"`
 - Opacity control
 - Optional labels (region names) and/or values
@@ -71,7 +71,7 @@ the height from the width at the correct aspect ratio automatically:
 
 ``` r
 
-p_heat <- plot_heatmap(df, "boxing", "front", sex = "male")
+p_heat <- plot_heatmap(df, "boxing", "anterior", sex = "male")
 save_diagram(p_heat, file = "heatmap.png", width = 1600, units = "px")
 
 p_sun <- plot_sunburst(df_sb, "boxing")

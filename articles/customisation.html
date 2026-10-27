@@ -96,7 +96,7 @@ before applying it.</p>
 </h2>
 <p><code><a href="../reference/plot_heatmap.html">plot_heatmap()</a></code> supports:</p>
 <ul>
-<li>View: <code>"front"</code>, <code>"back"</code>, or
+<li>View: <code>"anterior"</code>, <code>"posterior"</code>, or
 <code>"both"</code>
 </li>
 <li>Diagram sex: <code>"male"</code> or <code>"female"</code>
@@ -135,7 +135,7 @@ lightened</li>
 export logic, deriving the height from the width at the correct aspect
 ratio automatically:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p_heat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_heatmap.html">plot_heatmap</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"boxing"</span>, <span class="st">"front"</span>, sex <span class="op">=</span> <span class="st">"male"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">p_heat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_heatmap.html">plot_heatmap</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"boxing"</span>, <span class="st">"anterior"</span>, sex <span class="op">=</span> <span class="st">"male"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/save_diagram.html">save_diagram</a></span><span class="op">(</span><span class="va">p_heat</span>, file <span class="op">=</span> <span class="st">"heatmap.png"</span>, width <span class="op">=</span> <span class="fl">1600</span>, units <span class="op">=</span> <span class="st">"px"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p_sun</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_sunburst.html">plot_sunburst</a></span><span class="op">(</span><span class="va">df_sb</span>, <span class="st">"boxing"</span><span class="op">)</span></span>

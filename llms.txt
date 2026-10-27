@@ -1,16 +1,16 @@
 # spinviz
 
 `spinviz` is an `R` package for visualising **sports injury frequency
-data**. It renders **anatomical heatmaps** (front/back, male/female body
-models) and **interactive tissue-type to pathology-type sunburst
-diagrams**. Toggle labels and values, customise colour palettes and
-legends, and export publication-ready **PNG, JPG or PDF** figures.
+data**. It renders **anatomical heatmaps** (anterior/posterior,
+male/female body models) and **interactive tissue-type to pathology-type
+sunburst diagrams**. Toggle labels and values, customise colour palettes
+and legends, and export publication-ready **PNG, JPG or PDF** figures.
 
 The main function,
 [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md),
-colours anatomical regions by injury frequency and can render **front**,
-**back**, or **both** views, using **male** or **female** body
-templates.
+colours anatomical regions by injury frequency and can render
+**anterior**, **posterior**, or **both** views, using **male** or
+**female** body templates.
 [`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
 renders tissue types on an inner ring and pathologies on an outer ring.
 Built-in taxonomies (`body_categories`, `injury_categories`), one-call
@@ -37,14 +37,14 @@ pak::pak("bnqcasimiro/spinviz")
 
 ``` r
 
-plot_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "anterior", sex = "male", show_scale = FALSE)
 ```
 
 **`Example Diagrams`**
 
 | Front (Male) | Back (Male) | Both Views (Male) |
 |----|----|----|
-| ![Injury heatmap, front view on male template](reference/figures/injury-heatmap-front.png) | ![Injury heatmap, back view on male template](reference/figures/injury-heatmap-back.png) | ![Injury heatmap, both views on male template](reference/figures/injury-heatmap-both.png) |
+| ![Injury heatmap, anterior view on male template](reference/figures/injury-heatmap-front.png) | ![Injury heatmap, posterior view on male template](reference/figures/injury-heatmap-back.png) | ![Injury heatmap, both views on male template](reference/figures/injury-heatmap-both.png) |
 
 **Sunburst diagram**
 

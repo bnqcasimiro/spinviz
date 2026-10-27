@@ -9,7 +9,8 @@ library(spinviz)
 
 - **Heatmaps** of injury frequency projected onto human-body diagrams
   ([`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)),
-  with front, back, or both views and male or female body templates.
+  with anterior, posterior, or both views and male or female body
+  templates.
 - **Interactive sunburst diagrams** of tissue_type/pathology_type
   classifications
   ([`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)),
@@ -63,12 +64,12 @@ boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
 df <- data.frame(body_region, body_area, boxing)
 ```
 
-Then call `plot_heatmap(injury_data, selected_sport, view_choice)`,
-where `view_choice` is one of `"front"`, `"back"`, or `"both"`:
+Then call `plot_heatmap(data, group, view)`, where `view` is one of
+`"anterior"`, `"posterior"`, or `"both"`:
 
 ``` r
 
-plot_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
+plot_heatmap(df, "boxing", "anterior", sex = "male", show_scale = FALSE)
 ```
 
 ![](spinviz_files/figure-html/unnamed-chunk-4-1.png)
@@ -109,7 +110,7 @@ counts:
 
 ``` r
 
-plot_heatmap_default(c(boxing, unspecified = 4), "front")
+plot_heatmap_default(c(boxing, unspecified = 4), "anterior")
 ```
 
 ![](spinviz_files/figure-html/unnamed-chunk-7-1.png)

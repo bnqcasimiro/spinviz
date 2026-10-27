@@ -11,8 +11,8 @@ and plugging in a set of injury counts.
 ``` r
 plot_heatmap_default(
   counts,
-  view_choice,
-  selected_sport = "injury_count",
+  view,
+  group = "injury_count",
   sex = c("male", "female"),
   ...
 )
@@ -31,13 +31,13 @@ plot_heatmap_default(
   for the full numbered row order, or just run `print(body_categories)`
   directly.
 
-- view_choice:
+- view:
 
-  which view to render the diagram. One of ("front", "back", or "both"),
-  same as
+  which view to render the diagram. One of ("anterior", "posterior", or
+  "both"), same as
   [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md).
 
-- selected_sport:
+- group:
 
   A string used as the injury-count column's name when building the
   underlying data frame. Default "injury_count".
@@ -73,5 +73,5 @@ to save the result to file.
 
 ``` r
 boxing <- c(1, 12, 24, 20, 11, 12, 8, 5, 40, 32, 12, 28, 20, 15, 12, 35, 18, 5, 0)
-p1 <- plot_heatmap_default(boxing, "front", sex = "male")
+p1 <- plot_heatmap_default(boxing, "anterior", sex = "male")
 ```

@@ -67,8 +67,8 @@
 </div>
 <!-- badges: start -->
 
-<p><code>spinviz</code> is an <code>R</code> package for visualising <strong>sports injury frequency data</strong>. It renders <strong>anatomical heatmaps</strong> (front/back, male/female body models) and <strong>interactive tissue-type to pathology-type sunburst diagrams</strong>. Toggle labels and values, customise colour palettes and legends, and export publication-ready <strong>PNG, JPG or PDF</strong> figures.</p>
-<p>The main function, <code><a href="reference/plot_heatmap.html">plot_heatmap()</a></code>, colours anatomical regions by injury frequency and can render <strong>front</strong>, <strong>back</strong>, or <strong>both</strong> views, using <strong>male</strong> or <strong>female</strong> body templates. <code><a href="reference/plot_sunburst.html">plot_sunburst()</a></code> renders tissue types on an inner ring and pathologies on an outer ring. Built-in taxonomies (<code>body_categories</code>, <code>injury_categories</code>), one-call wrappers, and <code><a href="reference/save_diagram.html">save_diagram()</a></code> for correct-aspect-ratio export are also included.</p>
+<p><code>spinviz</code> is an <code>R</code> package for visualising <strong>sports injury frequency data</strong>. It renders <strong>anatomical heatmaps</strong> (anterior/posterior, male/female body models) and <strong>interactive tissue-type to pathology-type sunburst diagrams</strong>. Toggle labels and values, customise colour palettes and legends, and export publication-ready <strong>PNG, JPG or PDF</strong> figures.</p>
+<p>The main function, <code><a href="reference/plot_heatmap.html">plot_heatmap()</a></code>, colours anatomical regions by injury frequency and can render <strong>anterior</strong>, <strong>posterior</strong>, or <strong>both</strong> views, using <strong>male</strong> or <strong>female</strong> body templates. <code><a href="reference/plot_sunburst.html">plot_sunburst()</a></code> renders tissue types on an inner ring and pathologies on an outer ring. Built-in taxonomies (<code>body_categories</code>, <code>injury_categories</code>), one-call wrappers, and <code><a href="reference/save_diagram.html">save_diagram()</a></code> for correct-aspect-ratio export are also included.</p>
 <p>Full documentation, tutorials, and a function reference live on the <a href="https://bnqcasimiro.github.io/spinviz/">pkgdown site</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -83,7 +83,7 @@
 </h2>
 <p><strong>Heatmap diagram</strong></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_heatmap.html">plot_heatmap</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"boxing"</span>, <span class="st">"front"</span>, sex <span class="op">=</span> <span class="st">"male"</span>, show_scale <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_heatmap.html">plot_heatmap</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"boxing"</span>, <span class="st">"anterior"</span>, sex <span class="op">=</span> <span class="st">"male"</span>, show_scale <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <details><summary><b><code>Example Diagrams</code></b>
 </summary><table class="table">
 <colgroup>
@@ -97,8 +97,8 @@
 <th>Both Views (Male)</th>
 </tr></thead>
 <tbody><tr>
-<td><img src="reference/figures/injury-heatmap-front.png" height="300" alt="Injury heatmap, front view on male template"></td>
-<td><img src="reference/figures/injury-heatmap-back.png" height="300" alt="Injury heatmap, back view on male template"></td>
+<td><img src="reference/figures/injury-heatmap-front.png" height="300" alt="Injury heatmap, anterior view on male template"></td>
+<td><img src="reference/figures/injury-heatmap-back.png" height="300" alt="Injury heatmap, posterior view on male template"></td>
 <td><img src="reference/figures/injury-heatmap-both.png" height="300" alt="Injury heatmap, both views on male template"></td>
 </tr></tbody>
 </table></details><p><strong>Sunburst diagram</strong></p>

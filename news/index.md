@@ -17,6 +17,15 @@
 
 ### Breaking changes
 
+- [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
+  arguments have been renamed: `injury_data` is now `data`,
+  `selected_sport` is now `group`, and `view_choice` is now `view`, with
+  the view values `"front"` and `"back"` renamed to `"anterior"` and
+  `"posterior"` (`"both"` is unchanged). The same renames apply to
+  [`plot_heatmap_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap_default.md)
+  and to
+  [`save_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/save_diagram.md)’s
+  `view` argument.
 - The sunburst injury-data column names have been renamed: `tissue` is
   now `tissue_type` and `pathology` is now `pathology_type`, mirroring
   the “Tissue type / Pathology type” terminology used in the

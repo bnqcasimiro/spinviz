@@ -32,7 +32,7 @@ df <- read_injury_data("injuries.csv")
 
 ``` r
 
-plot_heatmap(df, "boxing", "front", sex = "male")
+plot_heatmap(df, "boxing", "anterior", sex = "male")
 ```
 
 ## Sunburst (tissue_type/pathology_type) data

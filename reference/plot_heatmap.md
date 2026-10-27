@@ -2,15 +2,15 @@
 
 Creates a heat map projected onto a diagram of the human body, based on
 the number of injuries on body parts visible on the diagram. Diagrams
-can be viewed from the front, back, or both views
+can be viewed from the anterior, posterior, or both views
 
 ## Usage
 
 ``` r
 plot_heatmap(
-  injury_data,
-  selected_sport,
-  view_choice,
+  data,
+  group,
+  view,
   sex = c("male", "female"),
   value_format = c("frequency", "proportion"),
   palette = NULL,
@@ -23,19 +23,20 @@ plot_heatmap(
 
 ## Arguments
 
-- injury_data:
+- data:
 
   a data frame with the body region, area the injury occurred, and the
   frequency of the injury
 
-- selected_sport:
+- group:
 
-  the name of the sport, corresponding to the header of the frequency
-  column in the data frame.
+  the name of the group (e.g. a sport), corresponding to the header of
+  the frequency column in the data frame.
 
-- view_choice:
+- view:
 
-  which view to render the diagram. One of ("front", "back", or "both")
+  which view to render the diagram. One of ("anterior", "posterior", or
+  "both")
 
 - sex:
 
@@ -104,10 +105,10 @@ automatically applied.
 # just run print(body_categories) to see the order directly.
 df <- body_categories
 df$boxing <- c(15, 5, 18, 20, 6, 14, 9, 11, 12, 18, 22, 10, 9, 16, 13, 7, 8, 3, 24)
-# Generate a plot for front view, male
-p1 <- plot_heatmap(df, "boxing", "front", sex = "male", show_values = FALSE)
+# Generate a plot for anterior view, male
+p1 <- plot_heatmap(df, "boxing", "anterior", sex = "male", show_values = FALSE)
 # You can customise the colour palette by:
-p2 <- plot_heatmap(df, "boxing", "front", sex = "female", palette = "plasma")
+p2 <- plot_heatmap(df, "boxing", "anterior", sex = "female", palette = "plasma")
 # You can add your own plot title by:
-p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Front)")
+p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Anterior)")
 ```
