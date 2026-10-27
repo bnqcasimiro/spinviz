@@ -39,7 +39,7 @@
 #' values, one per tissue type (excluding "Unspecified", which is always
 #' grey). Pathology (outer ring) colours are automatically derived as
 #' lightened versions of their parent tissue's colour.
-#' @param transparency A number between 0 and 1 for diagram opacity. Default 1.
+#' @param opacity A number between 0 and 1 for diagram opacity. Default 1.
 #' @param plot_title A string title for the diagram.
 #'
 #' @param inner_font_size Numeric font size for inner-ring tissue labels.
@@ -191,38 +191,47 @@
 #'
 #' p3 <- plot_sunburst(df2, "boxing")
 
-
 plot_sunburst <- function(
-    data, column_name = "", replace_names = "",
-    depth = -1,
-    palette = "Dark 3", transparency = 1,
-    plot_title = "",
-    # Inner ring (tissue labels)
-    inner_font_size = 12,
-    inner_font_style = "normal",
-    inner_font_color = "#FFFFFF",
-    inner_font_family = "Arial",
+  data,
+  column_name = "",
+  replace_names = "",
+  depth = -1,
+  palette = "Dark 3",
+  opacity = 1,
+  plot_title = "",
+  # Inner ring (tissue labels)
+  inner_font_size = 12,
+  inner_font_style = "normal",
+  inner_font_color = "#FFFFFF",
+  inner_font_family = "Arial",
 
-    # Outer labels (pathology labels)
-    outer_font_size = 12,
-    outer_font_style = "normal",
-    outer_font_color = "#333333",
-    outer_font_family = "Arial",
-    title_size = 18, title_color = "#333333", title_x = "center", title_y = "20%",
-    title_family = "Arial",
-    include_non_specific = TRUE,
-    inner_radius = "10%", mid_radius = "40%", outer_radius = "50%",
-    label_line_length = 40, label_line_length2 = 80,
-    min_label_angle = 2,
-    outer_label_width = 90,
-    show_outer_labels = TRUE,
-    widget_width = "1200px", widget_height = "1500px",
-    warnings = "text"){
-
+  # Outer labels (pathology labels)
+  outer_font_size = 12,
+  outer_font_style = "normal",
+  outer_font_color = "#333333",
+  outer_font_family = "Arial",
+  title_size = 18,
+  title_color = "#333333",
+  title_x = "center",
+  title_y = "20%",
+  title_family = "Arial",
+  include_non_specific = TRUE,
+  inner_radius = "10%",
+  mid_radius = "40%",
+  outer_radius = "50%",
+  label_line_length = 40,
+  label_line_length2 = 80,
+  min_label_angle = 2,
+  outer_label_width = 90,
+  show_outer_labels = TRUE,
+  widget_width = "1200px",
+  widget_height = "1500px",
+  warnings = "text"
+) {
   #=========================================================
   # Helper: lighten a hex colour towards white by `factor` (0 = unchanged, 1 = white)
   #=========================================================
-  lighten_colour <- function(hex, factor = 0.55){
+  lighten_colour <- function(hex, factor = 0.55) {
     rgb_col <- grDevices::col2rgb(hex) / 255
     blended <- rgb_col * (1 - factor) + 1 * factor
     grDevices::rgb(blended[1], blended[2], blended[3])
@@ -238,46 +247,57 @@ plot_sunburst <- function(
   tissue <- colnames(data)[1]
   injury <- colnames(data)[2]
 
-  if(column_name == "") {
+  if (column_name == "") {
     current_sport <- colnames(data)[3]
-    if(is.na(current_sport)){
-      error_messages(type = warnings, "Dataset contains less than 3 columns",
-                     is_error = TRUE)
+    if (is.na(current_sport)) {
+      error_messages(
+        type = warnings,
+        "Dataset contains less than 3 columns",
+        is_error = TRUE
+      )
     }
   } else {
     current_sport <- colnames(data)[which(colnames(data) == column_name)]
-    if(length(current_sport) == 0) {
-      error_messages(type = warnings, "Column name does not exist in dataset",
-                     is_error = TRUE)
+    if (length(current_sport) == 0) {
+      error_messages(
+        type = warnings,
+        "Column name does not exist in dataset",
+        is_error = TRUE
+      )
     }
   }
 
   # Fill in missing values in the tissue column (carry the last seen tissue down)
-  if(any(data[tissue] == "")){
+  if (any(data[tissue] == "")) {
     new_name <- ""
-    for(i in 1:nrow(data[tissue])){
-      if(data[i, tissue] != ""){
+    for (i in 1:nrow(data[tissue])) {
+      if (data[i, tissue] != "") {
         new_name <- data[i, tissue]
-      } else{
+      } else {
         data[i, tissue] <- new_name
       }
     }
   }
 
-  if(any(is.numeric(data[[current_sport]])) == FALSE){
+  if (any(is.numeric(data[[current_sport]])) == FALSE) {
     dplyr::mutate_at(data, current_sport, as.numeric)
   }
 
   # Change null to 0 as nulls cause blank output, 0s are ignored
-  tryCatch(if(any(is.na(data[current_sport]))) {
-    data[current_sport][is.na(data[current_sport])] <- 0
-    error_messages(type = warnings, "Caution: null values found in dataset. Changed to 0",
-                   is_error = FALSE)
-  })
+  tryCatch(
+    if (any(is.na(data[current_sport]))) {
+      data[current_sport][is.na(data[current_sport])] <- 0
+      error_messages(
+        type = warnings,
+        "Caution: null values found in dataset. Changed to 0",
+        is_error = FALSE
+      )
+    }
+  )
 
-  if (nrow(data[current_sport]) == 0){
+  if (nrow(data[current_sport]) == 0) {
     error_messages(type = warnings, "Column contains 0 rows", is_error = TRUE)
-  } else if (colSums(data[current_sport]) == 0){
+  } else if (colSums(data[current_sport]) == 0) {
     error_messages(type = warnings, "Sum of column equals 0", is_error = TRUE)
   }
 
@@ -288,14 +308,19 @@ plot_sunburst <- function(
   current_data <- subset(current_data, current_data[injury] != "")
 
   # Toggle: drop "Non-specific" tissue rows entirely if requested
-  if(!isTRUE(include_non_specific)){
-    keep_rows <- !grepl(non_specific_label_pattern,
-                        trimws(current_data[[tissue]]), ignore.case = TRUE)
+  if (!isTRUE(include_non_specific)) {
+    keep_rows <- !grepl(
+      non_specific_label_pattern,
+      trimws(current_data[[tissue]]),
+      ignore.case = TRUE
+    )
     current_data <- current_data[keep_rows, ]
-    if(nrow(current_data) == 0){
-      error_messages(type = warnings,
-                     "No rows remain after excluding 'Non-specific' tissue",
-                     is_error = TRUE)
+    if (nrow(current_data) == 0) {
+      error_messages(
+        type = warnings,
+        "No rows remain after excluding 'Non-specific' tissue",
+        is_error = TRUE
+      )
     }
   }
 
@@ -306,9 +331,17 @@ plot_sunburst <- function(
   if (is.null(palette) || (length(palette) == 1 && !identical(palette, ""))) {
     base_colours <- diagram_colours(palette, n_tissue)
     if (is.null(base_colours) || length(base_colours) < n_tissue) {
-      warning("diagram_colours('", palette, "', ", n_tissue, ") returned ",
-              length(base_colours), " colour(s) for ", n_tissue,
-              " tissue types; falling back to the 'Dark 3' palette.")
+      warning(
+        "diagram_colours('",
+        palette,
+        "', ",
+        n_tissue,
+        ") returned ",
+        length(base_colours),
+        " colour(s) for ",
+        n_tissue,
+        " tissue types; falling back to the 'Dark 3' palette."
+      )
       base_colours <- diagram_colours("Dark 3", n_tissue)
     }
   } else {
@@ -324,23 +357,35 @@ plot_sunburst <- function(
   legend_names <- character(n_tissue)
   pathology_flat <- list()
 
-  for(i in seq_len(n_tissue)){
+  for (i in seq_len(n_tissue)) {
     current_tissue <- tissue_types[i]
     rows <- current_data[current_data[[tissue]] == current_tissue, ]
 
-    is_non_specific <- grepl(non_specific_label_pattern, trimws(current_tissue), ignore.case = TRUE)
-    tissue_colour <- if (is_non_specific) non_specific_colour else base_colours[i]
-    pathology_colour <- if (is_non_specific) non_specific_colour_light else lighten_colour(tissue_colour, 0.55)
+    is_non_specific <- grepl(
+      non_specific_label_pattern,
+      trimws(current_tissue),
+      ignore.case = TRUE
+    )
+    tissue_colour <- if (is_non_specific) {
+      non_specific_colour
+    } else {
+      base_colours[i]
+    }
+    pathology_colour <- if (is_non_specific) {
+      non_specific_colour_light
+    } else {
+      lighten_colour(tissue_colour, 0.55)
+    }
 
     legend_names[i] <- current_tissue
 
     children <- NULL
     if (show_pathology) {
-      children <- lapply(seq_len(nrow(rows)), function(j){
+      children <- lapply(seq_len(nrow(rows)), function(j) {
         list(
           name = rows[[injury]][j],
           value = rows[[current_sport]][j],
-          itemStyle = list(color = pathology_colour, opacity = transparency)
+          itemStyle = list(color = pathology_colour, opacity = opacity)
         )
       })
       for (j in seq_len(nrow(rows))) {
@@ -354,7 +399,7 @@ plot_sunburst <- function(
     tree_data[[i]] <- list(
       name = current_tissue,
       value = if (!show_pathology) sum(rows[[current_sport]]) else NULL,
-      itemStyle = list(color = tissue_colour, opacity = transparency),
+      itemStyle = list(color = tissue_colour, opacity = opacity),
       children = children
     )
   }
@@ -367,14 +412,20 @@ plot_sunburst <- function(
       text = plot_title,
       left = title_x,
       top = title_y,
-      textStyle = list(fontSize = title_size, color = title_color, fontFamily = title_family)
+      textStyle = list(
+        fontSize = title_size,
+        color = title_color,
+        fontFamily = title_family
+      )
     ),
     legend = list(
       type = "scroll",
       orient = "vertical",
       right = 10,
       top = "middle",
-      data = as.list(legend_names[!grepl(non_specific_label_pattern, legend_names, ignore.case = TRUE)])
+      data = as.list(legend_names[
+        !grepl(non_specific_label_pattern, legend_names, ignore.case = TRUE)
+      ])
     ),
     tooltip = list(trigger = "item", formatter = "{b}: {c}"),
     toolbox = list(
@@ -415,7 +466,8 @@ plot_sunburst <- function(
       list(),
 
       list(
-        r0 = inner_radius, r = mid_radius,
+        r0 = inner_radius,
+        r = mid_radius,
         label = list(
           rotate = "radial",
           position = "inside",
@@ -426,7 +478,8 @@ plot_sunburst <- function(
       ),
 
       list(
-        r0 = mid_radius, r = outer_radius,
+        r0 = mid_radius,
+        r = outer_radius,
         label = list(show = FALSE)
       )
     )
@@ -469,12 +522,15 @@ plot_sunburst <- function(
 
   opts$series <- all_series
 
-  chart <- echarts4r::e_list(echarts4r::e_charts(width = widget_width, height = widget_height), opts)
+  chart <- echarts4r::e_list(
+    echarts4r::e_charts(width = widget_width, height = widget_height),
+    opts
+  )
 
   attr(chart, "spinviz_sunburst_meta") <- list(
-    widget_width = widget_width, widget_height = widget_height
+    widget_width = widget_width,
+    widget_height = widget_height
   )
 
   chart
-
 }

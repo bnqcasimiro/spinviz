@@ -12,6 +12,8 @@
 
 ## Breaking changes
 
+* `plot_sunburst()`'s `transparency` argument has been renamed to `opacity`,
+  matching the argument name already used by `plot_heatmap()`.
 * `plot_heatmap()` arguments have been renamed: `injury_data` is now `data`,
   `selected_sport` is now `group`, and `view_choice` is now `view`, with the
   view values `"front"` and `"back"` renamed to `"anterior"` and `"posterior"`

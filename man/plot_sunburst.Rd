@@ -10,7 +10,7 @@ plot_sunburst(
   replace_names = "",
   depth = -1,
   palette = "Dark 3",
-  transparency = 1,
+  opacity = 1,
   plot_title = "",
   inner_font_size = 12,
   inner_font_style = "normal",
@@ -73,7 +73,7 @@ values, one per tissue type (excluding "Unspecified", which is always
 grey). Pathology (outer ring) colours are automatically derived as
 lightened versions of their parent tissue's colour.}
 
-\item{transparency}{A number between 0 and 1 for diagram opacity. Default 1.}
+\item{opacity}{A number between 0 and 1 for diagram opacity. Default 1.}
 
 \item{plot_title}{A string title for the diagram.}
 
