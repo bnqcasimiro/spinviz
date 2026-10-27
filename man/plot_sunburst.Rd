@@ -154,29 +154,17 @@ The diagram can be hovered over for more granular detail.
 Inner and outer ring labels can be formatted independently.
 }
 \examples{
-# Easiest: start from the built-in injury_categories taxonomy
-# (Tissue/Pathology columns are already filled in) and add your
-# own injury counts. See ?injury_categories for the category order.
-df <- injury_categories
-
-df$boxing <- c(
-  10, 19, 19, 41, 31, 18, 16, 16, 10, 10,
-  27, 46, 67, 31, 54, 10, 27, 10, 96, 82,
-  48, 26, 33, 34, 24
-)
-
-df$judo <- c(
-  25, 45, 37, 31, 19, 41, 48, 14, 49, 26,
-  42, 24, 14, 16, 37, 41, 23, 36, 33, 44,
-  48, 41, 31, 25, 48
-)
-
-p1 <- plot_sunburst(df, "boxing")
-p2 <- plot_sunburst(df, "judo")
+# Easiest: use the built-in tissue_df example dataset (the
+# injury_categories taxonomy with boxing and judo injury counts).
+# To use your own counts instead, start from the built-in
+# injury_categories taxonomy (Tissue/Pathology columns are already
+# filled in) and add your own counts. See ?injury_categories.
+(p1 <- plot_sunburst(tissue_df, "boxing"))
+(p2 <- plot_sunburst(tissue_df, "judo"))
 
 # Customise inner and outer label formatting independently
 p_custom <- plot_sunburst(
-  df,
+  tissue_df,
   "boxing",
   palette = "Dark 3",
   inner_font_size = 14,
@@ -246,7 +234,7 @@ df2 <- data.frame(
   boxing = boxing2
 )
 
-p3 <- plot_sunburst(df2, "boxing")
+(p3 <- plot_sunburst(df2, "boxing"))
 }
 \seealso{
 \code{\link[=save_diagram]{save_diagram()}} to export this chart directly

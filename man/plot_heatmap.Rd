@@ -59,16 +59,15 @@ diagram.
 Diagrams can be viewed from the anterior, posterior, or both views
 }
 \examples{
-# Easiest: start from the built-in body_categories taxonomy (its
-# body_region/body_area columns are already filled in) and just add
-# your own counts, matching its row order. See ?body_categories, or
-# just run print(body_categories) to see the order directly.
-df <- body_categories
-df$boxing <- c(15, 5, 18, 20, 6, 14, 9, 11, 12, 18, 22, 10, 9, 16, 13, 7, 8, 3, 24)
+# Easiest: use the built-in body_df example dataset (the
+# body_categories taxonomy with boxing injury counts attached).
 # Generate a plot for anterior view, male
-p1 <- plot_heatmap(df, "boxing", "anterior", sex = "male", show_values = FALSE)
+(p1 <- plot_heatmap(body_df, "boxing", "anterior", sex = "male", show_values = FALSE))
 # You can customise the colour palette by:
-p2 <- plot_heatmap(df, "boxing", "anterior", sex = "female", palette = "plasma")
+(p2 <- plot_heatmap(body_df, "boxing", "anterior", sex = "female", palette = "plasma"))
+# To use your own counts instead, start from the built-in body_categories
+# taxonomy (its body_region/body_area columns are already filled in) and
+# add your counts, matching its row order. See ?body_categories.
 # You can add your own plot title by:
 p2 + ggplot2::labs(title = "Boxing Injury Heatmap (Anterior)")
 }

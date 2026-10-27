@@ -95,3 +95,4 @@ URL: https://github.com/bnqcasimiro/spinviz,
     https://bnqcasimiro.github.io/spinviz/
 BugReports: https://github.com/bnqcasimiro/spinviz/issues
 Language: en-US
+LazyData: true
