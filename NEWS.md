@@ -1,5 +1,15 @@
 # spinviz (development version)
 
+## Minor changes
+
+* `create_injury_template()` now pre-fills the `body_region` column from
+  the `body_categories` taxonomy instead of leaving it blank, so templates
+  are ready to use without manually entering region labels. The template
+  now also includes the "Unspecified" row, and `read_injury_data()`
+  accepts "Unspecified" as a valid body area, matching what
+  `plot_heatmap()` already supports (it is reported as a count below the
+  diagram rather than drawn on it).
+
 ## Breaking changes
 
 * The sunburst injury-data column names have been renamed: `tissue` is now

@@ -17,9 +17,11 @@ The path (invisibly), so the call can be used in a pipe.
 }
 \description{
 Writes a CSV file in the format expected by \code{\link[=plot_heatmap]{plot_heatmap()}}: one row
-per recognised body area, with \code{body_region} and \code{body_area}
-columns and one empty column per sport for the user to fill in with
-injury frequencies.
+per body area in the \link{body_categories} taxonomy (including
+"Unspecified", which \code{\link[=plot_heatmap]{plot_heatmap()}} reports as a count below the
+diagram), with \code{body_region} and \code{body_area} columns pre-filled and
+one empty column per sport for the user to fill in with injury
+frequencies.
 }
 \examples{
 path <- tempfile(fileext = ".csv")

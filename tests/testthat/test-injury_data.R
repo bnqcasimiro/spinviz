@@ -7,8 +7,10 @@ test_that("create_injury_template writes a CSV with the expected structure", {
   expect_true(file.exists(path))
   written <- utils::read.csv(path, check.names = FALSE)
   expect_named(written, c("body_region", "body_area", "boxing", "judo"))
-  expect_equal(written$body_area, spinviz:::injury_body_areas())
-  expect_equal(nrow(written), 18)
+  expect_equal(written$body_area, body_categories$body_area)
+  expect_equal(written$body_region, body_categories$body_region)
+  expect_equal(nrow(written), 19)
+  expect_true("Unspecified" %in% written$body_area)
   expect_true(all(is.na(written$boxing)))
   expect_true(all(is.na(written$judo)))
 })
@@ -43,7 +45,7 @@ test_that("read_injury_data reads a filled-in template", {
   expect_s3_class(data, "data.frame")
   expect_named(data, c("body_region", "body_area", "boxing"))
   expect_type(data$boxing, "double")
-  expect_equal(data$boxing, as.numeric(seq_len(18)))
+  expect_equal(data$boxing, as.numeric(seq_len(19)))
 })
 
 test_that("read_injury_data preserves sport column names with spaces", {
@@ -112,6 +114,21 @@ test_that("read_injury_data warns on unrecognised body areas", {
     row.names = FALSE
   )
   expect_warning(read_injury_data(path), "Hed, Thorasic Spine")
+})
+
+test_that("read_injury_data accepts Unspecified without warning", {
+  path <- tempfile(fileext = ".csv")
+  on.exit(unlink(path))
+  utils::write.csv(
+    data.frame(
+      body_region = c("Head and neck", "Unspecified"),
+      body_area = c("Head", "Unspecified"),
+      boxing = c(1, 2)
+    ),
+    path,
+    row.names = FALSE
+  )
+  expect_no_warning(read_injury_data(path))
 })
 
 test_that("read_injury_data accepts recognised body areas in any case", {

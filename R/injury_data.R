@@ -1,9 +1,10 @@
-# Canonical list of body areas recognised by plot_heatmap(),
-# derived from the built-in body_categories taxonomy (minus "Unspecified",
-# which is not drawn on the diagram). Used verbatim (no title-casing), so
-# e.g. "Hip / groin" keeps its lowercase second word. Single source of
-# truth so the CSV template, the reader's validation, and the diagram
-# cannot drift apart.
+# Canonical list of body areas drawn on the plot_heatmap() diagram,
+# derived from the built-in body_categories taxonomy minus "Unspecified"
+# (which has no SVG region and is shown as a count below the diagram
+# instead). Used verbatim (no title-casing), so e.g. "Hip / groin" keeps
+# its lowercase second word. Note the CSV template and reader validation
+# accept the full taxonomy (including "Unspecified") via
+# body_categories$body_area.
 injury_body_areas <- function() {
   areas <- body_categories$body_area
   areas[areas != "Unspecified"]
@@ -13,9 +14,11 @@ injury_body_areas <- function() {
 #'
 #' @description
 #' Writes a CSV file in the format expected by [plot_heatmap()]: one row
-#' per recognised body area, with `body_region` and `body_area`
-#' columns and one empty column per sport for the user to fill in with
-#' injury frequencies.
+#' per body area in the [body_categories] taxonomy (including
+#' "Unspecified", which [plot_heatmap()] reports as a count below the
+#' diagram), with `body_region` and `body_area` columns pre-filled and
+#' one empty column per sport for the user to fill in with injury
+#' frequencies.
 #'
 #' @param path File path where the CSV should be written.
 #' @param sports Character vector of sport names; each becomes an empty
@@ -37,11 +40,7 @@ create_injury_template <- function(path, sports = "sport1") {
     all(nzchar(sports))
   )
 
-  template <- data.frame(
-    body_region = "",
-    body_area = injury_body_areas(),
-    stringsAsFactors = FALSE
-  )
+  template <- body_categories[, c("body_region", "body_area")]
   for (sport in sports) {
     template[[sport]] <- NA_real_
   }
@@ -127,7 +126,7 @@ read_injury_data <- function(path) {
   # Case-insensitive comparison against the canonical labels (which keep
   # lowercase second words, e.g. "Hip / groin"); input values themselves
   # are stored verbatim, so matching in plot_heatmap() is unaffected.
-  canonical <- injury_body_areas()
+  canonical <- body_categories$body_area
   entered <- trimws(data$body_area)
   unrecognised <- unique(entered[!tolower(entered) %in% tolower(canonical)])
   if (length(unrecognised) > 0) {
