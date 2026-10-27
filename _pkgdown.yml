@@ -35,6 +35,10 @@ reference:
       - create_sunburst_template
       - read_injury_data
       - read_sunburst_data
+  - title: Data
+    contents:
+      - body_df
+      - tissue_df
   - title: Palettes
     contents:
       - diagram_colours
