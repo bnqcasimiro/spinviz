@@ -18,7 +18,7 @@ plot_sunburst(
   replace_names = "",
   depth = -1,
   palette = "Dark 3",
-  transparency = 1,
+  opacity = 1,
   plot_title = "",
   inner_font_size = 12,
   inner_font_style = "normal",
@@ -96,7 +96,7 @@ plot_sunburst(
   grey). Pathology (outer ring) colours are automatically derived as
   lightened versions of their parent tissue's colour.
 
-- transparency:
+- opacity:
 
   A number between 0 and 1 for diagram opacity. Default 1.
 

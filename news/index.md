@@ -17,6 +17,10 @@
 
 ### Breaking changes
 
+- [`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)’s
+  `transparency` argument has been renamed to `opacity`, matching the
+  argument name already used by
+  [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md).
 - [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
   arguments have been renamed: `injury_data` is now `data`,
   `selected_sport` is now `group`, and `view_choice` is now `view`, with
