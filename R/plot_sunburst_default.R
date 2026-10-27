@@ -2,13 +2,13 @@
 #'
 #' @description
 #' A thin wrapper around [plot_sunburst()] for using the standard
-#' tissue/pathology taxonomy ([injury_categories]) and plugging in a set of
+#' tissue_type/pathology_type taxonomy ([injury_categories]) and plugging in a set of
 #' injury counts.
 #'
 #' @param counts A numeric vector of exactly `nrow(injury_categories)`
 #' values (currently 25), in the same row order as [injury_categories],
 #' i.e. `counts[i]` is the injury count for
-#' `injury_categories[i, c("tissue", "pathology")]`.
+#' `injury_categories[i, c("tissue_type", "pathology_type")]`.
 #' @param column_name A string used as the injury-count column's name when
 #' building the underlying data frame. Default "injury_count".
 #' @param ... Passed straight through to [plot_sunburst()].
@@ -19,7 +19,7 @@
 #' [plot_sunburst()] itself returns.
 #' @seealso [injury_categories] for the taxonomy this merges your counts
 #' into. [plot_sunburst()] for the full version that accepts any
-#' tissue/pathology taxonomy, if you need something other than the
+#' tissue_type/pathology_type taxonomy, if you need something other than the
 #' built-in one (i.e. a different classification system).
 #' @export
 #'

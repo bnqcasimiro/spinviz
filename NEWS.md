@@ -2,6 +2,14 @@
 
 ## Breaking changes
 
+* The sunburst injury-data column names have been renamed: `tissue` is now
+  `tissue_type` and `pathology` is now `pathology_type`, mirroring the
+  "Tissue type / Pathology type" terminology used in the documentation.
+  This affects the `injury_categories` taxonomy, `create_sunburst_template()`,
+  and `read_sunburst_data()`. Existing sunburst CSV files using the old
+  headers must be renamed before `read_sunburst_data()` will accept them.
+  `plot_sunburst()` itself selects columns by position, so data frames
+  passed to it directly are unaffected.
 * The heatmap injury-data column names have been renamed again:
   `region_area` is now `body_region` and `subcategory` is now `body_area`,
   so the names match the "Body region / Body area" terminology used in the

@@ -18,7 +18,7 @@ The path (invisibly), so the call can be used in a pipe.
 \description{
 Writes a CSV file in the format expected by
 \code{\link[=plot_sunburst]{plot_sunburst()}}: one row per entry in the built-in
-\link{injury_categories} taxonomy, with \code{tissue} and \code{pathology} columns and
+\link{injury_categories} taxonomy, with \code{tissue_type} and \code{pathology_type} columns and
 one empty column per sport for the user to fill in with injury
 frequencies.
 

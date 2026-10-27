@@ -1,15 +1,15 @@
-#' @title Standard tissue/pathology injury taxonomy
+#' @title Standard tissue_type/pathology_type injury taxonomy
 #'
 #' @description
 #' The standard Tissue/Pathology classification used throughout this
 #' package's sunburst and heatmap functions, with no injury counts attached.
 #' Combine it with your own counts via [plot_sunburst_default()] rather
-#' than retyping the full tissue/pathology category list for every analysis.
+#' than retyping the full tissue_type/pathology_type category list for every analysis.
 #'
 #' @format A data frame with 25 rows and 2 columns:
 #' \describe{
-#'   \item{tissue}{Tissue type, e.g. "Bone", "Nervous".}
-#'   \item{pathology}{Pathology type, e.g. "Fracture", "Tendon rupture".}
+#'   \item{tissue_type}{Tissue type, e.g. "Bone", "Nervous".}
+#'   \item{pathology_type}{Pathology type, e.g. "Fracture", "Tendon rupture".}
 #' }
 #'
 #' @details
@@ -50,11 +50,11 @@
 #'
 #' @seealso [plot_sunburst_default()] to build a sunburst diagram from
 #' this taxonomy plus your own injury counts, without needing to retype the
-#' tissue/pathology labels yourself. [body_categories] for the equivalent
+#' tissue_type/pathology_type labels yourself. [body_categories] for the equivalent
 #' taxonomy used by [plot_heatmap()].
 #' @export
 injury_categories <- data.frame(
-  tissue = c(
+  tissue_type = c(
     'Muscle / Tendon','Muscle / Tendon','Muscle / Tendon','Muscle / Tendon','Muscle / Tendon',
     'Nervous','Nervous',
     'Bone','Bone','Bone','Bone','Bone',
@@ -66,7 +66,7 @@ injury_categories <- data.frame(
     'Internal organ',
     'Unspecified'
   ),
-  pathology = c(
+  pathology_type = c(
     'Muscle strain','Muscle contusion','Compartment syndrome','Tendinopathy','Tendon rupture',
     'Brain or spinal cord injury','Peripheral nerve injury',
     'Fracture','Bone stress injury','Bone contusion','Avascular necrosis','Physis injury',

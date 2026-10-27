@@ -55,7 +55,7 @@ save_diagram(
 
 # Requires chromote (+ a Chrome install) for the screenshot export.
 df_sunburst <- data.frame(
-  tissue = c(
+  tissue_type = c(
     "Muscle/tendon",
     "Muscle/tendon",
     "Nervous",
@@ -67,7 +67,7 @@ df_sunburst <- data.frame(
     "Vessels",
     "Internal organs"
   ),
-  pathology = c(
+  pathology_type = c(
     "Muscle injury",
     "Tendon rupture",
     "Peripheral nerve injury",

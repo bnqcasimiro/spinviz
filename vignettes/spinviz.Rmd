@@ -23,7 +23,7 @@ library(spinviz)
 `spinviz` produces two kinds of injury visualisations:
 
 - **Heatmaps** of injury frequency projected onto human-body diagrams (`plot_heatmap()`), with front, back, or both views and male or female body templates.
-- **Interactive sunburst diagrams** of tissue/pathology classifications (`plot_sunburst()`), built on echarts4r.
+- **Interactive sunburst diagrams** of tissue_type/pathology_type classifications (`plot_sunburst()`), built on echarts4r.
 
 ## Data format
 
@@ -42,16 +42,16 @@ The 18 recognised body areas and their `body_region` groupings, plus a special `
 
 ### Sunburst data
 
-For the sunburst, the first two columns are `tissue` and `pathology`:
+For the sunburst, the first two columns are `tissue_type` and `pathology_type`:
 
-| tissue | pathology | sport1 |
+| tissue_type | pathology_type | sport1 |
 |---|---|---|
 | Muscle / Tendon | Muscle strain | 20 |
 | Muscle / Tendon | Tendon rupture | 10 |
 | Bone | Fracture | 16 |
 | Bone | Bone contusion | 6 |
 
-The built-in `injury_categories` taxonomy contains the 25-row tissue/pathology classification.
+The built-in `injury_categories` taxonomy contains the 25-row tissue_type/pathology_type classification.
 
 ## Heatmap example
 
@@ -111,7 +111,7 @@ plot_sunburst(
 
 The sunburst is interactive: tissue types sit on the inner ring, pathologies
 on the outer ring. See `?plot_sunburst` for options such as
-`depth = 1` (tissue ring only), excluding "Unspecified"/"Non-specific" rows,
+`depth = 1` (tissue_type ring only), excluding "Unspecified"/"Non-specific" rows,
 and label/radius/font tuning.
 
 ## Convenience wrappers

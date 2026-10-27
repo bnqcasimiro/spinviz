@@ -10,7 +10,7 @@ plot_sunburst_default(counts, column_name = "injury_count", ...)
 \item{counts}{A numeric vector of exactly \code{nrow(injury_categories)}
 values (currently 25), in the same row order as \link{injury_categories},
 i.e. \code{counts[i]} is the injury count for
-\code{injury_categories[i, c("tissue", "pathology")]}.}
+\code{injury_categories[i, c("tissue_type", "pathology_type")]}.}
 
 \item{column_name}{A string used as the injury-count column's name when
 building the underlying data frame. Default "injury_count".}
@@ -25,7 +25,7 @@ An echarts4r htmlwidget, identical to what
 }
 \description{
 A thin wrapper around \code{\link[=plot_sunburst]{plot_sunburst()}} for using the standard
-tissue/pathology taxonomy (\link{injury_categories}) and plugging in a set of
+tissue_type/pathology_type taxonomy (\link{injury_categories}) and plugging in a set of
 injury counts.
 }
 \examples{
@@ -35,6 +35,6 @@ p1 <- plot_sunburst_default(boxing, plot_title = "Boxing Injuries")
 \seealso{
 \link{injury_categories} for the taxonomy this merges your counts
 into. \code{\link[=plot_sunburst]{plot_sunburst()}} for the full version that accepts any
-tissue/pathology taxonomy, if you need something other than the
+tissue_type/pathology_type taxonomy, if you need something other than the
 built-in one (i.e. a different classification system).
 }

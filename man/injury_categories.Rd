@@ -2,12 +2,12 @@
 % Please edit documentation in R/injury_categories.R
 \name{injury_categories}
 \alias{injury_categories}
-\title{Standard tissue/pathology injury taxonomy}
+\title{Standard tissue_type/pathology_type injury taxonomy}
 \format{
 A data frame with 25 rows and 2 columns:
 \describe{
-\item{tissue}{Tissue type, e.g. "Bone", "Nervous".}
-\item{pathology}{Pathology type, e.g. "Fracture", "Tendon rupture".}
+\item{tissue_type}{Tissue type, e.g. "Bone", "Nervous".}
+\item{pathology_type}{Pathology type, e.g. "Fracture", "Tendon rupture".}
 }
 }
 \usage{
@@ -17,7 +17,7 @@ injury_categories
 The standard Tissue/Pathology classification used throughout this
 package's sunburst and heatmap functions, with no injury counts attached.
 Combine it with your own counts via \code{\link[=plot_sunburst_default]{plot_sunburst_default()}} rather
-than retyping the full tissue/pathology category list for every analysis.
+than retyping the full tissue_type/pathology_type category list for every analysis.
 }
 \details{
 \strong{Row order matters.} \code{\link[=plot_sunburst_default]{plot_sunburst_default()}} (and the manual
@@ -58,6 +58,6 @@ source if this list and the live object ever disagree) is:
 \seealso{
 \code{\link[=plot_sunburst_default]{plot_sunburst_default()}} to build a sunburst diagram from
 this taxonomy plus your own injury counts, without needing to retype the
-tissue/pathology labels yourself. \link{body_categories} for the equivalent
+tissue_type/pathology_type labels yourself. \link{body_categories} for the equivalent
 taxonomy used by \code{\link[=plot_heatmap]{plot_heatmap()}}.
 }

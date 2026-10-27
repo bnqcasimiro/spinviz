@@ -40,12 +40,12 @@ df <- read_injury_data("injuries.csv")
 plot_heatmap(df, "boxing", "front", sex = "male")
 ```
 
-## Sunburst (tissue/pathology) data
+## Sunburst (tissue_type/pathology_type) data
 
 The same workflow exists for the sunburst format. `create_sunburst_template()`
-writes a CSV pre-filled with the 25-row `injury_categories` taxonomy (`tissue`
-and `pathology` columns), and `read_sunburst_data()` validates it — including
-filling blank `tissue` cells down from the row above, so compact hand-edited
+writes a CSV pre-filled with the 25-row `injury_categories` taxonomy (`tissue_type`
+and `pathology_type` columns), and `read_sunburst_data()` validates it — including
+filling blank `tissue_type` cells down from the row above, so compact hand-edited
 files work:
 
 ```{r}

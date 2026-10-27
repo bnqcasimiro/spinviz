@@ -3,7 +3,7 @@
 #' @description
 #' Writes a CSV file in the format expected by
 #' [plot_sunburst()]: one row per entry in the built-in
-#' [injury_categories] taxonomy, with `tissue` and `pathology` columns and
+#' [injury_categories] taxonomy, with `tissue_type` and `pathology_type` columns and
 #' one empty column per sport for the user to fill in with injury
 #' frequencies.
 #'
@@ -37,8 +37,8 @@ create_sunburst_template <- function(path, sports = "sport1") {
   # rows in a spreadsheet; read_sunburst_data() also accepts the compact
   # carry-down style.
   template <- data.frame(
-    tissue = injury_categories$tissue,
-    pathology = injury_categories$pathology,
+    tissue_type = injury_categories$tissue_type,
+    pathology_type = injury_categories$pathology_type,
     stringsAsFactors = FALSE
   )
   for (sport in sports) {
@@ -54,16 +54,16 @@ create_sunburst_template <- function(path, sports = "sport1") {
 #' @description
 #' Reads a CSV file (e.g. one created with [create_sunburst_template()] and
 #' filled in) and checks that it has the structure
-#' [plot_sunburst()] expects: `tissue` and `pathology` columns
+#' [plot_sunburst()] expects: `tissue_type` and `pathology_type` columns
 #' plus at least one sport column of injury frequencies.
 #'
-#' Blank cells in the `tissue` column are filled with the last seen tissue
+#' Blank cells in the `tissue_type` column are filled with the last seen tissue_type
 #' value (carry-down), matching the behaviour of
 #' [plot_sunburst()], so compact hand-edited files are accepted.
 #'
 #' @param path File path of the CSV to read.
 #'
-#' @return A data frame with `tissue`, `pathology`, and one column per
+#' @return A data frame with `tissue_type`, `pathology_type`, and one column per
 #'   sport (coerced to numeric), ready to pass to
 #'   [plot_sunburst()].
 #' @seealso [create_sunburst_template()] to generate a correctly formatted
@@ -81,7 +81,7 @@ read_sunburst_data <- function(path) {
 
   data <- utils::read.csv(path, check.names = FALSE)
 
-  required <- c("tissue", "pathology")
+  required <- c("tissue_type", "pathology_type")
   missing_cols <- setdiff(required, names(data))
   if (length(missing_cols) > 0) {
     stop(
@@ -96,7 +96,7 @@ read_sunburst_data <- function(path) {
   if (length(sport_cols) == 0) {
     stop(
       "No sport column found. The file needs at least one injury frequency ",
-      "column besides 'tissue' and 'pathology'.",
+      "column besides 'tissue_type' and 'pathology_type'.",
       call. = FALSE
     )
   }
@@ -105,16 +105,16 @@ read_sunburst_data <- function(path) {
     stop("File contains no data rows.", call. = FALSE)
   }
 
-  data$tissue <- trimws(as.character(data$tissue))
-  data$pathology <- trimws(as.character(data$pathology))
+  data$tissue_type <- trimws(as.character(data$tissue_type))
+  data$pathology_type <- trimws(as.character(data$pathology_type))
 
-  # Carry the last seen tissue down over blank cells, mirroring
+  # Carry the last seen tissue_type down over blank cells, mirroring
   # plot_sunburst()'s handling of compact hand-edited files.
-  blank_tissue <- is.na(data$tissue) | !nzchar(data$tissue)
+  blank_tissue <- is.na(data$tissue_type) | !nzchar(data$tissue_type)
   if (any(blank_tissue)) {
     if (blank_tissue[1]) {
       stop(
-        "Column 'tissue' starts with a blank value; the first row must ",
+        "Column 'tissue_type' starts with a blank value; the first row must ",
         "name a tissue type.",
         call. = FALSE
       )
@@ -122,16 +122,16 @@ read_sunburst_data <- function(path) {
     last_seen <- ""
     for (i in seq_len(nrow(data))) {
       if (blank_tissue[i]) {
-        data$tissue[i] <- last_seen
+        data$tissue_type[i] <- last_seen
       } else {
-        last_seen <- data$tissue[i]
+        last_seen <- data$tissue_type[i]
       }
     }
   }
 
-  if (anyNA(data$pathology) || any(!nzchar(data$pathology))) {
+  if (anyNA(data$pathology_type) || any(!nzchar(data$pathology_type))) {
     stop(
-      "Column 'pathology' contains missing or empty values.",
+      "Column 'pathology_type' contains missing or empty values.",
       call. = FALSE
     )
   }
@@ -139,29 +139,29 @@ read_sunburst_data <- function(path) {
   # Warn (not stop) on unrecognised labels: the diagram accepts custom
   # categories, but typos silently produce fragmented trees.
   unrecognised_tissue <- setdiff(
-    unique(data$tissue),
-    unique(injury_categories$tissue)
+    unique(data$tissue_type),
+    unique(injury_categories$tissue_type)
   )
   if (length(unrecognised_tissue) > 0) {
     warning(
-      "Unrecognised tissue value(s), possibly misspelled: ",
+      "Unrecognised tissue_type value(s), possibly misspelled: ",
       paste(unrecognised_tissue, collapse = ", "),
       ". Expected values are: ",
-      paste(unique(injury_categories$tissue), collapse = ", "),
+      paste(unique(injury_categories$tissue_type), collapse = ", "),
       call. = FALSE
     )
   }
 
   unrecognised_pathology <- setdiff(
-    unique(data$pathology),
-    unique(injury_categories$pathology)
+    unique(data$pathology_type),
+    unique(injury_categories$pathology_type)
   )
   if (length(unrecognised_pathology) > 0) {
     warning(
-      "Unrecognised pathology value(s), possibly misspelled: ",
+      "Unrecognised pathology_type value(s), possibly misspelled: ",
       paste(unrecognised_pathology, collapse = ", "),
       ". Expected values are: ",
-      paste(unique(injury_categories$pathology), collapse = ", "),
+      paste(unique(injury_categories$pathology_type), collapse = ", "),
       call. = FALSE
     )
   }

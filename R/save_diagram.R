@@ -89,14 +89,14 @@
 #' boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
 #' df_heatmap <- data.frame(body_region, body_area, boxing)
 #'
-#' tissue <- c('Muscle/tendon','Muscle/tendon','Nervous','Bone','Bone',
-#'             'Cartilage/Synovium/Bursa','Ligament/Joint capsule',
-#'             'Superficial tissues/skin','Vessels','Internal organs')
-#' pathology <- c('Muscle injury','Tendon rupture','Peripheral nerve injury',
-#'                'Fracture','Bone contusion','Cartilage injury','Joint sprain',
-#'                'Laceration','Vascular trauma','Organ trauma')
+#' tissue_type <- c('Muscle/tendon','Muscle/tendon','Nervous','Bone','Bone',
+#'                  'Cartilage/Synovium/Bursa','Ligament/Joint capsule',
+#'                  'Superficial tissues/skin','Vessels','Internal organs')
+#' pathology_type <- c('Muscle injury','Tendon rupture','Peripheral nerve injury',
+#'                     'Fracture','Bone contusion','Cartilage injury','Joint sprain',
+#'                     'Laceration','Vascular trauma','Organ trauma')
 #' injuries <- c(20, 10, 16, 16, 10, 67, 27, 82, 26, 34)
-#' df_sunburst <- data.frame(tissue, pathology, injuries)
+#' df_sunburst <- data.frame(tissue_type, pathology_type, injuries)
 #'
 #' \dontrun{
 #' # Heatmap: type detected automatically, ratio comes from plot_heatmap()'s

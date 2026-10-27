@@ -1,13 +1,13 @@
 sample_sunburst_data <- function() {
   data.frame(
-    tissue = c(
+    tissue_type = c(
       "Muscle / Tendon",
       "Muscle / Tendon",
       "Bone",
       "Bone",
       "Unspecified"
     ),
-    pathology = c(
+    pathology_type = c(
       "Muscle strain",
       "Tendon rupture",
       "Fracture",
@@ -60,7 +60,7 @@ test_that("plot_sunburst can exclude non-specific tissue rows", {
   labels <- vapply(sb$x$opts$series[[1]]$data, `[[`, "", "name")
   expect_false(any(grepl("unspecified", labels, ignore.case = TRUE)))
 
-  everything_unspecified <- df[df$tissue == "Unspecified", ]
+  everything_unspecified <- df[df$tissue_type == "Unspecified", ]
   expect_error(
     plot_sunburst(
       everything_unspecified,
