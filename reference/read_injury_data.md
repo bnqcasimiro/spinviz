@@ -35,23 +35,24 @@ to generate a correctly formatted file.
 path <- tempfile(fileext = ".csv")
 create_injury_template(path, sports = "boxing")
 read_injury_data(path)
-#>    body_region      body_area boxing
-#> 1         <NA>           Head     NA
-#> 2         <NA>           Neck     NA
-#> 3         <NA>       Shoulder     NA
-#> 4         <NA>      Upper arm     NA
-#> 5         <NA>          Elbow     NA
-#> 6         <NA>        Forearm     NA
-#> 7         <NA>          Wrist     NA
-#> 8         <NA>           Hand     NA
-#> 9         <NA>          Chest     NA
-#> 10        <NA> Thoracic spine     NA
-#> 11        <NA>    Lumbosacral     NA
-#> 12        <NA>        Abdomen     NA
-#> 13        <NA>    Hip / groin     NA
-#> 14        <NA>          Thigh     NA
-#> 15        <NA>           Knee     NA
-#> 16        <NA>      Lower leg     NA
-#> 17        <NA>          Ankle     NA
-#> 18        <NA>           Foot     NA
+#>      body_region      body_area boxing
+#> 1  Head and neck           Head     NA
+#> 2  Head and neck           Neck     NA
+#> 3     Upper limb       Shoulder     NA
+#> 4     Upper limb      Upper arm     NA
+#> 5     Upper limb          Elbow     NA
+#> 6     Upper limb        Forearm     NA
+#> 7     Upper limb          Wrist     NA
+#> 8     Upper limb           Hand     NA
+#> 9          Trunk          Chest     NA
+#> 10         Trunk Thoracic spine     NA
+#> 11         Trunk    Lumbosacral     NA
+#> 12         Trunk        Abdomen     NA
+#> 13    Lower limb    Hip / groin     NA
+#> 14    Lower limb          Thigh     NA
+#> 15    Lower limb           Knee     NA
+#> 16    Lower limb      Lower leg     NA
+#> 17    Lower limb          Ankle     NA
+#> 18    Lower limb           Foot     NA
+#> 19   Unspecified    Unspecified     NA
 ```

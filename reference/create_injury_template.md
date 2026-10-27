@@ -2,9 +2,13 @@
 
 Writes a CSV file in the format expected by
 [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md):
-one row per recognised body area, with `body_region` and `body_area`
-columns and one empty column per sport for the user to fill in with
-injury frequencies.
+one row per body area in the
+[body_categories](https://bnqcasimiro.github.io/spinviz/reference/body_categories.md)
+taxonomy (including "Unspecified", which
+[`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
+reports as a count below the diagram), with `body_region` and
+`body_area` columns pre-filled and one empty column per sport for the
+user to fill in with injury frequencies.
 
 ## Usage
 
