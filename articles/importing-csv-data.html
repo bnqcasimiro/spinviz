@@ -95,14 +95,15 @@ are numeric (with a warning for values that fail to parse):</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_heatmap.html">plot_heatmap</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"boxing"</span>, <span class="st">"front"</span>, sex <span class="op">=</span> <span class="st">"male"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="sunburst-tissuepathology-data">Sunburst (tissue/pathology) data<a class="anchor" aria-label="anchor" href="#sunburst-tissuepathology-data"></a>
+<h2 id="sunburst-tissue_typepathology_type-data">Sunburst (tissue_type/pathology_type) data<a class="anchor" aria-label="anchor" href="#sunburst-tissue_typepathology_type-data"></a>
 </h2>
 <p>The same workflow exists for the sunburst format.
 <code><a href="../reference/create_sunburst_template.html">create_sunburst_template()</a></code> writes a CSV pre-filled with the
-25-row <code>injury_categories</code> taxonomy (<code>tissue</code> and
-<code>pathology</code> columns), and <code><a href="../reference/read_sunburst_data.html">read_sunburst_data()</a></code>
-validates it — including filling blank <code>tissue</code> cells down
-from the row above, so compact hand-edited files work:</p>
+25-row <code>injury_categories</code> taxonomy (<code>tissue_type</code>
+and <code>pathology_type</code> columns), and
+<code><a href="../reference/read_sunburst_data.html">read_sunburst_data()</a></code> validates it — including filling blank
+<code>tissue_type</code> cells down from the row above, so compact
+hand-edited files work:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/create_sunburst_template.html">create_sunburst_template</a></span><span class="op">(</span><span class="st">"tissue_injuries.csv"</span>, sports <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"boxing"</span>, <span class="st">"judo"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_sunburst_data.html">read_sunburst_data</a></span><span class="op">(</span><span class="st">"tissue_injuries.csv"</span><span class="op">)</span></span>

@@ -24,7 +24,7 @@
 - [`body_categories`](https://bnqcasimiro.github.io/spinviz/reference/body_categories.md)
   : Standard Body region/Body area injury taxonomy
 - [`injury_categories`](https://bnqcasimiro.github.io/spinviz/reference/injury_categories.md)
-  : Standard tissue/pathology injury taxonomy
+  : Standard tissue_type/pathology_type injury taxonomy
 
 ## Importing data
 

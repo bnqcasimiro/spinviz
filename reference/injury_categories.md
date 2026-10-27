@@ -1,11 +1,11 @@
-# Standard tissue/pathology injury taxonomy
+# Standard tissue_type/pathology_type injury taxonomy
 
 The standard Tissue/Pathology classification used throughout this
 package's sunburst and heatmap functions, with no injury counts
 attached. Combine it with your own counts via
 [`plot_sunburst_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst_default.md)
-rather than retyping the full tissue/pathology category list for every
-analysis.
+rather than retyping the full tissue_type/pathology_type category list
+for every analysis.
 
 ## Usage
 
@@ -17,11 +17,11 @@ injury_categories
 
 A data frame with 25 rows and 2 columns:
 
-- tissue:
+- tissue_type:
 
   Tissue type, e.g. "Bone", "Nervous".
 
-- pathology:
+- pathology_type:
 
   Pathology type, e.g. "Fracture", "Tendon rupture".
 
@@ -67,7 +67,8 @@ this list and the live object ever disagree) is:
 
 [`plot_sunburst_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst_default.md)
 to build a sunburst diagram from this taxonomy plus your own injury
-counts, without needing to retype the tissue/pathology labels yourself.
+counts, without needing to retype the tissue_type/pathology_type labels
+yourself.
 [body_categories](https://bnqcasimiro.github.io/spinviz/reference/body_categories.md)
 for the equivalent taxonomy used by
 [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md).

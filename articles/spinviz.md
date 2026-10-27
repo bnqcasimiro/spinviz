@@ -10,7 +10,8 @@ library(spinviz)
 - **Heatmaps** of injury frequency projected onto human-body diagrams
   ([`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)),
   with front, back, or both views and male or female body templates.
-- **Interactive sunburst diagrams** of tissue/pathology classifications
+- **Interactive sunburst diagrams** of tissue_type/pathology_type
+  classifications
   ([`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)),
   built on echarts4r.
 
@@ -34,9 +35,10 @@ are available as the built-in `body_categories` taxonomy (19 rows).
 
 ### Sunburst data
 
-For the sunburst, the first two columns are `tissue` and `pathology`:
+For the sunburst, the first two columns are `tissue_type` and
+`pathology_type`:
 
-| tissue          | pathology      | sport1 |
+| tissue_type     | pathology_type | sport1 |
 |-----------------|----------------|--------|
 | Muscle / Tendon | Muscle strain  | 20     |
 | Muscle / Tendon | Tendon rupture | 10     |
@@ -44,7 +46,7 @@ For the sunburst, the first two columns are `tissue` and `pathology`:
 | Bone            | Bone contusion | 6      |
 
 The built-in `injury_categories` taxonomy contains the 25-row
-tissue/pathology classification.
+tissue_type/pathology_type classification.
 
 ## Heatmap example
 
@@ -96,7 +98,7 @@ plot_sunburst(
 The sunburst is interactive: tissue types sit on the inner ring,
 pathologies on the outer ring. See
 [`?plot_sunburst`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
-for options such as `depth = 1` (tissue ring only), excluding
+for options such as `depth = 1` (tissue_type ring only), excluding
 “Unspecified”/“Non-specific” rows, and label/radius/font tuning.
 
 ## Convenience wrappers

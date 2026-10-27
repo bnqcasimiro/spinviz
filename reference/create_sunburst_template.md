@@ -4,8 +4,8 @@ Writes a CSV file in the format expected by
 [`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md):
 one row per entry in the built-in
 [injury_categories](https://bnqcasimiro.github.io/spinviz/reference/injury_categories.md)
-taxonomy, with `tissue` and `pathology` columns and one empty column per
-sport for the user to fill in with injury frequencies.
+taxonomy, with `tissue_type` and `pathology_type` columns and one empty
+column per sport for the user to fill in with injury frequencies.
 
 [injury_categories](https://bnqcasimiro.github.io/spinviz/reference/injury_categories.md)
 is the single source of truth for the taxonomy, so the template, the

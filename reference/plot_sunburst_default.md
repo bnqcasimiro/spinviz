@@ -2,7 +2,7 @@
 
 A thin wrapper around
 [`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
-for using the standard tissue/pathology taxonomy
+for using the standard tissue_type/pathology_type taxonomy
 ([injury_categories](https://bnqcasimiro.github.io/spinviz/reference/injury_categories.md))
 and plugging in a set of injury counts.
 
@@ -20,7 +20,7 @@ plot_sunburst_default(counts, column_name = "injury_count", ...)
   (currently 25), in the same row order as
   [injury_categories](https://bnqcasimiro.github.io/spinviz/reference/injury_categories.md),
   i.e. `counts[i]` is the injury count for
-  `injury_categories[i, c("tissue", "pathology")]`.
+  `injury_categories[i, c("tissue_type", "pathology_type")]`.
 
 - column_name:
 
@@ -45,9 +45,9 @@ itself returns.
 [injury_categories](https://bnqcasimiro.github.io/spinviz/reference/injury_categories.md)
 for the taxonomy this merges your counts into.
 [`plot_sunburst()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst.md)
-for the full version that accepts any tissue/pathology taxonomy, if you
-need something other than the built-in one (i.e. a different
-classification system).
+for the full version that accepts any tissue_type/pathology_type
+taxonomy, if you need something other than the built-in one (i.e. a
+different classification system).
 
 ## Examples
 

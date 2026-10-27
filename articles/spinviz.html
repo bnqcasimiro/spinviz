@@ -79,8 +79,9 @@
 human-body diagrams (<code><a href="../reference/plot_heatmap.html">plot_heatmap()</a></code>), with front, back, or
 both views and male or female body templates.</li>
 <li>
-<strong>Interactive sunburst diagrams</strong> of tissue/pathology
-classifications (<code><a href="../reference/plot_sunburst.html">plot_sunburst()</a></code>), built on echarts4r.</li>
+<strong>Interactive sunburst diagrams</strong> of
+tissue_type/pathology_type classifications
+(<code><a href="../reference/plot_sunburst.html">plot_sunburst()</a></code>), built on echarts4r.</li>
 </ul>
 <div class="section level2">
 <h2 id="data-format">Data format<a class="anchor" aria-label="anchor" href="#data-format"></a>
@@ -128,12 +129,12 @@ that cannot be localised, are available as the built-in
 <div class="section level3">
 <h3 id="sunburst-data">Sunburst data<a class="anchor" aria-label="anchor" href="#sunburst-data"></a>
 </h3>
-<p>For the sunburst, the first two columns are <code>tissue</code> and
-<code>pathology</code>:</p>
+<p>For the sunburst, the first two columns are <code>tissue_type</code>
+and <code>pathology_type</code>:</p>
 <table class="table">
 <thead><tr class="header">
-<th>tissue</th>
-<th>pathology</th>
+<th>tissue_type</th>
+<th>pathology_type</th>
 <th>sport1</th>
 </tr></thead>
 <tbody>
@@ -160,7 +161,7 @@ that cannot be localised, are available as the built-in
 </tbody>
 </table>
 <p>The built-in <code>injury_categories</code> taxonomy contains the
-25-row tissue/pathology classification.</p>
+25-row tissue_type/pathology_type classification.</p>
 </div>
 </div>
 <div class="section level2">
@@ -204,8 +205,9 @@ diagram (they have no body region to colour).</p>
 <div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:750px;height:750px;" class="echarts4r html-widget"></div>
 <script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"theme":"","tl":false,"draw":true,"renderer":"canvas","events":[],"buttons":[],"opts":{"title":{"text":"","left":"center","top":"20%","textStyle":{"fontSize":18,"color":"#333333","fontFamily":"Arial"}},"legend":{"type":"scroll","orient":"vertical","right":10,"top":"middle","data":["Muscle / Tendon","Nervous","Bone","Cartilage / Synovium","Ligament","Superficial tissue","Vessel","Stump","Internal organ"]},"tooltip":{"trigger":"item","formatter":"{b}: {c}"},"toolbox":{"show":true,"feature":{"saveAsImage":{"show":true,"type":"jpeg","title":"Save as JPG","backgroundColor":"#ffffff"}}},"series":[{"type":"sunburst","radius":[0,"100%"],"sort":null,"nodeClick":false,"emphasis":{"label":{"show":false}},"data":[{"name":"Muscle / Tendon","value":null,"itemStyle":{"color":"#DD64BE","opacity":1},"children":[{"name":"Muscle strain","value":20,"itemStyle":{"color":"#F0B9E2","opacity":1}},{"name":"Muscle contusion","value":0,"itemStyle":{"color":"#F0B9E2","opacity":1}},{"name":"Compartment syndrome","value":0,"itemStyle":{"color":"#F0B9E2","opacity":1}},{"name":"Tendinopathy","value":10,"itemStyle":{"color":"#F0B9E2","opacity":1}},{"name":"Tendon rupture","value":31,"itemStyle":{"color":"#F0B9E2","opacity":1}}]},{"name":"Nervous","value":null,"itemStyle":{"color":"#B675E0","opacity":1},"children":[{"name":"Brain or spinal cord injury","value":18,"itemStyle":{"color":"#DEC1F1","opacity":1}},{"name":"Peripheral nerve injury","value":16,"itemStyle":{"color":"#DEC1F1","opacity":1}}]},{"name":"Bone","value":null,"itemStyle":{"color":"#5991E4","opacity":1},"children":[{"name":"Fracture","value":16,"itemStyle":{"color":"#B4CEF3","opacity":1}},{"name":"Bone stress injury","value":20,"itemStyle":{"color":"#B4CEF3","opacity":1}},{"name":"Bone contusion","value":20,"itemStyle":{"color":"#B4CEF3","opacity":1}},{"name":"Avascular necrosis","value":27,"itemStyle":{"color":"#B4CEF3","opacity":1}},{"name":"Physis injury","value":46,"itemStyle":{"color":"#B4CEF3","opacity":1}}]},{"name":"Cartilage / Synovium","value":null,"itemStyle":{"color":"#00A6CA","opacity":1},"children":[{"name":"Cartilage injury","value":67,"itemStyle":{"color":"#8CD7E7","opacity":1}},{"name":"Arthritis","value":31,"itemStyle":{"color":"#8CD7E7","opacity":1}},{"name":"Synovitis / Capsulitis","value":54,"itemStyle":{"color":"#8CD7E7","opacity":1}},{"name":"Bursitis","value":20,"itemStyle":{"color":"#8CD7E7","opacity":1}}]},{"name":"Ligament","value":null,"itemStyle":{"color":"#00AD9A","opacity":1},"children":[{"name":"Joint sprain","value":27,"itemStyle":{"color":"#8CDAD2","opacity":1}},{"name":"Chronic instability","value":30,"itemStyle":{"color":"#8CDAD2","opacity":1}}]},{"name":"Superficial tissue","value":null,"itemStyle":{"color":"#00AA5A","opacity":1},"children":[{"name":"Contusion","value":96,"itemStyle":{"color":"#8CD9B5","opacity":1}},{"name":"Laceration","value":82,"itemStyle":{"color":"#8CD9B5","opacity":1}},{"name":"Abrasion","value":48,"itemStyle":{"color":"#8CD9B5","opacity":1}}]},{"name":"Vessel","value":null,"itemStyle":{"color":"#6F9F00","opacity":1},"children":[{"name":"Vascular trauma","value":26,"itemStyle":{"color":"#BED48C","opacity":1}}]},{"name":"Stump","value":null,"itemStyle":{"color":"#AA9000","opacity":1},"children":[{"name":"Stump injury","value":33,"itemStyle":{"color":"#D9CD8C","opacity":1}}]},{"name":"Internal organ","value":null,"itemStyle":{"color":"#CE7D3B","opacity":1},"children":[{"name":"Organ injury","value":34,"itemStyle":{"color":"#E9C5A7","opacity":1}}]},{"name":"Unspecified","value":null,"itemStyle":{"color":"#B0B0B0","opacity":1},"children":[{"name":"Unspecified","value":24,"itemStyle":{"color":"#D4D4D4","opacity":1}}]}],"label":{"color":"#FFFFFF","fontSize":12,"fontFamily":"Arial","fontStyle":"normal"},"itemStyle":{"borderWidth":1,"borderColor":"#fff"},"levels":[[],{"r0":"10%","r":"40%","label":{"rotate":"radial","position":"inside","align":"center","verticalAlign":"middle","overflow":"truncate"}},{"r0":"40%","r":"50%","label":{"show":false}}]},{"type":"pie","radius":["40%","50%"],"center":["50%","50%"],"silent":true,"sort":null,"data":[{"name":"Muscle strain","value":20},{"name":"Muscle contusion","value":0},{"name":"Compartment syndrome","value":0},{"name":"Tendinopathy","value":10},{"name":"Tendon rupture","value":31},{"name":"Brain or spinal cord injury","value":18},{"name":"Peripheral nerve injury","value":16},{"name":"Fracture","value":16},{"name":"Bone stress injury","value":20},{"name":"Bone contusion","value":20},{"name":"Avascular necrosis","value":27},{"name":"Physis injury","value":46},{"name":"Cartilage injury","value":67},{"name":"Arthritis","value":31},{"name":"Synovitis / Capsulitis","value":54},{"name":"Bursitis","value":20},{"name":"Joint sprain","value":27},{"name":"Chronic instability","value":30},{"name":"Contusion","value":96},{"name":"Laceration","value":82},{"name":"Abrasion","value":48},{"name":"Vascular trauma","value":26},{"name":"Stump injury","value":33},{"name":"Organ injury","value":34},{"name":"Unspecified","value":24}],"itemStyle":{"color":"transparent","borderWidth":0},"emphasis":{"disabled":true},"avoidLabelOverlap":true,"minShowLabelAngle":2,"label":{"show":true,"position":"outside","color":"#333333","fontSize":12,"fontFamily":"Arial","fontStyle":"normal","overflow":"break","width":90},"labelLine":{"show":true,"length":40,"length2":80,"smooth":false,"lineStyle":{"width":1,"color":"#999999"}}}]},"dispose":true},"evals":[],"jsHooks":[]}</script><p>The sunburst is interactive: tissue types sit on the inner ring,
 pathologies on the outer ring. See <code><a href="../reference/plot_sunburst.html">?plot_sunburst</a></code> for
-options such as <code>depth = 1</code> (tissue ring only), excluding
-“Unspecified”/“Non-specific” rows, and label/radius/font tuning.</p>
+options such as <code>depth = 1</code> (tissue_type ring only),
+excluding “Unspecified”/“Non-specific” rows, and label/radius/font
+tuning.</p>
 </div>
 <div class="section level2">
 <h2 id="convenience-wrappers">Convenience wrappers<a class="anchor" aria-label="anchor" href="#convenience-wrappers"></a>
