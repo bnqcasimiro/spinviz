@@ -84,7 +84,7 @@ A plot in R-studio viewer
 ## See also
 
 [`body_categories`](https://bnqcasimiro.github.io/spinviz/reference/body_categories.md)
-for the built-in region_area/subcategory taxonomy, and
+for the built-in body_region/body_area taxonomy, and
 [`plot_heatmap_default`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap_default.md)
 for a wrapper that only needs a vector of counts.
 [`diagram_colours`](https://bnqcasimiro.github.io/spinviz/reference/diagram_colours.md)
@@ -99,7 +99,7 @@ automatically applied.
 
 ``` r
 # Easiest: start from the built-in body_categories taxonomy (its
-# region_area/subcategory columns are already filled in) and just add
+# body_region/body_area columns are already filled in) and just add
 # your own counts, matching its row order. See ?body_categories, or
 # just run print(body_categories) to see the order directly.
 df <- body_categories

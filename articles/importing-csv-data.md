@@ -6,8 +6,8 @@ plot.
 
 ## Heatmap (body injury) data
 
-**1. Create a template CSV** with all 18 recognised body subcategories
-and one empty column per sport:
+**1. Create a template CSV** with all 18 recognised body areas and one
+empty column per sport:
 
 ``` r
 
@@ -15,7 +15,7 @@ create_injury_template("injuries.csv", sports = c("boxing", "judo"))
 ```
 
 **2. Fill in the file** in your favourite spreadsheet editor, entering
-the injury frequencies and the `region_area` grouping for each row.
+the injury frequencies and the `body_region` grouping for each row.
 
 **3. Read the file back in.**
 [`read_injury_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_injury_data.md)

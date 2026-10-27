@@ -38,6 +38,13 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="development version" id="spinviz-development-version">spinviz (development version)<a class="anchor" aria-label="anchor" href="#spinviz-development-version"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>The heatmap injury-data column names have been renamed again: <code>region_area</code> is now <code>body_region</code> and <code>subcategory</code> is now <code>body_area</code>, so the names match the “Body region / Body area” terminology used in the documentation. This affects the <code>body_categories</code> taxonomy, <code><a href="../reference/create_injury_template.html">create_injury_template()</a></code>, <code><a href="../reference/read_injury_data.html">read_injury_data()</a></code>, and <code><a href="../reference/plot_heatmap.html">plot_heatmap()</a></code> (including <code><a href="../reference/plot_heatmap_default.html">plot_heatmap_default()</a></code>). Existing CSV files and data frames using the old names must be updated; <code><a href="../reference/read_injury_data.html">read_injury_data()</a></code> detects any of the previous names (<code>Region.area</code>, <code>Subcategory</code>, <code>region_area</code>, <code>subcategory</code>) and errors with a hint explaining the rename. The internal helper <code>injury_subcategories()</code> was likewise renamed to <code>injury_body_areas()</code>.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="spinviz-100">spinviz 1.0.0<a class="anchor" aria-label="anchor" href="#spinviz-100"></a></h2>
 <p>First CRAN release.</p>
 <div class="section level3">

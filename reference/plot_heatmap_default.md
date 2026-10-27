@@ -26,7 +26,7 @@ plot_heatmap_default(
   19), in the same row order as
   [body_categories](https://bnqcasimiro.github.io/spinviz/reference/body_categories.md),
   i.e. `counts[i]` is the injury count for
-  `body_categories[i, c("region_area", "subcategory")]`. See
+  `body_categories[i, c("body_region", "body_area")]`. See
   [`?body_categories`](https://bnqcasimiro.github.io/spinviz/reference/body_categories.md)
   for the full numbered row order, or just run `print(body_categories)`
   directly.
@@ -64,8 +64,8 @@ itself returns.
 [body_categories](https://bnqcasimiro.github.io/spinviz/reference/body_categories.md)
 for the taxonomy this merges your counts into.
 [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
-for the full version that accepts any region_area/subcategory taxonomy,
-if you need something other than the built-in one.
+for the full version that accepts any body_region/body_area taxonomy, if
+you need something other than the built-in one.
 [`save_diagram()`](https://bnqcasimiro.github.io/spinviz/reference/save_diagram.md)
 to save the result to file.
 

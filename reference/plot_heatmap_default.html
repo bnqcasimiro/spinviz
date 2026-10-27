@@ -67,7 +67,7 @@ injury counts.</p>
 <dd><p>A numeric vector of exactly <code>nrow(body_categories)</code> values
 (currently 19), in the same row order as <a href="body_categories.html">body_categories</a>,
 i.e. <code>counts[i]</code> is the injury count for
-<code>body_categories[i, c("region_area", "subcategory")]</code>. See
+<code>body_categories[i, c("body_region", "body_area")]</code>. See
 <code><a href="body_categories.html">?body_categories</a></code> for the full numbered row order, or just run
 <code>print(body_categories)</code> directly.</p></dd>
 
@@ -101,7 +101,7 @@ argument (<code>palette</code>, <code>opacity</code>, <code>show_labels</code>, 
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><a href="body_categories.html">body_categories</a> for the taxonomy this merges your counts
 into. <code><a href="plot_heatmap.html">plot_heatmap()</a></code> for the full version that accepts any
-region_area/subcategory taxonomy, if you need something other than the
+body_region/body_area taxonomy, if you need something other than the
 built-in one. <code><a href="save_diagram.html">save_diagram()</a></code> to save the result to file.</p></div>
     </div>
 

@@ -93,8 +93,8 @@ cohort).</p>
 </h3>
 <table class="table">
 <thead><tr class="header">
-<th>region_area</th>
-<th>subcategory</th>
+<th>body_region</th>
+<th>body_area</th>
 <th>sport1</th>
 </tr></thead>
 <tbody>
@@ -120,11 +120,10 @@ cohort).</p>
 </tr>
 </tbody>
 </table>
-<p>The 18 recognised body subcategories and their
-<code>region_area</code> groupings, plus a special
-<code>Unspecified</code> category for injuries that cannot be localised,
-are available as the built-in <code>body_categories</code> taxonomy (19
-rows).</p>
+<p>The 18 recognised body areas and their <code>body_region</code>
+groupings, plus a special <code>Unspecified</code> category for injuries
+that cannot be localised, are available as the built-in
+<code>body_categories</code> taxonomy (19 rows).</p>
 </div>
 <div class="section level3">
 <h3 id="sunburst-data">Sunburst data<a class="anchor" aria-label="anchor" href="#sunburst-data"></a>
@@ -168,15 +167,15 @@ rows).</p>
 <h2 id="heatmap-example">Heatmap example<a class="anchor" aria-label="anchor" href="#heatmap-example"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">subcategory</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Head"</span>, <span class="st">"Neck"</span>, <span class="st">"Shoulder"</span>, <span class="st">"Chest"</span>, <span class="st">"Upper arm"</span>, <span class="st">"Elbow"</span>,</span>
+<code class="sourceCode R"><span><span class="va">body_area</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Head"</span>, <span class="st">"Neck"</span>, <span class="st">"Shoulder"</span>, <span class="st">"Chest"</span>, <span class="st">"Upper arm"</span>, <span class="st">"Elbow"</span>,</span>
 <span>                 <span class="st">"Abdomen"</span>, <span class="st">"Forearm"</span>, <span class="st">"Hip / groin"</span>, <span class="st">"Wrist"</span>, <span class="st">"Hand"</span>,</span>
 <span>                 <span class="st">"Thigh"</span>, <span class="st">"Knee"</span>, <span class="st">"Lower leg"</span>, <span class="st">"Ankle"</span>, <span class="st">"Foot"</span>,</span>
 <span>                 <span class="st">"Thoracic spine"</span>, <span class="st">"Lumbosacral"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">region_area</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Example"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">subcategory</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">body_region</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Example"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">body_area</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">boxing</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">5</span>, <span class="fl">18</span>, <span class="fl">12</span>, <span class="fl">20</span>, <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">14</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">11</span>, <span class="fl">3</span>, <span class="fl">16</span>, <span class="fl">13</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">18</span>, <span class="fl">22</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">region_area</span>, <span class="va">subcategory</span>, <span class="va">boxing</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">body_region</span>, <span class="va">body_area</span>, <span class="va">boxing</span><span class="op">)</span></span></code></pre></div>
 <p>Then call
 <code>plot_heatmap(injury_data, selected_sport, view_choice)</code>,
 where <code>view_choice</code> is one of <code>"front"</code>,
@@ -186,7 +185,7 @@ where <code>view_choice</code> is one of <code>"front"</code>,
 <p><img src="spinviz_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="100%"></p>
 <p>See <code><a href="../reference/plot_heatmap.html">?plot_heatmap</a></code> for options controlling labels,
 values, opacity, the legend scale, and custom palettes. Rows with an
-<code>"Unspecified"</code> subcategory are shown as a label below the
+<code>"Unspecified"</code> body_area are shown as a label below the
 diagram (they have no body region to colour).</p>
 </div>
 <div class="section level2">

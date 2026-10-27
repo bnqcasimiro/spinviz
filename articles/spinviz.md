@@ -21,17 +21,16 @@ one or more columns of injury frequencies (one per sport or cohort).
 
 ### Heatmap data
 
-| region_area   | subcategory | sport1 |
-|---------------|-------------|--------|
-| Head and neck | Head        | 10     |
-| Head and neck | Neck        | 20     |
-| Upper limb    | Shoulder    | 5      |
-| Upper limb    | Upper arm   | 8      |
+| body_region   | body_area | sport1 |
+|---------------|-----------|--------|
+| Head and neck | Head      | 10     |
+| Head and neck | Neck      | 20     |
+| Upper limb    | Shoulder  | 5      |
+| Upper limb    | Upper arm | 8      |
 
-The 18 recognised body subcategories and their `region_area` groupings,
-plus a special `Unspecified` category for injuries that cannot be
-localised, are available as the built-in `body_categories` taxonomy (19
-rows).
+The 18 recognised body areas and their `body_region` groupings, plus a
+special `Unspecified` category for injuries that cannot be localised,
+are available as the built-in `body_categories` taxonomy (19 rows).
 
 ### Sunburst data
 
@@ -51,15 +50,15 @@ tissue/pathology classification.
 
 ``` r
 
-subcategory <- c("Head", "Neck", "Shoulder", "Chest", "Upper arm", "Elbow",
+body_area <- c("Head", "Neck", "Shoulder", "Chest", "Upper arm", "Elbow",
                  "Abdomen", "Forearm", "Hip / groin", "Wrist", "Hand",
                  "Thigh", "Knee", "Lower leg", "Ankle", "Foot",
                  "Thoracic spine", "Lumbosacral")
 
-region_area <- rep("Example", length(subcategory))
+body_region <- rep("Example", length(body_area))
 boxing <- c(15, 5, 18, 12, 20, 6, 10, 14, 9, 9, 11, 3, 16, 13, 7, 8, 18, 22)
 
-df <- data.frame(region_area, subcategory, boxing)
+df <- data.frame(body_region, body_area, boxing)
 ```
 
 Then call `plot_heatmap(injury_data, selected_sport, view_choice)`,
@@ -75,7 +74,7 @@ plot_heatmap(df, "boxing", "front", sex = "male", show_scale = FALSE)
 See
 [`?plot_heatmap`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
 for options controlling labels, values, opacity, the legend scale, and
-custom palettes. Rows with an `"Unspecified"` subcategory are shown as a
+custom palettes. Rows with an `"Unspecified"` body_area are shown as a
 label below the diagram (they have no body region to colour).
 
 ## Sunburst example

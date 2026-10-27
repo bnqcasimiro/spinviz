@@ -78,11 +78,11 @@ read it back, and plot.</p>
 <h2 id="heatmap-body-injury-data">Heatmap (body injury) data<a class="anchor" aria-label="anchor" href="#heatmap-body-injury-data"></a>
 </h2>
 <p><strong>1. Create a template CSV</strong> with all 18 recognised body
-subcategories and one empty column per sport:</p>
+areas and one empty column per sport:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/create_injury_template.html">create_injury_template</a></span><span class="op">(</span><span class="st">"injuries.csv"</span>, sports <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"boxing"</span>, <span class="st">"judo"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><strong>2. Fill in the file</strong> in your favourite spreadsheet
-editor, entering the injury frequencies and the <code>region_area</code>
+editor, entering the injury frequencies and the <code>body_region</code>
 grouping for each row.</p>
 <p><strong>3. Read the file back in.</strong>
 <code><a href="../reference/read_injury_data.html">read_injury_data()</a></code> checks that the required columns are

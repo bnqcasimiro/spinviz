@@ -1,5 +1,28 @@
 # Changelog
 
+## spinviz (development version)
+
+### Breaking changes
+
+- The heatmap injury-data column names have been renamed again:
+  `region_area` is now `body_region` and `subcategory` is now
+  `body_area`, so the names match the “Body region / Body area”
+  terminology used in the documentation. This affects the
+  `body_categories` taxonomy,
+  [`create_injury_template()`](https://bnqcasimiro.github.io/spinviz/reference/create_injury_template.md),
+  [`read_injury_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_injury_data.md),
+  and
+  [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md)
+  (including
+  [`plot_heatmap_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap_default.md)).
+  Existing CSV files and data frames using the old names must be
+  updated;
+  [`read_injury_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_injury_data.md)
+  detects any of the previous names (`Region.area`, `Subcategory`,
+  `region_area`, `subcategory`) and errors with a hint explaining the
+  rename. The internal helper `injury_subcategories()` was likewise
+  renamed to `injury_body_areas()`.
+
 ## spinviz 1.0.0
 
 First CRAN release.

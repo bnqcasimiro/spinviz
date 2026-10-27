@@ -2,9 +2,9 @@
 
 Writes a CSV file in the format expected by
 [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md):
-one row per recognised body subcategory, with `region_area` and
-`subcategory` columns and one empty column per sport for the user to
-fill in with injury frequencies.
+one row per recognised body area, with `body_region` and `body_area`
+columns and one empty column per sport for the user to fill in with
+injury frequencies.
 
 ## Usage
 

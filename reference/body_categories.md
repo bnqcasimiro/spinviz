@@ -4,7 +4,7 @@ The standard Body region/Body area classification used by
 [`plot_heatmap()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap.md),
 with no injury counts attached. Combine it with your own counts via
 [`plot_heatmap_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap_default.md)
-rather than retyping the full region_area/subcategory list for every
+rather than retyping the full body_region/body_area list for every
 analysis.
 
 ## Usage
@@ -17,11 +17,11 @@ body_categories
 
 A data frame with 19 rows and 2 columns:
 
-- region_area:
+- body_region:
 
   Body region, e.g. "Upper limb", "Trunk".
 
-- subcategory:
+- body_area:
 
   Body area, e.g. "Shoulder", "Chest".
 
@@ -61,7 +61,7 @@ this list and the live object ever disagree) is:
 
 [`plot_heatmap_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_heatmap_default.md)
 to build a heatmap diagram from this taxonomy plus your own injury
-counts, without needing to retype the region_area/subcategory labels
+counts, without needing to retype the body_region/body_area labels
 yourself.
 [injury_categories](https://bnqcasimiro.github.io/spinviz/reference/injury_categories.md)
 for the equivalent taxonomy used by the sunburst functions.
