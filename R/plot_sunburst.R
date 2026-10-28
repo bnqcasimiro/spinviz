@@ -213,7 +213,7 @@ plot_sunburst <- function(
     label_line_length = 40,
     label_line_length2 = 80,
     min_label_angle = 2,
-    outer_label_width = 90,
+    outer_label_width = 120,
     show_outer_labels = TRUE,
     show_values = FALSE,
     widget_width = "1200px",
