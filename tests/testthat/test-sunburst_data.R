@@ -2,7 +2,7 @@ test_that("create_sunburst_template writes a CSV with the expected structure", {
   path <- tempfile(fileext = ".csv")
   on.exit(unlink(path))
 
-  create_sunburst_template(path, sports = c("boxing", "judo"))
+  create_sunburst_template(path, group = c("boxing", "judo"))
 
   expect_true(file.exists(path))
   written <- utils::read.csv(path, check.names = FALSE)
@@ -14,27 +14,27 @@ test_that("create_sunburst_template writes a CSV with the expected structure", {
   expect_true(all(is.na(written$judo)))
 })
 
-test_that("create_sunburst_template defaults to a single sport column", {
+test_that("create_sunburst_template defaults to a single group column", {
   path <- tempfile(fileext = ".csv")
   on.exit(unlink(path))
 
   create_sunburst_template(path)
   written <- utils::read.csv(path, check.names = FALSE)
-  expect_named(written, c("tissue_type", "pathology_type", "sport1"))
+  expect_named(written, c("tissue_type", "pathology_type", "group1"))
 })
 
-test_that("create_sunburst_template rejects invalid sports argument", {
+test_that("create_sunburst_template rejects invalid group argument", {
   path <- tempfile(fileext = ".csv")
-  expect_error(create_sunburst_template(path, sports = character(0)))
-  expect_error(create_sunburst_template(path, sports = ""))
-  expect_error(create_sunburst_template(path, sports = NA_character_))
+  expect_error(create_sunburst_template(path, group = character(0)))
+  expect_error(create_sunburst_template(path, group = ""))
+  expect_error(create_sunburst_template(path, group = NA_character_))
 })
 
 test_that("create_sunburst_template/read_sunburst_data round-trip a filled-in file", {
   path <- tempfile(fileext = ".csv")
   on.exit(unlink(path))
 
-  create_sunburst_template(path, sports = "boxing")
+  create_sunburst_template(path, group = "boxing")
   template <- utils::read.csv(path, check.names = FALSE)
   template$boxing <- seq_len(nrow(template))
   utils::write.csv(template, path, row.names = FALSE)
@@ -51,11 +51,11 @@ test_that("create_sunburst_template/read_sunburst_data round-trip a filled-in fi
   expect_equal(data$pathology_type, spinviz::injury_categories$pathology_type)
 })
 
-test_that("read_sunburst_data preserves sport column names with spaces", {
+test_that("read_sunburst_data preserves group column names with spaces", {
   path <- tempfile(fileext = ".csv")
   on.exit(unlink(path))
 
-  create_sunburst_template(path, sports = "water polo")
+  create_sunburst_template(path, group = "water polo")
   data <- read_sunburst_data(path)
   expect_true("water polo" %in% names(data))
 })
@@ -118,7 +118,7 @@ test_that("read_sunburst_data errors when required columns are missing", {
   expect_error(read_sunburst_data(path), "pathology_type")
 })
 
-test_that("read_sunburst_data errors when no sport column is present", {
+test_that("read_sunburst_data errors when no group column is present", {
   path <- tempfile(fileext = ".csv")
   on.exit(unlink(path))
   utils::write.csv(
@@ -126,7 +126,7 @@ test_that("read_sunburst_data errors when no sport column is present", {
     path,
     row.names = FALSE
   )
-  expect_error(read_sunburst_data(path), "No sport column")
+  expect_error(read_sunburst_data(path), "No group column")
 })
 
 test_that("read_sunburst_data errors on empty pathology_type values", {
@@ -179,7 +179,7 @@ test_that("read_sunburst_data accepts recognised values without warning", {
   expect_no_warning(read_sunburst_data(path))
 })
 
-test_that("read_sunburst_data warns when sport values are not numeric", {
+test_that("read_sunburst_data warns when group values are not numeric", {
   path <- tempfile(fileext = ".csv")
   on.exit(unlink(path))
   utils::write.csv(

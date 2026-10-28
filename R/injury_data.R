@@ -21,7 +21,7 @@ injury_body_areas <- function() {
 #' frequencies.
 #'
 #' @param path File path where the CSV should be written.
-#' @param sports Character vector of sport names; each becomes an empty
+#' @param group Character vector of sport names; each becomes an empty
 #'   frequency column in the template.
 #'
 #' @return The path (invisibly), so the call can be used in a pipe.
@@ -29,19 +29,19 @@ injury_body_areas <- function() {
 #' @export
 #' @examples
 #' path <- tempfile(fileext = ".csv")
-#' create_injury_template(path, sports = c("boxing", "judo"))
-create_injury_template <- function(path, sports = "sport1") {
+#' create_injury_template(path, group = c("boxing", "judo"))
+create_injury_template <- function(path, group = "group1") {
   stopifnot(
     is.character(path),
     length(path) == 1,
-    is.character(sports),
-    length(sports) >= 1,
-    !anyNA(sports),
-    all(nzchar(sports))
+    is.character(group),
+    length(group) >= 1,
+    !anyNA(group),
+    all(nzchar(group))
   )
 
   template <- body_categories[, c("body_region", "body_area")]
-  for (sport in sports) {
+  for (sport in group) {
     template[[sport]] <- NA_real_
   }
 
@@ -66,7 +66,7 @@ create_injury_template <- function(path, sports = "sport1") {
 #' @export
 #' @examples
 #' path <- tempfile(fileext = ".csv")
-#' create_injury_template(path, sports = "boxing")
+#' create_injury_template(path, group = "boxing")
 #' read_injury_data(path)
 read_injury_data <- function(path) {
   stopifnot(is.character(path), length(path) == 1)
