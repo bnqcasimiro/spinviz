@@ -81,7 +81,7 @@
 #' @param min_label_angle Minimum slice angle in degrees for displaying
 #' outer-ring pathology labels. Default 2.
 #' @param outer_label_width Maximum width in pixels for outer-ring pathology
-#' labels before text wrapping. Default 90.
+#' labels before text wrapping. Default 120.
 #' @param show_outer_labels Logical. If `FALSE`, hides the outer-ring
 #' (pathology) labels and their leader lines entirely. The slices
 #' themselves still render and are still hoverable via tooltip. If `TRUE`
