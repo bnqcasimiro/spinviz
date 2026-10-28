@@ -13,7 +13,7 @@ user to fill in with injury frequencies.
 ## Usage
 
 ``` r
-create_injury_template(path, sports = "sport1")
+create_injury_template(path, group = "group1")
 ```
 
 ## Arguments
@@ -22,7 +22,7 @@ create_injury_template(path, sports = "sport1")
 
   File path where the CSV should be written.
 
-- sports:
+- group:
 
   Character vector of sport names; each becomes an empty frequency
   column in the template.
@@ -40,6 +40,5 @@ to read a completed file back in.
 
 ``` r
 path <- tempfile(fileext = ".csv")
-create_injury_template(path, sports = c("boxing", "judo"))
-#> Error in create_injury_template(path, sports = c("boxing", "judo")): unused argument (sports = c("boxing", "judo"))
+create_injury_template(path, group = c("boxing", "judo"))
 ```

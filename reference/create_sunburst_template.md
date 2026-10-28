@@ -14,7 +14,7 @@ reader's validation, and the diagram cannot drift apart.
 ## Usage
 
 ``` r
-create_sunburst_template(path, sports = "sport1")
+create_sunburst_template(path, group = "group1")
 ```
 
 ## Arguments
@@ -23,7 +23,7 @@ create_sunburst_template(path, sports = "sport1")
 
   File path where the CSV should be written.
 
-- sports:
+- group:
 
   Character vector of sport names; each becomes an empty frequency
   column in the template.
@@ -43,6 +43,5 @@ for the heatmap equivalent.
 
 ``` r
 path <- tempfile(fileext = ".csv")
-create_sunburst_template(path, sports = c("boxing", "judo"))
-#> Error in create_sunburst_template(path, sports = c("boxing", "judo")): unused argument (sports = c("boxing", "judo"))
+create_sunburst_template(path, group = c("boxing", "judo"))
 ```
