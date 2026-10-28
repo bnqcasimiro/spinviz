@@ -44,4 +44,5 @@ for the heatmap equivalent.
 ``` r
 path <- tempfile(fileext = ".csv")
 create_sunburst_template(path, sports = c("boxing", "judo"))
+#> Error in create_sunburst_template(path, sports = c("boxing", "judo")): unused argument (sports = c("boxing", "judo"))
 ```

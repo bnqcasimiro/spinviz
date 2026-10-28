@@ -41,4 +41,5 @@ to read a completed file back in.
 ``` r
 path <- tempfile(fileext = ".csv")
 create_injury_template(path, sports = c("boxing", "judo"))
+#> Error in create_injury_template(path, sports = c("boxing", "judo")): unused argument (sports = c("boxing", "judo"))
 ```
