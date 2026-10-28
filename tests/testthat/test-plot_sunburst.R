@@ -54,6 +54,22 @@ test_that("plot_sunburst drops the pathology ring for depth = 1", {
   expect_length(sb_depth1$x$opts$series, 1)
 })
 
+test_that("plot_sunburst show_values adds (n = ...) labels", {
+  df <- sample_sunburst_data()
+
+  sb <- plot_sunburst(df, "boxing")
+  expect_equal(sb$x$opts$series[[2]]$label$formatter, "{b}")
+
+  sb <- plot_sunburst(df, "boxing", show_values = TRUE)
+  expect_equal(sb$x$opts$series[[1]]$label$formatter, "{b} ({n|n} = {c})")
+  expect_equal(sb$x$opts$series[[2]]$label$formatter, "{b}\n({n|n} = {c})")
+  expect_equal(sb$x$opts$series[[2]]$label$rich$n$fontStyle, "italic")
+
+  expect_equal(sb$x$opts$series[[1]]$data[[1]]$value, 30)
+
+  expect_error(plot_sunburst(df, "boxing", show_values = "yes"))
+})
+
 test_that("plot_sunburst can exclude non-specific tissue rows", {
   df <- sample_sunburst_data()
   sb <- plot_sunburst(df, "boxing", include_non_specific = FALSE)
