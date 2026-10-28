@@ -92,6 +92,7 @@ Inner and outer ring labels can be formatted independently.</p>
 <span>  min_label_angle <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  outer_label_width <span class="op">=</span> <span class="fl">90</span>,</span>
 <span>  show_outer_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  widget_width <span class="op">=</span> <span class="st">"1200px"</span>,</span>
 <span>  widget_height <span class="op">=</span> <span class="st">"1500px"</span>,</span>
 <span>  warnings <span class="op">=</span> <span class="st">"text"</span></span>
@@ -234,6 +235,12 @@ labels before text wrapping. Default 90.</p></dd>
 (pathology) labels and their leader lines entirely. The slices
 themselves still render and are still hoverable via tooltip. If <code>TRUE</code>
 (default), labels show as usual.</p></dd>
+
+
+<dt id="arg-show-values">show_values<a class="anchor" aria-label="anchor" href="#arg-show-values"></a></dt>
+<dd><p>Logical. If <code>TRUE</code>, each inner (tissue) and outer
+(pathology) label is followed by its injury count as "(<em>n</em> = ...)".
+If <code>FALSE</code> (default), labels show names only.</p></dd>
 
 
 <dt id="arg-widget-width-widget-height">widget_width, widget_height<a class="anchor" aria-label="anchor" href="#arg-widget-width-widget-height"></a></dt>

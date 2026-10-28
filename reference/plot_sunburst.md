@@ -42,6 +42,7 @@ plot_sunburst(
   min_label_angle = 2,
   outer_label_width = 90,
   show_outer_labels = TRUE,
+  show_values = FALSE,
   widget_width = "1200px",
   widget_height = "1500px",
   warnings = "text"
@@ -186,6 +187,12 @@ plot_sunburst(
   leader lines entirely. The slices themselves still render and are
   still hoverable via tooltip. If `TRUE` (default), labels show as
   usual.
+
+- show_values:
+
+  Logical. If `TRUE`, each inner (tissue) and outer (pathology) label is
+  followed by its injury count as "(*n* = ...)". If `FALSE` (default),
+  labels show names only.
 
 - widget_width, widget_height:
 
