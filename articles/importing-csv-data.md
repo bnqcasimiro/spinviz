@@ -7,11 +7,11 @@ plot.
 ## Heatmap (body injury) data
 
 **1. Create a template CSV** with all 18 recognised body areas and one
-empty column per sport:
+empty column per group:
 
 ``` r
 
-create_injury_template("injuries.csv", sports = c("boxing", "judo"))
+create_injury_template("injuries.csv", group = c("boxing", "judo"))
 ```
 
 **2. Fill in the file** in your favourite spreadsheet editor, entering
@@ -19,8 +19,8 @@ the injury frequencies and the `body_region` grouping for each row.
 
 **3. Read the file back in.**
 [`read_injury_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_injury_data.md)
-checks that the required columns are present, that at least one sport
-column exists, and that sport values are numeric (with a warning for
+checks that the required columns are present, that at least one group
+column exists, and that group values are numeric (with a warning for
 values that fail to parse):
 
 ``` r
@@ -47,7 +47,7 @@ row above, so compact hand-edited files work:
 
 ``` r
 
-create_sunburst_template("tissue_injuries.csv", sports = c("boxing", "judo"))
+create_sunburst_template("tissue_injuries.csv", group = c("boxing", "judo"))
 df <- read_sunburst_data("tissue_injuries.csv")
 plot_sunburst(df, "boxing")
 ```

@@ -44,5 +44,5 @@ path <- tempfile(fileext = ".csv")
 create_sunburst_template(path, sports = "boxing")
 #> Error in create_sunburst_template(path, sports = "boxing"): unused argument (sports = "boxing")
 read_sunburst_data(path)
-#> Error: File does not exist: /tmp/Rtmpg7UgO5/file1d6218ad0a22.csv
+#> Error: File does not exist: /tmp/RtmpbnMVom/file1b2d62183de1.csv
 ```

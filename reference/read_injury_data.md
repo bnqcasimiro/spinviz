@@ -36,5 +36,5 @@ path <- tempfile(fileext = ".csv")
 create_injury_template(path, sports = "boxing")
 #> Error in create_injury_template(path, sports = "boxing"): unused argument (sports = "boxing")
 read_injury_data(path)
-#> Error: File does not exist: /tmp/Rtmpg7UgO5/file1d625ff301ac.csv
+#> Error: File does not exist: /tmp/RtmpbnMVom/file1b2d5e5daa2e.csv
 ```
