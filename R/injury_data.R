@@ -100,10 +100,10 @@ read_injury_data <- function(path) {
     )
   }
 
-  sport_cols <- setdiff(names(data), required)
-  if (length(sport_cols) == 0) {
+  group_cols <- setdiff(names(data), required)
+  if (length(group_cols) == 0) {
     stop(
-      "No sport column found. The file needs at least one injury frequency ",
+      "No group column found. The file needs at least one injury frequency ",
       "column besides 'body_region' and 'body_area'.",
       call. = FALSE
     )
@@ -139,7 +139,7 @@ read_injury_data <- function(path) {
     )
   }
 
-  for (col in sport_cols) {
+  for (col in group_cols) {
     data[[col]] <- coerce_injury_values(data[[col]], col)
     values <- data[[col]][!is.na(data[[col]])]
     invalid <- abs(values - round(values)) > sqrt(.Machine$double.eps) |
