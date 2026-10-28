@@ -4,12 +4,12 @@
 \alias{create_injury_template}
 \title{Create a template CSV file for injury data}
 \usage{
-create_injury_template(path, sports = "sport1")
+create_injury_template(path, group = "group1")
 }
 \arguments{
 \item{path}{File path where the CSV should be written.}
 
-\item{sports}{Character vector of sport names; each becomes an empty
+\item{group}{Character vector of sport names; each becomes an empty
 frequency column in the template.}
 }
 \value{
@@ -25,7 +25,7 @@ frequencies.
 }
 \examples{
 path <- tempfile(fileext = ".csv")
-create_injury_template(path, sports = c("boxing", "judo"))
+create_injury_template(path, group = c("boxing", "judo"))
 }
 \seealso{
 \code{\link[=read_injury_data]{read_injury_data()}} to read a completed file back in.

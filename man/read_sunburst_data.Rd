@@ -26,7 +26,7 @@ value (carry-down), matching the behaviour of
 }
 \examples{
 path <- tempfile(fileext = ".csv")
-create_sunburst_template(path, sports = "boxing")
+create_sunburst_template(path, group = "boxing")
 read_sunburst_data(path)
 }
 \seealso{

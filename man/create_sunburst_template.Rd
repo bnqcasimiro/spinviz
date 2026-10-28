@@ -4,12 +4,12 @@
 \alias{create_sunburst_template}
 \title{Create a template CSV file for sunburst injury data}
 \usage{
-create_sunburst_template(path, sports = "sport1")
+create_sunburst_template(path, group = "group1")
 }
 \arguments{
 \item{path}{File path where the CSV should be written.}
 
-\item{sports}{Character vector of sport names; each becomes an empty
+\item{group}{Character vector of sport names; each becomes an empty
 frequency column in the template.}
 }
 \value{
@@ -28,7 +28,7 @@ apart.
 }
 \examples{
 path <- tempfile(fileext = ".csv")
-create_sunburst_template(path, sports = c("boxing", "judo"))
+create_sunburst_template(path, group = c("boxing", "judo"))
 }
 \seealso{
 \code{\link[=read_sunburst_data]{read_sunburst_data()}} to read a completed file back in,

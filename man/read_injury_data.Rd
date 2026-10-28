@@ -21,7 +21,7 @@ column of injury frequencies.
 }
 \examples{
 path <- tempfile(fileext = ".csv")
-create_injury_template(path, sports = "boxing")
+create_injury_template(path, group = "boxing")
 read_injury_data(path)
 }
 \seealso{
