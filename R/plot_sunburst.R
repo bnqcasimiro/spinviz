@@ -86,6 +86,9 @@
 #' (pathology) labels and their leader lines entirely. The slices
 #' themselves still render and are still hoverable via tooltip. If `TRUE`
 #' (default), labels show as usual.
+#' @param show_values Logical. If `TRUE`, each inner (tissue) and outer
+#' (pathology) label is followed by its injury count as "(*n* = ...)".
+#' If `FALSE` (default), labels show names only.
 #' @param widget_width,widget_height Dimensions of the rendered diagram,
 #' specified as CSS size strings. Defaults: "1200px" and "1500px".
 #' @param warnings A string to determine how the program displays warnings:
@@ -180,41 +183,42 @@
 #' (p3 <- plot_sunburst(df2, "boxing"))
 
 plot_sunburst <- function(
-  data,
-  column_name = "",
-  replace_names = "",
-  depth = -1,
-  palette = "Dark 3",
-  opacity = 1,
-  plot_title = "",
-  # Inner ring (tissue labels)
-  inner_font_size = 12,
-  inner_font_style = "normal",
-  inner_font_color = "#FFFFFF",
-  inner_font_family = "Arial",
+    data,
+    column_name = "",
+    replace_names = "",
+    depth = -1,
+    palette = "Dark 3",
+    opacity = 1,
+    plot_title = "",
+    # Inner ring (tissue labels)
+    inner_font_size = 12,
+    inner_font_style = "normal",
+    inner_font_color = "#FFFFFF",
+    inner_font_family = "Arial",
 
-  # Outer labels (pathology labels)
-  outer_font_size = 12,
-  outer_font_style = "normal",
-  outer_font_color = "#333333",
-  outer_font_family = "Arial",
-  title_size = 18,
-  title_color = "#333333",
-  title_x = "center",
-  title_y = "20%",
-  title_family = "Arial",
-  include_non_specific = TRUE,
-  inner_radius = "10%",
-  mid_radius = "40%",
-  outer_radius = "50%",
-  label_line_length = 40,
-  label_line_length2 = 80,
-  min_label_angle = 2,
-  outer_label_width = 90,
-  show_outer_labels = TRUE,
-  widget_width = "1200px",
-  widget_height = "1500px",
-  warnings = "text"
+    # Outer labels (pathology labels)
+    outer_font_size = 12,
+    outer_font_style = "normal",
+    outer_font_color = "#333333",
+    outer_font_family = "Arial",
+    title_size = 18,
+    title_color = "#333333",
+    title_x = "center",
+    title_y = "20%",
+    title_family = "Arial",
+    include_non_specific = TRUE,
+    inner_radius = "10%",
+    mid_radius = "40%",
+    outer_radius = "50%",
+    label_line_length = 40,
+    label_line_length2 = 80,
+    min_label_angle = 2,
+    outer_label_width = 90,
+    show_outer_labels = TRUE,
+    show_values = FALSE,
+    widget_width = "1200px",
+    widget_height = "1500px",
+    warnings = "text"
 ) {
   #=========================================================
   # Helper: lighten a hex colour towards white by `factor` (0 = unchanged, 1 = white)
@@ -225,7 +229,24 @@ plot_sunburst <- function(
     grDevices::rgb(blended[1], blended[2], blended[3])
   }
 
+  stopifnot(is.logical(show_values), length(show_values) == 1, !is.na(show_values))
+
   non_specific_label_pattern <- "^(non-specific|unspecified)$"
+
+  #=========================================================
+  # Label text: "Name (n = 12)" with an italic n, matching plot_heatmap().
+  # ECharts can't parse plotmath, so the italic n is an ECharts rich-text
+  # token ({n|n}) styled via `rich`. {b} = slice name, {c} = slice value.
+  #=========================================================
+  label_formatter <- if (show_values) "{b} ({n|n} = {c})" else "{b}"
+  italic_n_style <- function(color, size, family) {
+    list(n = list(
+      fontStyle = "italic",
+      color = color,
+      fontSize = size,
+      fontFamily = family
+    ))
+  }
   non_specific_colour <- "#B0B0B0"
   non_specific_colour_light <- lighten_colour(non_specific_colour, 0.45)
 
@@ -386,7 +407,9 @@ plot_sunburst <- function(
 
     tree_data[[i]] <- list(
       name = current_tissue,
-      value = if (!show_pathology) sum(rows[[current_sport]]) else NULL,
+      # Always set the tissue total explicitly so the inner label's {c}
+      # shows it (it equals the sum of its pathology children).
+      value = sum(rows[[current_sport]], na.rm = TRUE),
       itemStyle = list(color = tissue_colour, opacity = opacity),
       children = children
     )
@@ -442,7 +465,9 @@ plot_sunburst <- function(
       color = inner_font_color,
       fontSize = inner_font_size,
       fontFamily = inner_font_family,
-      fontStyle = inner_font_style
+      fontStyle = inner_font_style,
+      formatter = label_formatter,
+      rich = italic_n_style(inner_font_color, inner_font_size, inner_font_family)
     ),
 
     itemStyle = list(
@@ -495,7 +520,9 @@ plot_sunburst <- function(
         fontFamily = outer_font_family,
         fontStyle = outer_font_style,
         overflow = "break",
-        width = outer_label_width
+        width = outer_label_width,
+        formatter = label_formatter,
+        rich = italic_n_style(outer_font_color, outer_font_size, outer_font_family)
       ),
       labelLine = list(
         show = show_outer_labels,
