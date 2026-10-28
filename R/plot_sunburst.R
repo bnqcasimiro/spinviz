@@ -233,12 +233,9 @@ plot_sunburst <- function(
 
   non_specific_label_pattern <- "^(non-specific|unspecified)$"
 
-  #=========================================================
-  # Label text: "Name (n = 12)" with an italic n, matching plot_heatmap().
-  # ECharts can't parse plotmath, so the italic n is an ECharts rich-text
-  # token ({n|n}) styled via `rich`. {b} = slice name, {c} = slice value.
-  #=========================================================
+
   label_formatter <- if (show_values) "{b} ({n|n} = {c})" else "{b}"
+  outer_label_formatter <- if (show_values) "{b}\n({n|n} = {c})" else "{b}"
   italic_n_style <- function(color, size, family) {
     list(n = list(
       fontStyle = "italic",
@@ -521,7 +518,7 @@ plot_sunburst <- function(
         fontStyle = outer_font_style,
         overflow = "break",
         width = outer_label_width,
-        formatter = label_formatter,
+        formatter = outer_label_formatter,
         rich = italic_n_style(outer_font_color, outer_font_size, outer_font_family)
       ),
       labelLine = list(

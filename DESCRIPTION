@@ -96,3 +96,4 @@ URL: https://github.com/bnqcasimiro/spinviz,
 BugReports: https://github.com/bnqcasimiro/spinviz/issues
 Language: en-US
 LazyData: true
+RoxygenNote: 7.3.3

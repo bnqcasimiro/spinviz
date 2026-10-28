@@ -34,6 +34,7 @@ plot_sunburst(
   min_label_angle = 2,
   outer_label_width = 90,
   show_outer_labels = TRUE,
+  show_values = FALSE,
   widget_width = "1200px",
   widget_height = "1500px",
   warnings = "text"
@@ -133,6 +134,10 @@ labels before text wrapping. Default 90.}
 (pathology) labels and their leader lines entirely. The slices
 themselves still render and are still hoverable via tooltip. If \code{TRUE}
 (default), labels show as usual.}
+
+\item{show_values}{Logical. If \code{TRUE}, each inner (tissue) and outer
+(pathology) label is followed by its injury count as "(\emph{n} = ...)".
+If \code{FALSE} (default), labels show names only.}
 
 \item{widget_width, widget_height}{Dimensions of the rendered diagram,
 specified as CSS size strings. Defaults: "1200px" and "1500px".}
