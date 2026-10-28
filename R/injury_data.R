@@ -141,6 +141,17 @@ read_injury_data <- function(path) {
 
   for (col in sport_cols) {
     data[[col]] <- coerce_injury_values(data[[col]], col)
+    values <- data[[col]][!is.na(data[[col]])]
+    invalid <- abs(values - round(values)) > sqrt(.Machine$double.eps) |
+      values < 0
+    if (any(invalid)) {
+      stop(
+        "Column '", col, "' must contain whole-number injury counts ",
+        "(0, 1, 2, ...). Invalid value(s): ",
+        paste(unique(values[invalid]), collapse = ", "),
+        call. = FALSE
+      )
+    }
   }
 
   data
