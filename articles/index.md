@@ -8,3 +8,5 @@
   file](https://bnqcasimiro.github.io/spinviz/articles/importing-csv-data.md):
 - [Get started with
   spinviz](https://bnqcasimiro.github.io/spinviz/articles/spinviz.md):
+- [Workshop
+  materials](https://bnqcasimiro.github.io/spinviz/articles/workshop.md):
