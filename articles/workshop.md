@@ -43,12 +43,15 @@ install.packages(c("chromote", "base64enc"))
 ## Loading the example data
 
 The example CSV files follow the same layout as the templates created by
-[`create_injury_template()`](https://bnqcasimiro.github.io/spinviz/reference/create_injury_template.md).
+[`create_injury_template()`](https://bnqcasimiro.github.io/spinviz/reference/create_injury_template.md)
+or
+[`create_sunburst_template()`](https://bnqcasimiro.github.io/spinviz/reference/create_sunburst_template.md).
 You can either:
 
 - Download a CSV and read it in with
-  [`read_injury_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_injury_data.md),
+  [`read_injury_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_injury_data.md)
   or
+  [`read_sunburst_data()`](https://bnqcasimiro.github.io/spinviz/reference/read_sunburst_data.md)
 - Use the built-in copies, `body_df` and `tissue_df`, which hold the
   same data
 
@@ -73,4 +76,26 @@ tissue_data <- tissue_df
 
 See [Importing data from a CSV
 file](https://bnqcasimiro.github.io/spinviz/articles/importing-csv-data.md)
-for creating and filling in your
+for creating and filling in your own templates.
+
+## Quick start
+
+``` r
+
+plot_heatmap(data = body_data, group = "boxing", view = "both", sex = "male")
+plot_sunburst(data = tissue_data, group = "judo", show_values = TRUE)
+```
+
+The R script walks through each argument with fill-in-the-blank
+activities.
+
+## Data source
+
+The example data are competition injury counts from the Beijing 2008,
+London 2012 and Rio de Janeiro 2016 Olympic Games:
+
+Lystad RP, Alevras A, Rudy I, Soligard T, Engebretsen L. Injury
+incidence, severity and profile in Olympic combat sports: a comparative
+analysis of 7712 athlete exposures from three consecutive Olympic Games.
+*Br J Sports Med* 2021;55:1077–1083.
+[doi:10.1136/bjsports-2020-102958](https://doi.org/10.1136/bjsports-2020-102958)

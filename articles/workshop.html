@@ -112,10 +112,12 @@ Chrome:</p>
 <h2 id="loading-the-example-data">Loading the example data<a class="anchor" aria-label="anchor" href="#loading-the-example-data"></a>
 </h2>
 <p>The example CSV files follow the same layout as the templates created
-by <code><a href="../reference/create_injury_template.html">create_injury_template()</a></code>. You can either:</p>
+by <code><a href="../reference/create_injury_template.html">create_injury_template()</a></code> or
+<code><a href="../reference/create_sunburst_template.html">create_sunburst_template()</a></code>. You can either:</p>
 <ul>
-<li>Download a CSV and read it in with <code><a href="../reference/read_injury_data.html">read_injury_data()</a></code>,
-or</li>
+<li>Download a CSV and read it in with <code><a href="../reference/read_injury_data.html">read_injury_data()</a></code>
+or <code><a href="../reference/read_sunburst_data.html">read_sunburst_data()</a></code>
+</li>
 <li>Use the built-in copies, <code>body_df</code> and
 <code>tissue_df</code>, which hold the same data</li>
 </ul>
@@ -136,7 +138,26 @@ or</li>
 <span><span class="va">body_data</span> <span class="op">&lt;-</span> <span class="va">body_df</span></span>
 <span><span class="va">tissue_data</span> <span class="op">&lt;-</span> <span class="va">tissue_df</span></span></code></pre></div>
 <p>See <a href="importing-csv-data.html">Importing data from a CSV
-file</a> for creating and filling in your</p>
+file</a> for creating and filling in your own templates.</p>
+</div>
+<div class="section level2">
+<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h2>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_heatmap.html">plot_heatmap</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">body_data</span>, group <span class="op">=</span> <span class="st">"boxing"</span>, view <span class="op">=</span> <span class="st">"both"</span>, sex <span class="op">=</span> <span class="st">"male"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_sunburst.html">plot_sunburst</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tissue_data</span>, group <span class="op">=</span> <span class="st">"judo"</span>, show_values <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>The R script walks through each argument with fill-in-the-blank
+activities.</p>
+</div>
+<div class="section level2">
+<h2 id="data-source">Data source<a class="anchor" aria-label="anchor" href="#data-source"></a>
+</h2>
+<p>The example data are competition injury counts from the Beijing 2008,
+London 2012 and Rio de Janeiro 2016 Olympic Games:</p>
+<p>Lystad RP, Alevras A, Rudy I, Soligard T, Engebretsen L. Injury
+incidence, severity and profile in Olympic combat sports: a comparative
+analysis of 7712 athlete exposures from three consecutive Olympic Games.
+<em>Br J Sports Med</em> 2021;55:1077–1083. <a href="https://doi.org/10.1136/bjsports-2020-102958" class="external-link">doi:10.1136/bjsports-2020-102958</a></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
