@@ -1,0 +1,20 @@
+body_region,body_area,boxing,judo
+Head and neck,Head,75,22
+Head and neck,Neck,2,2
+Upper limb,Shoulder,6,11
+Upper limb,Upper arm,2,1
+Upper limb,Elbow,8,18
+Upper limb,Forearm,6,NA
+Upper limb,Wrist,6,8
+Upper limb,Hand,3,2
+Trunk,Chest,2,2
+Trunk,Thoracic spine,4,1
+Trunk,Lumbosacral,3,NA
+Trunk,Abdomen,1,NA
+Lower limb,Hip / groin,NA,1
+Lower limb,Thigh,NA,4
+Lower limb,Knee,2,16
+Lower limb,Lower leg,NA,NA
+Lower limb,Ankle,4,3
+Lower limb,Foot,NA,3
+Unspecified,Unspecified,NA,NA

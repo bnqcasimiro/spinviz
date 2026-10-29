@@ -13,6 +13,8 @@ navbar:
           href: articles/importing-csv-data.html
         - text: Customising and saving diagrams
           href: articles/customisation.html
+        - text: Workshop materials
+          href: articles/workshop.html
 
 reference:
   - title: Package
