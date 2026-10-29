@@ -1,26 +1,26 @@
 tissue,pathology,boxing,judo
 Muscle / Tendon,Muscle strain,7,5
-Muscle / Tendon,Muscle contusion,NA,NA
-Muscle / Tendon,Compartment syndrome,NA,NA
+Muscle / Tendon,Muscle contusion,,
+Muscle / Tendon,Compartment syndrome,,
 Muscle / Tendon,Tendinopathy,2,1
-Muscle / Tendon,Tendon rupture,NA,2
+Muscle / Tendon,Tendon rupture,,2
 Nervous,Brain or spinal cord injury,8,1
-Nervous,Peripheral nerve injury,NA,NA
+Nervous,Peripheral nerve injury,,
 Bone,Fracture,5,2
-Bone,Bone stress injury,1,NA
-Bone,Bone contusion,NA,NA
-Bone,Avascular necrosis,NA,NA
-Bone,Physis injury,NA,NA
+Bone,Bone stress injury,1,
+Bone,Bone contusion,,
+Bone,Avascular necrosis,,
+Bone,Physis injury,,
 Cartilage / Synovium,Cartilage injury,1,3
 Cartilage / Synovium,Arthritis,2,1
-Cartilage / Synovium,Synovitis / Capsulitis,NA,NA
-Cartilage / Synovium,Bursitis,NA,NA
+Cartilage / Synovium,Synovitis / Capsulitis,,
+Cartilage / Synovium,Bursitis,,
 Ligament,Joint sprain,18,45
-Ligament,Chronic instability,NA,NA
+Ligament,Chronic instability,,
 Superficial tissue,Contusion,23,15
 Superficial tissue,Laceration,51,17
-Superficial tissue,Abrasion,NA,NA
-Vessel,Vascular trauma,NA,NA
-Stump,Stump injury,NA,NA
-Internal organ,Organ injury,NA,NA
+Superficial tissue,Abrasion,,
+Vessel,Vascular trauma,,
+Stump,Stump injury,,
+Internal organ,Organ injury,,
 Unspecified,Unspecified,6,2
