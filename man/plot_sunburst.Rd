@@ -6,7 +6,7 @@
 \usage{
 plot_sunburst(
   data,
-  column_name = "",
+  group = "",
   replace_names = "",
   depth = -1,
   palette = "Dark 3",
@@ -58,7 +58,7 @@ start from the built-in \link{injury_categories} taxonomy (which already has
 columns 1 and 2 filled in with the standard classification) and just add
 your own injury counts as column 3. See \code{\link[=plot_sunburst_default]{plot_sunburst_default()}}.}
 
-\item{column_name}{A string of the name of the column that contains the
+\item{group}{A string of the name of the column that contains the
 injury frequency. Will use the 3rd column if unspecified.}
 
 \item{replace_names}{A vector of strings that contains the original and

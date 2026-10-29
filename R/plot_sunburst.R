@@ -27,7 +27,7 @@
 #' columns 1 and 2 filled in with the standard classification) and just add
 #' your own injury counts as column 3. See [plot_sunburst_default()].
 #'
-#' @param column_name A string of the name of the column that contains the
+#' @param group A string of the name of the column that contains the
 #' injury frequency. Will use the 3rd column if unspecified.
 #' @param replace_names A vector of strings that contains the original and
 #' replacement values of tissue/pathology names, e.g.
@@ -184,7 +184,7 @@
 
 plot_sunburst <- function(
     data,
-    column_name = "",
+    group = "",
     replace_names = "",
     depth = -1,
     palette = "Dark 3",
@@ -253,7 +253,7 @@ plot_sunburst <- function(
   tissue <- colnames(data)[1]
   injury <- colnames(data)[2]
 
-  if (column_name == "") {
+  if (group == "") {
     current_sport <- colnames(data)[3]
     if (is.na(current_sport)) {
       error_messages(
@@ -263,7 +263,7 @@ plot_sunburst <- function(
       )
     }
   } else {
-    current_sport <- colnames(data)[which(colnames(data) == column_name)]
+    current_sport <- colnames(data)[which(colnames(data) == group)]
     if (length(current_sport) == 0) {
       error_messages(
         type = warnings,

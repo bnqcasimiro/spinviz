@@ -40,7 +40,7 @@ test_that("plot_sunburst returns an htmlwidget with recorded size metadata", {
   expect_equal(meta2$widget_height, "600px")
 })
 
-test_that("plot_sunburst defaults to the third column when column_name is empty", {
+test_that("plot_sunburst defaults to the third column when group is empty", {
   df <- sample_sunburst_data()
   # Should not error; "boxing" is the third column
   expect_no_error(plot_sunburst(df))

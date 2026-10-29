@@ -9,7 +9,7 @@
 #' values (currently 25), in the same row order as [injury_categories],
 #' i.e. `counts[i]` is the injury count for
 #' `injury_categories[i, c("tissue_type", "pathology_type")]`.
-#' @param column_name A string used as the injury-count column's name when
+#' @param group A string used as the injury-count column's name when
 #' building the underlying data frame. Default "injury_count".
 #' @param ... Passed straight through to [plot_sunburst()].
 #' Every other argument (`palette`, `plot_title`, `include_non_specific`,
@@ -26,7 +26,7 @@
 #' @examples
 #' boxing <- c(20,0,0,10,31,18,16,16,20,20,27,46,67,31,54,20,27,30,96,82,48,26,33,34,24)
 #' p1 <- plot_sunburst_default(boxing, plot_title = "Boxing Injuries")
-plot_sunburst_default <- function(counts, column_name = "injury_count", ...){
+plot_sunburst_default <- function(counts, group = "injury_count", ...){
 
   expected_n <- nrow(injury_categories)
   if (!is.numeric(counts) || length(counts) != expected_n) {
@@ -39,7 +39,7 @@ plot_sunburst_default <- function(counts, column_name = "injury_count", ...){
   }
 
   df <- injury_categories
-  df[[column_name]] <- counts
+  df[[group]] <- counts
 
-  plot_sunburst(df, column_name = column_name, ...)
+  plot_sunburst(df, group = group, ...)
 }

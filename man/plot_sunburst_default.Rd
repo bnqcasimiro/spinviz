@@ -4,7 +4,7 @@
 \alias{plot_sunburst_default}
 \title{Sunburst diagram using the built-in injury taxonomy}
 \usage{
-plot_sunburst_default(counts, column_name = "injury_count", ...)
+plot_sunburst_default(counts, group = "injury_count", ...)
 }
 \arguments{
 \item{counts}{A numeric vector of exactly \code{nrow(injury_categories)}
@@ -12,7 +12,7 @@ values (currently 25), in the same row order as \link{injury_categories},
 i.e. \code{counts[i]} is the injury count for
 \code{injury_categories[i, c("tissue_type", "pathology_type")]}.}
 
-\item{column_name}{A string used as the injury-count column's name when
+\item{group}{A string used as the injury-count column's name when
 building the underlying data frame. Default "injury_count".}
 
 \item{...}{Passed straight through to \code{\link[=plot_sunburst]{plot_sunburst()}}.
