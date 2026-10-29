@@ -140,7 +140,7 @@ create_injury_template("body_injuries_template.csv", group = c("boxing", "judo")
 # It's on the spinviz website. This line downloads it into your folder:
 
 download.file(
-  "https://bnqcasimiro.github.io/spinviz/body_injuries_example.csv",
+  "https://bnqcasimiro.github.io/spinviz/workshop/body_injuries_example.csv",
   destfile = "body_injuries_example.csv"
 )
 
@@ -337,7 +337,7 @@ create_sunburst_template("tissue_injuries_template.csv", group = c("boxing", "ju
 # judo injury counts from Lystad et al. (2021).
 
 download.file(
-  "https://bnqcasimiro.github.io/spinviz/tissue_injuries_example.csv",
+  "https://bnqcasimiro.github.io/spinviz/workshop/tissue_injuries_example.csv",
   destfile = "tissue_injuries_example.csv"
 )
 
