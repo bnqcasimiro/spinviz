@@ -14,7 +14,7 @@ outer ring labels can be formatted independently.
 ``` r
 plot_sunburst(
   data,
-  column_name = "",
+  group = "",
   replace_names = "",
   depth = -1,
   palette = "Dark 3",
@@ -73,7 +73,7 @@ plot_sunburst(
   column 3. See
   [`plot_sunburst_default()`](https://bnqcasimiro.github.io/spinviz/reference/plot_sunburst_default.md).
 
-- column_name:
+- group:
 
   A string of the name of the column that contains the injury frequency.
   Will use the 3rd column if unspecified.

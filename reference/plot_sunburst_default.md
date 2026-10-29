@@ -9,7 +9,7 @@ and plugging in a set of injury counts.
 ## Usage
 
 ``` r
-plot_sunburst_default(counts, column_name = "injury_count", ...)
+plot_sunburst_default(counts, group = "injury_count", ...)
 ```
 
 ## Arguments
@@ -22,7 +22,7 @@ plot_sunburst_default(counts, column_name = "injury_count", ...)
   i.e. `counts[i]` is the injury count for
   `injury_categories[i, c("tissue_type", "pathology_type")]`.
 
-- column_name:
+- group:
 
   A string used as the injury-count column's name when building the
   underlying data frame. Default "injury_count".
