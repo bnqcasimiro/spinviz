@@ -1,4 +1,4 @@
-tissue,pathology,boxing,judo
+tissue_type,pathology_type,boxing,judo
 Muscle / Tendon,Muscle strain,7,5
 Muscle / Tendon,Muscle contusion,,
 Muscle / Tendon,Compartment syndrome,,
