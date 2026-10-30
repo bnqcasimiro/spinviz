@@ -42,10 +42,12 @@ pak::pak("bnqcasimiro/spinviz")
 
 
 
-# --- Step 2: Packages for saving sunburst images (optional) ------------------
+# --- Step 2: Packages for saving sunburst images ------------------------------
 
 # Using Posit Cloud?
-# Skip this step. Posit Cloud already has these packages installed.
+# Skip this step. Exporting sunbursts as static images is not supported in
+# this Posit Cloud workshop environment. Instead, save your sunburst as an
+# interactive .html file (see Section B6).
 
 # Using R on your own device?
 # Saving a sunburst as .png/.jpg/.pdf needs two extra packages
@@ -137,31 +139,36 @@ create_injury_template("body_injuries_template.csv", group = c("boxing", "judo")
 # --- Option 1: read the example CSV ------------------------------------------
 # body_injuries_example.csv is the template from A2, already filled in with
 # boxing and judo injury counts from Lystad et al. (2021).
-# It's on the spinviz website. This line downloads it into your folder:
+
+# Using Posit Cloud?
+# The example CSV is already in your project files (see the Files pane),
+# so skip the download and go straight to read_injury_data() below.
+
+# Using R on your own device?
+# Run this first to download the example CSV into your working folder
+# (or download it manually from the spinviz website):
 
 download.file(
   "https://bnqcasimiro.github.io/spinviz/workshop/body_injuries_example.csv",
   destfile = "body_injuries_example.csv"
 )
 
-# (Or download it yourself from the spinviz website and upload it to
-# Posit Cloud / put it in your working folder.)
 
-# read_injury_data() checks the columns, flags misspelled body areas, and
-# stops if any count isn't a whole number.
+# Read it in. read_injury_data() checks the columns, flags misspelled body
+# areas, and stops if any count isn't a whole number.
 body_data <- read_injury_data("body_injuries_example.csv")
 
 
-# --- Option 2: use the built-in data frame -----------------------------------
-# No file needed: body_df comes with spinviz and holds the same
-# Lystad et al. (2021) data.
+# --- Option 2: use the built-in example data frame ---------------------------
+# No file needed: body_df comes with spinviz and contains made-up example
+# counts, so plots will differ from Option 1.
 
 body_data <- body_df
 
 
 # Either way, have a look at it:
 body_data
-names(body_data)   # the group columns you can plot: "boxing" and "judo"
+names(body_data)   # the group columns you can plot
 
 
 # -----------------------------------------------------------------------------
@@ -211,11 +218,12 @@ plot_heatmap(data = body_data, group = "boxing", view = "___", sex = "___")
 # 1c. Same as 1b, but show each area's PROPORTION of all injuries instead
 #     of raw counts.
 plot_heatmap(data = body_data, group = "boxing", view = "both", sex = "male",
-             value_format = ___)
+             value_format = "___")
 
 
 # --- Activity 2: Compare groups ---------------------------------------------
-# body_data has two groups. Not sure what they are? Run: names(body_data)
+# Using Option 1? body_data has two groups: boxing and judo.
+# (body_df only has boxing, so skip this activity if you used Option 2.)
 
 # 2a. Plot BOTH sides of the body for the SECOND group (judo).
 plot_heatmap(data = body_data, group = "___", view = "both", sex = "male")
@@ -224,14 +232,12 @@ plot_heatmap(data = body_data, group = "___", view = "both", sex = "male")
 # --- Activity 3: Make it your own -------------------------------------------
 # Fill in the blanks to customise the look.
 
-test_colour(list("viridis", "Reds", "Blues 3"))   # preview some palettes first
-
 my_heatmap <- plot_heatmap(
   data           = body_data,
   group          = "boxing",
-  view           = "both",
+  view           = "___",
   sex            = "___",     # "male" or "female"
-  palette        = "___",     # pick one you liked from test_colour()
+  palette        = "___",     # pick a palette name (?diagram_colours)
   opacity        = ___,       # a number between 0 and 1
   show_labels    = ___,       # TRUE or FALSE
   show_values    = ___,       # TRUE or FALSE
@@ -275,13 +281,11 @@ heat_plot   # type the name to show it again
 
 save_diagram(plot  = heat_plot,
              file  = "heatmap_boxing.png",
-             width = 2000, units = "px")
+             width = 20, units = "cm")
 
 save_diagram(plot  = heat_plot,
              file  = "heatmap_boxing.pdf",
              width = 2000, units = "px")
-
-# TRY: bg = NA for a transparent background (good for slides/posters)
 
 
 
@@ -333,19 +337,31 @@ create_sunburst_template("tissue_injuries_template.csv", group = c("boxing", "ju
 
 
 # --- Option 1: read the example CSV ------------------------------------------
-# tissue_injuries_example.csv: the B2 template filled in with boxing and
-# judo injury counts from Lystad et al. (2021).
+# tissue_injuries_example.csv is the template from B2, already filled in with
+# boxing and judo injury counts from Lystad et al. (2021).
+
+# Using Posit Cloud?
+# The example CSV is already in your project files (see the Files pane),
+# so skip the download and go straight to read_sunburst_data() below.
+
+# Using R on your own device?
+# Run this first to download the example CSV into your working folder
+# (or download it manually from the spinviz website):
 
 download.file(
   "https://bnqcasimiro.github.io/spinviz/workshop/tissue_injuries_example.csv",
   destfile = "tissue_injuries_example.csv"
 )
 
+
+# Read it in. read_sunburst_data() checks the columns, flags misspelled
+# tissue/pathology types, and stops if any count isn't a whole number.
 tissue_data <- read_sunburst_data("tissue_injuries_example.csv")
 
 
-# --- Option 2: use the built-in data frame -----------------------------------
-# tissue_df comes with spinviz and holds the same Lystad et al. (2021) data.
+# --- Option 2: use the built-in example data frame ---------------------------
+# No file needed: tissue_df comes with spinviz and contains made-up example
+# counts, so plots will differ from Option 1.
 
 tissue_data <- tissue_df
 
@@ -364,7 +380,7 @@ names(tissue_data)   # the group columns you can plot
 #
 # plot_sunburst(data, group, ...)
 #   data         - your data frame (today: tissue_data)
-#   group  - name of the group column to plot, in quotes, e.g. "boxing"
+#   group        - name of the group column to plot, in quotes, e.g. "boxing"
 #
 # Optional styling:
 #   palette              - colour scheme, e.g. "Dark 3", "viridis", "Set 3", etc.
@@ -373,7 +389,7 @@ names(tissue_data)   # the group columns you can plot
 #   show_outer_labels    - TRUE/FALSE: show pathology names on the outer ring
 #   show_values          - TRUE/FALSE: show counts (n = ...) beside labels
 #                          (default FALSE)
-#   depth                - 1 shows the tissue ring only; leave out to show
+#   depth                - 1 shows the tissue ring only; 0 or leave out to show
 #                          both rings
 #   inner_font_size      - text size for tissue labels
 #   outer_font_size      - text size for pathology labels
@@ -416,8 +432,6 @@ plot_sunburst(data = tissue_data, group = "___")
 # --- Activity 3: Make it your own -------------------------------------------
 # Fill in the blanks to customise the look.
 
-test_colour(list("Dark 3", "viridis", "Set 2"))   # preview some palettes first
-
 my_sunburst <- plot_sunburst(
   data                 = tissue_data,
   group                = "boxing",
@@ -425,6 +439,7 @@ my_sunburst <- plot_sunburst(
   opacity              = ___,       # a number between 0 and 1
   show_outer_labels    = ___,       # TRUE or FALSE
   show_values          = ___,       # TRUE or FALSE
+  depth                = ___,       # 0 or 1
   inner_font_size      = 14,
   outer_font_size      = 11
 )
@@ -453,11 +468,21 @@ sun_plot   # type the name to show it again
 
 # Want to save your Activity 3 design instead? Use plot = my_sunburst below.
 
+
 # Step 2: save it.
-# Sunbursts are web widgets, so saving as an image uses Chrome behind the
-# scenes (needs the chromote + base64enc packages). Formats: .png, .jpg, .pdf
-# If labels are missing in the image, increase 'delay' (seconds to wait
-# for the chart to finish drawing), e.g. delay = 3.
+
+# --- Option 1: Interactive web page (.html) ---------------------------------
+# Using Posit Cloud? Use this option. Option 2 is not supported on Posit Cloud.
+# Also recommended for sharing: the saved file keeps hover tooltips and can
+# be opened in any web browser.
+
+htmlwidgets::saveWidget(sun_plot, "sunburst_boxing.html")
+
+
+# --- Option 2: Static image (.png, .jpg, .pdf) ------------------------------
+# Using R on your own device? You can use this option (not Posit Cloud).
+# Requires the chromote and base64enc packages and a local installation of
+# Google Chrome (see Setup, Step 2).
 
 save_diagram(plot  = sun_plot,
              file  = "sunburst_boxing.png",
@@ -466,10 +491,6 @@ save_diagram(plot  = sun_plot,
 save_diagram(plot  = sun_plot,
              file  = "sunburst_boxing.pdf",
              width = 2000)
-
-# Using Posit Cloud, or want an interactive version to share? Save it as a
-# web page (works without Chrome):
-htmlwidgets::saveWidget(sun_plot, "sunburst_boxing.html")
 
 
 
@@ -554,6 +575,7 @@ list.files()
 #   -> Run the "Step 1: assign the plot" line in A6 / B6 first.
 
 # Sunburst won't save
-#   -> install.packages(c("chromote", "base64enc")) and make sure Google
-#      Chrome is installed. On Posit Cloud (no Chrome), save as .html with
-#      htmlwidgets::saveWidget() instead.
+#   -> Posit Cloud workshop project: static image export isn't supported.
+#      Save as .html with htmlwidgets::saveWidget() (see B6).
+#   -> Own device: install.packages(c("chromote", "base64enc")) and make
+#      sure Google Chrome is installed.
