@@ -6,7 +6,7 @@ Materials for the spinviz workshop, covering the full workflow from
 loading data to saving a body heatmap and a tissue/pathology sunburst:
 
 - [Workshop slides
-  (PDF)](https://bnqcasimiro.github.io/spinviz/workshop/spinviz_workshop_slides.pdf)
+  (PDF)](https://bnqcasimiro.github.io/spinviz/workshop/spinviz_workshop_slides1.pdf)
 - [R
   script](https://bnqcasimiro.github.io/spinviz/workshop/spinviz_workshop.R):
   step-by-step script with activities and answers
