@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 Materials for the spinviz workshop, covering the full workflow from loading
 data to saving a body heatmap and a tissue/pathology sunburst:
 
-- [Workshop slides (PDF)](../workshop/spinviz_workshop_slides.pdf)
+- [Workshop slides (PDF)](../workshop/spinviz_workshop_slides1.pdf)
 - [R script](../workshop/spinviz_workshop.R): step-by-step script with
   activities and answers
 - [body_injuries_example.csv](../workshop/body_injuries_example.csv): example
